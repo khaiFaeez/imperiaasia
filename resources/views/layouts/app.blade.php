@@ -11,29 +11,50 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+        @livewireStyles
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
-         @livewireStyles
+        <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+        <div class="min-h-screen">
+            @livewire('navigation-menu')
+            <div class="drawer">
+            <input id="my-drawer" type="checkbox" class="drawer-toggle">
+            <div class="drawer-content">
 
-            <!-- Page Content -->
-            <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $slot }}
-            </main>
+                    <!-- Page Heading -->
+                @if (isset($header))
+                    <header class="shadow">
+                        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                            {{ $header }}
+                        </div>
+                    </header>
+                @endif
+
+                <!-- Page Content -->
+                <main>
+                    {{ $slot }}
+                </main>
+            </div>
+            <div class="drawer-side">
+                <label for="my-drawer" class="drawer-overlay"></label>
+                <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+                <!-- Sidebar content here -->
+                <li><a>Sidebar Item 1</a></li>
+                <li><a>Sidebar Item 2</a></li>
+
+                </ul>
+            </div>
+            </div>
+
         </div>
-         @livewireScripts
+
+        @stack('modals')
+
+        @livewireScripts
     </body>
 </html>
