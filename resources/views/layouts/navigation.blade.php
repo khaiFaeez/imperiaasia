@@ -44,6 +44,8 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+                        <x-dropdown-link href="{{ route('users.index') }}">Manage Users</x-dropdown-link>
+                        <x-dropdown-link href="{{ route('roles.index') }}">Manage Role</x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -86,6 +88,8 @@
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>
                 </form>
+                <x-responsive-nav-link href="{{ route('users.index') }}">Manage Users</x-responsive-nav-link>
+                <x-responsive-nav-link href="{{ route('roles.index') }}">Manage Role</x-responsive-nav-link>
             </div>
         </div>
     </div>
