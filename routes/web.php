@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,21 +22,35 @@ Route::get('/', function () {
     return redirect('login');
 });
 
-Route::get('/dashboard', function () {
+// This serves as the create token page
+Route::get('dashboard', function () {
+
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+    // if (Auth::check() && Auth::user()->hasRole('superadmin')) {
+    //     return auth()
+    //         ->user()
+    //         ->createToken('auth_token', ['superadmin'])
+    //         ->plainTextToken;
+    // }
+    // return redirect("/");
+})->middleware('auth')->name('dashboard');
+
 
 require __DIR__ . '/auth.php';
+
+Route::post('register', [RegisterController::class, 'register'])
+    ->middleware('restrictothers');
+
+Route::get('clear/token', function () {
+    if (Auth::check() && Auth::user()->hasRole('superadmin')) {
+        Auth::user()->tokens()->delete();
+    }
+
+    return 'Token Cleared';
+})->middleware('auth');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     // Route::resource('invoices', InvoiceController::class);
-});
-
-
-Route::prefix('invoice')->name('invoice.')->group(function () {
-    Route::get('/platinum', function () {
-        return view('invoice');
-    })->name('platinum');
 });

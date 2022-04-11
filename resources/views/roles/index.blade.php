@@ -1,7 +1,7 @@
 
 <x-app-layout>
  <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl  leading-tight">
             {{ __('Role Management') }}
         </h2>
          <div class="flex items-start justify-start mb-3">
