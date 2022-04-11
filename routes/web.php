@@ -30,3 +30,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
     // Route::resource('invoices', InvoiceController::class);
 });
+
+
+Route::prefix('invoice')->name('invoice.')->group(function () {
+    Route::get('/platinum', function () {
+        return view('invoice');
+    })->name('platinum');
+});
