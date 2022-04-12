@@ -12,46 +12,46 @@
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
 {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
-<div class="flex flex-col gap-3">
-    <div class="grid grid-cols-2">
+<div class="grid grid-cols-6 gap-6">
+    <div class="col-span-6">
 
-            <strong>Username:</strong>
-            {!! Form::text('username', null, array('placeholder' => 'Username','class' => 'input input-bordered w-full text-primary max-w-md ')) !!}
-
-    </div>
-    <div class="grid grid-cols-2">
-
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'input input-bordered w-full text-primary max-w-md')) !!}
+            <x-label>Username:</x-label>
+            {!! Form::text('username', null, array('placeholder' => 'Username','class' => 'input input-bordered w-full text-primary ')) !!}
 
     </div>
+    <div class="col-span-6">
 
-    <div class="grid grid-cols-2">
-
-            <strong>Staff ID:</strong>
-            {!! Form::text('staff_id', null, array('placeholder' => 'EN001','class' => 'input input-bordered w-full text-primary max-w-md')) !!}
-
-    </div>
-    <div class="grid grid-cols-2">
-
-            <strong>Password:</strong>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'input input-bordered w-full text-primary max-w-md')) !!}
+            <x-label>Name:</x-label>
+            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'input input-bordered w-full text-primary')) !!}
 
     </div>
-    <div class="grid grid-cols-2">
 
-            <strong>Confirm Password:</strong>
-            {!! Form::password('password_confirmation', array('placeholder' => 'Confirm Password','class' => 'input input-bordered w-full text-primary max-w-md')) !!}
+    <div class="col-span-6">
+
+            <x-label>Staff ID:</x-label>
+            {!! Form::text('staff_id', null, array('placeholder' => 'EN001','class' => 'input input-bordered w-full text-primary')) !!}
 
     </div>
-    <div class="grid grid-cols-2">
+    <div class="col-span-6">
 
-            <strong>Role:</strong>
-            {!! Form::select('roles[]', $roles,[], array('class' => 'select w-full text-primary max-w-md h-52','multiple')) !!}
+            <x-label>Password:</x-label>
+            {!! Form::password('password', array('placeholder' => 'Password','class' => 'input input-bordered w-full text-primary')) !!}
+
+    </div>
+    <div class="col-span-6">
+
+            <x-label>Confirm Password:</x-label>
+            {!! Form::password('password_confirmation', array('placeholder' => 'Confirm Password','class' => 'input input-bordered w-full text-primary')) !!}
+
+    </div>
+    <div class="col-span-6">
+
+            <x-label>Role:</x-label>
+            {!! Form::select('roles[]', $roles,[], array('class' => 'select w-full text-primary h-52','multiple')) !!}
 
     </div>
 </div>
-<div class="flex w-full justify-center mt-5">
+<div class="flex w-full justify-end mt-5">
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </div>
 {!! Form::close() !!}

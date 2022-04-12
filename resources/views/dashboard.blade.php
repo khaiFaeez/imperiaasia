@@ -29,8 +29,9 @@
         </div>
 
         <div class="grid grid-cols-3 gap-3">
+            @can('user-create')
              <a href="{{ route('users.create') }}" class="btn btn-neutral">Create User</a>
-
+            @endcan
         </div>
         </x-slot>
 </x-app-layout>

@@ -4,46 +4,37 @@
             {{ __('Edit Role') }}
         </h2>
          <div class="flex items-start justify-start mb-3">
-            <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}"> Back</a>
+            <a class="btn btn-ghost btn-sm" href="{{ route('roles.index') }}"> Back</a>
          </div>
     </x-slot>
     <x-slot name="slot">
 
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-        </ul>
-    </div>
-@endif
 
 
 {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
+<div class="grid grid-cols-6 gap-6">
+    <div class="col-span-6">
+
+            <x-label>Name:</x-label>
+
+            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'input input-bordered w-full text-primary')) !!}
+
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Permission:</strong>
-            <br/>
-            @foreach($permission as $value)
+     <div class="col-span-6">
+
+            <x-label>Permission:</x-label>
+
+           @foreach($permission as $value)
                 <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
                 {{ $value->name }}</label>
             <br/>
             @endforeach
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+
     </div>
 </div>
+    <div class="flex w-full justify-end mt-5">
+        <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
+    </div>
 {!! Form::close() !!}
 </x-slot>
 </x-app-layout>

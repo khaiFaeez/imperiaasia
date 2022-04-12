@@ -1,4 +1,4 @@
-<x-app-layout>
+{{-- <x-app-layout>
  <x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
             {{ __('Show Role') }}
@@ -29,4 +29,4 @@
     </div>
 </div>
 </x-slot>
-</x-app-layout>
+</x-app-layout> --}}

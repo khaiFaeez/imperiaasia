@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <script src="//unpkg.com/alpinejs" defer></script>
 
         @livewireStyles
 

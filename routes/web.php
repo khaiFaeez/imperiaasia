@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +47,8 @@ Route::get('clear/token', function () {
 })->middleware('auth');
 
 Route::group(['middleware' => ['auth', 'restrictothers']], function () {
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class)->except('delete');
-    Route::post('register', [RegisterController::class, 'register']);
+    Route::resource('roles', RoleController::class)->except(['create', 'store', 'show', 'destroy']);
+    Route::resource('users', UserController::class)->except('destroy');
+    Route::post('register', [RegisteredUserController::class, 'register']);
+    Route::get('edit-password', [RegisterController::class, 'register']);
 });

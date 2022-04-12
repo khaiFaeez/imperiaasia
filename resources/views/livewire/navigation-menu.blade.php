@@ -57,8 +57,13 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
-                        <x-dropdown-link href="{{ route('users.index') }}">Manage Users</x-dropdown-link>
-                        <x-dropdown-link href="{{ route('roles.index') }}">Manage Role</x-dropdown-link>
+                        @can('user-list')
+                        <x-dropdown-link  href="{{ route('users.index') }}">Manage Users</x-dropdown-link>
+                        @endif
+
+                        @can('role-edit')
+                        <x-dropdown-link  href="{{ route('roles.index') }}">Manage Role</x-dropdown-link>
+                        @endcan
                     </x-slot>
                 </x-dropdown>
             </div>

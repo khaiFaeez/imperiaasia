@@ -9,12 +9,14 @@
     <div class="flex items-end justify-end mb-3">
             <a class="btn btn-neutral" href="{{ route('users.create') }}"> Create New User</a>
     </div>
+@if ($message = Session::get('success'))
 
-    @if ($message = Session::get('success'))
+<div x-data="{show: true}" x-init="setTimeout(() => show = false, 1000)" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
     <div class="alert alert-success">
-      <p>{{ $message }}</p>
+        <p>{{ $message }}</p>
     </div>
-    @endif
+</div>
+@endif
 
 <table class="table table-bordered w-full">
 <thead>

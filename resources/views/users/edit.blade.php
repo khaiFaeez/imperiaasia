@@ -15,35 +15,36 @@
         {!! Form::close() !!} --}}
 
 {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
-<div class="flex flex-col gap-3">
-    <div class="grid grid-cols-2">
+<div class="grid grid-cols-6 gap-6">
+    <div class="col-span-6">
 
-            <strong>Username:</strong>
-            {!! Form::text('username', null, array('placeholder' => 'Username','class' => 'input input-bordered w-full text-primary max-w-md ')) !!}
 
-    </div>
-    <div class="grid grid-cols-2">
-
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'input input-bordered w-full text-primary max-w-md')) !!}
+            <x-label>Username:</x-label>
+            {!! Form::text('username', null, array('placeholder' => 'Username','class' => 'input input-bordered w-full text-primary ')) !!}
 
     </div>
+    <div class="col-span-6">
 
-    <div class="grid grid-cols-2">
-
-            <strong>Staff ID:</strong>
-            {!! Form::text('staff_id', null, array('placeholder' => 'EN001','class' => 'input input-bordered w-full text-primary max-w-md')) !!}
+            <x-label>Name:</x-label>
+            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'input input-bordered w-full text-primary')) !!}
 
     </div>
 
-    <div class="grid grid-cols-2">
+    <div class="col-span-6">
 
-            <strong>Role:</strong>
-            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'select w-full text-primary max-w-md h-52','multiple')) !!}
+            <x-label>Staff ID:</x-label>
+            {!! Form::text('staff_id', null, array('placeholder' => 'EN001','class' => 'input input-bordered w-full text-primary')) !!}
+
+    </div>
+
+    <div class="col-span-6">
+
+            <x-label>Role:</x-label>
+            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'select w-full text-primary h-52','multiple')) !!}
 
     </div>
 </div>
-<div class="flex w-full justify-center mt-5">
+<div class="flex w-full justify-end mt-5">
         <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
     </div>
 {!! Form::close() !!}
