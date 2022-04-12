@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::resource('invoice', InvoiceController::class);
+    Route::resource('invoice', InvoiceController::class)->except('show');
 });
 
 // Route::post('login', [AuthController::class, 'login']);

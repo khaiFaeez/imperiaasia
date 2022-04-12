@@ -5,6 +5,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InvoiceController;
 
 
 /*
@@ -50,6 +51,9 @@ Route::group(['middleware' => ['auth']], function () {
         // }
         // return redirect("/");
     })->name('dashboard');
+
+
+    Route::get('invoice/{portfolio?}',  [InvoiceController::class, 'show'])->name('invoice.show');
 });
 
 Route::group(['middleware' => ['auth', 'restrictothers']], function () {
