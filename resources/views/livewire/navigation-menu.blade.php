@@ -47,6 +47,17 @@
                     </x-slot>
 
                     <x-slot name="content">
+
+                        @can('user-list')
+                        <x-dropdown-link  href="{{ route('users.index') }}">Manage Users</x-dropdown-link>
+                        @endif
+
+                        @can('role-edit')
+                        <x-dropdown-link  href="{{ route('roles.index') }}">Manage Role</x-dropdown-link>
+                        @endcan
+
+                        <x-dropdown-link  href="{{ route('password.edit') }}">Update Password</x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -57,16 +68,6 @@
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
-                        @can('user-list')
-                        <x-dropdown-link  href="{{ route('users.index') }}">Manage Users</x-dropdown-link>
-                        @endif
-
-                        @can('role-edit')
-                        <x-dropdown-link  href="{{ route('roles.index') }}">Manage Role</x-dropdown-link>
-                        @endcan
-
-
-                        <x-dropdown-link  href="{{ route('password.edit') }}">Update Password</x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
             </div>

@@ -52,7 +52,7 @@
     </div>
 </div>
 <div class="flex w-full justify-end mt-5">
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        <x-button>Submit</x-button>
     </div>
 {!! Form::close() !!}
 </x-slot>

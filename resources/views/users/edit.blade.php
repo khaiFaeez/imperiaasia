@@ -45,7 +45,7 @@
     </div>
 </div>
 <div class="flex w-full justify-end mt-5">
-        <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
+        <x-button>SAVE</x-button>
     </div>
 {!! Form::close() !!}
 </x-slot>
