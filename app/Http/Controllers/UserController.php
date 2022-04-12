@@ -61,6 +61,7 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
+        $user->setStatus('pending');
 
         return redirect()->route('users.index')
             ->with('status', 'User created successfully');

@@ -25,6 +25,7 @@
    <th>Name</th>
    <th>Username</th>
    <th>Staff ID</th>
+   <th>Status</th>
    <th>Roles</th>
  </tr>
  </thead>
@@ -36,6 +37,7 @@
     <td>{{ $user->name }}</td>
     <td>{{ $user->username }}</td>
     <td>{{ $user->staff_id }}</td>
+    <td>{{ $user->status }}</td>
     <td>
       @if(!empty($user->getRoleNames()))
         @foreach($user->getRoleNames() as $v)
