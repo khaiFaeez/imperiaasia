@@ -4,7 +4,7 @@
             {{ __('Show User') }}
         </h2>
          <div class="flex items-start justify-start mb-3">
-            <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}"> Back</a>
+            <a class="btn btn-ghost btn-sm" href="{{ route('users.index') }}"> Back</a>
          </div>
     </x-slot>
     <x-slot name="slot">

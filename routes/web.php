@@ -38,9 +38,6 @@ Route::get('dashboard', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::post('register', [RegisterController::class, 'register'])
-    ->middleware('restrictothers');
-
 Route::get('clear/token', function () {
     if (Auth::check() && Auth::user()->hasRole('superadmin')) {
         Auth::user()->tokens()->delete();
@@ -49,8 +46,8 @@ Route::get('clear/token', function () {
     return 'Token Cleared';
 })->middleware('auth');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'restrictothers']], function () {
     Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-    // Route::resource('invoices', InvoiceController::class);
+    Route::resource('users', UserController::class)->except('delete');
+    Route::post('register', [RegisterController::class, 'register']);
 });

@@ -1,62 +1,51 @@
 <x-app-layout>
- <x-slot name="header">
+   <x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
             {{ __('Edit User') }}
         </h2>
-         <div class="flex items-start justify-start mb-3">
-            <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}"> Back</a>
+         <div class="flex items-start justify-start">
+            <a class="btn btn-ghost btn-sm" href="{{ route('users.index') }}"> Back</a>
          </div>
     </x-slot>
+
     <x-slot name="slot">
-
-@if (count($errors) > 0)
-  <div class="alert alert-danger">
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-    <ul>
-       @foreach ($errors->all() as $error)
-         <li>{{ $error }}</li>
-       @endforeach
-    </ul>
-  </div>
-@endif
-
+    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+       {{-- {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+            {!! Form::submit('Delete', ['class' => 'btn btn-error text-error-content']) !!}
+        {!! Form::close() !!} --}}
 
 {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
+<div class="flex flex-col gap-3">
+    <div class="grid grid-cols-2">
+
+            <strong>Username:</strong>
+            {!! Form::text('username', null, array('placeholder' => 'Username','class' => 'input input-bordered w-full text-primary max-w-md ')) !!}
+
+    </div>
+    <div class="grid grid-cols-2">
+
             <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
+            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'input input-bordered w-full text-primary max-w-md')) !!}
+
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Email:</strong>
-            {!! Form::text('email', null, array('placeholder' => 'Email','class' => 'form-control')) !!}
-        </div>
+
+    <div class="grid grid-cols-2">
+
+            <strong>Staff ID:</strong>
+            {!! Form::text('staff_id', null, array('placeholder' => 'EN001','class' => 'input input-bordered w-full text-primary max-w-md')) !!}
+
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Password:</strong>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Confirm Password:</strong>
-            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
+
+    <div class="grid grid-cols-2">
+
             <strong>Role:</strong>
-            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'select w-full text-primary max-w-md h-52','multiple')) !!}
+
     </div>
 </div>
+<div class="flex w-full justify-center mt-5">
+        <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
+    </div>
 {!! Form::close() !!}
 </x-slot>
 </x-app-layout>

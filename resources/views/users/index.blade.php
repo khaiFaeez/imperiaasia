@@ -7,7 +7,7 @@
  <x-slot name="slot">
 
     <div class="flex items-end justify-end mb-3">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+            <a class="btn btn-neutral" href="{{ route('users.create') }}"> Create New User</a>
     </div>
 
     @if ($message = Session::get('success'))
@@ -16,18 +16,20 @@
     </div>
     @endif
 
-
 <table class="table table-bordered w-full">
+<thead>
  <tr>
    <th>No</th>
    <th>Name</th>
    <th>Username</th>
    <th>Staff ID</th>
    <th>Roles</th>
-   <th width="280px">Action</th>
  </tr>
+ </thead>
+ <tbody>
  @foreach ($data as $key => $user)
-  <tr>
+
+  <tr class="hover hover:cursor-pointer" onclick="location.href='{{ route('users.edit',$user->id) }}';">
     <td>{{ ++$i }}</td>
     <td>{{ $user->name }}</td>
     <td>{{ $user->username }}</td>
@@ -39,15 +41,9 @@
         @endforeach
       @endif
     </td>
-    <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
-    </td>
   </tr>
  @endforeach
+ </tbody>
 </table>
 
 

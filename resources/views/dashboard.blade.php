@@ -29,7 +29,7 @@
         </div>
 
         <div class="grid grid-cols-3 gap-3">
-             <a href="{{ route('users.create') }}" class="btn btn-primary">Create User</a>
+             <a href="{{ route('users.create') }}" class="btn btn-neutral">Create User</a>
 
         </div>
         </x-slot>

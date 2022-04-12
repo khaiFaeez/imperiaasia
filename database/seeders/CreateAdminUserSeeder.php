@@ -24,7 +24,14 @@ class CreateAdminUserSeeder extends Seeder
             'password' => bcrypt('12345678')
         ]);
 
-        $role = Role::create(['name' => 'superadmin'], ['name' => 'admin'], ['name' => 'account'], ['name' => 'logistic'], ['name' => 'clerk']);
+
+        $role = Role::create(['name' => 'superadmin']);
+
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'account']);
+        Role::create(['name' => 'logistic']);
+        Role::create(['name' => 'clerk']);
+
 
         $permissions = Permission::pluck('id', 'id')->all();
 
