@@ -64,6 +64,9 @@
                         @can('role-edit')
                         <x-dropdown-link  href="{{ route('roles.index') }}">Manage Role</x-dropdown-link>
                         @endcan
+
+
+                        <x-dropdown-link  href="{{ route('password.edit') }}">Update Password</x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
             </div>

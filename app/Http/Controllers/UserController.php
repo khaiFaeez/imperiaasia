@@ -12,6 +12,8 @@ use DB;
 use Hash;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -128,5 +130,30 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
+    }
+
+    public function updatePassword(Request $request)
+    {
+        try {
+            $user = User::find(Auth::user()->id);
+            $input = $request->all();
+            Validator::make($input, [
+                'current_password' => ['required', 'string'],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ])->after(function ($validator) use ($user, $input) {
+                if (!isset($input['current_password']) || !Hash::check($input['current_password'], $user->password)) {
+                    $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
+                }
+            })->validateWithBag('updatePassword');
+
+            $user->forceFill([
+                'password' => Hash::make($input['password']),
+            ])->save();
+
+            return redirect()->route('password.edit')
+                ->with('success', 'Password updated successfully');
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
     }
 }
