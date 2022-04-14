@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InvoiceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +20,44 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
+});
+
+
+require __DIR__ . '/auth.php';
+
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('clear/token', function () {
+        if (Auth::check() && Auth::user()->hasRole('superadmin')) {
+            Auth::user()->tokens()->delete();
+        }
+        return 'Token Cleared';
+    });
+
+    Route::get('update-password', function () {
+        return view('update-password');
+    })->name('password.edit');
+
+    Route::post('update-password', [UserController::class, 'updatePassword'])->name('password.store');
+
+    Route::get('dashboard', function () {
+        return view('dashboard');
+        // if (Auth::check() && Auth::user()->hasRole('superadmin')) {
+        //     return auth()
+        //         ->user()
+        //         ->createToken('auth_token', ['superadmin'])
+        //         ->plainTextToken;
+        // }
+        // return redirect("/");
+    })->name('dashboard');
+
+
+    Route::get('invoice/{portfolio?}',  [InvoiceController::class, 'show'])->name('invoice.show');
+});
+
+Route::group(['middleware' => ['auth', 'restrictothers']], function () {
+    Route::resource('roles', RoleController::class)->except(['create', 'store', 'show', 'destroy']);
+    Route::resource('users', UserController::class)->except('destroy');
+    Route::post('register', [RegisteredUserController::class, 'register']);
 });
