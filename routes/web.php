@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ClientController;
 
 
 /*
@@ -52,8 +53,9 @@ Route::group(['middleware' => ['auth']], function () {
         // return redirect("/");
     })->name('dashboard');
 
-    Route::domain('{portfolio}.localhost')->name('portfolio.')->group(function () {
+    Route::domain('{portfolio}.' . env('SESSION_DOMAIN'))->name('portfolio.')->group(function () {
         Route::resource('invoice', InvoiceController::class);
+        Route::resource('client', ClientController::class);
     });
 });
 

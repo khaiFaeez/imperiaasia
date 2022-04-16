@@ -6,34 +6,61 @@ use Illuminate\Http\Request;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Models\Client;
+use App\Models\Consultant;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
+use App\Models\Collector;
 
 class InvoiceController extends Controller
 {
-    protected $inv;
+    protected $portfolio;
+
     public function __construct()
     {
+        $this->portfolio = Route::current()->parameter("portfolio");
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $portfolio = $request->get('portfolio');
-        Cache::put('portfolio', $portfolio);
-        if ($portfolio === 'platinum') {
-            $invoices = new Invoice;
-            $invoices->setConnection($portfolio);
-            $invoices = $invoices->paginate(15);
-        }
+        Auth::user()->hasPermissionTo('invoice-list');
 
-        return view('invoice.index', ["portfolio" => $portfolio, 'invoices' => $invoices]);
+        Config::set('database.default', $this->portfolio);
+
+        // $invoice = $this->invoiceInstance();
+        $invoices = Invoice::paginate(15);
+
+        return view('invoice.index', ["portfolio" => $this->portfolio, "invoices" => $invoices]);
     }
 
 
-    public function show()
+    public function show($portfolio, $id)
     {
+        Auth::user()->hasPermissionTo('invoice-edit');
+
+        Config::set('database.default', $this->portfolio);
+
+        // $invoice = $this->invoiceInstance();
+        $invoice = Invoice::find($id);
+
+        $states = DB::table('Negeri')->get();
+        $products = DB::table('Product')->get();
+        $consultants = Consultant::get();
+        $countries = ["Indonesia", "Philippine"];
+        $cmd = Collector::get();
+
+
+        return view('invoice.show', ["portfolio" => $this->portfolio, "invoice" => $invoice, "client" => $invoice->client, "states" => $states, "countries" => $countries, "products" => $products, "consultants" => $consultants, "cmd" => $cmd]);
     }
 
-    public function changeConnection($portfolio)
+    private function invoiceInstance()
     {
-        $this->inv = DB::connection($portfolio)->table('Invoice');
+
+        $this->portfolio = Route::current()->parameter("portfolio");;
+        $invoices = new Invoice;
+        $invoices->setConnection($this->portfolio);
+        return $invoices;
     }
 }

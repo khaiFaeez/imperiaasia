@@ -12,6 +12,7 @@ class Invoice extends Model
 
     // protected $connection = 'platinum';
     protected $table = 'Invoice';
+    protected $primaryKey  = "Id";
 
     public function client()
     {
