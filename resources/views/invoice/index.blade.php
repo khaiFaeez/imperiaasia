@@ -16,7 +16,37 @@
     </div>
     @endif
 
+    <a href="" class="btn btn-primary">Create Invoice</a>
+    <a href="" class="btn btn-primary">Create Invoice</a>
 
+
+<table class="table table-bordered w-full">
+<thead>
+ <tr>
+   <th>No</th>
+   <th>Invoice No</th>
+   <th>Name</th>
+   <th>IC Number</th>
+   <th>Phone No</th>
+ </tr>
+ </thead>
+ <tbody>
+ @php
+ $i = 0;
+ @endphp
+ @foreach ($invoices as $key => $invoice)
+
+  <tr class="hover hover:cursor-pointer" onclick="location.href='{{ route('users.edit',$invoice->Id) }}';">
+    <td>{{ ++$i }}</td>
+    <td>{{ $invoice->Inv_No }}</td>
+    <td>{{ $invoice->client->Name }}</td>
+    <td>{{ $invoice->client->MyKad_SSM }}</td>
+    <td>{{ $invoice->client->Phone }}</td>
+  </tr>
+ @endforeach
+ {{ $invoices->links() }}
+ </tbody>
+</table>
 
 </x-slot>
 </x-app-layout>

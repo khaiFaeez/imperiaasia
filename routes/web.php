@@ -52,8 +52,9 @@ Route::group(['middleware' => ['auth']], function () {
         // return redirect("/");
     })->name('dashboard');
 
-
-    Route::get('invoice/{portfolio?}',  [InvoiceController::class, 'show'])->name('invoice.show');
+    Route::domain('{portfolio}.localhost')->name('portfolio.')->group(function () {
+        Route::resource('invoice', InvoiceController::class);
+    });
 });
 
 Route::group(['middleware' => ['auth', 'restrictothers']], function () {

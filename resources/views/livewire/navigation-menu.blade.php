@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="" />
+                        <x-application-logo class=""  data-set-theme="corporate"/>
                     </a>
                 </div>
 
@@ -16,10 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-dropdown>
+                    <x-dropdown  >
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium hover:border-gray-300 focus:outline-none focus: focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div class="">Invoice</div>
+                            <div class="">Platinum</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -30,10 +30,16 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('invoice.show','platinum')" >
-                            {{ __('Platinum') }}
+                        <x-dropdown-link :href="route('portfolio.invoice.index',['platinum'])" data-set-theme="valentine">
+                            {{ __('Invoice') }}
+                        </x-dropdown-link>
+
+                         <x-dropdown-link :href="route('portfolio.invoice.index',['platinum'])" data-set-theme="valentine">
+                            {{ __('Client') }}
                         </x-dropdown-link>
                     </x-slot>
+
+
                 </x-dropdown>
 
                 </div>

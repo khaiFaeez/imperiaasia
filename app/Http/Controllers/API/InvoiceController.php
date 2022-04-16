@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Http\Resources\Invoice as InvoiceResource;
 use App\Models\Invoice;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 
@@ -16,6 +17,11 @@ class InvoiceController extends BaseController
     {
         $invoice = Invoice::all();
         return $this->handleResponse(InvoiceResource::collection($invoice), 'Invoice have been retrieved!');
+    }
+
+    public function changeConnection($portfolio)
+    {
+        $this->inv = DB::connection($portfolio)->table('Invoice');
     }
 
 
