@@ -41,21 +41,16 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('password.edit');
 
     Route::post('update-password', [UserController::class, 'updatePassword'])->name('password.store');
-
-    Route::get('dashboard', function () {
+    Route::get('/dashboard', function () {
         return view('dashboard');
-        // if (Auth::check() && Auth::user()->hasRole('superadmin')) {
-        //     return auth()
-        //         ->user()
-        //         ->createToken('auth_token', ['superadmin'])
-        //         ->plainTextToken;
-        // }
-        // return redirect("/");
     })->name('dashboard');
-
+    //SUB-DOMAIN
     Route::domain('{portfolio}.' . env('SESSION_DOMAIN'))->name('portfolio.')->group(function () {
         Route::resource('invoice', InvoiceController::class);
         Route::resource('client', ClientController::class);
+        Route::get('dashboard', function () {
+            return view('dashboard', ['portfolio' => 'platinum']);
+        })->name('dashboard');
     });
 });
 

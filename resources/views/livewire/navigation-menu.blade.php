@@ -1,25 +1,21 @@
-<nav x-data="{ open: false }" class="nav">
+<nav x-data="{ open: false }" class="nav bg-base-300">
     <!-- Primary Navigation Menu -->
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="/">
                         <x-application-logo class="" />
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center gap-5">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
 
                     <x-dropdown  >
                     <x-slot name="trigger">
-                        <button class="flex items-center text-sm font-medium hover:border-gray-300 focus:outline-none focus: focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div class="">Platinum</div>
+                        <button class="btn btn-ghost transition duration-150 ease-in-out">
+                            <div class="">{{ \Route::getCurrentRoute()->parameter('portfolio') ? \Route::getCurrentRoute()->parameter('portfolio') : "Select Portfolio" }}</div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -30,17 +26,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('portfolio.invoice.index',['platinum'])">
-                            {{ __('Invoice') }}
-                        </x-dropdown-link>
-
-                         <x-dropdown-link :href="route('portfolio.client.index',['platinum'])">
-                            {{ __('Client') }}
+                        <x-dropdown-link :href="route('portfolio.invoice.index',['portfolio'=>'platinum'])">
+                            {{ __('Platinum') }}
                         </x-dropdown-link>
                     </x-slot>
-
-
-                </x-dropdown>
+                    </x-dropdown>
 
                 </div>
             </div>
@@ -51,12 +41,7 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-             <label for="my-drawer" class="btn btn-ghost drawer-button mr-5">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-             </label>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium  hover: hover:border-gray-300 focus:outline-none focus: focus:border-gray-300 transition duration-150 ease-in-out">
@@ -111,9 +96,6 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

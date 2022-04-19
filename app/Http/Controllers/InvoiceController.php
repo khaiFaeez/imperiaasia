@@ -20,7 +20,7 @@ class InvoiceController extends Controller
 
     public function __construct()
     {
-        $this->portfolio = Route::current()->parameter("portfolio");
+        $this->portfolio = Route::current() ? Route::current()->parameter("portfolio") : "";
     }
 
     public function index()

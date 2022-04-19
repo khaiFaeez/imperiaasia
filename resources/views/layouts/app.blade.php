@@ -29,26 +29,53 @@ if(\Route::getCurrentRoute()->parameter('portfolio') =='platinum')
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-
-        <div class="min-h-screen">
             @livewire('navigation-menu')
-
-                    <!-- Page Heading -->
-                @if (isset($header))
-                    <header class="shadow">
-                        <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                            {{ $header }}
-                        </div>
-                    </header>
+       <div class="drawer drawer-mobile">
+            <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
+            <div class="drawer-content flex flex-col items-center justify-center">
+                <!-- Page content here -->
+            <main class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                                {{ $slot }}
+                            </main>
+            </div>
+            <div class="drawer-side">
+                <label for="my-drawer-2" class="drawer-overlay"></label>
+                <aside class="w-80 bg-base-200">
+                <div class="h-4"></div>
+                <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
+                <!-- Sidebar content here -->
+                {{ \Route::getCurrentRoute()->parameter('portfolio') }}
+                @if(\Route::getCurrentRoute()->parameter('portfolio'))
+                <li>
+                    <a href="{{ route('portfolio.dashboard',[\Route::getCurrentRoute()->parameter('portfolio')]) }}" {{ request()->routeIs('portfolio.dashboard',\Route::getCurrentRoute()->parameter('portfolio')) ? "class=active" : '' }}>
+                        {{ __('Dashboard') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('portfolio.client.index',[\Route::getCurrentRoute()->parameter('portfolio')]) }}" {{ request()->routeIs('portfolio.client.*',[\Route::getCurrentRoute()->parameter('portfolio')]) ? "class=active" : '' }}>
+                        {{ __('Clients') }}
+                    </a>
+                </li>
                 @endif
-
-                <!-- Page Content -->
-                <main class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $slot }}
-                </main>
+                </ul>
+                <div class="h-4"></div>
+                <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
+                <!-- Sidebar content here -->
+                @if(\Route::getCurrentRoute()->parameter('portfolio'))
+                <li>
+                    <a href="{{ route('portfolio.invoice.index',[\Route::getCurrentRoute()->parameter('portfolio')]) }}" {{ request()->routeIs('portfolio.invoice.*',[\Route::getCurrentRoute()->parameter('portfolio')]) ? "class=active" : '' }}>
+                        {{ __('Invoices') }}
+                    </a>
+                </li>
+                <li><a>Aging</a></li>
+                <li><a>Quick Order</a></li>
+                <li><a>Print PDF</a></li>
+                <li><a>Print Docket</a></li>
+                @endif
+                </ul>
+                </aside>
         </div>
-
-
+        </div>
         @stack('modals')
 
         @livewireScripts
