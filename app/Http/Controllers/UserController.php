@@ -14,6 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
@@ -24,9 +25,14 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::whereNot('id', 1)->orderBy('id', 'DESC')->paginate(5);
-        return view('users.index', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $users = User::whereNot('id', 1)->orderBy('id', 'DESC')->paginate(5);
+        $users->map(function ($query) {
+            $query->getRoleNames();
+        });
+        // return view('users.index', compact('data'))
+        //     ->with('i', ($request->input('page', 1) - 1) * 5);
+
+        return Inertia::render('User/Index', compact('users'));
     }
 
     /**
@@ -37,7 +43,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
-        return view('users.create', compact('roles'));
+        return Inertia::render('User/Create', compact('roles'));
     }
 
     /**
@@ -87,11 +93,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        Auth::user()->hasPermissionTo('user-edit');
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        return Inertia::render('User/Edit', compact('user', 'roles', 'userRole'));
     }
 
     /**
@@ -103,6 +110,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Auth::user()->hasPermissionTo('user-edit');
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'staff_id' =>  ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],

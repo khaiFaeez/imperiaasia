@@ -1,13 +1,14 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ClientController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('update-password', [UserController::class, 'updatePassword'])->name('password.store');
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return Inertia::render('Dashboard');
     })->name('dashboard');
     //SUB-DOMAIN
     Route::domain('{portfolio}.' . env('SESSION_DOMAIN'))->name('portfolio.')->group(function () {
@@ -55,7 +56,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'restrictothers']], function () {
-    Route::resource('roles', RoleController::class)->except(['create', 'store', 'show', 'destroy']);
+    Route::resource('roles', RoleController::class)->except(['store', 'show', 'destroy']);
     Route::resource('users', UserController::class)->except('destroy');
     Route::post('register', [RegisteredUserController::class, 'register']);
 });
