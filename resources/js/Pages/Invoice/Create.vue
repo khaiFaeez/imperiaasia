@@ -15,7 +15,7 @@ export default {
     },
     data() {
         return {
-            form: this.$inertia.form({
+            productForm: this.$inertia.form({
                 grand_total:0,
                 products:[
                     {
@@ -60,11 +60,11 @@ export default {
     },
     methods: {
         grandTotal () {
-            this.form.grand_total = this.form.products[0].total + this.form.products[1].total + this.form.products[2].total + this.form.products[3].total + this.form.products[4].total
+            this.productForm.grand_total = this.productForm.products[0].total + this.productForm.products[1].total + this.productForm.products[2].total + this.productForm.products[3].total + this.productForm.products[4].total
         },
         total (i) {
-            this.form.products[i].discounted_price = ( this.form.products[i].discount * (this.form.products[i].price * this.form.products[i].qty) / 100);
-            this.form.products[i].total = this.form.products[i].price * this.form.products[i].qty - this.form.products[i].discounted_price
+            this.productForm.products[i].discounted_price = ( this.productForm.products[i].discount * (this.productForm.products[i].price * this.productForm.products[i].qty) / 100);
+            this.productForm.products[i].total = this.productForm.products[i].price * this.productForm.products[i].qty - this.productForm.products[i].discounted_price
             this.grandTotal()
         }
     }
@@ -93,22 +93,22 @@ export default {
         <tr class="line_items" v-for="(n, i) in 5" :key="i">
             <td class="p-0">{{n}}</td>
             <td class="p-0">
-                <select class="border-0 p-0 select" v-model="form.products[i].product">
+                <select class="border-0 p-0 select" v-model="productForm.products[i].product">
                                 <option  value=''>Product</option>
                                 <option v-for="product in $page.props.products" :key="product.id" :value="product.id" >{{product.Product_Name}}</option>
                 </select>
             </td>
-            <td class="p-0"><input class="border-0" type="text"   placeholder="" v-model="form.products[i].price"  @change="total(i)"></td>
-            <td class="p-0"><input class="border-0" type="text"   placeholder="" v-model="form.products[i].qty"  @change="total(i)"></td>
-            <td class="p-0"><input class="border-0" type="text"   placeholder="" v-model="form.products[i].discount"  @change="total(i)"></td>
-            <td class="p-0"><input class="border-0" type="text"   placeholder="" v-model="form.products[i].discounted_price"  @change="total(i)"></td>
-            <td class="p-0"><input class="border-0" type="text"   placeholder=""  v-model="form.products[i].total" @change="grandTotal(i)"></td>
+            <td class="p-0"><input class="border-0" type="text"   placeholder="" v-model="productForm.products[i].price"  @change="total(i)"></td>
+            <td class="p-0"><input class="border-0" type="text"   placeholder="" v-model="productForm.products[i].qty"  @change="total(i)"></td>
+            <td class="p-0"><input class="border-0" type="text"   placeholder="" v-model="productForm.products[i].discount"  @change="total(i)"></td>
+            <td class="p-0"><input class="border-0" type="text"   placeholder="" v-model="productForm.products[i].discounted_price"  @change="total(i)"></td>
+            <td class="p-0"><input class="border-0" type="text"   placeholder=""  v-model="productForm.products[i].total" @change="grandTotal(i)"></td>
             </tr>
         </tbody>
         <tfoot>
         <th colspan=5></th>
         <th >Grand Total</th>
-        <th ><input v-model="form.grand_total" style="border: 0;" type="text" name="Grand_Total"  placeholder="" ></th>
+        <th ><input v-model="productForm.grand_total" style="border: 0;" type="text" name="Grand_Total"  placeholder="" ></th>
         </tfoot>
   </table>
 

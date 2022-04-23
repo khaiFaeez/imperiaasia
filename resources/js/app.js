@@ -3,7 +3,6 @@ require("./bootstrap");
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/inertia-vue3";
 import { InertiaProgress } from "@inertiajs/progress";
-import { themeChange } from "theme-change";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
@@ -20,4 +19,3 @@ createInertiaApp({
 });
 
 InertiaProgress.init({ color: "#4B5563" });
-themeChange(false);
