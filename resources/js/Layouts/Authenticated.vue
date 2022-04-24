@@ -40,19 +40,15 @@ const showingNavigationDropdown = ref(false);
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
                     <!-- Sidebar content here -->
                     <li>
-                        <BreezeResponsiveNavLink :href="route('portfolio.client.index',{portfolio:route().params.portfolio})">
+                        <BreezeResponsiveNavLink :href="route('portfolio.client.index',{portfolio:route().params.portfolio})"  :active="route().current('*.client.*')">
                             Client
                         </BreezeResponsiveNavLink>
                     </li>
                     <li>
-                        <BreezeResponsiveNavLink :href="route('portfolio.invoice.index',{portfolio:route().params.portfolio})">
+                        <BreezeResponsiveNavLink :href="route('portfolio.invoice.index',{portfolio:route().params.portfolio})"  :active="route().current('*.invoice.*')" >
                             Invoices
                         </BreezeResponsiveNavLink>
                     </li>
-                    <li><BreezeResponsiveNavLink>Aging</BreezeResponsiveNavLink></li>
-                    <li><BreezeResponsiveNavLink>Quick Order</BreezeResponsiveNavLink></li>
-                    <li><BreezeResponsiveNavLink>Print PDF</BreezeResponsiveNavLink></li>
-                    <li><BreezeResponsiveNavLink>Print Docket</BreezeResponsiveNavLink></li>
                     </ul>
                     </aside>
                 </div>

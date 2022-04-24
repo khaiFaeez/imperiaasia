@@ -72,6 +72,22 @@ export default {
                         discounted_price : 0,
                         total : 0,
                     }
+                ],
+                payment:[
+                    {
+                        ptp:"",
+                        settlement:""
+                    }, {
+                        ptp:"",
+                        settlement:""
+                    }, {
+                        ptp:"",
+                        settlement:""
+                    }, {
+                        ptp:"",
+                        settlement:""
+                    }
+
                 ]
             }),
 
@@ -98,8 +114,9 @@ export default {
 <Head title="Create Invoice" />
 <AppLayout>
 
-    <form @submit.prevent="storeInvoice" class="form">
+    <section>
         <div class="divider text-xl">Client</div>
+    <form @submit.prevent="storeInvoice" class="form">
         <div class="grid grid-cols-1 gap-5 mb-12">
                 <div>
                   <BreezeLabel value="ID Card"/>
@@ -178,9 +195,10 @@ export default {
                 </div>
             </div>
     </form>
+    </section>
 
+    <section class="grid grid-cols-1 gap-5 mb-12">
 <div class="divider text-xl">Product</div>
-    <div class="grid grid-cols-1 gap-5">
     <table class="table table-compact ">
         <thead>
             <tr>
@@ -216,7 +234,82 @@ export default {
         <th ><BreezeInput v-model="invoiceForm.grand_total" style="border: 0;" type="text" name="Grand_Total"  placeholder="" /></th>
         </tfoot>
   </table>
-  </div>
+  </section>
+
+
+<div class="divider text-xl mb-12">Sales</div>
+  <section class="grid grid-cols-1 gap-5">
+
+                        <div>
+                        <BreezeLabel value="Sales Person" />
+                          <select id="Sales_Person" name="Sales_Person" class="select border-primary w-full" required>
+                            <option  value=''>Please select consultant</option>
+                              <option v-for="($consultant,i) in $page.props.consultants" :key="i" :value="$consultant.id" :class="{ 'text-error': $consultant.Status != 'Active','text-primary':$consultant.Status == 'Active'}" >{{$consultant.Name}} - {{$consultant.Employee_Code}}</option>
+                          </select>
+                        </div>
+
+
+                        <div class="col-lg-3">
+                          <BreezeLabel value="Sales Channel"/>
+                          <select id="Channel" name="Channel" class="form-control form-control-sm" required>
+                          <option  value=''>Please select</option>
+                          <option  value='1'>ONLINE</option>
+                          <option  value='2'>DISTRIBUTOR</option>
+                          <option  value='4'>OFFLINE</option>
+                          <option  value='3'>SPECIAL ORDER</option>
+                          </select>
+                        </div>
+
+                        <div class="col-lg-3">
+                          <BreezeLabel value="Closing Source"/>
+                          <select id="Closing" name="Closing" class="form-control form-control-sm">
+                            <option  value=''>Please select</option>
+                            <option  value='A'>A - CALL</option>
+                            <option  value='B'>B - WHATSAPP</option>
+                            <option  value='C'>C - WALKIN</option>
+                            <option  value='D'>D - ROADSHOW</option>
+                          </select>
+                        </div>
+ </section>
+
+ <section>
+
+<div class="divider text-xl">Payment</div>
+     <div class="overflow-auto">
+<table class="table table-compact">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Promise To Pay (PTP)</th>
+                    <th scope="col">Settlement (RM)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="line_items" v-for="($p,i) in 4" :key="i">
+                    <td>
+                        {{$p}}
+                    </td>
+                    <td>
+                        <BreezeInput type="date" v-model="invoiceForm.payment[i].ptp" placeholder="" />
+                    </td>
+                    <td>
+                        <BreezeInput type="text" v-model="invoiceForm.payment[i].settlement" placeholder="" />
+                    </td>
+                    <td>
+                        <button type="button"><span style="font-size: 1em; color: Tomato;"><i class="fas fa-times"/></span></button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th ></th>
+                <th >Total Settlement (RM)</th>
+                <th ><input id="total_settlement" style="border: 0;" class="form-control form-control-sm" type="text" name="total_settlement" value="" placeholder=""  ></th>
+            </tfoot>
+        </table>
+        </div>
+
+</section>
 
 </AppLayout>
 

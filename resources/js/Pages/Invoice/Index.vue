@@ -30,6 +30,9 @@ export default {
 <template>
 <Head title="Invoice List" />
 <AppLayout>
+<h1 class="mb-8 text-3xl font-bold">
+    <Link class="text-indigo-400 hover:text-indigo-600" href="/invoice">Invoice</Link>
+</h1>
 <section class="flex flex-row items-start mb-5">
     <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio})" v-if="route().current('*.invoice.*')" class="btn btn-primary text-white">
         Create Invoice
@@ -146,8 +149,8 @@ export default {
   </tr>
  </tbody>
 </table>
-<pagination class="mt-6" :links="$page.props.invoices.links" />
 </div>
+<pagination class="mt-6" :links="$page.props.invoices.links" />
 </AppLayout>
 
 </template>

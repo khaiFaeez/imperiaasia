@@ -3749,6 +3749,9 @@ body[dir="rtl"] .checkbox:checked,
 .mb-12 {
   margin-bottom: 3rem;
 }
+.mb-8 {
+  margin-bottom: 2rem;
+}
 .block {
   display: block;
 }
@@ -4359,6 +4362,9 @@ body[dir="rtl"] .checkbox:checked,
 .font-semibold {
   font-weight: 600;
 }
+.font-bold {
+  font-weight: 700;
+}
 .uppercase {
   text-transform: uppercase;
 }
@@ -4658,6 +4664,10 @@ body[dir="rtl"] .checkbox:checked,
 .hover\:text-gray-800:hover {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+.hover\:text-indigo-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-text-opacity));
 }
 .focus\:z-10:focus {
   z-index: 10;

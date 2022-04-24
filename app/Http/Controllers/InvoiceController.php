@@ -102,7 +102,7 @@ class InvoiceController extends Controller
 
         $states = State::get();
         $products = Product::select('id', 'Code', 'Product_Name')->get();
-        $consultants = Consultant::select('id', 'Name')->get();
+        $consultants = Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get();
         $countries = ["Indonesia", "Philippine"];
         $cmd = Collector::select('id', 'Name')->get();
         $clients = Client::select('id', 'Name')->get();
