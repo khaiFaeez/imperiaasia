@@ -32,7 +32,7 @@ class InvoiceController extends Controller
 
         Config::set('database.default', $this->portfolio);
 
-        $invoices = Invoice::with('client')->with('product')->with('channel')->with('state')->orderBy('Id', 'desc')->paginate(15);
+        $invoices = Invoice::with('client')->with('product')->with('channel')->with('state')->orderBy('Id', 'desc')->paginate(20);
 
         // $datas = [];
         // foreach ($invoices as $data) {

@@ -67,7 +67,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role created successfully');
+            ->with('message', 'Role created successfully');
     }
     /**
      * Display the specified resource.

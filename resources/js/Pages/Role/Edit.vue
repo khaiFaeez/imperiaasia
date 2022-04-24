@@ -43,9 +43,6 @@ export default {
                     preserveScroll: true,
                 });
             },
-        checkform(){
-            console.log(this.form.permission)
-        }
     }
 }
 
@@ -54,44 +51,29 @@ export default {
 <template>
 
 <AppLayout>
-
 <form @submit.prevent="updateRole($page.props.role.id)" class="form">
     <div class="grid grid-cols-6 gap-6">
 
-    <div class="col-span-6">
+            <div class="col-span-6">
+                <BreezeLabel>Name:</BreezeLabel>
+                <BreezeInput id="name" type="text" v-model="form.name" required autocomplete="name" />
+            </div>
 
-            <BreezeLabel>Name:</BreezeLabel>
-
-             <BreezeInput id="name" type="text" v-model="form.name" required autocomplete="name" />
-
-
-    </div>
-     <div class="col-span-6">
-
-             <BreezeLabel>Permission:</BreezeLabel>
-
+            <div class="col-span-6">
+                <BreezeLabel>Permission:</BreezeLabel>
                 <div v-for="($permission, i) in $page.props.permissions" :key="i" >
-                    <input class="checkbox" type="checkbox"  name="permission[]" v-model="form.permission" :value="$permission.id" @click="checkform"/>
-                    <label class="mx-3" >  {{ $permission.name }}</label>
+                        <input class="checkbox" type="checkbox"  name="permission[]" v-model="form.permission" :value="$permission.id"/>
+                        <label class="mx-3" >  {{ $permission.name }}</label>
                 </div>
 
-    </div>
-    <div class="flex items-center justify-end px-4 py-3 bg-transparent text-right sm:px-6 rounded-xl" v-if="$page.props.flash.message">
-         <transition leave-active-class="transition ease-in duration-1000 mr-3" leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <div v-show="on" class="text-sm text-gray-600">
-                 Saved.
             </div>
-        </transition>
+
+            <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Save
+            </BreezeButton>
+
     </div>
-
-                    <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                        Save
-                    </BreezeButton>
-
-</div>
-        </form>
-
-
+</form>
 </AppLayout>
 
 </template>

@@ -125,7 +125,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+            ->with('message', 'User updated successfully');
     }
 
     /**
@@ -138,7 +138,7 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('message', 'User deleted successfully');
     }
 
     public function updatePassword(Request $request)
@@ -160,7 +160,7 @@ class UserController extends Controller
             ])->save();
 
             return redirect()->route('password.edit')
-                ->with('success', 'Password updated successfully');
+                ->with('message', 'Password updated successfully');
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

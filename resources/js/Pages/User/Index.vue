@@ -30,11 +30,7 @@ export default {
                 <Link class="btn btn-neutral" :href="route('users.create')"> Create New User</Link>
         </div>
 
-    <div v-if="$page.props.message" x-data="{show: true}" x-init="setTimeout(() => show = false, 1000)" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
-        <div class="alert alert-success">
-            <p>{{ $page.props.message }}</p>
-        </div>
-    </div>
+
 
     <table class="table table-bordered w-full">
     <thead>

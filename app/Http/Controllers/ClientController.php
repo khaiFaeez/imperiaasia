@@ -3,9 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\Client;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Route;
 
 class ClientController extends Controller
 {
+    public function __construct()
+    {
+        $this->portfolio = Route::current() ? Route::current()->parameter("portfolio") : "";
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +22,13 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('client.index');
+
+        Config::set('database.default', $this->portfolio);
+        $clients = Client::with('state')->paginate(20);
+        $clients->map(function ($query) {
+            $query->invoice = $query->getLastInvoice($query);
+        });
+        return Inertia::render('Client/Index', ['clients' => $clients]);
     }
 
     /**

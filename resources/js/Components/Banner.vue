@@ -49,11 +49,11 @@
 
         computed: {
             style() {
-                return this.$page.props.jetstream.flash?.bannerStyle || 'success'
+                return this.$page.props.flash?.bannerStyle || 'success'
             },
 
             message() {
-                return this.$page.props.jetstream.flash?.banner || ''
+                return this.$page.props.flash?.banner || ''
             },
         }
     })

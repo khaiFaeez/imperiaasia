@@ -11,7 +11,8 @@ const showingNavigationDropdown = ref(false);
 export default {
     components:{
         Pagination,
-        AppLayout
+        AppLayout,
+        Link
     },
     created: function () {
         this.moment = moment;
@@ -28,8 +29,13 @@ export default {
 <template>
 
 <AppLayout>
+<section class="flex flex-row items-start mb-5">
+    <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio})" v-if="route().current('*.invoice.*')" class="btn btn-primary text-white">
+        Create Invoice
+    </Link>
+</section>
 <div class="overflow-auto">
-<table class="table table-bordered w-full">
+<table class="table table-compact table-bordered w-full">
 <thead>
  <tr>
     <th>Status</th>
@@ -42,7 +48,7 @@ export default {
     <th>Ship Name</th>
     <th>Ship Address 1</th>
     <th>Ship Address 2</th>
-    <th>Ship Poscode</th>
+    <th>Ship Postcode</th>
     <th>Ship City</th>
     <th>Ship State</th>
     <th>Ship Country</th>
