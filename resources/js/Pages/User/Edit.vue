@@ -1,6 +1,6 @@
 <script>
 import { ref } from 'vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link, Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
 import moment from 'moment'
@@ -23,7 +23,8 @@ export default {
         BreezeButton,
         BreezeInput,
         BreezeInputError,
-        Link
+        Link,
+        Head
     },
     data() {
         return {
@@ -55,6 +56,7 @@ export default {
 </script>
 
 <template>
+<Head title="Edit User" />
 <AppLayout>
 
         <div v-if="status" class="mb-4 font-medium text-sm">

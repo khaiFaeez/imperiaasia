@@ -1,6 +1,6 @@
 <script>
 import { ref } from 'vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
 import moment from 'moment'
@@ -12,7 +12,8 @@ export default {
     components:{
         Pagination,
         AppLayout,
-        Link
+        Link,
+        Head
     },
     created: function () {
         this.moment = moment;
@@ -27,7 +28,7 @@ export default {
 </script>
 
 <template>
-
+<Head title="Invoice List" />
 <AppLayout>
 <section class="flex flex-row items-start mb-5">
     <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio})" v-if="route().current('*.invoice.*')" class="btn btn-primary text-white">

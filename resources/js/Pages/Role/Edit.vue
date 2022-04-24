@@ -1,6 +1,6 @@
 <script>
 import { ref } from 'vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
 import moment from 'moment'
@@ -20,7 +20,8 @@ export default {
         BreezeButton,
         BreezeInput,
         BreezeInputError,
-        Link
+        Link,
+        Head
     },
     data() {
         return {
@@ -49,7 +50,7 @@ export default {
 </script>
 
 <template>
-
+<Head title="Edit Role" />
 <AppLayout>
 <form @submit.prevent="updateRole($page.props.role.id)" class="form">
     <div class="grid grid-cols-6 gap-6">

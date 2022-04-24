@@ -1,5 +1,5 @@
 <script>
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import BreezeButton from '@/Components/Button.vue'
 import BreezeLabel from '@/Components/Label.vue'
@@ -14,7 +14,8 @@ export default {
         BreezeButton,
         BreezeInput,
         BreezeInputError,
-        Link
+        Link,
+        Head
     },
     methods: {
         goToViewPage(data) {
@@ -94,7 +95,7 @@ export default {
 </script>
 
 <template>
-
+<Head title="Create Invoice" />
 <AppLayout>
 
     <form @submit.prevent="storeInvoice" class="form">
@@ -202,11 +203,11 @@ export default {
                                 <option v-for="product in $page.props.products" :key="product.id" :value="product.id" >{{product.Product_Name}}</option>
                 </select>
             </td>
-            <td class="p-0"><BreezeInput class="border-0" type="text" placeholder="" v-model="invoiceForm.products[i].price"  @change="total(i)"/></td>
-            <td class="p-0"><BreezeInput class="border-0" type="text" placeholder="" v-model="invoiceForm.products[i].qty"  @change="total(i)"/></td>
-            <td class="p-0"><BreezeInput class="border-0" type="text" placeholder="" v-model="invoiceForm.products[i].discount"  @change="total(i)"/></td>
-            <td class="p-0"><BreezeInput class="border-0" type="text" placeholder="" v-model="invoiceForm.products[i].discounted_price"  @change="total(i)"/></td>
-            <td class="p-0"><BreezeInput class="border-0" type="text" placeholder="" v-model="invoiceForm.products[i].total" @change="grandTotal(i)"/></td>
+            <td class="p-0"><BreezeInput class="border-0" type="number" placeholder="" v-model="invoiceForm.products[i].price"  @change="total(i)"/></td>
+            <td class="p-0"><BreezeInput class="border-0" type="number" placeholder="" v-model="invoiceForm.products[i].qty"  @change="total(i)"/></td>
+            <td class="p-0"><BreezeInput class="border-0" type="number" placeholder="" v-model="invoiceForm.products[i].discount"  @change="total(i)"/></td>
+            <td class="p-0"><BreezeInput class="border-0" type="number" placeholder="" v-model="invoiceForm.products[i].discounted_price"  @change="total(i)"/></td>
+            <td class="p-0"><BreezeInput class="border-0" type="number" placeholder="" v-model="invoiceForm.products[i].total" @change="grandTotal(i)"/></td>
             </tr>
         </tbody>
         <tfoot>

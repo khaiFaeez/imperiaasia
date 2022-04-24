@@ -1,6 +1,6 @@
 <script>
 import { ref } from 'vue';
-import { Link } from '@inertiajs/inertia-vue3';
+import { Link, Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
 
@@ -11,7 +11,8 @@ export default {
     components:{
         Pagination,
         AppLayout,
-        Link
+        Link,
+        Head
     },
     methods: {
         goToViewPage(data) {
@@ -23,12 +24,11 @@ export default {
 </script>
 
 <template>
-
+<Head title="Role List" />
 <AppLayout>
-
-        <div class="flex items-end justify-end mb-3">
-                <Link class="btn btn-neutral" :href="route('roles.create')"> Add New Role</Link>
-        </div>
+    <div class="flex items-end justify-end mb-3">
+            <Link class="btn btn-neutral" :href="route('roles.create')"> Add New Role</Link>
+    </div>
 
     <table class="table table-bordered w-full">
     <thead>

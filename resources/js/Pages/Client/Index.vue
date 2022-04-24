@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
 import moment from 'moment'
+import { Head } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 
@@ -13,7 +14,8 @@ export default {
     ],
     components:{
         Pagination,
-        AppLayout
+        AppLayout,
+        Head
     },
     created: function () {
         this.moment = moment;
@@ -28,6 +30,7 @@ export default {
 </script>
 
 <template>
+<Head title="Client List"/>
 <AppLayout>
 <div class="overflow-auto">
 <table class="table table-compact table-bordered w-full">
