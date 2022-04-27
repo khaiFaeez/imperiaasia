@@ -52,6 +52,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('dashboard', function () {
             return view('dashboard', ['portfolio' => 'platinum']);
         })->name('dashboard');
+
+        Route::get('/livesearch', [ClientController::class, 'getICNumber']);
     });
 });
 

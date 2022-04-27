@@ -18,7 +18,7 @@ const showingNavigationDropdown = ref(false);
             </div>
                 <Navigation/>
 
-            <div class="drawer drawer-mobile h-[calc(100vh-4rem)]">
+            <div class="drawer drawer-mobile h-[calc(100vh-5rem)]">
                 <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
                 <div class="drawer-content flex flex-col">
                                 <!-- Page content here -->

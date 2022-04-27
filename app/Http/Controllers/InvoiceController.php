@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InvoiceRequest;
 use Illuminate\Http\Request;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Cache;
@@ -16,6 +17,7 @@ use App\Models\Collector;
 use App\Models\Product;
 use App\Models\State;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class InvoiceController extends Controller
 {
@@ -82,16 +84,17 @@ class InvoiceController extends Controller
 
         Config::set('database.default', $this->portfolio);
 
-        $invoice = Invoice::find($id);
-        $states = DB::table('Negeri')->get();
-        $products = DB::table('Product')->get();
-        $consultants = Consultant::get();
+        $invoice = Invoice::with('client')->with('state')->where('Id', $id)->first();
+        $states = State::get();
+        $products = Product::select('id', 'Code', 'Product_Name')->get();
+        $consultants = Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get();
         $countries = ["Indonesia", "Philippine"];
-        $cmd = Collector::get();
+        $cmd = Collector::select('id', 'Name')->get();
+        $clients = Client::select('id', 'Name')->get();
 
         // return view('invoice.show', ["portfolio" => $this->portfolio, "invoice" => $invoice, "client" => $invoice->client, "states" => $states, "countries" => $countries, "products" => $products, "consultants" => $consultants, "cmd" => $cmd]);
 
-        return Inertia::render('Invoice/Show', ["portfolio" => $this->portfolio, "invoice" => $invoice, "client" => $invoice->client, "states" => $states, "countries" => $countries, "products" => $products, "consultants" => $consultants, "cmd" => $cmd]);
+        return Inertia::render('Invoice/Show', ["portfolio" => $this->portfolio, "invoice" => $invoice,  "states" => $states, "countries" => $countries, "products" => $products, "consultants" => $consultants, "cmd" => $cmd, 'show' => true]);
     }
 
     public function create()
@@ -108,5 +111,25 @@ class InvoiceController extends Controller
         $clients = Client::select('id', 'Name')->get();
 
         return Inertia::render('Invoice/Create', ["portfolio" => $this->portfolio, "states" => $states, "countries" => $countries, "products" => $products, "consultants" => $consultants, "cmd" => $cmd]);
+    }
+
+    public function store(Request $request)
+    {
+        Auth::user()->hasPermissionTo('invoice-create');
+
+        Config::set('database.default', $this->portfolio);
+
+        return $request->all();
+        // $validator = Validator::make($request->all(), [
+        //     'grand_total' => 'max:1'
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return ($validator);
+        // return redirect('post/create')
+        // ->withErrors($validator)
+        //     ->withInput();
+        // }
+        // Invoice::create($request->validated());
     }
 }

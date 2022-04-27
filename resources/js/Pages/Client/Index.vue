@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
 import moment from 'moment'
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head,Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 
@@ -15,7 +15,8 @@ export default {
     components:{
         Pagination,
         AppLayout,
-        Head
+        Head,
+        Link
     },
     created: function () {
         this.moment = moment;
@@ -32,6 +33,16 @@ export default {
 <template>
 <Head title="Client List"/>
 <AppLayout>
+
+<h1 class="mb-8 text-3xl font-bold">
+    <Link class="text-indigo-400 hover:text-indigo-600" href="/client">Client</Link>
+</h1>
+<section class="flex flex-row items-start mb-5">
+
+    <Link :href="route('portfolio.client.create',{portfolio:route().params.portfolio})" v-if="route().current('*.client.*')" class="btn btn-primary text-white">
+        Create Client
+    </Link>
+</section>
 <div class="overflow-auto">
 <table class="table table-compact table-bordered w-full">
 <thead>

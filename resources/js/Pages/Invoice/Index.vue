@@ -4,6 +4,7 @@ import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
 import moment from 'moment'
+import BreezeInput from '@/Components/Input.vue'
 
 const showingNavigationDropdown = ref(false);
 
@@ -13,7 +14,8 @@ export default {
         Pagination,
         AppLayout,
         Link,
-        Head
+        Head,
+        BreezeInput
     },
     created: function () {
         this.moment = moment;
@@ -21,8 +23,9 @@ export default {
     methods: {
         goToViewPage(data) {
             window.open(route('portfolio.invoice.show',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_self');
-        }
-    }
+        },
+
+    },
 }
 
 </script>
@@ -34,6 +37,7 @@ export default {
     <Link class="text-indigo-400 hover:text-indigo-600" href="/invoice">Invoice</Link>
 </h1>
 <section class="flex flex-row items-start mb-5">
+
     <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio})" v-if="route().current('*.invoice.*')" class="btn btn-primary text-white">
         Create Invoice
     </Link>

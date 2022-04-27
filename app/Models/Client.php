@@ -12,6 +12,22 @@ class Client extends Model
     use HasFactory;
 
     protected $table = 'Client';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'MyKad_SSM',
+        'Name',
+        'Mobile_No',
+        'Phone',
+        'Off_Phone',
+        'Address',
+        'Address_2',
+        'Poscode',
+        'City',
+        'State',
+        'Country',
+        'updated_at'
+    ];
 
     public function state()
     {
