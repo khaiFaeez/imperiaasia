@@ -10,7 +10,7 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-<nav class="navbar bg-base-300">
+<nav class="navbar bg-base-300 ">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -18,19 +18,19 @@ const showingNavigationDropdown = ref(false);
 
       </label>
                             <div class="dropdown inline-block lg:hidden">
-                                <label tabindex="0" class="btn btn-ghost m-1"> {{ route().params.portfolio ? route().params.portfolio : "Select Portfolio" }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg></label>
-                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li><a :href="route('portfolio.invoice.index',{portfolio:'platinum'})">Platinum</a ></li>
+                                <label tabindex="0" class="btn btn-ghost m-1 text-xl"> {{ route().params.portfolio ? route().params.portfolio : "Select Portfolio" }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg></label>
+                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ">
+                                    <li><a :href="route('portfolio.invoice.index',{portfolio:'platinum'})" >Platinum</a ></li>
                                 </ul>
                             </div>
     </div>
     <Link :href="route('dashboard')">
-        <BreezeApplicationLogo class="block  w-auto" />
+        <BreezeApplicationLogo class="block w-auto px-4" />
     </Link>
   </div>
   <div class="navbar-center hidden lg:flex">
                             <div class="dropdown">
-                                <label tabindex="0" class="btn m-1 btn-ghost "> {{ route().params.portfolio ? route().params.portfolio : "Select Portfolio" }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg></label>
+                                <label tabindex="0" class="btn btn-ghost m-1 text-xl no-animation"> {{ route().params.portfolio ? route().params.portfolio : "Select Portfolio" }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg></label>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                     <li><a :href="route('portfolio.invoice.index',{portfolio:'platinum'})">Platinum</a ></li>
                                 </ul>

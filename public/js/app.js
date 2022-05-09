@@ -22074,7 +22074,7 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var classes = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return props.active ? 'block pl-3 pr-4 py-2 border-l-4 border-indigo-400 text-base font-medium text-primary-content bg-primary focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out' : 'block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-base-content hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out';
+      return props.active ? 'text-xl active' : 'text-xl';
     });
     var __returned__ = {
       props: props,
@@ -22886,32 +22886,31 @@ __webpack_require__.r(__webpack_exports__);
         'portfolio': this.$page.props.portfolio
       }));
     },
-    onSearchIDChange: function onSearchIDChange(event) {
-      var input = document.querySelector('#ic_checker');
-      input.classList.remove('input-primary');
-      input.classList.remove('input-success');
-      input.classList.remove('input-error');
-      input.classList.add('input-primary');
-      var that = this;
-      this.axios.get('/livesearch', {
-        params: {
-          keyword: event.target.value
-        }
-      }).then(function (res) {
-        input.classList.remove('input-primary');
-        input.classList.add("input-success");
-
-        if (Object.keys(res.data).length == 0) {
-          that.canCreate = 'client';
-        } else {
-          that.canCreate = 'order';
-          that.ClientFormv = res.data;
-        }
-      })["catch"](function (error) {
-        input.classList.remove('input-primary');
-        input.classList.add("input-error");
-        that.canCreate = false;
-      }); // this.form.get('/')
+    onSearchIDChange: function onSearchIDChange(event) {// let input =  document.querySelector('#ic_checker');
+      // input.classList.remove('input-primary');
+      // input.classList.remove('input-success');
+      // input.classList.remove('input-error');
+      // input.classList.add('input-primary');
+      // let that = this;
+      // this.axios.get('/livesearch', {
+      //     params: {
+      //     keyword: event.target.value
+      //     }
+      // }).then((res) => {
+      //         input.classList.remove('input-primary');
+      //         input.classList.add("input-success");
+      //         if(Object.keys(res.data).length == 0){
+      //             that.canCreate = 'client'
+      //         }else{
+      //             that.canCreate = 'order'
+      //             that.ClientFormv = res.data
+      //         }
+      // }).catch( (error)=> {
+      //         input.classList.remove('input-primary');
+      //         input.classList.add("input-error");
+      //         that.canCreate = false;
+      //     })
+      // this.form.get('/')
     }
   }
 });
@@ -23369,8 +23368,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "font-serif text-2xl"
+};
 function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", null, "IMPERIA ASIA");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_1, "IMPERIA ASIA");
 }
 
 /***/ }),
@@ -24153,7 +24155,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = ["value"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("input", {
-    "class": "input input-bordered input-primary w-full",
+    "class": "input input-bordered focus:ring-0 w-full focus:border-base-100",
     value: $props.modelValue,
     onInput: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.$emit('update:modelValue', $event.target.value);
@@ -24299,7 +24301,7 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = {
   tabindex: "0",
-  "class": "btn btn-ghost m-1"
+  "class": "btn btn-ghost m-1 text-xl"
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
@@ -24327,7 +24329,7 @@ var _hoisted_11 = {
 };
 var _hoisted_12 = {
   tabindex: "0",
-  "class": "btn m-1 btn-ghost"
+  "class": "btn btn-ghost m-1 text-xl no-animation"
 };
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
@@ -24384,7 +24386,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BreezeApplicationLogo"], {
-        "class": "block w-auto"
+        "class": "block w-auto px-4"
       })];
     }),
     _: 1
@@ -24470,7 +24472,7 @@ var _hoisted_1 = {
   key: 0
 };
 var _hoisted_2 = {
-  "class": "flex flex-wrap -mb-1"
+  "class": "btn-group"
 };
 var _hoisted_3 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24481,14 +24483,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       key: p
     }, [link.url === null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: 0,
-      "class": "mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded",
+      "class": "btn",
       innerHTML: link.label
     }, null, 8
     /* PROPS */
     , _hoisted_3)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Link, {
       key: 1,
-      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded hover:bg-base-100 focus:border-indigo-500 focus:text-indigo-500", {
-        'bg-accent text-accent-content': link.active
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["btn", {
+        'btn btn-active': link.active
       }]),
       href: link.url,
       innerHTML: link.label
@@ -24643,7 +24645,7 @@ var _hoisted_10 = {
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
   "class": "menu menu-compact flex flex-col p-0 px-4 overflow-y-auto"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar content here "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li")], -1
+}, null, -1
 /* HOISTED */
 );
 
@@ -24659,7 +24661,7 @@ var _hoisted_13 = {
 
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Client ");
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Invoices ");
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Invoice ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_ctx.$page.props.flash.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.flash.message), 1
@@ -25370,7 +25372,7 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Client");
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text-indigo-400 font-medium"
+  "class": "text-primary font-medium"
 }, "/", -1
 /* HOISTED */
 );
@@ -25391,7 +25393,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppLayout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        "class": "text-indigo-400 hover:text-indigo-600",
+        "class": "text-primary hover:text-primary-focus",
         href: "/client"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25468,7 +25470,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppLayout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        "class": "text-indigo-400 hover:text-indigo-600",
+        "class": "text-primary hover:text-primary-focus",
         href: "/client"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25553,7 +25555,7 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Client");
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text-indigo-400 font-medium"
+  "class": "text-primary font-medium"
 }, "/", -1
 /* HOISTED */
 );
@@ -25572,7 +25574,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppLayout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        "class": "text-indigo-400 hover:text-indigo-600",
+        "class": "text-primary hover:text-primary-focus",
         href: "/client"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25672,7 +25674,7 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Invoice");
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text-indigo-400 font-medium"
+  "class": "text-primary font-medium"
 }, "/", -1
 /* HOISTED */
 );
@@ -25720,7 +25722,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppLayout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        "class": "text-indigo-400 hover:text-indigo-600",
+        "class": "text-primary hover:text-primary-focus",
         href: "/invoice"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -25735,7 +25737,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }, ["prevent"])),
         "class": "form"
       }, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
-        value: "ID Card"
+        value: "ID Number"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
         type: "text",
         name: "MyKad_SSM",
@@ -25895,7 +25897,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppLayout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        "class": "text-indigo-400 hover:text-indigo-600",
+        "class": "text-primary hover:text-primary-focus",
         href: "/invoice"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -26020,7 +26022,7 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Invoice");
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "text-indigo-400 font-medium"
+  "class": "text-primary font-medium"
 }, "/", -1
 /* HOISTED */
 );
@@ -26051,7 +26053,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AppLayout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
-        "class": "text-indigo-400 hover:text-indigo-600",
+        "class": "text-primary hover:text-primary-focus",
         href: "/invoice"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

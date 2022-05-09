@@ -44,8 +44,8 @@ export default {
 <Head title="Create Invoice" />
 <AppLayout>
      <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-indigo-400 hover:text-indigo-600" href="/invoice">Invoice</Link>
-      <span class="text-indigo-400 font-medium">/</span> {{invoice.Inv_No}}
+      <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
+      <span class="text-primary font-medium">/</span> {{invoice.Inv_No}}
     </h1>
         <div class="divider text-xl">Client</div>
       <transition

@@ -2731,6 +2731,12 @@ html {
 .btn-secondary:focus-visible {
   outline: 2px solid hsl(var(--s));
 }
+.btn-accent:hover, .btn-accent.btn-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--af, var(--a)) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--af, var(--a)) / var(--tw-bg-opacity));
+}
 .btn-info {
   --tw-border-opacity: 1;
   border-color: hsl(var(--in) / var(--tw-border-opacity));
@@ -2782,6 +2788,12 @@ html {
 .btn-warning:focus-visible {
   outline: 2px solid hsl(var(--wa));
 }
+.btn-error:hover, .btn-error.btn-active {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--er) / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--er) / var(--tw-bg-opacity));
+}
 .btn.glass:hover,
     .btn.glass.btn-active {
   --glass-opacity: 25%;
@@ -2803,6 +2815,12 @@ html {
 }
 .btn-ghost:focus-visible {
   outline: 2px solid 0 0 2px currentColor;
+}
+.btn-link:hover, .btn-link.btn-active {
+  border-color: transparent;
+  background-color: transparent;
+  -webkit-text-decoration-line: underline;
+  text-decoration-line: underline;
 }
 .btn-outline.btn-primary {
   --tw-text-opacity: 1;
@@ -3459,8 +3477,32 @@ body[dir="rtl"] .checkbox:checked,
 .rounded-box {
   border-radius: var(--rounded-box, 1rem);
 }
-.artboard.phone {
-  width: 320px;
+.glass,
+  .glass:hover,
+  .glass.btn-active {
+  border: none;
+  -webkit-backdrop-filter: blur(var(--glass-blur, 40px));
+  backdrop-filter: blur(var(--glass-blur, 40px));
+  background-color: transparent;
+  background-image: linear-gradient(
+        135deg,
+        rgb(255 255 255 / var(--glass-opacity, 30%)) 0%,
+        rgb(0 0 0 / 0%) 100%
+      ),
+      linear-gradient(
+        var(--glass-reflex-degree, 100deg),
+        rgb(255 255 255 / var(--glass-reflex-opacity, 10%)) 25%,
+        rgb(0 0 0 / 0%) 25%
+      );
+  box-shadow: 0 0 0 1px rgb(255 255 255 / var(--glass-border-opacity, 10%))
+        inset,
+      0 0 0 2px rgb(0 0 0 / 5%);
+  text-shadow: 0 1px rgb(0 0 0 / var(--glass-text-shadow-opacity, 5%));
+}
+.no-animation {
+  --btn-focus-scale: 1;
+  --animation-btn: 0;
+  --animation-input: 0;
 }
 .btn-sm {
   height: 2rem;
@@ -3770,6 +3812,9 @@ body[dir="rtl"] .checkbox:checked,
 }
 .h-\[calc\(100vh-5rem\)\] {
   height: calc(100vh - 5rem);
+}
+.h-32 {
+  height: 8rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -4094,6 +4139,10 @@ body[dir="rtl"] .checkbox:checked,
   --tw-border-opacity: 1;
   border-color: hsl(var(--p) / var(--tw-border-opacity));
 }
+.border-base-100 {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--b1) / var(--tw-border-opacity));
+}
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -4277,6 +4326,9 @@ body[dir="rtl"] .checkbox:checked,
 .font-sans {
   font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+.font-serif {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -4447,6 +4499,10 @@ body[dir="rtl"] .checkbox:checked,
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
+.text-neutral {
+  --tw-text-opacity: 1;
+  color: hsl(var(--n) / var(--tw-text-opacity));
+}
 .underline {
   -webkit-text-decoration-line: underline;
           text-decoration-line: underline;
@@ -4490,6 +4546,11 @@ body[dir="rtl"] .checkbox:checked,
 .ring-1 {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+.ring-0 {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 .ring-gray-300 {
@@ -4611,8 +4672,20 @@ body[dir="rtl"] .checkbox:checked,
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity));
 }
+.hover\:text-primary-focus:hover {
+  --tw-text-opacity: 1;
+  color: hsl(var(--pf, var(--p)) / var(--tw-text-opacity));
+}
+.hover\:ring-0:hover {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
 .focus\:z-10:focus {
   z-index: 10;
+}
+.focus\:border-0:focus {
+  border-width: 0px;
 }
 .focus\:border-blue-300:focus {
   --tw-border-opacity: 1;
@@ -4633,6 +4706,10 @@ body[dir="rtl"] .checkbox:checked,
 .focus\:border-indigo-500:focus {
   --tw-border-opacity: 1;
   border-color: rgb(99 102 241 / var(--tw-border-opacity));
+}
+.focus\:border-base-100:focus {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--b1) / var(--tw-border-opacity));
 }
 .focus\:bg-indigo-500:focus {
   --tw-bg-opacity: 1;

@@ -38,8 +38,8 @@ export default {
 <Head title="View Client" />
 <AppLayout>
      <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-indigo-400 hover:text-indigo-600" href="/client">Client</Link>
-      <span class="text-indigo-400 font-medium">/</span> Create
+      <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
+      <span class="text-primary font-medium">/</span> Create
     </h1>
 
             <ClientForm  :client="form" :states="$page.props.states"/>

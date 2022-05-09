@@ -30,9 +30,6 @@ const showingNavigationDropdown = ref(false);
                     <label for="my-drawer-2" class="drawer-overlay"></label>
                     <aside class="w-80 bg-base-200">
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
-                        <!-- Sidebar content here -->
-                        <li>
-                        </li>
                     </ul>
 
                     <div class="h-4"></div>
@@ -46,7 +43,7 @@ const showingNavigationDropdown = ref(false);
                     </li>
                     <li>
                         <BreezeResponsiveNavLink :href="route('portfolio.invoice.index',{portfolio:route().params.portfolio})"  :active="route().current('*.invoice.*')" >
-                            Invoices
+                            Invoice
                         </BreezeResponsiveNavLink>
                     </li>
                     </ul>

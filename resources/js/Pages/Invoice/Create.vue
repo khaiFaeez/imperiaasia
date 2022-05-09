@@ -125,32 +125,32 @@ export default {
         },
         onSearchIDChange(event) {
 
-        let input =  document.querySelector('#ic_checker');
-        input.classList.remove('input-primary');
-        input.classList.remove('input-success');
-        input.classList.remove('input-error');
-        input.classList.add('input-primary');
-        let that = this;
+        // let input =  document.querySelector('#ic_checker');
+        // input.classList.remove('input-primary');
+        // input.classList.remove('input-success');
+        // input.classList.remove('input-error');
+        // input.classList.add('input-primary');
+        // let that = this;
 
-        this.axios.get('/livesearch', {
-            params: {
-            keyword: event.target.value
-            }
-        }).then((res) => {
-                input.classList.remove('input-primary');
-                input.classList.add("input-success");
-                if(Object.keys(res.data).length == 0){
-                    that.canCreate = 'client'
-                }else{
-                    that.canCreate = 'order'
-                    that.ClientFormv = res.data
-                }
+        // this.axios.get('/livesearch', {
+        //     params: {
+        //     keyword: event.target.value
+        //     }
+        // }).then((res) => {
+        //         input.classList.remove('input-primary');
+        //         input.classList.add("input-success");
+        //         if(Object.keys(res.data).length == 0){
+        //             that.canCreate = 'client'
+        //         }else{
+        //             that.canCreate = 'order'
+        //             that.ClientFormv = res.data
+        //         }
 
-        }).catch( (error)=> {
-                input.classList.remove('input-primary');
-                input.classList.add("input-error");
-                that.canCreate = false;
-            })
+        // }).catch( (error)=> {
+        //         input.classList.remove('input-primary');
+        //         input.classList.add("input-error");
+        //         that.canCreate = false;
+        //     })
 
         // this.form.get('/')
         },
@@ -162,14 +162,14 @@ export default {
 <Head title="Create Invoice" />
 <AppLayout>
      <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-indigo-400 hover:text-indigo-600" href="/invoice">Invoice</Link>
-      <span class="text-indigo-400 font-medium">/</span> Create
+      <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
+      <span class="text-primary font-medium">/</span> Create
     </h1>
     <form @submit.prevent="storeInvoice" class="form">
         <div class="divider text-xl">Client</div>
         <div class="grid grid-cols-1 gap-5 mb-12">
                 <div>
-                  <BreezeLabel value="ID Card"/>
+                  <BreezeLabel value="ID Number"/>
                   <BreezeInput  type="text" name="MyKad_SSM"  @change="onSearchIDChange($event)" id="ic_checker"/>
                 </div>
                 <div class="btn-group gap-3" v-show="orderType == ''">
