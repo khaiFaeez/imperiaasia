@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Client;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use App\Models\State;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class ClientController extends Controller
 {
@@ -28,11 +28,20 @@ class ClientController extends Controller
 
         Auth::user()->hasPermissionTo('invoice-list');
         Config::set('database.default', $this->portfolio);
-        $clients = Client::with('state')->paginate(20);
+        $filter = Request::input('search');
+        $clients = Client::with('state')
+            ->when($filter, function ($query, $filter) {
+                $query->where('MyKad_SSM', 'LIKE', '%' . $filter . '%');
+            })
+            ->paginate(20);
         $clients->map(function ($query) {
             $query->invoice = $query->getLastInvoice($query);
         });
-        return Inertia::render('Client/Index', ["portfolio" => $this->portfolio, 'clients' => $clients]);
+        return Inertia::render('Client/Index', [
+            "portfolio" => $this->portfolio,
+            'clients' => $clients,
+            'filters' => Request::all('search', 'trashed'),
+        ]);
     }
 
     /**
@@ -44,10 +53,12 @@ class ClientController extends Controller
     {
         Auth::user()->hasPermissionTo('invoice-create');
         Config::set('database.default', $this->portfolio);
-        $states = State::get();
-        $countries = ["Malaysia", "Indonesia", "Philippine"];
 
-        return Inertia::render('Client/Create', ["portfolio" => $this->portfolio, 'states' => $states, 'countries' => $countries]);
+        return Inertia::render('Client/Create', [
+            "portfolio" => $this->portfolio,
+            'states' => State::get(),
+            'countries' => ["Malaysia", "Indonesia", "Philippine"]
+        ]);
     }
 
     /**
@@ -56,14 +67,17 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
         Auth::user()->hasPermissionTo('invoice-create');
 
         Config::set('database.default', $this->portfolio);
-        Client::create($request->all());
+        $id = Client::create($request->validated());
 
-        return redirect()->route('portfolio.client.index', ["portfolio" => $this->portfolio])
+        return redirect()->route('portfolio.client.show', [
+            "portfolio" => $this->portfolio,
+            "client" => $id->id
+        ])
             ->with('message', 'Client created successfully');
     }
 
@@ -76,11 +90,13 @@ class ClientController extends Controller
     public function show($portfolio, $id)
     {
         Config::set('database.default', $this->portfolio);
-        $client = Client::with('state')->where('id', $id)->first();
-        $states = State::get();
-        $countries = ["Malaysia", "Indonesia", "Philippine"];
 
-        return Inertia::render('Client/Show', ["portfolio" => $this->portfolio, 'client' => $client, 'states' => $states, 'countries' => $countries]);
+        return Inertia::render('Client/Show', [
+            "portfolio" => $this->portfolio,
+            'client' => Client::with('state')->where('id', $id)->with('invoices')->first(),
+            'states' => State::get(),
+            'countries' => ["Malaysia", "Indonesia", "Philippine"]
+        ]);
     }
 
     /**
@@ -121,7 +137,7 @@ class ClientController extends Controller
     {
 
         Config::set('database.default', $this->portfolio);
-        $data = Client::where('MyKad_SSM', 'LIKE', '%' . $request->keyword . '%')->first();
+        $data = Client::where('MyKad_SSM', 'LIKE', '%' . $request->keyword . '%')->get();
 
 
         return response()->json($data);

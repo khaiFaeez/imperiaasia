@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\State;
 use Illuminate\Support\Facades\DB;
+use App\Models\Invoice;
 
 class Client extends Model
 {
@@ -32,6 +33,11 @@ class Client extends Model
     public function state()
     {
         return $this->hasOne(State::class, 'id', 'State');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class, 'MyKad_SSM', 'id');
     }
 
     public function getLastInvoice(Client $client)

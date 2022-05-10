@@ -24,7 +24,17 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'MyKad_SSM' => 'required | digits:12 ',
+            'Name' => 'required',
+            'Mobile_No' => 'required',
+            'Phone' => 'required | numeric',
+            'Off_Phone' => 'required',
+            'Address' => 'required',
+            'Address_2' => 'required',
+            'Poscode' => 'required',
+            'City' => 'required',
+            'State' => 'required',
+            'Country' => 'required'
         ];
     }
 }

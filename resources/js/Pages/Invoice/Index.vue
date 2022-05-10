@@ -5,17 +5,38 @@ import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
 import moment from 'moment'
 import BreezeInput from '@/Components/Input.vue'
+import SearchFilter from '@/Components/SearchFilter'
+import throttle from 'lodash/throttle'
+import pickBy from 'lodash/pickBy'
 
 const showingNavigationDropdown = ref(false);
 
 
 export default {
+    props:[
+        'invoice','filters'
+    ],
+     data() {
+        return {
+        form: {
+            search: this.filters.search,
+        },
+        }
+    },
+     watch: {
+        form: {
+        deep: true,
+        handler: throttle(function () {
+            this.$inertia.get(route('portfolio.invoice.index',{'portfolio':this.$page.props.portfolio}), pickBy(this.form), { preserveState: true })
+        }, 150),
+        },
+    },
     components:{
         Pagination,
         AppLayout,
-        Link,
         Head,
-        BreezeInput
+        Link,
+        SearchFilter,
     },
     created: function () {
         this.moment = moment;
@@ -24,10 +45,13 @@ export default {
         goToViewPage(data) {
             window.open(route('portfolio.invoice.show',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_self');
         },
-
-    },
+         reset() {
+            this.form = {
+            search: null,
+            }
+         }
+    }
 }
-
 </script>
 
 <template>
@@ -36,11 +60,15 @@ export default {
 <h1 class="mb-8 text-3xl font-bold">
     <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
 </h1>
-<section class="flex flex-row items-start mb-5">
-
-    <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio})" v-if="route().current('*.invoice.*')" class="btn btn-primary text-white">
-        Create Invoice
-    </Link>
+<section class="flex flex-row items-center justify-between mb-5">
+    <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
+        <label class="block text-gray-700">Trashed:</label>
+        <select v-model="form.trashed" class="form-select mt-1 w-full">
+          <option :value="null" />
+          <option value="with">With Trashed</option>
+          <option value="only">Only Trashed</option>
+        </select>
+      </search-filter>
 </section>
 <div class="overflow-auto">
 <table class="table table-compact table-bordered w-full">
@@ -121,7 +149,7 @@ export default {
                 <td>{{ $invoice.Aging}} Days</td>
                 <td>{{ $invoice.Inv_No }}</td>
                 <td>Date</td>
-                <td>{{ $invoice.MyKad_SSM }}</td>
+                <td>{{ $invoice.client.MyKad_SSM }}</td>
                 <td>{{ $invoice.client.Name }}</td>
                 <td>{{ $invoice.Ship_Phone }}</td>
                 <td>{{ $invoice.Ship_Name }}</td>

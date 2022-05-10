@@ -2,6 +2,7 @@
 import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import ClientForm from '@/Components/Forms/ClientForm.vue'
+import BreezeButton from '@/Components/Button'
 
 
 export default {
@@ -13,6 +14,7 @@ export default {
         Link,
         Head,
         ClientForm,
+        BreezeButton
     },
     data(){
         return {
@@ -30,6 +32,20 @@ export default {
                     Country:""
             })
         }
+    },
+    methods: {
+        storeClient() {
+                this.form.post(route('portfolio.client.store',{"portfolio":this.$page.props.portfolio}),{
+                    errorBag: 'storeClient',
+                    preserveScroll: true,
+                     onFinish: () => {
+                        this.showUpdateForm = false;
+                        this.$toast.success(this.$page.props.flash.message, {
+                            position: 'top'
+                        });
+                    },
+                });
+            },
     }
 }
 
@@ -41,8 +57,16 @@ export default {
       <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
       <span class="text-primary font-medium">/</span> Create
     </h1>
-
-            <ClientForm  :client="form" :states="$page.props.states"/>
+        <form @submit.prevent="storeClient" class="form">
+            <ClientForm
+                :client="form"
+                :states="$page.props.states"/>
+                <div>
+            <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                Save
+            </BreezeButton>
+            </div>
+        </form>
 
 </AppLayout>
 </template>

@@ -1,8 +1,6 @@
 <script>
 
-import { Link,Head } from '@inertiajs/inertia-vue3';
-import AppLayout from '@/Layouts/Authenticated.vue';
-import BreezeButton from '@/Components/Button.vue'
+import { Link,Head } from '@inertiajs/inertia-vue3'
 import BreezeLabel from '@/Components/Label.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from  '@/Components/InputError.vue'
@@ -11,119 +9,151 @@ import BreezeInputError from  '@/Components/InputError.vue'
 export default {
     props: ['client','countries','states'],
     components:{
-        AppLayout,
         BreezeLabel,
-        BreezeButton,
         BreezeInput,
         BreezeInputError,
-        Link,
-        Head
-    },
-    data() {
-        return {
-             form: this.$inertia.form(this.client),
-        };
-    },methods: {
-        storeClient() {
-                this.form.post(route('portfolio.client.store',{"portfolio":this.$page.props.portfolio}),{
-                    // errorBag: 'storeClient',
-                    // preserveScroll: true,
-                    //  onFinish: () => {
-                        // this.showUpdateForm = false;
-                        // this.$toast.success(this.$page.props.flash.message, {
-                        //     position: 'top'
-                        // });
-                    // },
-                });
-            },
+        Link
     }
-
 }
 
 </script>
 <template>
+<div class="w-full">
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="IC Number / Passport"/>
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" name="MyKad_SSM" v-model="client.MyKad_SSM"  />
+        <BreezeInputError :message="client.errors.Name" />
+    </div>
+  </div>
 
-        <form @submit.prevent="storeClient" class="form">
-        <div class="grid grid-cols-1 gap-5 mb-12">
-                <div>
-                  <BreezeLabel value="ID Card"/>
-                  <BreezeInput  type="text" name="MyKad_SSM" v-model="form.MyKad_SSM"  />
-                </div>
-                <div>
-                  <BreezeLabel value="Name"/>
-                  <BreezeInput  type="text" name="Name" v-model="form.Name"   />
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Name"/>
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" name="Name" v-model="client.Name"   />
+        <BreezeInputError :message="client.errors.Name" />
+    </div>
+  </div>
 
-                <div class="grid grid-cols-3 gap-2">
-                <div>
-                    <BreezeLabel value="Contact No. 1"/>
-                    <BreezeInput  type="text" name="Phone_1" v-model="form.Mobile_No"  />
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Contact No. 1"/>
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" name="Phone_1" v-model="client.Mobile_No"  />
+        <BreezeInputError :message="client.errors.Mobile_No" />
+    </div>
+  </div>
 
-                <div>
-                    <BreezeLabel value="Contact No. 2"/>
-                    <BreezeInput  type="text" name="Phone_2" v-model="form.Phone" placeholder="" />
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Contact No. 2"/>
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" name="Phone_2" v-model="client.Phone" placeholder="" />
+        <BreezeInputError :message="client.errors.Phone" />
+    </div>
+  </div>
 
-                <div>
-                    <BreezeLabel value="Contact No. 3"/>
-                    <BreezeInput  type="text" name="Phone_3" v-model="form.Off_Phone" placeholder="" />
-                </div>
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Contact No. 3"/>
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" name="Phone_3" v-model="client.Off_Phone" placeholder="" />
+        <BreezeInputError :message="client.errors.Off_Phone" />
+    </div>
+  </div>
 
-                <div>
-                <BreezeLabel value="Client Occupation"/>
-                          <select name="Occupation"  v-model="form.occupation" class="border-primary w-full max-w-md">
-                          <option  value=''>Please select</option>
-                          <option  value='A'>Gaji Bulanan</option>
-                          <option  value='B'>Bekerja Sendiri/berniaga</option>
-                          <option  value='C'>Suri Rumah</option>
-                          <option  value='D'>Goverment Staff</option>
-                          </select>
-                </div>
+   <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Client Occupation"/>
+    </div>
+    <div class="md:w-2/3">
+        <select name="Occupation"  v-model="client.occupation" class="border-primary w-full max-w-md">
+            <option  value=''>Please select</option>
+            <option  value='A'>Gaji Bulanan</option>
+            <option  value='B'>Bekerja Sendiri/berniaga</option>
+            <option  value='C'>Suri Rumah</option>
+            <option  value='D'>Goverment Staff</option>
+            </select>
+        <BreezeInputError :message="client.errors.occupation" />
+    </div>
+  </div>
 
-                <div>
-                  <BreezeLabel value="Address"/>
-                  <BreezeInput  type="text" placeholder="" name="Address" v-model="form.Address"  />
-                </div>
-
-                <div>
-                  <BreezeLabel value="Address 2"/>
-                  <BreezeInput  type="text" placeholder=""  name="Address_2" v-model="form.Address_2" />
-                </div>
-                 <div class="grid grid-cols-4 gap-2">
-                <div>
-                      <BreezeLabel value="Poscode"/>
-                      <BreezeInput  type="text" placeholder="" name="Poscode" v-model="form.Poscode"  />
-                </div>
-
-                <div>
-                      <BreezeLabel value="City" />
-                      <BreezeInput  type="text" placeholder="" name="City" v-model="form.City"  />
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Address"/>
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" placeholder="" name="Address" v-model="client.Address"  />
+        <BreezeInputError :message="client.errors.Address" />
+    </div>
+  </div>
 
 
-                <div>
-                      <BreezeLabel  value="State" />
-                      <select name="State"   v-model="form.State" class="select border-primary w-full">
-                                            <option  value=''>Please select state</option>
-									        <option v-for="$state in states" :key="$state.id" :value="$state.id" >{{$state.Negeri}}</option>
-                      </select>
-                </div>
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Address 2"/>
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" placeholder=""  name="Address_2" v-model="client.Address_2" />
+        <BreezeInputError :message="client.errors.Address_2" />
+    </div>
+  </div>
 
-                <div>
-                      <BreezeLabel value="Country"/>
-                      <select name="Country"   v-model="form.Country" class="select border-primary w-full">
-                        <option value='MALAYSIA'>MALAYSIA</option>
-                        <option v-for="$country in countries" :key="$country" :value="$country" >{{$country}}</option>
-                      </select>
-                </div>
-                </div>
-            </div>
-            <div>
-                 <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Save
-                </BreezeButton>
-            </div>
-        </form>
+
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Poscode"/>
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" placeholder="" name="Poscode" v-model="client.Poscode"  />
+        <BreezeInputError :message="client.errors.Poscode" />
+    </div>
+  </div>
+
+
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="City" />
+    </div>
+    <div class="md:w-2/3">
+        <BreezeInput  type="text" placeholder="" name="City" v-model="client.City"  />
+        <BreezeInputError :message="client.errors.City" />
+    </div>
+  </div>
+
+
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel  value="State" />
+    </div>
+    <div class="md:w-2/3">
+        <select name="State"   v-model="client.State" class="select border-primary w-full">
+                                <option  value=''>Please select state</option>
+                                <option v-for="$state in states" :key="$state.id" :value="$state.id" >{{$state.Negeri}}</option>
+        </select>
+        <BreezeInputError :message="client.errors.State" />
+    </div>
+  </div>
+
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Country"/>
+    </div>
+    <div class="md:w-2/3">
+        <select name="Country"   v-model="client.Country" class="select border-primary w-full">
+            <option v-for="$country in countries" :key="$country" :value="$country" >{{$country}}</option>
+        </select>
+        <BreezeInputError :message="client.errors.Country" />
+    </div>
+  </div>
+
+</div>
+
 </template>

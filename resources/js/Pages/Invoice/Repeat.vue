@@ -12,9 +12,10 @@ import PaymentForm from '@/Components/Forms/PaymentForm.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import PostageForm from '@/Components/Forms/PostageForm.vue'
 
+
 export default {
     props:[
-        'client'
+        'client','invoice'
     ],
     components:{
         AppLayout,
@@ -34,58 +35,58 @@ export default {
     data() {
         return {
             clientForm:this.$inertia.form({
-                    MyKad_SSM:this.client.MyKad_SSM,
-                    Name:this.client.Name,
-                    Mobile_No:this.client.Mobile_No,
-                    Phone:this.client.Phone,
-                    Off_Phone:this.client.Off_Phone,
-                    Address:this.client.Address,
-                    Address_2:this.client.Address_2,
-                    Poscode:this.client.Poscode,
-                    City:this.client.City,
-                    State:this.client.State,
-                    Country:this.client.Country
+                    MyKad_SSM:this.invoice.client.MyKad_SSM,
+                    Name:this.invoice.client.Name,
+                    Mobile_No:this.invoice.client.Mobile_No,
+                    Phone:this.invoice.client.Phone,
+                    Off_Phone:this.invoice.client.Off_Phone,
+                    Address:this.invoice.client.Address,
+                    Address_2:this.invoice.client.Address_2,
+                    Poscode:this.invoice.client.Poscode,
+                    City:this.invoice.client.City,
+                    State:this.invoice.client.State,
+                    Country:this.invoice.client.Country
             }),
             invoiceForm: this.$inertia.form({
-                MyKad_SSM:this.client.id,
+                MyKad_SSM:this.invoice.client.id,
                 products:{
-                grand_total:0,
+                grand_total:this.invoice.Grand_Total,
                 items:[
                     {
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
+                        product:this.invoice.Product,
+                        price : this.invoice.Price,
+                        qty : this.invoice.Qty,
+                        discount : this.invoice.Discount,
                         discounted_price : 0,
-                        total : 0,
+                        total : this.invoice.Total_RM,
                     },{
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
+                         product:this.invoice.Product_2,
+                        price : this.invoice.Price_2,
+                        qty : this.invoice.Qty_2,
+                        discount : this.invoice.Discount_2,
                         discounted_price : 0,
-                        total : 0,
+                        total : this.invoice.Total_RM_2,
                     }, {
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
+                         product:this.invoice.Product_3,
+                        price : this.invoice.Price_3,
+                        qty : this.invoice.Qty_3,
+                        discount : this.invoice.Discount_3,
                         discounted_price : 0,
-                        total : 0,
+                        total : this.invoice.Total_RM_3,
                     }, {
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
+                         product:this.invoice.Product_4,
+                        price : this.invoice.Price_4,
+                        qty : this.invoice.Qty_4,
+                        discount : this.invoice.Discount_4,
                         discounted_price : 0,
-                        total : 0,
+                        total : this.invoice.Total_RM_4,
                     }, {
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
+                         product:this.invoice.Product_5,
+                        price : this.invoice.Price_5,
+                        qty : this.invoice.Qty_5,
+                        discount : this.invoice.Discount_5,
                         discounted_price : 0,
-                        total : 0,
+                        total : this.invoice.Total_RM_5,
                     }
                 ]},
                 payment:{
@@ -180,6 +181,7 @@ export default {
       <span class="text-primary font-medium">/</span> Create
     </h1>
     <form @submit.prevent="storeInvoice" class="form">
+
         <div class="divider text-xl mb-8 ">Client</div>
             <ClientForm
                 :client="clientForm"
@@ -197,16 +199,16 @@ export default {
             />
 
 
-
         <div class="divider text-xl mb-8 mt-32 ">Product</div>
             <ProductForm
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
-        <div class="my-12 flex justify-end">
+         <div class="my-12 flex justify-end">
         <BreezeButton :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
                 Save
         </BreezeButton>
         </div>
+
     </form>
 </AppLayout>
 

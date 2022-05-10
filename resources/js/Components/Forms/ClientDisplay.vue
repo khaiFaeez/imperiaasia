@@ -41,7 +41,7 @@ export default {
         <form @submit.prevent="storeClient" class="form">
         <div class="grid grid-cols-1 gap-5 mb-12">
                 <div>
-                  <BreezeLabel value="ID Card"/>
+                  <BreezeLabel value="IC Number / Passport"/>
                   <p>{{client.MyKad_SSM}}</p>
                 </div>
                 <div>

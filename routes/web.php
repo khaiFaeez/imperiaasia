@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,10 @@ Route::group(['middleware' => ['auth']], function () {
             return view('dashboard', ['portfolio' => 'platinum']);
         })->name('dashboard');
 
-        Route::get('/livesearch', [ClientController::class, 'getICNumber']);
+        // Route::get('/livesearch', [ClientController::class, 'getICNumber']);
+        Route::get('/invoice/repeat/{invoice_id}', [InvoiceController::class, 'repeatOrder'])->name('invoice.repeat');
+        Route::get('/invoice/create/{client_id}', [InvoiceController::class, 'create'])->name('invoice.create');
+        Route::get('/invoice/pdf/{invoice}', [PdfController::class, 'index'])->name('invoice.pdf');
     });
 });
 

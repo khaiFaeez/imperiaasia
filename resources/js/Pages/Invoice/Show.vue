@@ -36,6 +36,9 @@ export default {
         goToViewPage(data) {
             window.open(route('portfolio.invoice.show',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_self');
         },
+        openPDF(data){
+            window.open(route('portfolio.invoice.pdf',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_blank')
+        }
     }
 }
 
@@ -47,6 +50,10 @@ export default {
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
       <span class="text-primary font-medium">/</span> {{invoice.Inv_No}}
     </h1>
+    <section class="flex flex-row items-center justify-between mb-5">
+        <div></div>
+    <button @click="openPDF(invoice)" class="btn btn-info" >PDF</button>
+</section>
         <div class="divider text-xl">Client</div>
       <transition
             enter-active-class="transition ease-out duration-200"

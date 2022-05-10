@@ -13,7 +13,7 @@ class InvoiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,9 @@ class InvoiceRequest extends FormRequest
      */
     public function rules()
     {
-        // return [
-        //     'invoice    .*.email' => 'required|email|unique:exists:users,id'
-        // ];
+        return [
+            'shipping.Ship_Name' => 'required',
+            'MyKad_SSM' => 'required ',
+        ];
     }
 }
