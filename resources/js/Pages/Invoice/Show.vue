@@ -6,9 +6,10 @@ import BreezeLabel from '@/Components/Label.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from  '@/Components/InputError.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
-import ProductForm from '@/Components/Forms/ProductForm.vue'
 import SalesForm from '@/Components/Forms/SalesForm.vue'
 import PaymentForm from '@/Components/Forms/PaymentForm.vue'
+import ProductDisplay from '@/Components/Forms/ProductDisplay.vue';
+import PostageDisplay from '@/Components/Forms/PostageDisplay.vue';
 
 
 export default {
@@ -19,17 +20,117 @@ export default {
         states:Object
     },
     components:{
-        AppLayout,
-        BreezeLabel,
-        BreezeButton,
-        BreezeInput,
-        BreezeInputError,
-        Link,
-        Head,
-        ClientDisplay,
-        ProductForm,
-        SalesForm,
-        PaymentForm
+    AppLayout,
+    BreezeLabel,
+    BreezeButton,
+    BreezeInput,
+    BreezeInputError,
+    Link,
+    Head,
+    ClientDisplay,
+    ProductDisplay,
+    SalesForm,
+    PaymentForm,
+    PostageDisplay
+
+},
+data() {
+        return {
+            clientForm:this.$inertia.form({
+                    MyKad_SSM:this.invoice.client.MyKad_SSM,
+                    Name:this.invoice.client.Name,
+                    Mobile_No:this.invoice.client.Mobile_No,
+                    Phone:this.invoice.client.Phone,
+                    Off_Phone:this.invoice.client.Off_Phone,
+                    Address:this.invoice.client.Address,
+                    Address_2:this.invoice.client.Address_2,
+                    Poscode:this.invoice.client.Poscode,
+                    City:this.invoice.client.City,
+                    State:this.invoice.client.State,
+                    Country:this.invoice.client.Country
+            }),
+            invoiceForm: this.$inertia.form({
+                client:this.invoice.client.id,
+                products:{
+                grand_total:this.invoice.Grand_Total,
+                items:[
+                    {
+                        product:this.invoice.Product,
+                        product_name:this.invoice.product?.Product_Name,
+                        price : this.invoice.Price,
+                        qty : this.invoice.Qty,
+                        discount : this.invoice.Discount,
+                        discounted_price : 0,
+                        total : this.invoice.Total_RM,
+                    },{
+                         product:this.invoice.Product_2,
+                        product_name:this.invoice.product2?.Product_Name,
+                        price : this.invoice.Price_2,
+                        qty : this.invoice.Qty_2,
+                        discount : this.invoice.Discount_2,
+                        discounted_price : 0,
+                        total : this.invoice.Total_RM_2,
+                    }, {
+                         product:this.invoice.Product_3,
+                        product_name:this.invoice.product3?.Product_Name,
+                        price : this.invoice.Price_3,
+                        qty : this.invoice.Qty_3,
+                        discount : this.invoice.Discount_3,
+                        discounted_price : 0,
+                        total : this.invoice.Total_RM_3,
+                    }, {
+                         product:this.invoice.Product_4,
+                        product_name:this.invoice.product4?.Product_Name,
+                        price : this.invoice.Price_4,
+                        qty : this.invoice.Qty_4,
+                        discount : this.invoice.Discount_4,
+                        discounted_price : 0,
+                        total : this.invoice.Total_RM_4,
+                    }, {
+                         product:this.invoice.Product_5,
+                        product_name:this.invoice.product5?.Product_Name,
+                        price : this.invoice.Price_5,
+                        qty : this.invoice.Qty_5,
+                        discount : this.invoice.Discount_5,
+                        discounted_price : 0,
+                        total : this.invoice.Total_RM_5,
+                    }
+                ]},
+                payment:{
+                    total_settlement:"",
+                    items:[
+                    {
+                        ptp:"",
+                        settlement:""
+                    }, {
+                        ptp:"",
+                        settlement:""
+                    }, {
+                        ptp:"",
+                        settlement:""
+                    }, {
+                        ptp:"",
+                        settlement:""
+                    }
+
+                ]},
+                sales:{
+                    consultant:"",
+                    channel:"",
+                    closing:""
+                },
+                shipping:{
+                    Ship_Name:this.invoice.Ship_Name,
+                    Ship_Phone:this.invoice.Ship_Phone,
+                    Ship_Add1:this.invoice.Ship_Add1,
+                    Ship_Add2:this.invoice.Ship_Add2,
+                    Ship_poscode:this.invoice.Ship_poscode,
+                    Ship_City:this.invoice.Ship_City,
+                    Ship_State:this.invoice.Ship_State,
+                    Ship_Country:this.invoice.Ship_Country
+                }
+            }),
+        };
     },
     methods: {
 
@@ -52,29 +153,29 @@ export default {
     </h1>
     <section class="flex flex-row items-center justify-between mb-5">
         <div></div>
-    <button @click="openPDF(invoice)" class="btn btn-info" >Print</button>
+    <button @click="openPDF(invoice)" class="btn btn-info" >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+</svg>
+    Print
+    </button>
 </section>
         <div class="divider text-xl">Client</div>
-      <transition
-            enter-active-class="transition ease-out duration-200"
-            enter-from-class="transform opacity-0 scale-95"
-            enter-to-class="transform opacity-100 scale-100"
-            leave-active-class="transition ease-in duration-75"
-            leave-from-class="transform opacity-100 scale-100"
-            leave-to-class="transform opacity-0 scale-95">
-            <div >
-            <ClientDisplay  :client="invoice.client" :states="$page.props.states"/>
+
+            <ClientDisplay
+                :client="invoice.client"
+                :states="$page.props.states"/>
+
+            <div class="divider text-xl mb-8 mt-32 ">Postage</div>
+            <PostageDisplay
+                :states="$page.props.states"
+                :shipping="invoiceForm.shipping"
+            />
+
             <div class="divider text-xl">Product</div>
-             <!-- <ProductForm :product="invoice.products" :products="$page.props.products" :readonly="true"/>
-            <div class="divider text-xl">Sales</div>
-             <SalesForm :sales="invoice.sales" :consultants="$page.props.consultants" />
-            <div class="divider text-xl">Payment</div>
-             <PaymentForm :payment="invoice.payment"/>
-            <BreezeButton class="ml-4" :class="{ 'opacity-25': invoice.processing }" :disabled="invoice.processing">
-                Submit
-            </BreezeButton> -->
-            </div>
-     </transition>
+             <ProductDisplay
+                :products="invoiceForm.products"
+                :productLists="$page.props.products" />
 
 </AppLayout>
 

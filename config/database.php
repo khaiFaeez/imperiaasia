@@ -103,6 +103,26 @@ return [
             ]) : [],
         ],
 
+        'dresella' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_PLATI2'),
+            'host' => env('DB_HOST_PLATI', '127.0.0.1'),
+            'port' => env('DB_PORT_PLATI', '3306'),
+            'database' => env('DB_DATABASE_PLATI2', 'forge'),
+            'username' => env('DB_USERNAME_PLATI2', 'forge'),
+            'password' => env('DB_PASSWORD_PLATI2', ''),
+            'unix_socket' => env('DB_SOCKET_PLATI2', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

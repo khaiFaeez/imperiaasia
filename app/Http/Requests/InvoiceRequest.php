@@ -25,7 +25,7 @@ class InvoiceRequest extends FormRequest
     {
         return [
             'shipping.Ship_Name' => 'required',
-            'MyKad_SSM' => 'required ',
+            'client' => 'required ',
         ];
     }
 }

@@ -47,7 +47,7 @@ export default {
                     Country:this.client.Country
             }),
             invoiceForm: this.$inertia.form({
-                MyKad_SSM:this.client.id,
+                client:this.client.id,
                 products:{
                 grand_total:0,
                 items:[

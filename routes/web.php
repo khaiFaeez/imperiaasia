@@ -10,6 +10,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,21 +44,15 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('password.edit');
 
     Route::post('update-password', [UserController::class, 'updatePassword'])->name('password.store');
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //SUB-DOMAIN
     Route::domain('{portfolio}.' . env('SESSION_DOMAIN'))->name('portfolio.')->group(function () {
         Route::resource('invoice', InvoiceController::class);
         Route::resource('client', ClientController::class);
-        Route::get('dashboard', function () {
-            return view('dashboard', ['portfolio' => 'platinum']);
-        })->name('dashboard');
-
-        // Route::get('/livesearch', [ClientController::class, 'getICNumber']);
         Route::get('/invoice/repeat/{invoice_id}', [InvoiceController::class, 'repeatOrder'])->name('invoice.repeat');
         Route::get('/invoice/create/{client_id}', [InvoiceController::class, 'create'])->name('invoice.create');
-        Route::get('/invoice/pdf/{invoice}', [PdfController::class, 'index'])->name('invoice.pdf');
+        Route::get('/invoice/pdf/{invoice}', [PdfController::class, 'printInvoice'])->name('invoice.pdf');
+        Route::get('/print/invoice/', [PdfController::class, 'index'])->name('invoice.bulk.pdf');
     });
 });
 

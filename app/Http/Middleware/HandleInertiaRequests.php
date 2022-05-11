@@ -43,6 +43,9 @@ class HandleInertiaRequests extends Middleware
             },
             'flash' => [
                 'message' => $request->session()->get('message')
+            ],
+            'portfolio' => [
+                'list' => config('portfolio.list')
             ]
         ]);
     }

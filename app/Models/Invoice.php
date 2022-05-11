@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Client;
 use App\Models\Product;
 use App\Models\Channel;
+use App\Models\Delivery;
 
 class Invoice extends Model
 {
     use HasFactory;
 
-    // protected $connection = 'platinum';
     protected $table = 'Invoice';
     protected $primaryKey  = "Id";
     protected $guarded = [];
@@ -28,6 +28,27 @@ class Invoice extends Model
         return $this->hasOne(Product::class, 'id', 'Product');
     }
 
+    public function product2()
+    {
+        return $this->hasOne(Product::class, 'id', 'Product_2');
+    }
+
+    public function product3()
+    {
+        return $this->hasOne(Product::class, 'id', 'Product_3');
+    }
+
+    public function product4()
+    {
+        return $this->hasOne(Product::class, 'id', 'Product_4');
+    }
+
+    public function product5()
+    {
+        return $this->hasOne(Product::class, 'id', 'Product_5');
+    }
+
+
     public function state()
     {
         return $this->hasOne(State::class, 'id', 'Ship_State');
@@ -37,6 +58,13 @@ class Invoice extends Model
     {
         return $this->hasOne(Channel::class, 'id', 'Channel');
     }
+
+    public function delivery()
+    {
+        return $this->hasOne(Delivery::class, 'id', 'Inv_No');
+    }
+
+
 
     public static function boot()
     {

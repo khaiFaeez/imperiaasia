@@ -20,7 +20,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="dropdown inline-block lg:hidden">
                                 <label tabindex="0" class="btn btn-ghost m-1 text-xl"> {{ route().params.portfolio ? route().params.portfolio : "Select Portfolio" }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg></label>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ">
-                                    <li><a :href="route('portfolio.invoice.index',{portfolio:'platinum'})" >Platinum</a ></li>
+                                    <li v-for="(value,key) in $page.props.portfolio.list" :key="key"><a :href="route('portfolio.invoice.index',{portfolio:key})">{{value}}</a ></li>
                                 </ul>
                             </div>
     </div>
@@ -32,7 +32,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="dropdown">
                                 <label tabindex="0" class="btn btn-ghost m-1 text-xl no-animation"> {{ route().params.portfolio ? route().params.portfolio : "Select Portfolio" }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg></label>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li><a :href="route('portfolio.invoice.index',{portfolio:'platinum'})">Platinum</a ></li>
+                                    <li v-for="(value,key) in $page.props.portfolio.list" :key="key"><a :href="route('portfolio.invoice.index',{portfolio:key})">{{value}}</a ></li>
                                 </ul>
                             </div>
   </div>

@@ -2,16 +2,18 @@
 
 return [
     'list' => [
-        'platinum',
-        'jeffer juice',
-        'dressela',
+        'platinum' => "Platinum",
+        'jefferjuice' => "Jeffer Juice",
+        'dressela' => "Dresella",
     ],
 
     'invoice_prefix' => [
-        "platinum" => "INV-"
+        "platinum" => "INV-",
+        "dresella" => "DRE-"
     ],
 
     'invoice_padding' => [
-        "platinum" => "7"
+        "platinum" => 7,
+        "dresella" => 7
     ]
 ];

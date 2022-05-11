@@ -38,76 +38,118 @@ export default {
 </script>
 <template>
 
-        <form @submit.prevent="storeClient" class="form">
-        <div class="grid grid-cols-1 gap-5 mb-12">
-                <div>
-                  <BreezeLabel value="IC Number / Passport"/>
-                  <p>{{client.MyKad_SSM}}</p>
-                </div>
-                <div>
-                  <BreezeLabel value="Name"/>
-                  <p>{{client.Name}}</p>
-                </div>
+<div class="w-full">
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="IC Number / Passport"/>
+    </div>
+    <div class="md:w-2/3">
+         <p>{{client.MyKad_SSM}}</p>
+    </div>
+  </div>
 
-                <div class="grid grid-cols-3 gap-2">
-                <div>
-                    <BreezeLabel value="Contact No. 1"/>
-                    <p>{{client.Mobile_No}}</p>
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Name"/>
+    </div>
+    <div class="md:w-2/3">
+        <p>{{client.Name}}</p>
+    </div>
+  </div>
 
-                <div>
-                    <BreezeLabel value="Contact No. 2"/>
-                    <p>{{client.Phone}}</p>
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Contact No. 1"/>
+    </div>
+    <div class="md:w-2/3">
+         <p>{{client.Mobile_No}}</p>
+    </div>
+  </div>
 
-                <div>
-                    <BreezeLabel value="Contact No. 3"/>
-                    <p>{{client.Off_Phone}}</p>
-                </div>
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Contact No. 2"/>
+    </div>
+    <div class="md:w-2/3">
+         <p>{{client.Phone}}</p>
+    </div>
+  </div>
 
-                <div>
-                <BreezeLabel value="Client Occupation"/>
-                          <select name="Occupation"  v-model="client.occupation" class="border-primary w-full max-w-md">
-                          <option  value=''>Please select</option>
-                          <option  value='A'>Gaji Bulanan</option>
-                          <option  value='B'>Bekerja Sendiri/berniaga</option>
-                          <option  value='C'>Suri Rumah</option>
-                          <option  value='D'>Goverment Staff</option>
-                          </select>
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Contact No. 3"/>
+    </div>
+    <div class="md:w-2/3">
+         <p>{{client.Off_Phone}}</p>
+    </div>
+  </div>
 
-                <div>
-                  <BreezeLabel value="Address"/>
-                  <p>{{client.Address}}</p>=
-                </div>
+   <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Client Occupation"/>
+    </div>
+    <div class="md:w-2/3">
+         <p>{{client.occupation}}</p>
+    </div>
+  </div>
 
-                <div>
-                  <BreezeLabel value="Address 2"/>
-                  <p>{{client.Address_2}}</p>
-                </div>
-                 <div class="grid grid-cols-4 gap-2">
-                <div>
-                      <BreezeLabel value="Poscode"/>
-                      <p>{{client.Poscode}}</p>
-                </div>
-
-                <div>
-                      <BreezeLabel value="City" />
-                      <p>{{client.City}}</p>
-                </div>
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Address"/>
+    </div>
+    <div class="md:w-2/3">
+         <p>{{client.Address}}</p>
+    </div>
+  </div>
 
 
-                <div>
-                      <BreezeLabel  value="State" />
-                      <p>{{activeState?.Negeri}}</p>
-                </div>
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Address 2"/>
+    </div>
+    <div class="md:w-2/3">
+        <p>{{client.Address_2}}</p>
+    </div>
+  </div>
 
-                <div>
-                      <BreezeLabel value="Country"/>
-                      <p>{{client.Country}}</p>
-                </div>
-                </div>
-            </div>
-        </form>
+
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Poscode"/>
+    </div>
+    <div class="md:w-2/3">
+        <p>{{client.Poscode}}</p>
+    </div>
+  </div>
+
+
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="City" />
+    </div>
+    <div class="md:w-2/3">
+        <p>{{client.City}}</p>
+    </div>
+  </div>
+
+
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel  value="State" />
+    </div>
+    <div class="md:w-2/3">
+        <p>{{activeState?.Negeri}}</p>
+    </div>
+  </div>
+
+<div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+        <BreezeLabel value="Country"/>
+    </div>
+    <div class="md:w-2/3">
+        <p>{{client.Country}}</p>
+    </div>
+  </div>
+</div>
+
 </template>

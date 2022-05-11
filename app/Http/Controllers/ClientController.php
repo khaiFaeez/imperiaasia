@@ -93,7 +93,7 @@ class ClientController extends Controller
 
         return Inertia::render('Client/Show', [
             "portfolio" => $this->portfolio,
-            'client' => Client::with('state')->where('id', $id)->with('invoices')->first(),
+            'client' => Client::with('state')->where('id', $id)->with('invoices')->with('invoices.product')->first(),
             'states' => State::get(),
             'countries' => ["Malaysia", "Indonesia", "Philippine"]
         ]);
