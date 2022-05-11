@@ -52,7 +52,7 @@ export default {
     </h1>
     <section class="flex flex-row items-center justify-between mb-5">
         <div></div>
-    <button @click="openPDF(invoice)" class="btn btn-info" >PDF</button>
+    <button @click="openPDF(invoice)" class="btn btn-info" >Print</button>
 </section>
         <div class="divider text-xl">Client</div>
       <transition

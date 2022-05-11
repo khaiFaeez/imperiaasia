@@ -27118,7 +27118,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           return $options.openPDF($props.invoice);
         }),
         "class": "btn btn-info"
-      }, "PDF")]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+      }, "Print")]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
         "enter-active-class": "transition ease-out duration-200",
         "enter-from-class": "transform opacity-0 scale-95",
         "enter-to-class": "transform opacity-100 scale-100",
