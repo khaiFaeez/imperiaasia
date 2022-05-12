@@ -35,16 +35,15 @@ class PdfController extends Controller
         $data = array('Invoice No. :INV-100000', 'Date', 'Reference', 'Terms', 'Salesperson', 'Page', 'Promise to pay');
         $invoices = array();
         $currY = 0;
-        $this->company_name  = 'IMPERIA ASIA RESOURCES';
 
-        $this->fpdf->SetFont('Arial', 'B', 8);
+        // $this->fpdf->SetFont('Arial', 'B', 8);
 
         $this->fpdf->AliasNbPages();
+        $this->fpdf->SetAutoPageBreak(false);
         $this->fpdf->AddPage();
         $this->header();
         $this->billDeliver($header, $invoice, $currY);
-
-        // $this->fpdf->this->billDeliver($header, $invoice->toArray(), $currY);
+        $this->products($invoice, $currY);
         $this->fpdf->Ln();
 
 
@@ -57,7 +56,6 @@ class PdfController extends Controller
         $this->fpdf->Cell(20, 4, 'Total Amount : ', 0, 0, 'R');
         $this->fpdf->Cell(20, 4, $invoice->Grand_Total, 1, 0, 'L');
         $this->fpdf->Ln();
-        $this->products($invoice, $currY);
         $this->footer();
         $this->fpdf->Output();
 
@@ -73,17 +71,17 @@ class PdfController extends Controller
         $this->fpdf->Cell(80);
         // COMPANY NAME
 
-        $this->fpdf->Cell(30, 10, $this->company_name, 0, 1, 'C');
+        $this->fpdf->Cell(30, 10, config('portfolio.company.' . $this->portfolio . '.name'), 0, 1, 'C');
         $this->fpdf->SetFont('times', 'I', 10);
         $this->fpdf->SetY(14);
         $this->fpdf->SetX(128);
-        $this->fpdf->Cell(0, 5, '(SA017174-U)', 0, 1, 'C');
+        $this->fpdf->Cell(0, 5, '(' . config('portfolio.company.' . $this->portfolio . '.ssm') . ')', 0, 1, 'C');
 
 
 
         $this->fpdf->SetFont('times', 'B', 10);
-        $this->fpdf->Cell(0, 3, 'Wisma Imperia Asia No.24, Jalan Klang Sentral 2/KU5,  Klang Sentral, 41050 Klang, Selangor.', 0, 1, 'C');
-        $this->fpdf->Cell(0, 5, 'Tel : +603-3341 9822 / +6016 447 1982 / 1 800 88 1982 E-Mail : hi@imperiaasia.com Website : www.imperiaasia.com', 0, 1, 'C');
+        $this->fpdf->Cell(0, 3, config('portfolio.company.' . $this->portfolio . '.address'), 0, 1, 'C');
+        $this->fpdf->Cell(0, 5,  config('portfolio.company.' . $this->portfolio . '.contact'), 0, 1, 'C');
 
         $this->fpdf->Ln(5);
         $this->fpdf->SetFont('times', 'B', 15);
@@ -104,7 +102,7 @@ class PdfController extends Controller
         $this->fpdf->Ln();
         $this->fpdf->Cell(75, 4, '4) Interest at the rate 1.5% permonth will be charged on all overdue account*', 0, 0);
         $this->fpdf->Ln();
-        $this->fpdf->Cell(75, 4, '5) Payment By Cheque must pay to : IMPERIA ASIA RESOURCES*', 0, 0);
+        $this->fpdf->Cell(75, 4, '5) Payment By Cheque must pay to : ' . config('portfolio.company.' . $this->portfolio . '.name') . '*', 0, 0);
         $this->fpdf->Ln();
         /* $this->fpdf->Cell(75,4,'6) Year End Sale Voucher RM20 valid until 30 April 2022*',0,0);$this->fpdf->Ln();*/
         /*$this->fpdf->Cell(75,5,'6) Payment to be bank-in to a/c :',0,0);$this->fpdf->Ln();
@@ -140,12 +138,12 @@ class PdfController extends Controller
 
         $this->fpdf->SetY(-50);
         $this->fpdf->Cell(75, 9, 'ISSUED BY', 0, 0, 'C');
-        $this->fpdf->Cell(30, 9, ' ', 0, 'C', 0);
+        $this->fpdf->Cell(30, 9, ' ', 0, 0, 'C');
         $this->fpdf->Cell(75, 9, 'GOODS RECEIVED BY', 0, 0, 'C');
         //$this->fpdf->Ln(20);
         $this->fpdf->SetY(-30);
-        $this->fpdf->Cell(75, 9, 'IMPERIA ASIA RESOURCES', 'T', 0, 'C', 0);
-        $this->fpdf->Cell(30, 9, ' ', 0, 'C', 0);
+        $this->fpdf->Cell(75, 9, config('portfolio.company.' . $this->portfolio . '.name'), 'T', 0, 'C', 0);
+        $this->fpdf->Cell(30, 9, ' ', 0, 0, 'C');
         $this->fpdf->Cell(75, 9, 'Company`s Stamp & Signature', 'T', 0, 'C', 0);
         // Position at 1.5 cm from bottom
         $this->fpdf->SetY(-20);
@@ -191,7 +189,7 @@ class PdfController extends Controller
         $this->fpdf->setXY(10, 55);
         $this->fpdf->MultiCell($w, $sp, $invoice->client->Name, 0, 'L', 0);
         $this->fpdf->setXY(75, 55);
-        $this->fpdf->MultiCell(60, $sp, $invoice->Ship_Name, 0, 'L', 0);
+        $this->fpdf->MultiCell(60, $sp, iconv('UTF-8', 'windows-1252', $invoice->Ship_Name), 0, 'L', 0);
         $this->fpdf->setXY(145, 55);
         $this->fpdf->MultiCell(50, $sp, 'Invoice No.       : ' . $invoice->Inv_No, 0, 'L', 0);
         $y = $this->fpdf->GetY();
@@ -205,10 +203,10 @@ class PdfController extends Controller
         $this->fpdf->MultiCell(50, $sp, 'Terms               : 7 DAYS', 0, 'L', 0);
         $y = $this->fpdf->GetY();
         $this->fpdf->setXY(145, $y);
-        $this->fpdf->MultiCell(50, $sp, 'Salesperson      : ' . $invoice->Consultant_Name, 0, 'L', 0);
+        $this->fpdf->MultiCell(50, $sp, 'Salesperson      : ' . $invoice->consultant?->Name, 0, 'L', 0);
         $y = $this->fpdf->GetY();
         $this->fpdf->setXY(145, $y);
-        $this->fpdf->MultiCell(50, $sp, 'CMD                 : ' . $invoice->Cmd_Name, 0, 'L', 0);
+        $this->fpdf->MultiCell(50, $sp, 'CMD                 : ' . $invoice->collector?->Name, 0, 'L', 0);
         $y = $this->fpdf->GetY();
         $this->fpdf->setXY(145, $y);
         $this->fpdf->MultiCell(50, $sp, 'Page                   : 1 of 1', 0, 'L', 0);
@@ -246,10 +244,10 @@ class PdfController extends Controller
         $this->fpdf->SetY(59);
         $y2 = $this->fpdf->GetY();
         $this->fpdf->setXY(75, $y2 + $sp);
-        $this->fpdf->MultiCell(60, $sp, $invoice->Ship_Add1 . ' ' . $invoice->Ship_Add2, 0, 'L', 0);
+        $this->fpdf->MultiCell(60, $sp, iconv('UTF-8', 'windows-1252', $invoice->Ship_Add1) . ' ' . iconv('UTF-8', 'windows-1252', $invoice->Ship_Add2), 0, 'L', 0);
         $y2 = $this->fpdf->GetY();
         $this->fpdf->setXY(75, $y2);
-        $this->fpdf->MultiCell(60, $sp, $invoice->Ship_poscode . ' ' . $invoice->Ship_City, 0, 'L', 0);
+        $this->fpdf->MultiCell(60, $sp, iconv('UTF-8', 'windows-1252', $invoice->Ship_poscode) . ' ' . iconv('UTF-8', 'windows-1252', $invoice->Ship_City), 0, 'L', 0);
         $y2 = $this->fpdf->GetY();
         $this->fpdf->setXY(75, $y2);
         $this->fpdf->MultiCell(60, $sp, $invoice->state->Negeri ?? '', 0, 'L', 0);
@@ -259,7 +257,7 @@ class PdfController extends Controller
 
         $y2 = $this->fpdf->GetY();
         $this->fpdf->setXY(75, $y2);
-        $this->fpdf->MultiCell(60, $sp, 'Mobile No. : ' . $invoice->Ship_Phone, 0, 'L', 0);
+        $this->fpdf->MultiCell(60, $sp, 'Mobile No. : ' . iconv('UTF-8', 'windows-1252', $invoice->Ship_Phone), 0, 'L', 0);
 
 
 
@@ -284,100 +282,100 @@ class PdfController extends Controller
         $this->fpdf->Cell(30, 7, 'DIS %', 'BT', 0, 'L', 0);
         $this->fpdf->Cell(10, 7, 'Amount(MYR)', 'BT', 0, 'R', 0);
         $this->fpdf->Ln();
-        if ($invoice->Product == !null) {
+        if ($invoice->Product) {
             $i++;
-            $this->fpdf->Cell(10, 7, $i, 0, 'C', 0);
-            $this->fpdf->Cell(25, 7, $invoice->product->Code, 0, 0);
-            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name, 0, 0);
-            $this->fpdf->Cell(12, 7, $invoice->Qty, 0, 'C', 0);
+            $this->fpdf->Cell(10, 7, $i, 0,  0, 'C');
+            $this->fpdf->Cell(25, 7, $invoice->product->Code ?? "", 0, 0);
+            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name ?? "", 0, 0);
+            $this->fpdf->Cell(12, 7, $invoice->Qty, 0, 0, 'C');
             $this->fpdf->Cell(30, 7, $invoice->Price, 0, 0);
             $this->fpdf->Cell(30, 7, $invoice->Discount, 0, 0);
-            $this->fpdf->Cell(10, 7, $invoice->Total_RM, 0, 'R', 0);
+            $this->fpdf->Cell(10, 7, $invoice->Total_RM, 0, 0, 'R');
             $this->fpdf->Ln();
         }
         //p1
 
-        if ($invoice->Product_2 == !null) {
+        if ($invoice->Product_2) {
             $i++;
-            $this->fpdf->Cell(10, 7, $i, 0, 'C', 0);
-            $this->fpdf->Cell(25, 7, $invoice->product->Code2, 0, 0);
-            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name2, 0, 0);
-            $this->fpdf->Cell(12, 7, $invoice->Qty_2, 0, 'C', 0);
+            $this->fpdf->Cell(10, 7, $i, 0, 0, 'C');
+            $this->fpdf->Cell(25, 7, $invoice->product2->Code ?? "", 0, 0);
+            $this->fpdf->Cell(63, 7, $invoice->product2->Product_Name ?? "", 0, 0);
+            $this->fpdf->Cell(12, 7, $invoice->Qty_2, 0, 0, 'C');
             $this->fpdf->Cell(30, 7, $invoice->Price_2, 0, 0);
             $this->fpdf->Cell(30, 7, $invoice->Discount_2, 0, 0);
-            $this->fpdf->Cell(10, 7, $invoice->Total_RM_2, 0, 'R', 0);
+            $this->fpdf->Cell(10, 7, $invoice->Total_RM_2, 0, 0, 'R');
             $this->fpdf->Ln();
         }
         //p2
-        if ($invoice->Product_3 == !null) {
+        if ($invoice->Product_3) {
             $i++;
-            $this->fpdf->Cell(10, 7, $i, 0, 'C', 0);
-            $this->fpdf->Cell(25, 7, $invoice->product->Code3, 0, 0);
-            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name3, 0, 0);
-            $this->fpdf->Cell(12, 7, $invoice->Qty_3, 0, 'C', 0);
+            $this->fpdf->Cell(10, 7, $i, 0, 0, 'C');
+            $this->fpdf->Cell(25, 7, $invoice->product3->Code ?? "", 0, 0);
+            $this->fpdf->Cell(63, 7, $invoice->product3->Product_Name ?? "", 0, 0);
+            $this->fpdf->Cell(12, 7, $invoice->Qty_3, 0, 0, 'C');
             $this->fpdf->Cell(30, 7, $invoice->Price_3, 0, 0);
             $this->fpdf->Cell(30, 7, $invoice->Discount_3, 0, 0);
-            $this->fpdf->Cell(10, 7, $invoice->Total_RM_3, 0, 'R', 0);
+            $this->fpdf->Cell(10, 7, $invoice->Total_RM_3, 0, 0, 'R');
             $this->fpdf->Ln();
         }
         //p3
-        if ($invoice->Product_4 == !null) {
+        if ($invoice->Product_4) {
             $i++;
-            $this->fpdf->Cell(10, 7, $i, 0, 'C', 0);
-            $this->fpdf->Cell(25, 7, $invoice->product->Code4, 0, 0);
-            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name4, 0, 0);
-            $this->fpdf->Cell(12, 7, $invoice->Qty_4, 0, 'C', 0);
+            $this->fpdf->Cell(10, 7, $i, 0, 0, 'C');
+            $this->fpdf->Cell(25, 7, $invoice->product4->Code ?? "", 0, 0);
+            $this->fpdf->Cell(63, 7, $invoice->product4->Product_Name ?? "", 0, 0);
+            $this->fpdf->Cell(12, 7, $invoice->Qty_4, 0, 0, 'C');
             $this->fpdf->Cell(30, 7, $invoice->Price_4, 0, 0);
             $this->fpdf->Cell(30, 7, $invoice->Discount_4, 0, 0);
-            $this->fpdf->Cell(10, 7, $invoice->Total_RM_4, 0, 'R', 0);
+            $this->fpdf->Cell(10, 7, $invoice->Total_RM_4, 0, 0, 'R');
             $this->fpdf->Ln();
         }
         //p4
-        if ($invoice->Product_5 == !null) {
+        if ($invoice->Product_5) {
             $i++;
-            $this->fpdf->Cell(10, 7, $i, 0, 'C', 0);
-            $this->fpdf->Cell(25, 7, $invoice->product->Code5, 0, 0);
-            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name5, 0, 0);
-            $this->fpdf->Cell(12, 7, $invoice->Qty_5, 0, 'C', 0);
+            $this->fpdf->Cell(10, 7, $i, 0, 0, 'C');
+            $this->fpdf->Cell(25, 7, $invoice->product5->Code ?? "", 0, 0);
+            $this->fpdf->Cell(63, 7, $invoice->product5->Product_Name ?? "", 0, 0);
+            $this->fpdf->Cell(12, 7, $invoice->Qty_5, 0, 0, 'C');
             $this->fpdf->Cell(30, 7, $invoice->Price_5, 0, 0);
             $this->fpdf->Cell(30, 7, $invoice->Discount_5, 0, 0);
-            $this->fpdf->Cell(10, 7, $invoice->Total_RM_5, 0, 'R', 0);
+            $this->fpdf->Cell(10, 7, $invoice->Total_RM_5, 0, 0, 'R');
             $this->fpdf->Ln();
         }
         //p5
-        if ($invoice->Product_6 == !null) {
+        if ($invoice->Product_6) {
             $i++;
-            $this->fpdf->Cell(10, 7, $i, 0, 'C', 0);
-            $this->fpdf->Cell(25, 7, $invoice->product->Code6, 0, 0);
-            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name6, 0, 0);
-            $this->fpdf->Cell(12, 7, $invoice->Qty_6, 0, 'C', 0);
+            $this->fpdf->Cell(10, 7, $i, 0, 0, 'C');
+            $this->fpdf->Cell(25, 7, $invoice->product6->Code ?? "", 0, 0);
+            $this->fpdf->Cell(63, 7, $invoice->product6->Product_Name ?? "", 0, 0);
+            $this->fpdf->Cell(12, 7, $invoice->Qty_6, 0, 0, 'C');
             $this->fpdf->Cell(30, 7, $invoice->Price_6, 0, 0);
             $this->fpdf->Cell(30, 7, $invoice->Discount_6, 0, 0);
-            $this->fpdf->Cell(10, 7, $invoice->Total_RM_6, 0, 'R', 0);
+            $this->fpdf->Cell(10, 7, $invoice->Total_RM_6, 0, 0, 'R');
             $this->fpdf->Ln();
         }
         //p6
-        if ($invoice->Product_7 == !null) {
+        if ($invoice->Product_7) {
             $i++;
-            $this->fpdf->Cell(10, 7, $i, 0, 'C', 0);
-            $this->fpdf->Cell(25, 7, $invoice->product->Code7, 0, 0);
-            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name7, 0, 0);
-            $this->fpdf->Cell(12, 7, $invoice->Qty_7, 0, 'C', 0);
+            $this->fpdf->Cell(10, 7, $i, 0, 0, 'C');
+            $this->fpdf->Cell(25, 7, $invoice->product7->Code ?? "", 0, 0);
+            $this->fpdf->Cell(63, 7, $invoice->product7->Product_Name ?? "", 0, 0);
+            $this->fpdf->Cell(12, 7, $invoice->Qty_7, 0, 0, 'C');
             $this->fpdf->Cell(30, 7, $invoice->Price_7, 0, 0);
             $this->fpdf->Cell(30, 7, $invoice->Discount_7, 0, 0);
-            $this->fpdf->Cell(10, 7, $invoice->Total_RM_7, 0, 'R', 0);
+            $this->fpdf->Cell(10, 7, $invoice->Total_RM_7, 0, 0, 'R');
             $this->fpdf->Ln();
         }
         //p7
-        if ($invoice->Product_8 == !null) {
+        if ($invoice->Product_8) {
             $i++;
-            $this->fpdf->Cell(10, 7, $i, 0, 'C', 0);
-            $this->fpdf->Cell(25, 7, $invoice->product->Code8, 0, 0);
-            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name8, 0, 0);
-            $this->fpdf->Cell(12, 7, $invoice->Qty_8, 0, 'C', 0);
+            $this->fpdf->Cell(10, 7, $i, 0, 0, 'C');
+            $this->fpdf->Cell(25, 7, $invoice->product->Code8 ?? "", 0, 0);
+            $this->fpdf->Cell(63, 7, $invoice->product->Product_Name8 ?? "", 0, 0);
+            $this->fpdf->Cell(12, 7, $invoice->Qty_8, 0, 0, 'C');
             $this->fpdf->Cell(30, 7, $invoice->Price_8, 0, 0);
             $this->fpdf->Cell(30, 7, $invoice->Discount_8, 0, 0);
-            $this->fpdf->Cell(10, 7, $invoice->Total_RM_8, 0, 'R', 0);
+            $this->fpdf->Cell(10, 7, $invoice->Total_RM_8, 0, 0, 'R');
             $this->fpdf->Ln();
         }
         //p8

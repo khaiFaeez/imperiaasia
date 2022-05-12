@@ -54,12 +54,12 @@ class InvoiceController extends Controller
 
         return Inertia::render('Invoice/Show', [
             "portfolio" => $this->portfolio,
-            "invoice" => Invoice::with('client')->with('product')->with('product2')->with('product3')->with('product4')->with('product5')->with('state')->where('Id', $id)->first(),
+            "invoice" => Invoice::with('client')->with('product')->with('product2')->with('product3')->with('product4')->with('product5')->with('state')->with('consultant')->where('Id', $id)->first(),
             "states" => State::get(),
-            // "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
-            // "products" => Product::select('id', 'Code', 'Product_Name')->get(),
-            // "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get(),
-            // "cmd" => Collector::select('id', 'Name')->get(),
+            "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
+            "products" => Product::select('id', 'Code', 'Product_Name')->get(),
+            "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get(),
+            "cmd" => Collector::select('id', 'Name')->get(),
         ]);
     }
 
@@ -75,8 +75,8 @@ class InvoiceController extends Controller
             "states" => State::get(),
             "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
             "products" => Product::select('id', 'Code', 'Product_Name')->get(),
-            // "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get(),
-            // "cmd" => Collector::select('id', 'Name')->get(),
+            "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get(),
+            "cmd" => Collector::select('id', 'Name')->get(),
         ]);
     }
 
@@ -140,7 +140,9 @@ class InvoiceController extends Controller
             'Qty_5' => $request->products['items'][4]['qty'],
             'Discount_5' => $request->products['items'][4]['discount'],
             'Total_RM_5' => $request->products['items'][4]['total'],
-            'Promise_pay' => \Carbon\Carbon::now()
+            'Promise_pay' => \Carbon\Carbon::now(),
+            'Consultant' => $request->sales['consultant'],
+            'Channel' => $request->sales['channel'],
         ]);
 
         return redirect()->route('portfolio.invoice.show', [

@@ -180,12 +180,13 @@ export default {
       <span class="text-primary font-medium">/</span> Create
     </h1>
     <form @submit.prevent="storeInvoice" class="form">
-        <div class="divider text-xl mb-8 ">Client</div>
+        <div class="divider text-xl mb-8 " id="client">Client</div>
             <ClientForm
                 :client="clientForm"
                 :states="$page.props.states"
             />
-        <div class="divider text-xl mb-8 mt-32 ">Postage</div>
+
+        <div class="divider text-xl mb-8 mt-32 " id="postage">Postage</div>
             <div class="flex items-end justify-end my-12">
                     <button @click="copyAddress" type="button" class="btn btn-info btn-sm">Copy Client Address</button>
 
@@ -196,13 +197,18 @@ export default {
                 :shipping="invoiceForm.shipping"
             />
 
-
-
-        <div class="divider text-xl mb-8 mt-32 ">Product</div>
+        <div class="divider text-xl mb-8 mt-32 " id="product">Product</div>
             <ProductForm
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
+
+        <div class="divider text-xl mb-8 mt-32 " id="sales">Sales</div>
+            <SalesForm
+                :consultants="$page.props.consultants"
+                :sales="invoiceForm.sales" />
         <div class="my-12 flex justify-end">
+
+
         <BreezeButton :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
                 Save
         </BreezeButton>

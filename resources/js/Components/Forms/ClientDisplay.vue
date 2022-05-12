@@ -2,10 +2,7 @@
 
 import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
-import BreezeButton from '@/Components/Button.vue'
 import BreezeLabel from '@/Components/Label.vue'
-import BreezeInput from '@/Components/Input.vue'
-import BreezeInputError from  '@/Components/InputError.vue'
 
 
 export default {
@@ -13,9 +10,6 @@ export default {
     components:{
         AppLayout,
         BreezeLabel,
-        BreezeButton,
-        BreezeInput,
-        BreezeInputError,
         Link,
         Head
     },
@@ -32,7 +26,7 @@ export default {
                     })
                     return x;
                 }
-                }
+  }
 }
 
 </script>

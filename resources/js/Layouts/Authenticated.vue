@@ -5,7 +5,6 @@ import Navigation from '@/Components/Navigation.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
-
 </script>
 
 <template>
@@ -64,6 +63,34 @@ const showingNavigationDropdown = ref(false);
                         </BreezeResponsiveNavLink>
                     </li>
                     </ul>
+
+
+                    </aside>
+
+                    <aside class="w-80 bg-base-200">
+                    <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
+                    </ul>
+
+                    <div class="h-20"></div>
+
+                    <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
+                    <p>Jump to</p>
+                    <li>
+                        <button v-scroll-to="{ el: '#client' }" class="text-xl"> Client </button>
+                    </li>
+                    <li>
+                         <button v-scroll-to="{ el: '#postage' }" class="text-xl"> Postage </button>
+                    </li>
+
+                     <li>
+                         <button v-scroll-to="{ el: '#product' }" class="text-xl"> Product </button>
+                    </li>
+                    <li>
+                         <button v-scroll-to="{ el: '#sales' }" class="text-xl"> Sales </button>
+                    </li>
+                    </ul>
+
+
                     </aside>
                 </div>
             </div>

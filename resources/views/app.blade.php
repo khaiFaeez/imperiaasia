@@ -20,6 +20,7 @@ $theme = 'autumn';
         <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="//unpkg.com/alpinejs" defer></script>
         @inertiaHead
+
     </head>
     <body class="font-sans antialiased">
         @inertia

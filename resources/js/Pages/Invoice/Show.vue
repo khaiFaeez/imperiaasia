@@ -10,6 +10,7 @@ import SalesForm from '@/Components/Forms/SalesForm.vue'
 import PaymentForm from '@/Components/Forms/PaymentForm.vue'
 import ProductDisplay from '@/Components/Forms/ProductDisplay.vue';
 import PostageDisplay from '@/Components/Forms/PostageDisplay.vue';
+import SalesDisplay from '@/Components/Forms/SalesDisplay.vue';
 
 
 export default {
@@ -31,8 +32,8 @@ export default {
     ProductDisplay,
     SalesForm,
     PaymentForm,
-    PostageDisplay
-
+    PostageDisplay,
+    SalesDisplay
 },
 data() {
         return {
@@ -115,8 +116,8 @@ data() {
 
                 ]},
                 sales:{
-                    consultant:"",
-                    channel:"",
+                    consultant:this.invoice.consultant.Name,
+                    channel:this.invoice.Channel,
                     closing:""
                 },
                 shipping:{
@@ -140,7 +141,8 @@ data() {
         openPDF(data){
             window.open(route('portfolio.invoice.pdf',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_blank')
         }
-    }
+    },
+
 }
 
 </script>
@@ -160,23 +162,26 @@ data() {
     Print
     </button>
 </section>
-        <div class="divider text-xl">Client</div>
-
+<span ></span>
+        <div class="divider text-xl" id="client">Client</div>
             <ClientDisplay
                 :client="invoice.client"
                 :states="$page.props.states"/>
 
-            <div class="divider text-xl mb-8 mt-32 ">Postage</div>
+            <div class="divider text-xl mb-8 mt-32 " id="postage">Postage</div>
             <PostageDisplay
                 :states="$page.props.states"
                 :shipping="invoiceForm.shipping"
             />
 
-            <div class="divider text-xl">Product</div>
+            <div class="divider text-xl mb-8 mt-32 " id="product">Product</div>
              <ProductDisplay
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
 
+            <div class="divider text-xl mb-8 mt-32" id="sales">Sales</div>
+            <SalesDisplay
+                :sales="invoiceForm.sales" />
 </AppLayout>
 
 </template>

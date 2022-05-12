@@ -8,6 +8,8 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Models\Channel;
 use App\Models\Delivery;
+use App\Models\Consultant;
+use App\Models\Collector;
 
 class Invoice extends Model
 {
@@ -17,6 +19,11 @@ class Invoice extends Model
     protected $primaryKey  = "Id";
     protected $guarded = [];
     public $timestamps = false;
+
+    const ONLINE = 'Online';
+    const DISTRIBUTOR = 'Distributor';
+    const OFFLINE = 'Offline';
+    const  SPECIAL = 'Special Order';
 
     public function client()
     {
@@ -59,9 +66,19 @@ class Invoice extends Model
         return $this->hasOne(Channel::class, 'id', 'Channel');
     }
 
+    public function consultant()
+    {
+        return $this->hasOne(Consultant::class, 'id', 'Consultant');
+    }
+
+    public function collector()
+    {
+        return $this->hasOne(Collector::class, 'id', 'Cmd');
+    }
+
     public function delivery()
     {
-        return $this->hasOne(Delivery::class, 'id', 'Inv_No');
+        return $this->hasOne(Delivery::class, 'Inv_No', 'Id');
     }
 
 
