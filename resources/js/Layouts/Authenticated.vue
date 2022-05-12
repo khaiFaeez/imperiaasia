@@ -67,7 +67,7 @@ const showingNavigationDropdown = ref(false);
 
                     </aside>
 
-                    <aside class="w-80 bg-base-200">
+                    <aside class="w-80 bg-base-200" v-show="route().current('*.invoice.*')">
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
                     </ul>
 

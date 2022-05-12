@@ -4051,9 +4051,6 @@ body[dir="rtl"] .checkbox:checked,
 .list-disc {
   list-style-type: disc;
 }
-.list-decimal {
-  list-style-type: decimal;
-}
 .grid-cols-6 {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
