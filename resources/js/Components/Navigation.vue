@@ -24,7 +24,7 @@ const showingNavigationDropdown = ref(false);
                                 </ul>
                             </div>
     </div>
-    <Link :href="route('dashboard')">
+    <Link :href="route('portfolio.dashboard')">
         <BreezeApplicationLogo class="block w-auto px-4" />
     </Link>
   </div>
@@ -43,7 +43,6 @@ const showingNavigationDropdown = ref(false);
                 <li><Link :href="route('logout')" method="post" as="button"> Log Out</Link ></li>
                 <li><Link :href="route('users.index')"> Manage Users</Link ></li>
                 <li><Link :href="route('roles.index')"> Manage Roles</Link ></li>
-                <li><Link :href="route('password.edit')">Update Password</Link ></li>
             </ul>
         </div>
   </div>

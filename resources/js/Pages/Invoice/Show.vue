@@ -136,10 +136,10 @@ data() {
     methods: {
 
         goToViewPage(data) {
-            window.open(route('portfolio.invoice.show',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_self');
+            window.open(route('portfolio.invoice.show',{'invoice': data.Id}), '_self');
         },
         openPDF(data){
-            window.open(route('portfolio.invoice.pdf',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_blank')
+            window.open(route('portfolio.invoice.pdf',{'invoice': data.Id}), '_blank')
         }
     },
 

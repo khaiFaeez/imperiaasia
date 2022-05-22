@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -45,8 +46,9 @@ class HandleInertiaRequests extends Middleware
                 'message' => $request->session()->get('message')
             ],
             'portfolio' => [
-                'list' => config('portfolio.list')
-            ]
+                'list' => Portfolio::pluck('name', 'name')->all()
+            ],
+            'app_name' => config('app.name')
         ]);
     }
 }

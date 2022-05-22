@@ -128,14 +128,14 @@ export default {
     methods: {
 
         goToViewPage(data) {
-            window.open(route('portfolio.invoice.show',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_self');
+            window.open(route('portfolio.invoice.show',{'invoice': data.Id}), '_self');
         },
         storeInvoice(){
-            this.invoiceForm.post(route('portfolio.invoice.store',{'portfolio':this.$page.props.portfolio}));
+            this.invoiceForm.post(route('portfolio.invoice.store'));
         },
 
         storeClient() {
-                this.form.post(route('portfolio.client.store',{"portfolio":this.$page.props.portfolio}),{
+                this.form.post(route('portfolio.client.store'),{
                     errorBag: 'storeClient',
                     preserveScroll: true,
                      onFinish: () => {

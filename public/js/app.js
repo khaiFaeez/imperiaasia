@@ -22787,9 +22787,7 @@ __webpack_require__.r(__webpack_exports__);
     storeClient: function storeClient() {
       var _this = this;
 
-      this.form.post(route('portfolio.client.store', {
-        "portfolio": this.$page.props.portfolio
-      }), {
+      this.form.post(route('portfolio.client.store'), {
         errorBag: 'storeClient',
         preserveScroll: true,
         onFinish: function onFinish() {
@@ -22850,9 +22848,7 @@ var showingNavigationDropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     form: {
       deep: true,
       handler: lodash_throttle__WEBPACK_IMPORTED_MODULE_6___default()(function () {
-        this.$inertia.get(route('portfolio.client.index', {
-          'portfolio': this.$page.props.portfolio
-        }), lodash_pickBy__WEBPACK_IMPORTED_MODULE_7___default()(this.form), {
+        this.$inertia.get(route('portfolio.client.index'), lodash_pickBy__WEBPACK_IMPORTED_MODULE_7___default()(this.form), {
           preserveState: true
         });
       }, 150)
@@ -22871,8 +22867,7 @@ var showingNavigationDropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
   methods: {
     goToViewPage: function goToViewPage(data) {
       window.open(route('portfolio.client.show', {
-        'client': data.id,
-        'portfolio': this.$page.props.portfolio
+        'client': data.id
       }), '_self');
     },
     reset: function reset() {
@@ -23098,21 +23093,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     goToViewPage: function goToViewPage(data) {
       window.open(route('portfolio.invoice.show', {
-        'invoice': data.Id,
-        'portfolio': this.$page.props.portfolio
+        'invoice': data.Id
       }), '_self');
     },
     storeInvoice: function storeInvoice() {
-      this.invoiceForm.post(route('portfolio.invoice.store', {
-        'portfolio': this.$page.props.portfolio
-      }));
+      this.invoiceForm.post(route('portfolio.invoice.store'));
     },
     storeClient: function storeClient() {
       var _this = this;
 
-      this.form.post(route('portfolio.client.store', {
-        "portfolio": this.$page.props.portfolio
-      }), {
+      this.form.post(route('portfolio.client.store'), {
         errorBag: 'storeClient',
         preserveScroll: true,
         onFinish: function onFinish() {
@@ -23195,9 +23185,7 @@ var showingNavigationDropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     form: {
       deep: true,
       handler: lodash_throttle__WEBPACK_IMPORTED_MODULE_7___default()(function () {
-        this.$inertia.get(route('portfolio.invoice.index', {
-          'portfolio': this.$page.props.portfolio
-        }), lodash_pickBy__WEBPACK_IMPORTED_MODULE_8___default()(this.form), {
+        this.$inertia.get(route('portfolio.invoice.index'), lodash_pickBy__WEBPACK_IMPORTED_MODULE_8___default()(this.form), {
           preserveState: true
         });
       }, 150)
@@ -23216,8 +23204,7 @@ var showingNavigationDropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
   methods: {
     goToViewPage: function goToViewPage(data) {
       window.open(route('portfolio.invoice.show', {
-        'invoice': data.Id,
-        'portfolio': this.$page.props.portfolio
+        'invoice': data.Id
       }), '_self');
     },
     reset: function reset() {
@@ -23375,21 +23362,16 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     goToViewPage: function goToViewPage(data) {
       window.open(route('portfolio.invoice.show', {
-        'invoice': data.Id,
-        'portfolio': this.$page.props.portfolio
+        'invoice': data.Id
       }), '_self');
     },
     storeInvoice: function storeInvoice() {
-      this.invoiceForm.post(route('portfolio.invoice.store', {
-        'portfolio': this.$page.props.portfolio
-      }));
+      this.invoiceForm.post(route('portfolio.invoice.store'));
     },
     storeClient: function storeClient() {
       var _this = this;
 
-      this.form.post(route('portfolio.client.store', {
-        "portfolio": this.$page.props.portfolio
-      }), {
+      this.form.post(route('portfolio.client.store'), {
         errorBag: 'storeClient',
         preserveScroll: true,
         onFinish: function onFinish() {
@@ -23583,14 +23565,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     goToViewPage: function goToViewPage(data) {
       window.open(route('portfolio.invoice.show', {
-        'invoice': data.Id,
-        'portfolio': this.$page.props.portfolio
+        'invoice': data.Id
       }), '_self');
     },
     openPDF: function openPDF(data) {
       window.open(route('portfolio.invoice.pdf', {
-        'invoice': data.Id,
-        'portfolio': this.$page.props.portfolio
+        'invoice': data.Id
       }), '_blank');
     }
   }
@@ -24031,7 +24011,9 @@ var _hoisted_1 = {
   "class": "font-serif text-2xl"
 };
 function render(_ctx, _cache) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_1, "IMPERIA ASIA");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.app_name), 1
+  /* TEXT */
+  );
 }
 
 /***/ }),
@@ -25717,8 +25699,6 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Manage Roles");
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Update Password");
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("nav", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.route().params.portfolio ? _ctx.route().params.portfolio : "Select Portfolio") + " ", 1
   /* TEXT */
@@ -25735,7 +25715,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 128
   /* KEYED_FRAGMENT */
   ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Link"], {
-    href: _ctx.route('dashboard')
+    href: _ctx.route('portfolio.dashboard')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BreezeApplicationLogo"], {
@@ -25792,17 +25772,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_22];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["href"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Link"], {
-    href: _ctx.route('password.edit')
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_23];
     }),
     _: 1
     /* STABLE */
@@ -26182,7 +26151,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_ctx.$page.props.flash.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.flash.message), 1
   /* TEXT */
   )])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Page content here "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["Navigation"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])]), _ctx.route().params.portfolio ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("aside", _hoisted_10, [_hoisted_11, _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Sidebar content here "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["BreezeResponsiveNavLink"], {
-    href: _ctx.route('dashboard'),
+    href: _ctx.route('portfolio.dashboard'),
     active: _ctx.route().current('*.dashboard')
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -29149,7 +29118,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Welcome"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [$props.canLogin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [_ctx.$page.props.auth.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Link"], {
     key: 0,
-    href: _ctx.route('dashboard'),
+    href: _ctx.route('portfolio.dashboard'),
     "class": "text-sm text-gray-700 underline"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {

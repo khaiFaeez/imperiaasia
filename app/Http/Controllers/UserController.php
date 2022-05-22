@@ -67,7 +67,7 @@ class UserController extends Controller
         ]);
 
         $input = $request->all();
-        $input['password'] = FacadesHash::make($input['password']);
+        $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));

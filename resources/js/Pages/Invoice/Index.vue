@@ -27,7 +27,7 @@ export default {
         form: {
         deep: true,
         handler: throttle(function () {
-            this.$inertia.get(route('portfolio.invoice.index',{'portfolio':this.$page.props.portfolio}), pickBy(this.form), { preserveState: true })
+            this.$inertia.get(route('portfolio.invoice.index'), pickBy(this.form), { preserveState: true })
         }, 150),
         },
     },
@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         goToViewPage(data) {
-            window.open(route('portfolio.invoice.show',{'invoice': data.Id,'portfolio':this.$page.props.portfolio}), '_self');
+            window.open(route('portfolio.invoice.show',{'invoice': data.Id}), '_self');
         },
          reset() {
             this.form = {

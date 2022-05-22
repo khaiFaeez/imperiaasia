@@ -38,8 +38,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // return redirect()->intended(RouteServiceProvider::HOME);
-        $portfolio = $request->user()->currentPortfolio;
-        return redirect(route('portfolio.dashboard', ['portfolio' => $portfolio->name]));
+        return Inertia::location(route('portfolio.dashboard', ['portfolio' => $request->user()->currentPortfolio->name]));
     }
 
     /**

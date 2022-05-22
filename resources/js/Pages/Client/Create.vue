@@ -35,7 +35,7 @@ export default {
     },
     methods: {
         storeClient() {
-                this.form.post(route('portfolio.client.store',{"portfolio":this.$page.props.portfolio}),{
+                this.form.post(route('portfolio.client.store'),{
                     errorBag: 'storeClient',
                     preserveScroll: true,
                      onFinish: () => {
