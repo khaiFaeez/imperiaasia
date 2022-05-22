@@ -14,24 +14,17 @@ use App\Models\Product;
 use App\Models\State;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 
 class InvoiceController extends Controller
 {
-    protected $portfolio;
-
-    public function __construct()
-    {
-        $this->portfolio = Route::current() ? Route::current()->parameter("portfolio") : "";
-    }
 
     public function index()
     {
         Auth::user()->hasPermissionTo('invoice-list');
 
-        Config::set('database.default', $this->portfolio);
         $filter = Request::input('search');
         return Inertia::render('Invoice/Index', [
-            "portfolio" => $this->portfolio,
             "invoices" => Invoice::with('client')
                 ->with('product')
                 ->with('channel')
@@ -50,10 +43,9 @@ class InvoiceController extends Controller
     {
         Auth::user()->hasPermissionTo('invoice-edit');
 
-        Config::set('database.default', $this->portfolio);
+
 
         return Inertia::render('Invoice/Show', [
-            "portfolio" => $this->portfolio,
             "invoice" => Invoice::with('client')->with('product')->with('product2')->with('product3')->with('product4')->with('product5')->with('state')->with('consultant')->where('Id', $id)->first(),
             "states" => State::get(),
             "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
@@ -67,10 +59,9 @@ class InvoiceController extends Controller
     {
         Auth::user()->hasPermissionTo('invoice-edit');
 
-        Config::set('database.default', $this->portfolio);
+
 
         return Inertia::render('Invoice/Repeat', [
-            "portfolio" => $this->portfolio,
             "invoice" => Invoice::with('client')->with('state')->where('Id', $id)->first(),
             "states" => State::get(),
             "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
@@ -84,12 +75,11 @@ class InvoiceController extends Controller
     {
         Auth::user()->hasPermissionTo('invoice-create');
 
-        Config::set('database.default', $this->portfolio);
+
 
 
         return Inertia::render('Invoice/Create', [
             "client" => Client::where('id', $client_id)->first(),
-            "portfolio" => $this->portfolio,
             "states" => State::get(),
             "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
             "products" => Product::select('id', 'Code', 'Product_Name')->get(),
@@ -102,7 +92,7 @@ class InvoiceController extends Controller
     {
         Auth::user()->hasPermissionTo('invoice-create');
 
-        Config::set('database.default', $this->portfolio);
+
         // dd($request->products['items'][0]['product']);
         $id = Invoice::create([
             'MyKad_SSM' => $request->client,
@@ -146,7 +136,6 @@ class InvoiceController extends Controller
         ]);
 
         return redirect()->route('portfolio.invoice.show', [
-            "portfolio" => $this->portfolio,
             "invoice" => $id->Id
         ])
             ->with('message', 'Invoice created successfully');
@@ -154,7 +143,7 @@ class InvoiceController extends Controller
 
     public function invoice_no_list()
     {
-        Config::set('database.default', $this->portfolio);
+
 
         return Invoice::select('Id', 'Inv_No')->pluck('Id', 'Inv_No')->toJson();
     }

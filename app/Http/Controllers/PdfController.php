@@ -22,7 +22,6 @@ class PdfController extends Controller
 
     public function printInvoice($portfolio, $id)
     {
-        Config::set('database.default', $this->portfolio);
         $invoice  = Invoice::find($id);
 
         $gst = $invoice->Grand_Total / 106 * 0;

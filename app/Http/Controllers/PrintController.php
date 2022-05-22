@@ -19,7 +19,6 @@ class PrintController extends Controller
 
     public function index()
     {
-        Config::set('database.default', $this->portfolio);
         // Cache::remember('invoice_id', 60, function () {
         //     return Invoice::select('Id', 'Inv_No')->pluck('Id', 'Inv_No');
         // })

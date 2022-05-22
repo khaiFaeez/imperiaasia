@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Request;
 
 class ClientController extends Controller
 {
-    public function __construct()
-    {
-        $this->portfolio = Route::current() ? Route::current()->parameter("portfolio") : "";
-    }
 
     /**
      * Display a listing of the resource.
@@ -27,7 +23,7 @@ class ClientController extends Controller
     {
 
         Auth::user()->hasPermissionTo('invoice-list');
-        Config::set('database.default', $this->portfolio);
+
         $filter = Request::input('search');
         $clients = Client::with('state')
             ->when($filter, function ($query, $filter) {
@@ -38,7 +34,6 @@ class ClientController extends Controller
             $query->invoice = $query->getLastInvoice($query);
         });
         return Inertia::render('Client/Index', [
-            "portfolio" => $this->portfolio,
             'clients' => $clients,
             'filters' => Request::all('search', 'trashed'),
         ]);
@@ -52,10 +47,8 @@ class ClientController extends Controller
     public function create()
     {
         Auth::user()->hasPermissionTo('invoice-create');
-        Config::set('database.default', $this->portfolio);
 
         return Inertia::render('Client/Create', [
-            "portfolio" => $this->portfolio,
             'states' => State::get(),
             'countries' => ["Malaysia", "Indonesia", "Philippine"]
         ]);
@@ -71,11 +64,9 @@ class ClientController extends Controller
     {
         Auth::user()->hasPermissionTo('invoice-create');
 
-        Config::set('database.default', $this->portfolio);
         $id = Client::create($request->validated());
 
         return redirect()->route('portfolio.client.show', [
-            "portfolio" => $this->portfolio,
             "client" => $id->id
         ])
             ->with('message', 'Client created successfully');
@@ -89,10 +80,8 @@ class ClientController extends Controller
      */
     public function show($portfolio, $id)
     {
-        Config::set('database.default', $this->portfolio);
 
         return Inertia::render('Client/Show', [
-            "portfolio" => $this->portfolio,
             'client' => Client::with('state')->where('id', $id)->with('invoices')->with('invoices.product')->first(),
             'states' => State::get(),
             'countries' => ["Malaysia", "Indonesia", "Philippine"]
@@ -136,7 +125,6 @@ class ClientController extends Controller
     public function getICNumber(Request $request)
     {
 
-        Config::set('database.default', $this->portfolio);
         $data = Client::where('MyKad_SSM', 'LIKE', '%' . $request->keyword . '%')->get();
 
 

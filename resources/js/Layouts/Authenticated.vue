@@ -46,7 +46,7 @@ const showingNavigationDropdown = ref(false);
                         </BreezeResponsiveNavLink>
                     </li>
                     <li>
-                        <BreezeResponsiveNavLink :href="route('portfolio.client.index',{portfolio:route().params.portfolio})"  :active="route().current('*.client.*')">
+                        <BreezeResponsiveNavLink :href="route('portfolio.client.index')"  :active="route().current('*.client.*')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                             </svg>
@@ -55,7 +55,7 @@ const showingNavigationDropdown = ref(false);
                         </BreezeResponsiveNavLink>
                     </li>
                     <li>
-                        <BreezeResponsiveNavLink :href="route('portfolio.invoice.index',{portfolio:route().params.portfolio})"  :active="route().current('*.invoice.*')" >
+                        <BreezeResponsiveNavLink :href="route('portfolio.invoice.index')"  :active="route().current('*.invoice.*')" >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
@@ -64,7 +64,7 @@ const showingNavigationDropdown = ref(false);
                     </li>
 
                      <li>
-                        <BreezeResponsiveNavLink :href="route('portfolio.invoice.bulk.pdf',{portfolio:route().params.portfolio})"  :active="route().current('*.print.*')" >
+                        <BreezeResponsiveNavLink :href="route('portfolio.print.bulk.invoice')"  :active="route().current('*.print.*')" >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
                         </svg>

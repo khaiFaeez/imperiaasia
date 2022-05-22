@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\State;
 use Illuminate\Support\Facades\DB;
 use App\Models\Invoice;
+use Illuminate\Support\Facades\Session;
 
 class Client extends Model
 {
@@ -29,6 +30,14 @@ class Client extends Model
         'Country',
         'updated_at'
     ];
+
+    protected $connection = 'default';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->connection = Session::get("portfolio_db");
+    }
 
     public function state()
     {

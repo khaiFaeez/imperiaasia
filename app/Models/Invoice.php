@@ -10,6 +10,7 @@ use App\Models\Channel;
 use App\Models\Delivery;
 use App\Models\Consultant;
 use App\Models\Collector;
+use Illuminate\Support\Facades\Session;
 
 class Invoice extends Model
 {
@@ -20,10 +21,18 @@ class Invoice extends Model
     protected $guarded = [];
     public $timestamps = false;
 
+    protected $connection = 'default';
+
     const ONLINE = 'Online';
     const DISTRIBUTOR = 'Distributor';
     const OFFLINE = 'Offline';
     const  SPECIAL = 'Special Order';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->connection = Session::get("portfolio_db");
+    }
 
     public function client()
     {

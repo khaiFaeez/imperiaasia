@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 
 class SetDefaultPortfolioForUrls
@@ -16,7 +17,9 @@ class SetDefaultPortfolioForUrls
      */
     public function handle($request, Closure $next)
     {
-        URL::defaults(['portfolio' => $request->user()->currentPortfolio->name ?? ""]);
+        if (Route::current('portfolio.*')) {
+            URL::defaults(['portfolio' => $request->user()->currentPortfolio->name ?? ""]);
+        }
 
         return $next($request);
     }

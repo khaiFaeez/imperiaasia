@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\PortfolioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,13 @@ Route::get('/', function () {
 });
 
 require __DIR__ . '/auth.php';
+
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('roles', RoleController::class)->except(['store', 'show', 'destroy']);
     Route::resource('users', UserController::class)->except('destroy');
     Route::post('register', [RegisteredUserController::class, 'register']);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/portfolio/change/{portfolio}', [PortfolioController::class, 'change_portfolio'])->name('portfolio.change');
 });

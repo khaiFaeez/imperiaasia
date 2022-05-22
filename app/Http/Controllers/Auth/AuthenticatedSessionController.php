@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 class AuthenticatedSessionController extends Controller
@@ -38,6 +39,9 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // return redirect()->intended(RouteServiceProvider::HOME);
+
+        Session::put('portfolio_db', $request->user()->currentPortfolio->db_connection);
+
         return Inertia::location(route('portfolio.dashboard', ['portfolio' => $request->user()->currentPortfolio->name]));
     }
 
@@ -55,6 +59,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return Inertia::location('/');
     }
 }
