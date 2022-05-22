@@ -18,7 +18,7 @@ const showingNavigationDropdown = ref(false);
 
       </label>
                             <div class="dropdown inline-block lg:hidden">
-                                <label tabindex="0" class="btn btn-ghost m-1 text-xl"> {{ $page.props.auth.user.current_portfolio.name }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg></label>
+                                <label tabindex="0" class="btn btn-ghost m-1"> {{ $page.props.auth.user.current_portfolio.name }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg></label>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 ">
                                     <li v-for="(value,key) in $page.props.portfolio?.list" :key="key"><Link :href="route('portfolio.change',{portfolio:key})" method="post" as="button">{{value}}</Link ></li>
                                 </ul>
@@ -30,7 +30,7 @@ const showingNavigationDropdown = ref(false);
   </div>
   <div class="navbar-center hidden lg:flex">
                             <div class="dropdown">
-                                <label tabindex="0" class="btn btn-ghost m-1 text-xl no-animation"> {{ $page.props.auth.user.current_portfolio.name }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg></label>
+                                <label tabindex="0" class="btn btn-ghost m-1 no-animation"> {{ $page.props.auth.user.current_portfolio.name }} <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg></label>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                     <li v-for="(value,key) in $page.props.portfolio?.list" :key="key"><Link :href="route('portfolio.change',{portfolio:key})" method="post" as="button">{{value}}</Link ></li>
                                 </ul>

@@ -57,7 +57,7 @@ export default {
 <template>
 <Head title="Invoice List" />
 <AppLayout>
-<h1 class="mb-8 text-3xl font-bold">
+<h1 class="mb-8 text-2xl font-bold">
     <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
 </h1>
 <section class="flex flex-row items-center justify-between mb-5">

@@ -140,6 +140,9 @@ data() {
         },
         openPDF(data){
             window.open(route('portfolio.invoice.pdf',{'invoice': data.Id}), '_blank')
+        },
+        openDocket(data){
+            window.open(route('portfolio.invoice.docket',{'invoice': data.Id}), '_blank')
         }
     },
 
@@ -149,18 +152,26 @@ data() {
 <template>
 <Head title="Create Invoice" />
 <AppLayout>
-     <h1 class="mb-8 text-3xl font-bold">
+     <h1 class="mb-8 text-2xl font-bold">
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
       <span class="text-primary font-medium">/</span> {{invoice.Inv_No}}
     </h1>
     <section class="flex flex-row items-center justify-between mb-5">
         <div></div>
-    <button @click="openPDF(invoice)" class="btn btn-info" >
+        <div>
+    <button @click="openPDF(invoice)" class="btn btn-info mr-3" >
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
 </svg>
     Print
     </button>
+    <button @click="openDocket(invoice)" class="btn btn-info" >
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+</svg>
+    Consignment
+    </button>
+    </div>
 </section>
 <span ></span>
         <div class="divider text-xl" id="client">Client</div>

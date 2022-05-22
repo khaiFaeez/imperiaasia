@@ -26,9 +26,7 @@ class ClientRequest extends FormRequest
         return [
             'MyKad_SSM' => 'required | digits:12 ',
             'Name' => 'required',
-            'Mobile_No' => 'required',
-            'Phone' => 'required | numeric',
-            'Off_Phone' => 'required',
+            'Mobile_No' => 'required | numeric',
             'Address' => 'required',
             'Address_2' => 'required',
             'Poscode' => 'required',

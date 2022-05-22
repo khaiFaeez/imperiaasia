@@ -85,17 +85,17 @@ const showingNavigationDropdown = ref(false);
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
                     <p>Jump to</p>
                     <li>
-                        <button v-scroll-to="{ el: '#client' }" class="text-xl"> Client </button>
+                        <button v-scroll-to="{ el: '#client' }" class=""> Client </button>
                     </li>
                     <li>
-                         <button v-scroll-to="{ el: '#postage' }" class="text-xl"> Postage </button>
+                         <button v-scroll-to="{ el: '#postage' }" class=""> Postage </button>
                     </li>
 
                      <li>
-                         <button v-scroll-to="{ el: '#product' }" class="text-xl"> Product </button>
+                         <button v-scroll-to="{ el: '#product' }" class=""> Product </button>
                     </li>
                     <li>
-                         <button v-scroll-to="{ el: '#sales' }" class="text-xl"> Sales </button>
+                         <button v-scroll-to="{ el: '#sales' }" class=""> Sales </button>
                     </li>
                     </ul>
 

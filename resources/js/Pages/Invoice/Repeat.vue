@@ -176,7 +176,7 @@ export default {
 <template>
 <Head title="Create Invoice" />
 <AppLayout>
-     <h1 class="mb-8 text-3xl font-bold">
+     <h1 class="mb-8 text-2xl font-bold">
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
       <span class="text-primary font-medium">/</span> Create
     </h1>

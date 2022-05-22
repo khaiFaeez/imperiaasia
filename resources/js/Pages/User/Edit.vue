@@ -65,7 +65,7 @@ export default {
             {{ status }}
         </div>
 
-        <form @submit.prevent="updateUser($page.props.user.id)" class="w-96 form">
+        <form @submit.prevent="updateUser($page.props.user.id)" class="w-96 form  mx-auto">
             <div class="mb-4">
                 <BreezeLabel for="username" value="Username" />
                 <BreezeInput id="username" type="text" v-model="form.username" required autocomplete="username" />
@@ -94,7 +94,7 @@ export default {
             </div>
 
              <div class="mb-4">
-                <BreezeLabel for="portfolios" value="Role" />
+                <BreezeLabel for="portfolios" value="Portfolio" />
                 <select name="portfolios" id="portfolios" multiple v-model="form.portfolios" class="select input-bordered border-primary w-full h-52">
                 <option v-for="($portfolio, i ) in $page.props.portfolios" :key="i" :value="i">{{$portfolio}}</option>
                 </select>
