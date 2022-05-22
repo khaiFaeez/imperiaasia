@@ -16,7 +16,7 @@ import { Head } from '@inertiajs/inertia-vue3';
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <h2>General</h2>
-                <div class="stats stats-vertical lg:stats-horizontal shadow">
+                <div class="stats stats-vertical lg:stats-horizontal w-full shadow">
 
             <div class="stat">
                 <div class="stat-title">Invoices</div>
@@ -36,6 +36,11 @@ import { Head } from '@inertiajs/inertia-vue3';
                 <div class="stat-desc"></div>
             </div>
 
+            <div class="stat">
+                <div class="stat-title">Clients</div>
+                <div class="stat-value">{{ $page.props.clients.toLocaleString() }}</div>
+                <div class="stat-desc"></div>
+            </div>
             </div>
 
             </div>

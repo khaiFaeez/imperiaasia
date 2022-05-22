@@ -3,8 +3,7 @@
 return [
     'list' => [
         'platinum' => "Platinum",
-        'jefferjuice' => "Jeffer Juice",
-        'dresella' => "Dresella",
+        'platinum2' => "Jeffer Juice",
     ],
 
     'invoice_prefix' => [

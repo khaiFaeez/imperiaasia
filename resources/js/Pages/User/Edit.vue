@@ -30,11 +30,13 @@ export default {
         return {
             form: this.$inertia.form({
                  _method: 'PUT',
-                 id:this.$page.props.user.id,
+                id:this.$page.props.user.id,
                 username:this.$page.props.user.username,
                 name:this.$page.props.user.name,
                 staff_id:this.$page.props.user.staff_id,
-                roles:Object.values(this.$page.props.userRole)
+                roles:Object.values(this.$page.props.userRole),
+                portfolios:Object.values(this.$page.props.userPortfolio)
+
 
             })
         }
@@ -89,6 +91,14 @@ export default {
                 <option v-for="($role, i ) in $page.props.roles" :key="i" :value="$role">{{$role}}</option>
                 </select>
                 <BreezeInputError :message="form.errors.roles" />
+            </div>
+
+             <div class="mb-4">
+                <BreezeLabel for="portfolios" value="Role" />
+                <select name="portfolios" id="portfolios" multiple v-model="form.portfolios" class="select input-bordered border-primary w-full h-52">
+                <option v-for="($portfolio, i ) in $page.props.portfolios" :key="i" :value="i">{{$portfolio}}</option>
+                </select>
+                <BreezeInputError :message="form.errors.portfolios" />
             </div>
 
             <div class="flex items-center justify-end mt-4">

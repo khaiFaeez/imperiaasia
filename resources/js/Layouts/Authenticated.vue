@@ -37,6 +37,15 @@ const showingNavigationDropdown = ref(false);
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
                     <!-- Sidebar content here -->
                     <li>
+                        <BreezeResponsiveNavLink :href="route('dashboard')"  :active="route().current('*.dashboard')">
+                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        </svg>
+                            Dashboard
+
+                        </BreezeResponsiveNavLink>
+                    </li>
+                    <li>
                         <BreezeResponsiveNavLink :href="route('portfolio.client.index',{portfolio:route().params.portfolio})"  :active="route().current('*.client.*')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -67,7 +76,7 @@ const showingNavigationDropdown = ref(false);
 
                     </aside>
 
-                    <aside class="w-80 bg-base-200" v-show="route().current('*.invoice.*')">
+                    <aside class="w-80 bg-base-200" v-show="route().current('*.invoice.show') || route().current('*.invoice.create')">
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
                     </ul>
 

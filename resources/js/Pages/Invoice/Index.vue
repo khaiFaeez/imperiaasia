@@ -76,6 +76,7 @@ export default {
 <table class="table table-compact table-bordered w-full">
 <thead>
  <tr>
+     <th></th>
     <th>Status</th>
     <th>Aging</th>
     <th>Inv No</th>
@@ -113,40 +114,6 @@ export default {
  </thead>
  <tbody>
   <tr class="hover hover:cursor-pointer" v-for="$invoice in $page.props.invoices.data" :key="$invoice.Id" @click="goToViewPage($invoice)">
-                <!-- <td>{{ $invoice.status}}</td>
-                <td>{{ $invoice.aging}} Days</td>
-                <td>{{ $invoice.inv_no }}</td>
-                <td>Date</td>
-                <td>{{ $invoice.id_number }}</td>
-                <td>{{ $invoice.name }}</td>
-                <td>{{ $invoice.ship_phone }}</td>
-                <td>{{ $invoice.ship_name }}</td>
-                <td>{{ $invoice.ship_address1 }}</td>
-                <td>{{ $invoice.ship_address2 }}</td>
-                <td>{{ $invoice.ship_postcode }}</td>
-                <td>{{ $invoice.ship_city }}</td>
-                <td>{{ $invoice.ship_state}}</td>
-                <td>{{ $invoice.ship_country }}</td>
-
-                <td>{{ $invoice.product_name}}</td>
-                <td>{{ $invoice.price }}</td>
-                <td>{{ $invoice.qty }}</td>
-                <td>{{ $invoice.total_rm }}</td>
-
-                <td>Grand Total</td>
-                <td>Paid Total</td>
-                <td>Overdue Amount</td>
-                <td>{{$invoice.consultant}}</td>
-                <td>{{$invoice.channel}}</td>
-
-                <td>{{ $invoice.ptp1}}</td>
-                <td>{{ $invoice.ptp2 }}</td>
-                <td>{{ $invoice.ptp3 }}</td>
-                <td>{{ $invoice.ptp4 }}</td>
-
-                <td>{{ $invoice.created_by }}</td>
-                <td>{{ $invoice.created_at }}</td> -->
-
                 <td>{{ $invoice.Status_Inv}}</td>
                 <td>{{ $invoice.Aging}} Days</td>
                 <td>{{ $invoice.Inv_No }}</td>

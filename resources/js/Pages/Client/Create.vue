@@ -60,6 +60,7 @@ export default {
         <form @submit.prevent="storeClient" class="form">
             <ClientForm
                 :client="form"
+                :countries="$page.props.countries"
                 :states="$page.props.states"/>
                 <div>
             <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">

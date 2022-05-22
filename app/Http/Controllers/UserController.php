@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Portfolio;
 use App\Models\User;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
-use DB;
-use Hash;
-use Illuminate\Support\Arr;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -42,8 +42,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
-        return Inertia::render('User/Create', compact('roles'));
+
+        return Inertia::render('User/Create', [
+            'roles' => Role::pluck('name', 'name')->all(),
+            'portfolios' => Portfolio::pluck('name', 'id')->all()
+        ]);
     }
 
     /**
@@ -59,11 +62,12 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'staff_id' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'portfolios' => ['required'],
             'roles' => 'required'
         ]);
 
         $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
+        $input['password'] = FacadesHash::make($input['password']);
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
@@ -97,8 +101,10 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
+        $portfolios = Portfolio::pluck('name', 'id')->all();
+        $userPortfolio = $user->portfolios ? $user->portfolios->pluck('id', 'name')->all() : [];
 
-        return Inertia::render('User/Edit', compact('user', 'roles', 'userRole'));
+        return Inertia::render('User/Edit', compact('user', 'roles', 'userRole', 'portfolios', 'userPortfolio'));
     }
 
     /**
@@ -114,6 +120,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'staff_id' =>  ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
+            'portfolios' => ['required'],
             'roles' => 'required'
         ]);
 
@@ -121,6 +128,8 @@ class UserController extends Controller
         $user = User::find($id);
         $user->update($input);
         DB::table('model_has_roles')->where('model_id', $id)->delete();
+
+        $user->portfolios()->attach($request->input('portfolios'));
 
         $user->assignRole($request->input('roles'));
 

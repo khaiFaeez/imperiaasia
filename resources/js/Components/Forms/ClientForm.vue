@@ -74,7 +74,7 @@ export default {
         <BreezeLabel value="Client Occupation"/>
     </div>
     <div class="md:w-2/3">
-        <select name="Occupation"  v-model="client.occupation" class="border-primary w-full max-w-md">
+        <select name="Occupation"  v-model="client.occupation" class="input border-primary w-full max-w-md">
             <option  value=''>Please select</option>
             <option  value='A'>Gaji Bulanan</option>
             <option  value='B'>Bekerja Sendiri/berniaga</option>

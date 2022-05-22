@@ -151,4 +151,11 @@ class InvoiceController extends Controller
         ])
             ->with('message', 'Invoice created successfully');
     }
+
+    public function invoice_no_list()
+    {
+        Config::set('database.default', $this->portfolio);
+
+        return Invoice::select('Id', 'Inv_No')->pluck('Id', 'Inv_No')->toJson();
+    }
 }

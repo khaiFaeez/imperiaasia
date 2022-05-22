@@ -44,4 +44,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function portfolios()
+    {
+        return $this->belongsToMany(Portfolio::class);
+    }
+
+    public function currentPortfolio()
+    {
+        return $this->hasOne(Portfolio::class, 'id', 'current_portfolio_id');
+    }
 }

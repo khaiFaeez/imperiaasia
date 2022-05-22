@@ -19,11 +19,6 @@ class PdfController extends Controller
         $this->portfolio = Route::current() ? Route::current()->parameter("portfolio") : "";
     }
 
-    public function index()
-    {
-        return "PRINTING...";
-    }
-
 
     public function printInvoice($portfolio, $id)
     {
