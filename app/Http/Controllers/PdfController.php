@@ -20,10 +20,28 @@ class PdfController extends Controller
     }
 
 
+    public function printInvoices($invoices)
+    {
+        foreach ($invoices as $invoice) {
+            $this->generatePage($invoice);
+        }
+
+        $this->fpdf->Output();
+
+        exit;
+    }
+
     public function printInvoice($portfolio, $id)
     {
         $invoice  = Invoice::find($id);
+        $this->generatePage($invoice);
+        $this->fpdf->Output();
 
+        exit;
+    }
+
+    public function generatePage($invoice)
+    {
         $gst = $invoice->Grand_Total / 106 * 0;
         $header = array('Bill To: ', 'Deliver To', 'INVOICE/DELIVERY ORDER');
         $data = array('Invoice No. :INV-100000', 'Date', 'Reference', 'Terms', 'Salesperson', 'Page', 'Promise to pay');
@@ -51,9 +69,6 @@ class PdfController extends Controller
         $this->fpdf->Cell(20, 4, $invoice->Grand_Total, 1, 0, 'L');
         $this->fpdf->Ln();
         $this->footer();
-        $this->fpdf->Output();
-
-        exit;
     }
 
     public function header()

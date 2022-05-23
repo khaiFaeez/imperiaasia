@@ -90,6 +90,17 @@ class DocketController extends Controller
         exit;
     }
 
+    public function printDockets($invoices)
+    {
+        foreach ($invoices as $invoice) {
+            $this->generatePage($invoice);
+        }
+
+        $this->fpdf->Output();
+
+        exit;
+    }
+
     public function generatePage($invoice)
     {
 

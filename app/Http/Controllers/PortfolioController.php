@@ -21,8 +21,8 @@ class PortfolioController extends Controller
             abort(403);
         }
         User::where('id', Auth::user()->id)->update(['current_portfolio_id' => $portfolio]);
-        Session::put('portfolio_db', Auth::user()->currentPortfolio->db_connection);
+        Session::put('portfolio_db', Auth::user()->current_portfolio->db_connection);
 
-        return Inertia::location(route('portfolio.dashboard'));
+        return Inertia::location(route('portfolio.dashboard', ['portfolio' => Portfolio::where('id', $portfolio)->first()->name]));
     }
 }

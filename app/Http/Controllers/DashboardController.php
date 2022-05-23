@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,7 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $db =  array_keys(config('portfolio.list'));
+        // $db =  array_keys(config('portfolio.list'));
 
         // $q1 = DB::table(array_keys(config('portfolio.list'))[0] . '.Invoice')->select('Id');
 
@@ -25,20 +26,19 @@ class DashboardController extends Controller
         // $result = $q2->union($q1)->toSql();
 
         // dd($result);
-        $total_invoice = 0;
-        $total_client = 0;
+        // $total_invoice = 0;
+        // $total_client = 0;
         // $total_invoice = Cache::remember('total_invoice', 60, function () use ($db, $total_invoice) {
-        foreach ($db as $portfolio) {
-            $total_invoice += DB::table($portfolio . '.Invoice')->count('Id');
-            $total_client += DB::table($portfolio . '.Client')->count('id');
-        }
+        // foreach ($db as $portfolio) {
+        //     $total_invoice += DB::table($portfolio . '.Invoice')->count('Id');
+        //     $total_client += DB::table($portfolio . '.Client')->count('id');
+        // }
         // });
 
-
         return Inertia::render('Dashboard', [
-            'total_invoice' => $total_invoice,
+            'total_invoice' => DB::connection(Auth::user()->current_portfolio->db_connection)->table('Invoice')->count(),
             'users' => DB::table('users')->count(),
-            'clients' => $total_client
+            'clients' => DB::connection(Auth::user()->current_portfolio->db_connection)->table('Client')->count()
         ]);
     }
 

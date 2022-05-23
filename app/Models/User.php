@@ -50,7 +50,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Portfolio::class);
     }
 
-    public function currentPortfolio()
+    public function current_portfolio()
     {
         return $this->hasOne(Portfolio::class, 'id', 'current_portfolio_id');
     }

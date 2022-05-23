@@ -16,12 +16,11 @@ export default {
     }
 }
 </script>
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <template>
     <div class="grid grid-cols-1 gap-5">
                         <div>
                         <BreezeLabel value="Sales Person" />
-                          <select id="Sales_Person" name="Sales_Person" class="select border-primary w-full" v-model="sales.consultant">
+                          <select id="Sales_Person" name="Sales_Person" class="select border-primary w-full input" v-model="sales.consultant">
                             <option  value=''>Please select consultant</option>
                             <option v-for="($consultant,i) in consultants" :key="i" :value="$consultant.id" :class="{ 'text-error': $consultant.Status != 'Active','text-success':$consultant.Status == 'Active'}" >{{$consultant.Name}} - {{$consultant.Employee_Code}}</option>
                           </select>
@@ -30,7 +29,7 @@ export default {
 
                         <div class="col-lg-3">
                           <BreezeLabel value="Sales Channel"/>
-                          <select id="Channel" name="Channel" class="form-control form-control-sm" v-model="sales.channel" >
+                          <select id="Channel" name="Channel" class="form-control form-control-sm input" v-model="sales.channel" >
                           <option  value=''>Please select</option>
                           <option  value='1'>ONLINE</option>
                           <option  value='2'>DISTRIBUTOR</option>
@@ -41,7 +40,7 @@ export default {
 
                         <div class="col-lg-3">
                           <BreezeLabel value="Closing Source"/>
-                          <select id="Closing" name="Closing" class="form-control form-control-sm" v-model="sales.closing">
+                          <select id="Closing" name="Closing" class="form-control form-control-sm input" v-model="sales.closing">
                             <option  value=''>Please select</option>
                             <option  value='A'>A - CALL</option>
                             <option  value='B'>B - WHATSAPP</option>

@@ -13,10 +13,9 @@ import { Head } from '@inertiajs/inertia-vue3';
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-12 bg-base-300">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <h2>General</h2>
-                <div class="stats stats-vertical lg:stats-horizontal w-full shadow">
+                <div class="stats stats-vertical lg:stats-horizontal w-full shadow-xl">
 
             <div class="stat">
                 <div class="stat-title">Invoices</div>
@@ -48,21 +47,18 @@ import { Head } from '@inertiajs/inertia-vue3';
 
         <div class="py-12 ">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <h2>Account</h2>
 
             </div>
         </div>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <h2>Delivery</h2>
 
             </div>
         </div>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <h2>Setting</h2>
 
             </div>
         </div>

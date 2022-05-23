@@ -40,9 +40,9 @@ class AuthenticatedSessionController extends Controller
 
         // return redirect()->intended(RouteServiceProvider::HOME);
 
-        Session::put('portfolio_db', $request->user()->currentPortfolio->db_connection);
+        Session::put('portfolio_db', $request->user()->current_portfolio->db_connection);
 
-        return Inertia::location(route('portfolio.dashboard', ['portfolio' => $request->user()->currentPortfolio->name]));
+        return Inertia::location(route('portfolio.dashboard', ['portfolio' => $request->user()->current_portfolio->name]));
     }
 
     /**
