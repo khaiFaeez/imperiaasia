@@ -174,11 +174,11 @@ export default {
 </script>
 
 <template>
-<Head title="Create Invoice" />
+<Head title="Quick Order" />
 <app-layout>
      <h1 class="mb-8 text-2xl font-bold">
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-      <span class="text-primary font-medium">/</span> Create
+      <span class="text-primary font-medium">/</span> Quick Order
     </h1>
     <form @submit.prevent="storeInvoice" class="form">
 
@@ -188,10 +188,17 @@ export default {
                 :states="$page.props.states"
             />
         <div class="divider text-xl mb-8 mt-32 " id="postage">Postage</div>
-            <div class="flex items-end justify-end my-12">
-                    <button @click="copyAddress" type="button" class="btn btn-info btn-sm">Copy Client Address</button>
+            <div class="flex items-end justify-end my-12 gap-2">
+                    <button @click="copyAddress" type="button" class="btn btn-info btn-sm" title="Copy Client Details">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
+  <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+</svg>
+</button>
 
-                    <button @click="clearAddress" type="button" class="btn btn-error btn-sm">Clear Address</button>
+                    <button @click="clearAddress" type="button" class="btn btn-error btn-sm" title="Clear Postage Detail">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser" viewBox="0 0 16 16">
+  <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/>
+</svg></button>
             </div>
             <postage-form
                 :states="$page.props.states"
@@ -211,7 +218,10 @@ export default {
 
          <div class="my-12 flex justify-end">
         <breeze-button :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
-                Save
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save mr-3" viewBox="0 0 16 16">
+  <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+</svg>
+  Save
         </breeze-button>
         </div>
 

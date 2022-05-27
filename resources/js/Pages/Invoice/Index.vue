@@ -113,7 +113,7 @@ export default {
  </thead>
  <tbody>
   <tr class="hover hover:cursor-pointer" v-for="$invoice in $page.props.invoices.data" :key="$invoice.Id" @click="goToViewPage($invoice)">
-                <td>{{ $invoice.Status_Inv}}</td>
+                <td><div class="badge text-white" :class='$invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{$invoice.Status_Inv}}</div></td>
                 <td>{{ $invoice.Aging}} Days</td>
                 <td>{{ $invoice.Inv_No }}</td>
                 <td>Date</td>

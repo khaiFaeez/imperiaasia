@@ -7,20 +7,9 @@ import { Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 </script>
-<style scoped>
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.4s;
-}
-.slide-fade-enter,
-.slide-fade-leave-to {
-  transform: translateX(400px);
-  opacity: 0;
-}
-</style>
+
 <template>
     <div>
-        <Transition name="slide-fade">
         <div class="absolute bottom-5 inset-x-0 max-w-xl z-20" v-if="$page.props.flash.message" x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
                 <div class="alert alert-success text-white">
                     <p>{{ $page.props.flash.message }}</p>
@@ -119,6 +108,6 @@ const showingNavigationDropdown = ref(false);
                     </aside>
                 </div>
             </div>
-        </div></Transition>
+        </div>
     </div>
 </template>

@@ -112,6 +112,12 @@ class DocketController extends Controller
         $this->bill($invoice);
         //$this->fpdf->billDeliver($header,$rows,$currY);
         $this->fpdf->Ln();
+
+        try {
+            Invoice::where('Id', $invoice->Id)->update(['Docket_Status' => 1]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
 

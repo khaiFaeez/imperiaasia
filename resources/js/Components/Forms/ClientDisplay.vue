@@ -33,7 +33,7 @@ export default {
 <template>
 
 <div class="w-full">
-  <div class="md:flex md:items-center mb-6">
+  <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="IC Number / Passport"/>
     </div>
@@ -42,7 +42,7 @@ export default {
     </div>
   </div>
 
-  <div class="md:flex md:items-center mb-6">
+  <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Name"/>
     </div>
@@ -51,7 +51,7 @@ export default {
     </div>
   </div>
 
-  <div class="md:flex md:items-center mb-6">
+  <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Contact No. 1"/>
     </div>
@@ -60,7 +60,7 @@ export default {
     </div>
   </div>
 
-  <div class="md:flex md:items-center mb-6">
+  <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Contact No. 2"/>
     </div>
@@ -69,7 +69,7 @@ export default {
     </div>
   </div>
 
-  <div class="md:flex md:items-center mb-6">
+  <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Contact No. 3"/>
     </div>
@@ -78,7 +78,7 @@ export default {
     </div>
   </div>
 
-   <div class="md:flex md:items-center mb-6">
+   <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Client Occupation"/>
     </div>
@@ -87,7 +87,7 @@ export default {
     </div>
   </div>
 
-  <div class="md:flex md:items-center mb-6">
+  <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Address"/>
     </div>
@@ -97,7 +97,7 @@ export default {
   </div>
 
 
-<div class="md:flex md:items-center mb-6">
+<div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Address 2"/>
     </div>
@@ -107,7 +107,7 @@ export default {
   </div>
 
 
-<div class="md:flex md:items-center mb-6">
+<div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Poscode"/>
     </div>
@@ -117,7 +117,7 @@ export default {
   </div>
 
 
-<div class="md:flex md:items-center mb-6">
+<div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="City" />
     </div>
@@ -127,7 +127,7 @@ export default {
   </div>
 
 
-<div class="md:flex md:items-center mb-6">
+<div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel  value="State" />
     </div>
@@ -136,7 +136,7 @@ export default {
     </div>
   </div>
 
-<div class="md:flex md:items-center mb-6">
+<div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Country"/>
     </div>

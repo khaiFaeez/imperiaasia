@@ -69,6 +69,12 @@ class PdfController extends Controller
         $this->fpdf->Cell(20, 4, $invoice->Grand_Total, 1, 0, 'L');
         $this->fpdf->Ln();
         $this->footer();
+
+        try {
+            Invoice::where('Id', $invoice->Id)->update(['Invoice_Status' => 1]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function header()
