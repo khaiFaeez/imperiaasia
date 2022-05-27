@@ -136,16 +136,16 @@ export default {
                 <td>Grand Total</td>
                 <td>Paid Total</td>
                 <td>Overdue Amount</td>
-                <td>{{$invoice.Consultant}}</td>
+                <td>{{$invoice.consultant.Name}}</td>
                 <td>{{$invoice.channel?.Name}}</td>
 
-                <td>{{  moment($invoice.Promise_pay1).format('LL')}}</td>
-                <td>{{  moment($invoice.Promise_pay2).format('LL') }}</td>
-                <td>{{  moment($invoice.Promise_pay3).format('LL') }}</td>
-                <td>{{  moment($invoice.Promise_pay4).format('LL') }}</td>
+                <td>{{  $invoice.Promise_pay1 ? moment($invoice.Promise_pay1).format('LL') : ""}}</td>
+                <td>{{  $invoice.Promise_pay2 ? moment($invoice.Promise_pay2).format('LL') : ""}}</td>
+                <td>{{  $invoice.Promise_pay3 ? moment($invoice.Promise_pay3).format('LL') : ""}}</td>
+                <td>{{  $invoice.Promise_pay4 ? moment($invoice.Promise_pay4).format('LL') : ""}}</td>
 
                 <td>{{ $invoice.Created_By }}</td>
-                <td>{{ moment($invoice.Created_Date).format('LL') }}</td>
+                <td>{{ $invoice.Created_Date ? moment($invoice.Created_Date).format('LL') :  ""}}</td>
   </tr>
  </tbody>
 </table>

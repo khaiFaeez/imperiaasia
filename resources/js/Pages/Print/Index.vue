@@ -89,7 +89,11 @@ export default {
     <Link class="text-primary hover:text-primary-focus" href="/print">Print</Link>
 </h1>
 
-<div class="card max-w-2xl bg-base-300 shadow-xl">
+
+
+<div class="flex justify-between gap-5 my-5 w-full">
+
+<div class="card w-full max-w-2xl bg-base-300 shadow-xl">
   <div class="card-body">
 <form class="w-full my-8"  @submit.prevent="submit">
   <div class="md:flex md:items-center mb-3 ">
@@ -157,27 +161,30 @@ export default {
 </div>
 </div>
 
-<div v-if="$page.props.invoices.length > 0">
-<div class="flex justify-end gap-5 m-5">
-<form :action="route('portfolio.print.invoices')" method="post" target="_blank" @submit.prevent="check_form1">
+<div class="flex flex-col gap-3">
+<form :action="route('portfolio.print.invoices')" method="post" target="_blank" @submit.prevent="check_form1" v-if="$page.props.invoices.length > 0">
 <input type="hidden" :value="$page.props.attribute_name" name="_token"/>
 <input type="hidden" :value="selected" name="ids"/>
- <button  class="btn btn-primary" @click="check_form">
+ <button  class="btn btn-primary " @click="check_form">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
 </svg>
 
  Print Invoices</button>
  </form>
- <form :action="route('portfolio.print.dockets')" method="post" target="_blank" @submit.prevent="check_form2">
+
+ <form :action="route('portfolio.print.dockets')" method="post" target="_blank" @submit.prevent="check_form2" v-if="$page.props.invoices.length > 0">
 <input type="hidden" :value="$page.props.attribute_name" name="_token"/>
 <input type="hidden" :value="selected" name="ids"/>
- <button  class="btn btn-secondary hover:btn-secondary" @click="check_form"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+ <button  class="btn btn-secondary" @click="check_form"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
 </svg>
  Print Docket</button>
- </form></div>
+ </form>
+ </div>
+ </div>
 
+<div v-if="$page.props.invoices.length > 0">
 <div class="overflow-auto">
 <table class="table table-compact table-bordered w-full">
 <thead>

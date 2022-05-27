@@ -9,6 +9,11 @@ import BreezeLabel from '@/Components/Label.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from  '@/Components/InputError.vue'
 
+  // import the component
+  import Treeselect from 'vue3-treeselect'
+  // import the styles
+  import 'vue3-treeselect/dist/vue3-treeselect.css'
+
 const showingNavigationDropdown = ref(false);
 
 
@@ -24,7 +29,8 @@ export default {
         BreezeInput,
         BreezeInputError,
         Link,
-        Head
+        Head,
+        Treeselect
     },
     data() {
         return {
@@ -37,7 +43,27 @@ export default {
                 password:"",
                 password_confirmation:""
 
-            })
+            }),
+             // define the default value
+            value: null,
+            // define options
+            options: [ {
+            id: '1',
+            label: 'Platinum',
+            children: [ {
+                id: '11',
+                label: 'Admin',
+            }, {
+                id: '12',
+                label: 'Clerk',
+            } ],
+            }, {
+            id: '2',
+            label: 'Dresella',
+            }, {
+            id: '3',
+            label: 'TCK',
+            } ],
         }
     },
     created: function () {
@@ -109,6 +135,8 @@ export default {
                 <BreezeInputError :message="form.errors.portfolios" />
             </div>
 
+
+             <treeselect v-model="value" :multiple="true" :options="options" />
 
 
             <div class="flex items-center justify-end mt-4">

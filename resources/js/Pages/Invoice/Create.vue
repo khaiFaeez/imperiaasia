@@ -188,19 +188,13 @@ export default {
             />
 
         <div class="divider text-xl mb-8 mt-32 " id="postage">Postage</div>
-            <div class="flex items-end justify-end my-12">
-                    <button @click="copyAddress" type="button" class="btn btn-info btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
-  <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
-</svg>
-                    Copy Client Address</button>
+            <div class="flex items-end justify-end my-12 gap-2">
+                    <button @click="copyAddress" type="button" class="btn btn-info btn-sm" title="Copy Client Details">
+                   <i class="bi bi-files"></i>
+</button>
 
-                    <button @click="clearAddress" type="button" class="btn btn-error btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-</svg>
-                    Clear Address</button>
+                    <button @click="clearAddress" type="button" class="btn btn-error btn-sm" title="Clear Postage Detail">
+                  <i class="bi bi-eraser-fill"></i></button>
             </div>
             <postage-form
                 :states="$page.props.states"

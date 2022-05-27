@@ -29,6 +29,7 @@ class InvoiceController extends Controller
                 ->with('product')
                 ->with('channel')
                 ->with('state')
+                ->with('consultant')
                 ->orderBy('Id', 'desc')
                 ->when($filter, function ($query, $filter) {
                     $query->where('Inv_No', 'LIKE', '%' . $filter . '%');
