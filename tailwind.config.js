@@ -17,35 +17,15 @@ module.exports = {
     },
     daisyui: {
         themes: [
-            "light",
-            "dark",
-            "cupcake",
-            "bumblebee",
-            "emerald",
-            "corporate",
-            "synthwave",
-            "retro",
-            "cyberpunk",
-            "valentine",
-            "halloween",
-            "garden",
-            "forest",
-            "aqua",
-            "lofi",
-            "pastel",
-            "fantasy",
-            "wireframe",
-            "black",
-            "luxury",
-            "dracula",
-            "cmyk",
-            "autumn",
-            "business",
-            "acid",
-            "lemonade",
-            "night",
-            "coffee",
-            "winter",
+            {
+                autumn: {
+                    ...require("daisyui/src/colors/themes")[
+                        "[data-theme=autumn]"
+                    ],
+
+                    neutral: "#000000",
+                },
+            },
         ],
     },
 

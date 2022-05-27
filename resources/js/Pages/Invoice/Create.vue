@@ -182,7 +182,7 @@ export default {
     </h1>
     <form @submit.prevent="storeInvoice" class="form">
         <div class="divider text-xl mb-8 " id="client">Client</div>
-            <ClientForm
+            <client-display
                 :client="clientForm"
                 :states="$page.props.states"
             />
@@ -193,26 +193,26 @@ export default {
 
                     <button @click="clearAddress" type="button" class="btn btn-error btn-sm">Clear Address</button>
             </div>
-            <PostageForm
+            <postage-form
                 :states="$page.props.states"
                 :shipping="invoiceForm.shipping"
             />
 
         <div class="divider text-xl mb-8 mt-32 " id="product">Product</div>
-            <ProductForm
+            <product-form
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
 
         <div class="divider text-xl mb-8 mt-32 " id="sales">Sales</div>
-            <SalesForm
+            <sales-form
                 :consultants="$page.props.consultants"
                 :sales="invoiceForm.sales" />
         <div class="my-12 flex justify-end">
 
 
-        <BreezeButton :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
+        <breeze-button :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
                 Save
-        </BreezeButton>
+        </breeze-button>
         </div>
     </form>
 </AppLayout>

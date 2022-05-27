@@ -1,14 +1,26 @@
 <script setup>
 import { ref } from 'vue';
+import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import Navigation from '@/Components/Navigation.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 const showingNavigationDropdown = ref(false);
 </script>
-
+<style scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.4s;
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(400px);
+  opacity: 0;
+}
+</style>
 <template>
     <div>
+        <Transition name="slide-fade">
         <div class="absolute bottom-5 inset-x-0 max-w-xl z-20" v-if="$page.props.flash.message" x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
                 <div class="alert alert-success text-white">
                     <p>{{ $page.props.flash.message }}</p>
@@ -28,11 +40,15 @@ const showingNavigationDropdown = ref(false);
                 </div>
                 <div class="drawer-side" v-if="route().params.portfolio">
                     <label for="my-drawer-2" class="drawer-overlay"></label>
-                    <aside class="w-80 bg-base-200">
+                    <aside class="w-80 bg-neutral text-neutral-content">
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
                     </ul>
 
-                    <div class="h-20"></div>
+                    <div class="h-20 flex items-center justify-center">
+                    <Link :href="route('portfolio.dashboard')">
+                        <BreezeApplicationLogo class="block w-auto px-4" />
+                    </Link>
+                    </div>
 
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
                     <!-- Sidebar content here -->
@@ -76,7 +92,7 @@ const showingNavigationDropdown = ref(false);
 
                     </aside>
 
-                    <aside class="w-80 bg-base-200" v-show="route().current('*.invoice.show') || route().current('*.invoice.create')">
+                    <aside class="w-80 bg-neutral text-neutral-content" v-show="route().current('*.invoice.show') || route().current('*.invoice.create') || route().current('*.invoice.repeat')">
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
                     </ul>
 
@@ -103,6 +119,6 @@ const showingNavigationDropdown = ref(false);
                     </aside>
                 </div>
             </div>
-        </div>
+        </div></Transition>
     </div>
 </template>

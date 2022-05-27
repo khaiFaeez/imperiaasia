@@ -50,7 +50,7 @@ class InvoiceController extends Controller
             "states" => State::get(),
             "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
             "products" => Product::select('id', 'Code', 'Product_Name')->get(),
-            "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get(),
+            "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->get(),
             "cmd" => Collector::select('id', 'Name')->get(),
         ]);
     }
@@ -66,7 +66,7 @@ class InvoiceController extends Controller
             "states" => State::get(),
             "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
             "products" => Product::select('id', 'Code', 'Product_Name')->get(),
-            "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get(),
+            "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->get(),
             "cmd" => Collector::select('id', 'Name')->get(),
         ]);
     }
@@ -83,7 +83,7 @@ class InvoiceController extends Controller
             "states" => State::get(),
             "countries" => ["MALAYSIA", "INDONESIA", "PHILIPPINE"],
             "products" => Product::select('id', 'Code', 'Product_Name')->get(),
-            "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->orderBy('id', 'desc')->get(),
+            "consultants" => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->get(),
             "cmd" => Collector::select('id', 'Name')->get()
         ]);
     }

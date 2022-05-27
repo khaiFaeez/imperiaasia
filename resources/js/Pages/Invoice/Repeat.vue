@@ -18,20 +18,20 @@ export default {
         'client','invoice'
     ],
     components:{
-        AppLayout,
-        BreezeLabel,
-        BreezeButton,
-        BreezeInput,
-        BreezeInputError,
-        Link,
-        Head,
-        ClientForm,
-        ClientDisplay,
-        ProductForm,
-        SalesForm,
-        PaymentForm,
-        PostageForm
-    },
+    AppLayout,
+    BreezeLabel,
+    BreezeButton,
+    BreezeInput,
+    BreezeInputError,
+    Link,
+    Head,
+    ClientForm,
+    ClientDisplay,
+    ProductForm,
+    SalesForm,
+    PaymentForm,
+    PostageForm
+},
     data() {
         return {
             clientForm:this.$inertia.form({
@@ -175,7 +175,7 @@ export default {
 
 <template>
 <Head title="Create Invoice" />
-<AppLayout>
+<app-layout>
      <h1 class="mb-8 text-2xl font-bold">
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
       <span class="text-primary font-medium">/</span> Create
@@ -183,7 +183,7 @@ export default {
     <form @submit.prevent="storeInvoice" class="form">
 
         <div class="divider text-xl mb-8 " id="client">Client</div>
-            <ClientForm
+            <client-display
                 :client="clientForm"
                 :states="$page.props.states"
             />
@@ -193,29 +193,29 @@ export default {
 
                     <button @click="clearAddress" type="button" class="btn btn-error btn-sm">Clear Address</button>
             </div>
-            <PostageForm
+            <postage-form
                 :states="$page.props.states"
                 :shipping="invoiceForm.shipping"
             />
 
 
         <div class="divider text-xl mb-8 mt-32 " id="product">Product</div>
-            <ProductForm
+            <product-form
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
 
         <div class="divider text-xl mb-8 mt-32 " id="sales">Sales</div>
-            <SalesForm
+            <sales-form
                 :consultants="$page.props.consultants"
                 :sales="invoiceForm.sales" />
 
          <div class="my-12 flex justify-end">
-        <BreezeButton :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
+        <breeze-button :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
                 Save
-        </BreezeButton>
+        </breeze-button>
         </div>
 
     </form>
-</AppLayout>
+</app-layout>
 
 </template>
