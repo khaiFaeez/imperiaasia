@@ -1,20 +1,9 @@
 <script>
-import { ref } from 'vue';
 import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
-import Pagination from '@/Components/Pagination'
-import moment from 'moment'
+import UserForm from '@/Components/Forms/UserForm.vue';
 import BreezeButton from '@/Components/Button.vue'
-import BreezeLabel from '@/Components/Label.vue'
-import BreezeInput from '@/Components/Input.vue'
-import BreezeInputError from  '@/Components/InputError.vue'
 
-  // import the component
-  import Treeselect from 'vue3-treeselect'
-  // import the styles
-  import 'vue3-treeselect/dist/vue3-treeselect.css'
-
-const showingNavigationDropdown = ref(false);
 
 
 export default {
@@ -22,15 +11,11 @@ export default {
         status: String,
     },
     components:{
-        Pagination,
         AppLayout,
-        BreezeLabel,
-        BreezeButton,
-        BreezeInput,
-        BreezeInputError,
         Link,
         Head,
-        Treeselect
+        UserForm,
+        BreezeButton
     },
     data() {
         return {
@@ -41,11 +26,8 @@ export default {
                 roles:[],
                 portfolios:[],
                 password:"",
-                password_confirmation:""
-
+                password_confirmation:"",
             }),
-             // define the default value
-            value: null,
             // define options
             options: [ {
             id: '1',
@@ -66,9 +48,6 @@ export default {
             } ],
         }
     },
-    created: function () {
-        this.moment = moment;
-    },
     methods: {
         storeUser() {
                 this.form.post(route('users.store'),{
@@ -84,67 +63,19 @@ export default {
 <template>
 <Head title="Create User" />
 <AppLayout>
+            <h1 class="mb-8 text-2xl font-bold">
+                <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
+                <span class="text-primary font-medium">/</span> Create
+            </h1>
 
-        <div v-if="status" class="mb-4 font-medium text-sm">
-            {{ status }}
-        </div>
-
-        <form @submit.prevent="storeUser" class="w-96 form mx-auto">
-            <div class="mb-4">
-                <BreezeLabel for="username" value="Username" />
-                <BreezeInput id="username" type="text" v-model="form.username" required autocomplete="username" />
-                <BreezeInputError :message="form.errors.username" />
-            </div>
-
-            <div class="mb-4">
-                <BreezeLabel for="name" value="Name" />
-                <BreezeInput id="name" type="text" v-model="form.name" required autocomplete="name" />
-                <BreezeInputError :message="form.errors.name" />
-            </div>
-
-
-            <div class="mb-4">
-                <BreezeLabel for="staff_id" value="Staff ID" />
-                <BreezeInput id="staff_id" type="text" v-model="form.staff_id" required autocomplete="staff_id" />
-                <BreezeInputError :message="form.errors.staff_id" />
-            </div>
-
-            <div class="mt-4">
-                <BreezeLabel for="password" value="Password" />
-                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <BreezeLabel for="password_confirmation" value="Confirm Password" />
-                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
-            </div>
-
-             <div class="mb-4">
-                <BreezeLabel for="roles" value="Role" />
-                <select name="roles" id="roles" multiple v-model="form.roles" class="select input-bordered border-primary w-full h-52">
-                <option v-for="($role, i ) in $page.props.roles" :key="i" :value="$role">{{$role}}</option>
-                </select>
-                <BreezeInputError :message="form.errors.roles" />
-            </div>
-
-             <div class="mb-4">
-                <BreezeLabel for="portfolios" value="Portfolios" />
-                <select name="portfolios" id="portfolios" multiple v-model="form.portfolios" class="select input-bordered border-primary w-full h-52">
-                <option v-for="($portfolio, i ) in $page.props.portfolios" :key="i" :value="i">{{$portfolio}}</option>
-                </select>
-                <BreezeInputError :message="form.errors.portfolios" />
-            </div>
-
-
-             <treeselect v-model="value" :multiple="true" :options="options" />
-
-
-            <div class="flex items-center justify-end mt-4">
-
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="flex items-center justify-end my-3">
+                <BreezeButton class="btn-sm" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Register
                 </BreezeButton>
             </div>
+
+        <form @submit.prevent="storeUser" class="form">
+                <user-form :user="form" :options="options"></user-form>
         </form>
 </AppLayout>
 

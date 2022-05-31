@@ -2738,9 +2738,6 @@ body[dir="rtl"] .checkbox:checked,
 .m-1 {
   margin: 0.25rem;
 }
-.m-5 {
-  margin: 1.25rem;
-}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -2748,6 +2745,10 @@ body[dir="rtl"] .checkbox:checked,
 .my-12 {
   margin-top: 3rem;
   margin-bottom: 3rem;
+}
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 .my-8 {
   margin-top: 2rem;
@@ -2757,9 +2758,9 @@ body[dir="rtl"] .checkbox:checked,
   margin-left: 0.75rem;
   margin-right: 0.75rem;
 }
-.my-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
+.my-3 {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -2926,27 +2927,6 @@ body[dir="rtl"] .checkbox:checked,
 .h-8 {
   height: 2rem;
 }
-.max-h-min {
-  max-height: -webkit-min-content;
-  max-height: -moz-min-content;
-  max-height: min-content;
-}
-.max-h-max {
-  max-height: -webkit-max-content;
-  max-height: -moz-max-content;
-  max-height: max-content;
-}
-.max-h-screen {
-  max-height: 100vh;
-}
-.max-h-fit {
-  max-height: -webkit-fit-content;
-  max-height: -moz-fit-content;
-  max-height: fit-content;
-}
-.max-h-96 {
-  max-height: 24rem;
-}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -2988,9 +2968,6 @@ body[dir="rtl"] .checkbox:checked,
 }
 .w-52 {
   width: 13rem;
-}
-.w-96 {
-  width: 24rem;
 }
 .min-w-full {
   min-width: 100%;
@@ -3731,69 +3708,6 @@ body[dir="rtl"] .checkbox:checked,
 }
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
-}
-.btn-outline.hover\:btn-secondary:hover .badge {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--s) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-.btn-outline.hover\:btn-secondary:hover .badge-outline {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
-  background-color: transparent;
-  --tw-text-opacity: 1;
-  color: hsl(var(--s) / var(--tw-text-opacity));
-}
-.btn-outline.hover\:btn-secondary:hover:hover .badge {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sc) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sc) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--s) / var(--tw-text-opacity));
-}
-.btn-outline.hover\:btn-secondary:hover:hover .badge.outline {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sc) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-.hover\:btn-secondary:hover {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--s) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--s) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-.hover\:btn-secondary:hover:hover, .btn-secondary.btn-active {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-}
-.hover\:btn-secondary:hover:focus-visible {
-  outline: 2px solid hsl(var(--s));
-}
-.btn-outline.hover\:btn-secondary:hover {
-  --tw-text-opacity: 1;
-  color: hsl(var(--s) / var(--tw-text-opacity));
-}
-.btn-outline.hover\:btn-secondary:hover:hover {
-  --tw-border-opacity: 1;
-  border-color: hsl(var(--sf, var(--s)) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--sf, var(--s)) / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: hsl(var(--sc) / var(--tw-text-opacity));
-}
-.drawer-toggle:focus-visible ~ .drawer-content .drawer-button.hover\:btn-secondary:hover {
-  outline: 2px solid hsl(var(--s));
 }
 .hover\:cursor-pointer:hover {
   cursor: pointer;

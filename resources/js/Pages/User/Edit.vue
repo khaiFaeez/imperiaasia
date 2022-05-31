@@ -8,6 +8,7 @@ import BreezeButton from '@/Components/Button.vue'
 import BreezeLabel from '@/Components/Label.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from  '@/Components/InputError.vue'
+import UserForm from '@/Components/Forms/UserForm.vue';
 
 const showingNavigationDropdown = ref(false);
 
@@ -24,7 +25,8 @@ export default {
         BreezeInput,
         BreezeInputError,
         Link,
-        Head
+        Head,
+        UserForm,
     },
     data() {
         return {
@@ -36,13 +38,26 @@ export default {
                 staff_id:this.$page.props.user.staff_id,
                 roles:Object.values(this.$page.props.userRole),
                 portfolios:Object.values(this.$page.props.userPortfolio)
-
-
-            })
+            }),
+             // define options
+            options: [ {
+            id: '1',
+            label: 'Platinum',
+            children: [ {
+                id: '11',
+                label: 'Admin',
+            }, {
+                id: '12',
+                label: 'Clerk',
+            } ],
+            }, {
+            id: '2',
+            label: 'Dresella',
+            }, {
+            id: '3',
+            label: 'TCK',
+            } ],
         }
-    },
-    created: function () {
-        this.moment = moment;
     },
     methods: {
         updateUser(id) {
@@ -60,56 +75,23 @@ export default {
 <template>
 <Head title="Edit User" />
 <AppLayout>
+            <h1 class="mb-8 text-2xl font-bold">
+                <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
+                <span class="text-primary font-medium">/</span> Edit
+            </h1>
 
-        <div v-if="status" class="mb-4 font-medium text-sm">
-            {{ status }}
-        </div>
-
-        <form @submit.prevent="updateUser($page.props.user.id)" class="w-96 form  mx-auto">
-            <div class="mb-4">
-                <BreezeLabel for="username" value="Username" />
-                <BreezeInput id="username" type="text" v-model="form.username" required autocomplete="username" />
-                <BreezeInputError :message="form.errors.username" />
-            </div>
-
-            <div class="mb-4">
-                <BreezeLabel for="name" value="Name" />
-                <BreezeInput id="name" type="text" v-model="form.name" required autocomplete="name" />
-                <BreezeInputError :message="form.errors.name" />
-            </div>
-
-
-            <div class="mb-4">
-                <BreezeLabel for="staff_id" value="Staff ID" />
-                <BreezeInput id="staff_id" type="text" v-model="form.staff_id" required autocomplete="staff_id" />
-                <BreezeInputError :message="form.errors.staff_id" />
-            </div>
-
-             <div class="mb-4">
-                <BreezeLabel for="roles" value="Role" />
-                <select name="roles" id="roles" multiple v-model="form.roles" class="select input-bordered border-primary w-full h-52">
-                <option v-for="($role, i ) in $page.props.roles" :key="i" :value="$role">{{$role}}</option>
-                </select>
-                <BreezeInputError :message="form.errors.roles" />
-            </div>
-
-             <div class="mb-4">
-                <BreezeLabel for="portfolios" value="Portfolio" />
-                <select name="portfolios" id="portfolios" multiple v-model="form.portfolios" class="select input-bordered border-primary w-full h-52">
-                <option v-for="($portfolio, i ) in $page.props.portfolios" :key="i" :value="i">{{$portfolio}}</option>
-                </select>
-                <BreezeInputError :message="form.errors.portfolios" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <div class="flex items-center justify-end my-3">
+                <BreezeButton class="ml-4 btn-sm" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save mr-3" viewBox="0 0 16 16">
-  <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-</svg>
+                 <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                </svg>
                     Save
                 </BreezeButton>
             </div>
+
+
+        <form @submit.prevent="updateUser($page.props.user.id)" class="form">
+            <user-form :user="form" :options="options" ></user-form>
         </form>
 </AppLayout>
-
 </template>

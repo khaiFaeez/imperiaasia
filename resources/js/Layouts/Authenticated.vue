@@ -23,11 +23,11 @@ const showingNavigationDropdown = ref(false);
                 <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
                 <div class="drawer-content flex flex-col">
                                 <!-- Page content here -->         <Navigation/>
-                                <main class="mx-auto py-6 px-4 sm:px-6 lg:px-8 w-full">
+                                <main class="py-6 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto">
                                     <slot />
                                 </main>
                 </div>
-                <div class="drawer-side" v-if="route().params.portfolio">
+                <div class="drawer-side" >
                     <label for="my-drawer-2" class="drawer-overlay"></label>
                     <aside class="w-80 bg-neutral text-neutral-content">
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
