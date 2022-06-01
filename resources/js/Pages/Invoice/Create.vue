@@ -34,6 +34,7 @@ export default {
     data() {
         return {
             clientForm:this.$inertia.form({
+                    id:this.client.id,
                     MyKad_SSM:this.client.MyKad_SSM,
                     Name:this.client.Name,
                     Mobile_No:this.client.Mobile_No,
@@ -80,6 +81,27 @@ export default {
                         discounted_price : 0,
                         total : 0,
                     }, {
+                        product:"",
+                        price : 0,
+                        qty : 0,
+                        discount : 0,
+                        discounted_price : 0,
+                        total : 0,
+                    },{
+                        product:"",
+                        price : 0,
+                        qty : 0,
+                        discount : 0,
+                        discounted_price : 0,
+                        total : 0,
+                    },{
+                        product:"",
+                        price : 0,
+                        qty : 0,
+                        discount : 0,
+                        discounted_price : 0,
+                        total : 0,
+                    },{
                         product:"",
                         price : 0,
                         qty : 0,
@@ -179,14 +201,14 @@ export default {
     </h1>
 
     <form @submit.prevent="storeInvoice" class="form">
-        <div class="flex items-center justify-end mb-8">
+        <div class="flex items-center justify-end ">
                 <BreezeButton :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
                     <i class="bi bi-save mr-3"></i>
                         Save
                 </BreezeButton>
             </div>
-            <div class=" grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div>
+            <div class="grid grid-cols-1 xl:grid-cols-1 gap-4">
+            <div class="my-3">
             <div class="divider text-xl" id="client">Client</div>
             <client-display
                 :client="clientForm"
@@ -194,7 +216,7 @@ export default {
             />
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="postage">Postage</div>
             <div class="flex items-end justify-end gap-2">
                     <button @click="copyAddress" type="button" class="btn btn-ghost btn-sm" title="Copy Client Details">
@@ -210,14 +232,14 @@ export default {
             />
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="product">Product</div>
             <product-form
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="sales">Sales</div>
                 <sales-form
                     :consultants="$page.props.consultants"

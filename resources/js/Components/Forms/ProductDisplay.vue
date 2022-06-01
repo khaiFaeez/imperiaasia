@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-<div class="overflow-x-auto">
+<div class="overflow-x-auto py-2">
             <table class="table table-compact w-full">
                     <thead>
                         <tr>

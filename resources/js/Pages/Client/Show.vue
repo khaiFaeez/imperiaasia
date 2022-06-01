@@ -58,7 +58,8 @@ export default {
 
                 <td><div class="badge text-white" :class='$invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{$invoice.Status_Inv}}</div></td>
                 <td>{{ $invoice.Inv_No }}</td>
-                <td>{{ $invoice.Date ? moment($invoice.Date).fromNow() : "" }}</td>
+                <!-- <td>{{ $invoice.Date ? moment(moment($invoice.Created_Date).add(8, 'hours')).fromNow() : "" }}</td> -->
+                 <td>{{ $invoice.Date ? moment(moment().subtract($invoice.Aging, 'days')).endOf('day').fromNow() : "" }}</td>
                 <td>{{ $invoice.Date ? moment($invoice.Date).format('DD/MM/YYYY') : "" }}</td>
                 <td><Link :href="route('portfolio.invoice.repeat',{portfolio:route().params.portfolio,invoice_id:$invoice.Id})" v-if="route().current('*.client.*')" class="btn btn-primary btn-sm" v-show="!client.invoices.find(o => o.Status_Inv === 'PENDING')">
                <i class="bi bi-arrow-repeat mr-3"></i>

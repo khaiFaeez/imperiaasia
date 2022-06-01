@@ -31,7 +31,7 @@ class ClientController extends Controller
             ->paginate(20);
 
         $clients->map(function ($query) {
-            $query->invoice = $query->getAllInvoice()->first()->Inv_No;
+            $query->invoice = $query->getAllInvoice()->sortByDesc('Created_Date')->first()->Inv_No;
         });
 
         return Inertia::render('Client/Index', [

@@ -86,7 +86,7 @@ const showingNavigationDropdown = ref(false);
 
                     </aside>
 
-                    <aside class="w-80 bg-neutral text-neutral-content" v-show="route().current('*.invoice.show') || route().current('*.invoice.create') || route().current('*.invoice.repeat')">
+                    <!-- <aside class="w-80 bg-neutral text-neutral-content" v-show="route().current('*.invoice.show') || route().current('*.invoice.create') || route().current('*.invoice.repeat')">
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
                     </ul>
 
@@ -110,7 +110,7 @@ const showingNavigationDropdown = ref(false);
                     </ul>
 
 
-                    </aside>
+                    </aside> -->
                 </div>
             </div>
         </div>

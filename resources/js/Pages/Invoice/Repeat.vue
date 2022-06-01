@@ -35,6 +35,7 @@ export default {
     data() {
         return {
             clientForm:this.$inertia.form({
+                    id:this.invoice.client.id,
                     MyKad_SSM:this.invoice.client.MyKad_SSM,
                     Name:this.invoice.client.Name,
                     Mobile_No:this.invoice.client.Mobile_No,
@@ -87,6 +88,27 @@ export default {
                         discount : this.invoice.Discount_5,
                         discounted_price : 0,
                         total : this.invoice.Total_RM_5,
+                    },{
+                        product:this.invoice.Product_6,
+                        price : this.invoice.Price_6,
+                        qty : this.invoice.Qty_6,
+                        discount : this.invoice.Discount_6,
+                        discounted_price : 0,
+                        total : this.invoice.Total_RM_6,
+                    },{
+                        product:this.invoice.Product_7,
+                        price : this.invoice.Price_7,
+                        qty : this.invoice.Qty_7,
+                        discount : this.invoice.Discount_7,
+                        discounted_price : 0,
+                        total : this.invoice.Total_RM_7,
+                    },{
+                        product:this.invoice.Product_8,
+                        price : this.invoice.Price_8,
+                        qty : this.invoice.Qty_8,
+                        discount : this.invoice.Discount_8,
+                        discounted_price : 0,
+                        total : this.invoice.Total_RM_8,
                     }
                 ]},
                 payment:{
@@ -179,15 +201,15 @@ export default {
     </h1>
 
     <form @submit.prevent="storeInvoice" class="form">
-            <div class="flex items-center justify-end mb-8">
+            <div class="flex items-center justify-end">
                 <BreezeButton :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
                     <i class="bi bi-save mr-3"></i>
                         Save
                 </BreezeButton>
             </div>
 
-            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div>
+            <div class="grid grid-cols-1 xl:grid-cols-1 gap-4">
+            <div class="my-3">
             <div class="divider text-xl" id="client">Client</div>
             <client-display
                 :client="clientForm"
@@ -195,7 +217,7 @@ export default {
             />
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="postage">Postage</div>
             <div class="flex items-end justify-end gap-2">
                     <button @click="copyAddress" type="button" class="btn btn-ghost btn-sm" title="Copy Client Details">
@@ -211,14 +233,14 @@ export default {
             />
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="product">Product</div>
             <product-form
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="sales">Sales</div>
                 <sales-form
                     :consultants="$page.props.consultants"

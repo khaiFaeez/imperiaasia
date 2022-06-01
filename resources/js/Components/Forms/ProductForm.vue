@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-<div class="overflow-x-auto">
+<div class="overflow-x-auto py-2">
             <table class="table table-compact w-full">
                     <thead>
                         <tr>
@@ -34,7 +34,7 @@ export default {
                     </thead>
                     <tbody>
 
-                    <tr class="line_items" v-for="(n, i) in 5" :key="i">
+                    <tr class="line_items" v-for="(n, i) in products.items.length" :key="i">
                         <td class="">{{n}}</td>
                         <td class="p-0">
                             <select class="border-0 p-0 select" v-model="products.items[i].product">

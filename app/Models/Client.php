@@ -55,14 +55,14 @@ class Client extends Model
 
         $first = $portfolios->shift();
 
-        $invoices = DB::table($first . '.Invoice')->leftJoin($first . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->where('Client.MyKad_SSM', $this->MyKad_SSM);
+        $invoices = DB::table($first . '.Invoice')->leftJoin($first . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select('Invoice.*')->where('Client.MyKad_SSM', $this->MyKad_SSM);
 
         if ($invoices->count() > 0) {
             foreach ($portfolios as $portfolio) {
-                $q = DB::table($portfolio . '.Invoice')->leftJoin($portfolio . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->where('Client.MyKad_SSM', $this->MyKad_SSM);
+                $q = DB::table($portfolio . '.Invoice')->leftJoin($portfolio . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select('Invoice.*')->where('Client.MyKad_SSM', $this->MyKad_SSM);
                 $invoices->union($q);
             }
         }
-        return $invoices->get()->sortByDesc('Created_Date');
+        return $invoices->get();
     }
 }

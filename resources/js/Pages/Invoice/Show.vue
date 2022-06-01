@@ -156,7 +156,7 @@ data() {
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
       <span class="text-primary font-medium">/</span> {{invoice.Inv_No}}
     </h1>
-     <div class="flex items-center justify-end mb-8">
+     <div class="flex items-center justify-end">
         <button @click="openPDF(invoice)" class="btn btn-ghost mr-3" title="Print Invoice">
         <i class="bi bi-printer text-xl"></i>
         </button>
@@ -165,15 +165,15 @@ data() {
         </button>
     </div>
 
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div>
+        <div class="grid grid-cols-1 xl:grid-cols-1 gap-4">
+            <div class="my-3">
             <div class="divider text-xl" id="client">Client</div>
               <ClientDisplay
                 :client="invoice.client"
                 :states="$page.props.states"/>
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="postage">Postage</div>
              <PostageDisplay
                 :states="$page.props.states"
@@ -181,14 +181,14 @@ data() {
             />
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="product">Product</div>
               <ProductDisplay
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
             </div>
 
-            <div>
+            <div class="my-3">
             <div class="divider text-xl" id="sales">Sales</div>
                 <SalesDisplay
                 :sales="invoiceForm.sales" />

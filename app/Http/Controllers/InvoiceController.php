@@ -60,8 +60,6 @@ class InvoiceController extends Controller
     {
         Auth::user()->hasPermissionTo('invoice-edit');
 
-
-
         return Inertia::render('Invoice/Repeat', [
             "invoice" => Invoice::with('client')->with('state')->where('Id', $id)->first(),
             "states" => State::get(),
@@ -98,6 +96,16 @@ class InvoiceController extends Controller
         $id = Invoice::create([
             'MyKad_SSM' => $request->client,
             'Name' => $request->client,
+            'Aging' => $this->calculateAging(),
+            'Date' => \Carbon\Carbon::now()->format("Y-m-d"),
+            'Phone' => $request->client,
+            'Off_Phone' => $request->client,
+            'Address' => $request->client,
+            'Address_2' => $request->client,
+            'Poscode' => $request->client,
+            'City' => $request->client,
+            'State' => $request->client,
+            'Country' => $request->client,
             'Ship_Phone' => $request->shipping['Ship_Phone'],
             'Ship_Name' => $request->shipping['Ship_Name'],
             'Ship_Add1' => $request->shipping['Ship_Add1'],
@@ -134,6 +142,8 @@ class InvoiceController extends Controller
             'Promise_pay' => \Carbon\Carbon::now(),
             'Consultant' => $request->sales['consultant'],
             'Channel' => $request->sales['channel'],
+            'Created_By' => Auth::user()->username,
+            'Created_Date' => \Carbon\Carbon::now()
         ]);
 
         return redirect()->route('portfolio.invoice.show', [
@@ -144,8 +154,11 @@ class InvoiceController extends Controller
 
     public function invoice_no_list()
     {
-
-
         return Invoice::select('Id', 'Inv_No')->pluck('Id', 'Inv_No')->toJson();
+    }
+
+    public function calculateAging()
+    {
+        return 0;
     }
 }

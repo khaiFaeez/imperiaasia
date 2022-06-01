@@ -116,7 +116,7 @@ export default {
                 <td><div class="badge text-white" :class='$invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{$invoice.Status_Inv}}</div></td>
                 <td>{{ $invoice.Aging}} Days</td>
                 <td>{{ $invoice.Inv_No }}</td>
-                <td>Date</td>
+                <td>{{ $invoice.Date ? moment($invoice.Date).format('LL') : "" }}</td>
                 <td>{{ $invoice.client.MyKad_SSM }}</td>
                 <td>{{ $invoice.client.Name }}</td>
                 <td>{{ $invoice.Ship_Phone }}</td>
