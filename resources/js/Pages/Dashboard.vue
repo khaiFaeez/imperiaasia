@@ -90,7 +90,7 @@ export default {
 
             <div class="stat">
                 <div class="stat-title">Portfolios</div>
-                <div class="stat-value">{{ Object.keys($page.props.portfolio.list).length}}</div>
+                <div class="stat-value">{{ $page.props.portfolios }}</div>
                 <div class="stat-desc"></div>
             </div>
 

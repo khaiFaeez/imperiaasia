@@ -37,8 +37,6 @@ const showingNavigationDropdown = ref(false);
             <label tabindex="0" class="btn m-1 btn-ghost ">   {{ $page.props.auth.user.name }}</label>
             <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral w-52">
                 <li><Link :href="route('logout')" method="post" as="button"> Log Out</Link ></li>
-                <li><Link :href="route('users.index')"> Manage Users</Link ></li>
-                <li><Link :href="route('roles.index')"> Manage Roles</Link ></li>
             </ul>
         </div>
   </div>

@@ -81,6 +81,22 @@ const showingNavigationDropdown = ref(false);
                             Print Invoices
                         </BreezeResponsiveNavLink>
                     </li>
+
+                     <li>
+                        <BreezeResponsiveNavLink :href="route('users.index')"  :active="route().current('users.*')" >
+                        <i class="bi bi-person text-xl"></i>
+                            Users
+                        </BreezeResponsiveNavLink>
+                    </li>
+
+                    <li>
+                        <BreezeResponsiveNavLink :href="route('roles.index')"  :active="route().current('roles.*')" >
+                         <i class="bi bi-person-lines-fill text-xl"></i>
+                            User Roles
+                        </BreezeResponsiveNavLink>
+                    </li>
+
+
                     </ul>
 
 
