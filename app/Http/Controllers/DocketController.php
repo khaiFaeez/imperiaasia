@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Config;
 
 class DocketController extends Controller
 {
@@ -194,7 +193,7 @@ class DocketController extends Controller
         $this->fpdf->MultiCell(60, 4, '      ' . iconv('UTF-8', 'windows-1252', $row->Ship_City), 0, 'L', 0);
 
         $this->fpdf->SetXY(10 + $this->x3, -26 + $this->y3); //originally -22
-        $this->fpdf->MultiCell(60, 4, '      ' . $row->state->Negeri . ' ' . $row->Ship_Country, 0, 'L', 0);
+        $this->fpdf->MultiCell(60, 4, '      ' . $row->state?->Negeri . ' ' . $row->Ship_Country, 0, 'L', 0);
 
         $this->fpdf->SetXY(10 + $this->x3, -22 + $this->y3); //originally -18
         $this->fpdf->SetFont('Arial', 'B', 10);

@@ -1,12 +1,14 @@
 <script>
 import BreezeInput from '@/Components/Input.vue'
 import BreezeLabel from '@/Components/Label.vue'
+ import Multiselect from '@vueform/multiselect'
 
 export default {
     props:['consultants','sales'],
     components:{
         BreezeInput,
         BreezeLabel,
+        Multiselect
     },
     data() {
         return {
@@ -16,6 +18,9 @@ export default {
     }
 }
 </script>
+
+<style src="@vueform/multiselect/themes/default.css"></style>
+
 <template>
     <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>

@@ -60,7 +60,9 @@ export default {
 <h1 class="mb-8 text-2xl font-bold">
     <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
 </h1>
-<section class="flex flex-row items-center justify-between mb-5">
+
+
+<div class="flex flex-row items-center justify-between">
     <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
       </search-filter>
 
@@ -71,8 +73,8 @@ export default {
         </svg>
        Quick Order
         </Link>
-</section>
-<div class="overflow-auto">
+</div>
+<div class="overflow-auto my-5">
 <table class="table table-compact table-bordered w-full">
 <thead>
  <tr>

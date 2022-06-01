@@ -16,6 +16,6 @@ class State extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->connection = Session::get("portfolio_db");
+        $this->connection = \Auth::user()->current_portfolio()->first()->db_connection;
     }
 }

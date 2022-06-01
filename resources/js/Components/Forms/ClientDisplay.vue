@@ -38,7 +38,8 @@ export default {
         <BreezeLabel value="IC Number / Passport"/>
     </div>
     <div class="md:w-2/3">
-         <Link :href="route('portfolio.client.show',{'client': client.id})" class="text-info hover:underline">{{client.MyKad_SSM}}</Link>
+        <p v-if="route().current('*.client.*')">{{client.MyKad_SSM}}</p>
+        <Link :href="route('portfolio.client.show',{'client': client.id})" class="text-info hover:underline" v-else>{{client.MyKad_SSM}}</Link>
     </div>
   </div>
 

@@ -27,9 +27,9 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'MyKad_SSM' => ['required', 'unique:' . Session::get("portfolio_db") . '.Client', 'digits:12'],
+            'MyKad_SSM' => ['required', 'unique:' . \Auth::user()->current_portfolio()->first()->db_connection . '.Client', 'digits:12'],
             'Name' => 'required',
-            'Mobile_No' => 'required | numeric | unique:' . Session::get("portfolio_db") . '.Client',
+            'Mobile_No' => 'required | numeric | unique:' . \Auth::user()->current_portfolio()->first()->db_connection . '.Client',
             'Phone' => 'required | numeric',
             'Address' => 'required',
             'Address_2' => 'required',

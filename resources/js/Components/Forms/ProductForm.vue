@@ -7,7 +7,7 @@ export default {
     },
     methods:{
          grandTotal () {
-            this.products.grand_total = Number(this.products.items[0].total) + Number(this.products.items[1].total) + Number(this.products.items[2].total) + Number(this.products.items[3].total )+ Number(this.products.items[4].total)
+            this.products.grand_total = this.products.items.reduce((a, b) => +a + +b.total, 0);;//this.products.items.forEach( (e) => Number(this.products.items[0].total) + Number(this.products.items[1].total) + Number(this.products.items[2].total) + Number(this.products.items[3].total )+ Number(this.products.items[4].total)
         },
         total (i) {
             this.products.items[i].discounted_price = ( Number(this.products.items[i].discount) * (Number(this.products.items[i].price) * Number(this.products.items[i].qty)) / 100);

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request as RequestHttp;
@@ -20,36 +18,13 @@ class PrintController extends Controller
 
     public function index()
     {
-        $filter = Request::all();
-
-
-        $from = $filter['from'] ?? '';
-        $to = $filter['to'] ?? '';
-        $limit = $filter['limit'] ?? 10;
-
-        if ($filter) {
-            $invoice = Invoice::with('client')
-                ->with('state')
-                ->orderBy('Id', 'desc')
-                ->when($filter, function ($query, $filter) {
-                    $query->whereBetween('Inv_No', [$filter['from'], $filter['to']]);
-                })
-                ->limit($limit)
-                ->get();
-        } else {
-            $invoice = [];
-        }
-
 
 
         return Inertia::render('Print/Index', [
-            'invoices' => $invoice,
-            'value_help' => Invoice::orderBy('Id', 'desc')->where('Invoice_Status', 0)->orWhere('Docket_Status', 0)->pluck('Inv_No')->toArray(),
-            'limit' => $limit,
-            'from' => $from,
-            'to'   => $to,
+            'invoices' => Invoice::with('client')->with('state')->orderBy('Id', 'desc')->where('Invoice_Status', 0)->orWhere('Docket_Status', 0)->paginate(20),
             'attribute_name' => csrf_token(),
-            'ids' => is_array($invoice) ?  $invoice : $invoice->pluck('Id')
+            'ids' => Request::get('ids'),
+            'selected' => []
 
         ]);
     }

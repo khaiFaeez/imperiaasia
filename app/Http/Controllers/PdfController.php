@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Config;
 
 class PdfController extends Controller
 {

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ClientRequest;
 use Inertia\Inertia;
 use App\Models\Client;
-use Illuminate\Support\Facades\Config;
 use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -51,7 +50,7 @@ class ClientController extends Controller
 
         return Inertia::render('Client/Create', [
             'states' => State::get(),
-            'countries' => ["Malaysia", "Indonesia", "Philippine"]
+            'countries' => config('countries')
         ]);
     }
 

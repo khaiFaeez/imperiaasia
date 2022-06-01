@@ -24,7 +24,7 @@ export default {
                     </thead>
                     <tbody>
 
-                    <tr class="line_items" v-for="(n, i) in 5" :key="i">
+                    <tr class="line_items" v-for="(n, i) in products.items.length" :key="i">
                         <td class="">{{n}}</td>
                         <td class="p-0">
                             {{ products.items[i].product_name }}

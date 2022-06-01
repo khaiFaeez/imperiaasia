@@ -35,7 +35,11 @@ export default {
   </div>
 </div>
 <div class="flex flex-row justify-end mb-5">
-    <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio,client_id:client.id})" v-if="route().current('*.client.*')" class="btn btn-primary" v-show="!client.invoices.find(o => o.Status_Inv === 'PENDING')">
+    <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio,client_id:client.id})"  class="btn btn-primary" v-if="!client.invoices.find(o => o.Status_Inv === 'PENDING')">
+   <i class="bi bi-stars mr-3"></i>
+        New Invoice
+    </Link>
+    <Link class="btn btn-primary btn-disabled" v-else>
    <i class="bi bi-stars mr-3"></i>
         New Invoice
     </Link>
@@ -58,12 +62,20 @@ export default {
 
                 <td><div class="badge text-white" :class='$invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{$invoice.Status_Inv}}</div></td>
                 <td>{{ $invoice.Inv_No }}</td>
-                <!-- <td>{{ $invoice.Date ? moment(moment($invoice.Created_Date).add(8, 'hours')).fromNow() : "" }}</td> -->
                  <td>{{ $invoice.Date ? moment(moment().subtract($invoice.Aging, 'days')).endOf('day').fromNow() : "" }}</td>
                 <td>{{ $invoice.Date ? moment($invoice.Date).format('DD/MM/YYYY') : "" }}</td>
-                <td><Link :href="route('portfolio.invoice.repeat',{portfolio:route().params.portfolio,invoice_id:$invoice.Id})" v-if="route().current('*.client.*')" class="btn btn-primary btn-sm" v-show="!client.invoices.find(o => o.Status_Inv === 'PENDING')">
-               <i class="bi bi-arrow-repeat mr-3"></i>
-                    Quick Order</Link></td>
+                <td v-if="!client.invoices.find(o => o.Status_Inv === 'PENDING')">
+                    <Link :href="route('portfolio.invoice.repeat',{portfolio:route().params.portfolio,invoice_id:$invoice.Id})" class="btn btn-primary btn-sm" >
+                    <i class="bi bi-arrow-repeat mr-3"></i>
+                    Quick Order
+                    </Link>
+                </td>
+                <td v-else>
+                    <Link  class="btn btn-primary btn-sm btn-disabled" >
+                    <i class="bi bi-arrow-repeat mr-3"></i>
+                    Quick Order
+                    </Link>
+                </td>
   </tr>
  </tbody>
 </table>
