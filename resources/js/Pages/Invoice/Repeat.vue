@@ -177,48 +177,54 @@ export default {
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
       <span class="text-primary font-medium">/</span> Quick Order
     </h1>
-    <form @submit.prevent="storeInvoice" class="form">
 
-        <div class="divider text-xl mb-8 " id="client">Client</div>
+    <form @submit.prevent="storeInvoice" class="form">
+            <div class="flex items-center justify-end mb-8">
+                <BreezeButton :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
+                    <i class="bi bi-save mr-3"></i>
+                        Save
+                </BreezeButton>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            <div>
+            <div class="divider text-xl" id="client">Client</div>
             <client-display
                 :client="clientForm"
                 :states="$page.props.states"
             />
-        <div class="divider text-xl mb-8 mt-32 " id="postage">Postage</div>
-            <div class="flex items-end justify-end my-12 gap-2">
+            </div>
+
+            <div>
+            <div class="divider text-xl" id="postage">Postage</div>
+            <div class="flex items-end justify-end gap-2">
                     <button @click="copyAddress" type="button" class="btn btn-ghost btn-sm" title="Copy Client Details">
                    <i class="bi bi-files"></i>
-                   </button>
+                    </button>
 
                     <button @click="clearAddress" type="button" class="btn btn-ghost btn-sm" title="Clear Postage Detail">
-                  <i class="bi bi-eraser-fill"></i>
-                  </button>
+                  <i class="bi bi-eraser-fill"></i></button>
             </div>
             <postage-form
                 :states="$page.props.states"
                 :shipping="invoiceForm.shipping"
             />
+            </div>
 
-
-        <div class="divider text-xl mb-8 mt-32 " id="product">Product</div>
+            <div>
+            <div class="divider text-xl" id="product">Product</div>
             <product-form
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
+            </div>
 
-        <div class="divider text-xl mb-8 mt-32 " id="sales">Sales</div>
-            <sales-form
-                :consultants="$page.props.consultants"
-                :sales="invoiceForm.sales" />
-
-         <div class="my-12 flex justify-end">
-        <breeze-button :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save mr-3" viewBox="0 0 16 16">
-  <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-</svg>
-  Save
-        </breeze-button>
+            <div>
+            <div class="divider text-xl" id="sales">Sales</div>
+                <sales-form
+                    :consultants="$page.props.consultants"
+                    :sales="invoiceForm.sales" />
+            </div>
         </div>
-
     </form>
 </app-layout>
 

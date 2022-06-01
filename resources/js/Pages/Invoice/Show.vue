@@ -156,37 +156,44 @@ data() {
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
       <span class="text-primary font-medium">/</span> {{invoice.Inv_No}}
     </h1>
-    <section class="flex flex-row items-center justify-between mb-5">
-        <div></div>
-        <div>
-    <button @click="openPDF(invoice)" class="btn btn-ghost mr-3" title="Print Invoice">
-    <i class="bi bi-printer"></i>
-    </button>
-    <button @click="openDocket(invoice)" class="btn btn-ghost" title="Print Docket">
-    <i class="bi bi-printer-fill"></i>
-    </button>
+     <div class="flex items-center justify-end mb-8">
+        <button @click="openPDF(invoice)" class="btn btn-ghost mr-3" title="Print Invoice">
+        <i class="bi bi-printer text-xl"></i>
+        </button>
+        <button @click="openDocket(invoice)" class="btn btn-ghost" title="Print Docket">
+        <i class="bi bi-printer-fill text-xl"></i>
+        </button>
     </div>
-</section>
-<span ></span>
-        <div class="divider text-xl" id="client">Client</div>
-            <ClientDisplay
+
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+            <div>
+            <div class="divider text-xl" id="client">Client</div>
+              <ClientDisplay
                 :client="invoice.client"
                 :states="$page.props.states"/>
+            </div>
 
-            <div class="divider text-xl mb-8 mt-32 " id="postage">Postage</div>
-            <PostageDisplay
+            <div>
+            <div class="divider text-xl" id="postage">Postage</div>
+             <PostageDisplay
                 :states="$page.props.states"
                 :shipping="invoiceForm.shipping"
             />
+            </div>
 
-            <div class="divider text-xl mb-8 mt-32 " id="product">Product</div>
-             <ProductDisplay
+            <div>
+            <div class="divider text-xl" id="product">Product</div>
+              <ProductDisplay
                 :products="invoiceForm.products"
                 :productLists="$page.props.products" />
+            </div>
 
-            <div class="divider text-xl mb-8 mt-32" id="sales">Sales</div>
-            <SalesDisplay
+            <div>
+            <div class="divider text-xl" id="sales">Sales</div>
+                <SalesDisplay
                 :sales="invoiceForm.sales" />
+            </div>
+        </div>
 </AppLayout>
 
 </template>
