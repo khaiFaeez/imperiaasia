@@ -33,10 +33,12 @@
         "@vueform/multiselect": "^2.3.4",
         "axios": "^0.26.1",
         "bootstrap-icons": "^1.8.3",
+        "chart.js": "^3.8.0",
         "daisyui": "^2.15.0",
         "inertia-table": "^1.0.8",
         "moment": "^2.29.3",
         "vue-axios": "^3.4.1",
+        "vue-chartjs": "^4.1.1",
         "vue-scrollto": "^2.20.0",
         "vue3-treeselect": "^0.1.10"
     }
