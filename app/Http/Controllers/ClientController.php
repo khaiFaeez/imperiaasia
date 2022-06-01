@@ -6,7 +6,6 @@ use App\Http\Requests\ClientRequest;
 use Inertia\Inertia;
 use App\Models\Client;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Route;
 use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -30,9 +29,11 @@ class ClientController extends Controller
                 $query->where('MyKad_SSM', 'LIKE', '%' . $filter . '%');
             })
             ->paginate(20);
+
         $clients->map(function ($query) {
-            $query->invoice = $query->getLastInvoice($query);
+            $query->invoice = $query->getAllInvoice()->first()->Inv_No;
         });
+
         return Inertia::render('Client/Index', [
             'clients' => $clients,
             'filters' => Request::all('search', 'trashed'),
@@ -66,6 +67,8 @@ class ClientController extends Controller
 
         $id = Client::create($request->validated());
 
+
+
         return redirect()->route('portfolio.client.show', [
             "client" => $id->id
         ])
@@ -80,11 +83,12 @@ class ClientController extends Controller
      */
     public function show($portfolio, $id)
     {
-
+        $client = Client::with('state')->where('id', $id)->first();
+        $client->invoices = $client->getAllInvoice();
         return Inertia::render('Client/Show', [
-            'client' => Client::with('state')->where('id', $id)->with('invoices')->with('invoices.product')->first(),
+            'client' => $client,
             'states' => State::get(),
-            'countries' => ["Malaysia", "Indonesia", "Philippine"]
+            'countries' => config('countries')
         ]);
     }
 

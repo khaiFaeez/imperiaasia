@@ -68,15 +68,19 @@ export default {
                 <span class="text-primary font-medium">/</span> Create
             </h1>
 
-            <div class="flex items-center justify-end my-3">
-                <BreezeButton class="btn-sm" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </BreezeButton>
-            </div>
+
 
         <form @submit.prevent="storeUser" class="form">
                 <user-form :user="form" :options="options"></user-form>
+
+                <div class="flex items-center justify-end my-12">
+                <BreezeButton  :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                 <i class="bi bi-save"></i>
+                    Register
+                </BreezeButton>
+        </div>
         </form>
+
 </AppLayout>
 
 </template>

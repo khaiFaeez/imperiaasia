@@ -139,9 +139,6 @@ export default {
                     preserveScroll: true,
                      onFinish: () => {
                         this.showUpdateForm = false;
-                        this.$toast.success(this.$page.props.flash.message, {
-                            position: 'top'
-                        });
                     },
                 });
             },
@@ -189,11 +186,11 @@ export default {
 
         <div class="divider text-xl mb-8 mt-32 " id="postage">Postage</div>
             <div class="flex items-end justify-end my-12 gap-2">
-                    <button @click="copyAddress" type="button" class="btn btn-info btn-sm" title="Copy Client Details">
+                    <button @click="copyAddress" type="button" class="btn btn-ghost btn-sm" title="Copy Client Details">
                    <i class="bi bi-files"></i>
 </button>
 
-                    <button @click="clearAddress" type="button" class="btn btn-error btn-sm" title="Clear Postage Detail">
+                    <button @click="clearAddress" type="button" class="btn btn-ghost btn-sm" title="Clear Postage Detail">
                   <i class="bi bi-eraser-fill"></i></button>
             </div>
             <postage-form

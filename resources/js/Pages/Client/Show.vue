@@ -28,47 +28,40 @@ export default {
       <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
       <span class="text-primary font-medium">/</span> {{client.Name}}
     </h1>
-<section class="flex flex-row items-center justify-between mb-5">
-    <div></div>
-    <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio,client_id:client.id})" v-if="route().current('*.client.*')" class="btn btn-primary">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-    </svg>
+<div class="alert alert-error shadow-lg mb-5" v-show="client.invoices.find(o => o.Status_Inv === 'PENDING')">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+    <span>This client have pending invoice</span>
+  </div>
+</div>
+<div class="flex flex-row justify-end mb-5">
+    <Link :href="route('portfolio.invoice.create',{portfolio:route().params.portfolio,client_id:client.id})" v-if="route().current('*.client.*')" class="btn btn-primary" v-show="!client.invoices.find(o => o.Status_Inv === 'PENDING')">
+   <i class="bi bi-stars mr-3"></i>
         New Invoice
     </Link>
-
-
-</section>
-            <ClientDisplay  :client="client" :states="$page.props.states"/>
+</div>
+            <ClientDisplay class="mb-12" :client="client" :states="$page.props.states"/>
 
            <table class="table table-compact table-bordered w-full">
 <thead>
  <tr>
     <th>Status</th>
     <th>Inv No</th>
-
-    <th>Product</th>
-    <th>U/Price</th>
-    <th>Qty</th>
-    <th>Total</th>
+    <th>Aging</th>
+    <th>Date</th>
     <th></th>
  </tr>
  </thead>
  <tbody>
-  <tr class="hover hover:cursor-pointer" v-for="$invoice in $page.props.client.invoices" :key="$invoice.Id" @click="goToViewPage($invoice)">
+  <tr  v-for="$invoice in $page.props.client.invoices" :key="$invoice.Id" >
 
 
                 <td><div class="badge text-white" :class='$invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{$invoice.Status_Inv}}</div></td>
                 <td>{{ $invoice.Inv_No }}</td>
-
-                <td>{{ $invoice.product?.Product_Name}}</td>
-                <td>{{ $invoice.Price }}</td>
-                <td>{{ $invoice.Qty }}</td>
-                <td>{{ $invoice.Total_RM }}</td>
-                <td><Link :href="route('portfolio.invoice.repeat',{portfolio:route().params.portfolio,invoice_id:$invoice.Id})" v-if="route().current('*.client.*')" class="btn btn-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                    </svg>
+                <td>{{ $invoice.Date ? moment($invoice.Date).fromNow() : "" }}</td>
+                <td>{{ $invoice.Date ? moment($invoice.Date).format('DD/MM/YYYY') : "" }}</td>
+                <td><Link :href="route('portfolio.invoice.repeat',{portfolio:route().params.portfolio,invoice_id:$invoice.Id})" v-if="route().current('*.client.*')" class="btn btn-primary btn-sm" v-show="!client.invoices.find(o => o.Status_Inv === 'PENDING')">
+               <i class="bi bi-arrow-repeat mr-3"></i>
                     Quick Order</Link></td>
   </tr>
  </tbody>

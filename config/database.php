@@ -103,7 +103,7 @@ return [
             ]) : [],
         ],
 
-        'dresella' => [
+        'platinum2' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL_PLATI2'),
             'host' => env('DB_HOST_PLATI', '127.0.0.1'),

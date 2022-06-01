@@ -33,7 +33,7 @@ export default {
 </script>
 <template>
 
-<div class="w-full">
+<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
   <div class="md:flex md:items-center mb-3">
     <div class="md:w-1/3">
         <BreezeLabel value="Shipping Name"/>

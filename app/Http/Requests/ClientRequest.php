@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Session;
 
 class ClientRequest extends FormRequest
 {
@@ -16,6 +17,8 @@ class ClientRequest extends FormRequest
         return true;
     }
 
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,9 +27,10 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'MyKad_SSM' => 'required | digits:12 ',
+            'MyKad_SSM' => ['required', 'unique:' . Session::get("portfolio_db") . '.Client', 'digits:12'],
             'Name' => 'required',
-            'Mobile_No' => 'required | numeric',
+            'Mobile_No' => 'required | numeric | unique:' . Session::get("portfolio_db") . '.Client',
+            'Phone' => 'required | numeric',
             'Address' => 'required',
             'Address_2' => 'required',
             'Poscode' => 'required',

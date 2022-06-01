@@ -75,23 +75,35 @@ export default {
 <template>
 <Head title="Edit User" />
 <AppLayout>
+    <div class="max-w-7xl">
             <h1 class="mb-8 text-2xl font-bold">
                 <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
                 <span class="text-primary font-medium">/</span> Edit
             </h1>
 
-            <div class="flex items-center justify-end my-3">
-                <BreezeButton class="ml-4 btn-sm" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save mr-3" viewBox="0 0 16 16">
-                 <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
-                </svg>
+
+
+
+        <form @submit.prevent="updateUser($page.props.user.id)" class="form mb-12">
+            <user-form :user="form" :options="options" ></user-form>
+
+              <div class="flex items-center justify-end my-12">
+                <button class="btn btn-ghost mr-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <i class="bi bi-trash3 mr-3"></i>
+                    Delete
+                </button>
+
+                <BreezeButton  :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <i class="bi bi-save mr-3"></i>
                     Save
                 </BreezeButton>
+
+
+
+
             </div>
-
-
-        <form @submit.prevent="updateUser($page.props.user.id)" class="form">
-            <user-form :user="form" :options="options" ></user-form>
         </form>
+
+    </div>
 </AppLayout>
 </template>

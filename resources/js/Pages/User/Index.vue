@@ -27,8 +27,12 @@ export default {
 <Head title="User List" />
 <AppLayout>
 
+        <h1 class="mb-8 text-2xl font-bold">
+                <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
+        </h1>
+
         <div class="flex items-end justify-end mb-3">
-                <Link class="btn btn-neutral" :href="route('users.create')"> Create New User</Link>
+                <Link class="btn btn-primary" :href="route('users.create')"><i class="bi bi-person-plus-fill mr-3"></i> Create New User</Link>
         </div>
 
 

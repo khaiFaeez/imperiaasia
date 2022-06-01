@@ -44,7 +44,7 @@ class PrintController extends Controller
 
         return Inertia::render('Print/Index', [
             'invoices' => $invoice,
-            'value_help' => Invoice::orderBy('Id', 'desc')->limit(1000)->pluck('Inv_No')->toArray(),
+            'value_help' => Invoice::orderBy('Id', 'desc')->where('Invoice_Status', 0)->orWhere('Docket_Status', 0)->pluck('Inv_No')->toArray(),
             'limit' => $limit,
             'from' => $from,
             'to'   => $to,

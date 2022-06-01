@@ -32,7 +32,7 @@ export default {
     </div>
     <div class="md:w-2/3">
                 <BreezeInput id="username" type="text" v-model="user.username" required autocomplete="username" />
-                <BreezeInputError :message="user.errors.username" />
+                <BreezeInputError :message="$page.props.errors.username" />
     </div>
   </div>
 
@@ -43,7 +43,7 @@ export default {
     </div>
     <div class="md:w-2/3">
                 <BreezeInput id="name" type="text" v-model="user.name" required autocomplete="name" />
-                <BreezeInputError :message="user.errors.name" />
+                <BreezeInputError :message="$page.props.errors.name" />
     </div>
   </div>
 
@@ -54,7 +54,7 @@ export default {
     </div>
     <div class="md:w-2/3">
                 <BreezeInput id="staff_id" type="text" v-model="user.staff_id" required autocomplete="staff_id" />
-                <BreezeInputError :message="user.errors.staff_id" />
+                <BreezeInputError :message="$page.props.errors.staff_id" />
     </div>
   </div>
 
@@ -84,7 +84,7 @@ export default {
     </div>
     <div class="md:w-2/3">
                 <treeselect v-model="user.roles" :multiple="true" :options="options" />
-                <BreezeInputError :message="user.errors.Country" />
+                <BreezeInputError :message="$page.props.errors.Country" />
     </div>
   </div>
 

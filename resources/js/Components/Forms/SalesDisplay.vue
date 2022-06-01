@@ -33,7 +33,7 @@ export default {
 }
 </script>
 <template>
-    <div class="grid grid-cols-1 gap-5">
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                         <BreezeLabel value="Sales Person" />
                           <p>{{sales.consultant}}</p>

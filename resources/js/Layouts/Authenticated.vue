@@ -15,6 +15,11 @@ const showingNavigationDropdown = ref(false);
                     <p>{{ $page.props.flash.message }}</p>
                 </div>
         </div>
+        <!-- <div class="absolute bottom-5 inset-x-0 max-w-xl z-20" v-if="$page.props.errors" x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
+                <div class="alert alert-error text-white">
+                    <p>{{ $page.props.errors }}</p>
+                </div>
+        </div> -->
         <div class="min-h-screen relative">
 
 
@@ -23,7 +28,7 @@ const showingNavigationDropdown = ref(false);
                 <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
                 <div class="drawer-content flex flex-col">
                                 <!-- Page content here -->         <Navigation/>
-                                <main class="py-6 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto">
+                                <main class="py-6 px-4 sm:px-6 lg:px-8 w-full">
                                     <slot />
                                 </main>
                 </div>

@@ -49,8 +49,20 @@ class Client extends Model
         return $this->hasMany(Invoice::class, 'MyKad_SSM', 'id');
     }
 
-    public function getLastInvoice(Client $client)
+    public function getAllInvoice()
     {
-        return DB::connection("platinum")->table("Invoice")->where("MyKad_SSM", $client->id)->orderBy('id', 'desc')->pluck('Inv_No')->first();
+        $portfolios = Portfolio::pluck('db_connection');
+
+        $first = $portfolios->shift();
+
+        $invoices = DB::table($first . '.Invoice')->leftJoin($first . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->where('Client.MyKad_SSM', $this->MyKad_SSM);
+
+        if ($invoices->count() > 0) {
+            foreach ($portfolios as $portfolio) {
+                $q = DB::table($portfolio . '.Invoice')->leftJoin($portfolio . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->where('Client.MyKad_SSM', $this->MyKad_SSM);
+                $invoices->union($q);
+            }
+        }
+        return $invoices->get()->sortByDesc('Created_Date');
     }
 }
