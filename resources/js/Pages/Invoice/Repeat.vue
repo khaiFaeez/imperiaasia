@@ -195,7 +195,7 @@ export default {
 <template>
 <Head title="Quick Order" />
 <app-layout>
-     <h1 class="mb-8 text-2xl font-bold">
+     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
       <span class="text-primary font-medium">/</span> Quick Order
     </h1>

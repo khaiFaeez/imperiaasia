@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Session;
 
 class ClientRequest extends FormRequest
 {
@@ -27,7 +26,7 @@ class ClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'MyKad_SSM' => ['required', 'unique:' . \Auth::user()->current_portfolio()->first()->db_connection . '.Client', 'digits:12'],
+            'MyKad_SSM' => ['required', 'unique:' . \Auth::user()->current_portfolio()->first()->db_connection . '.Client'],
             'Name' => 'required',
             'Mobile_No' => 'required | numeric | unique:' . \Auth::user()->current_portfolio()->first()->db_connection . '.Client',
             'Phone' => 'required | numeric',

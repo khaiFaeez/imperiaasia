@@ -190,6 +190,7 @@ class InvoiceController extends Controller
     public function update(InvoiceRequest $request, $portfolio, $id)
     {
         Invoice::where('Id', $id)->update([
+            'Status_Inv' => $request->Status_Inv,
             'Ship_Phone' => $request->shipping['Ship_Phone'],
             'Ship_Name' => $request->shipping['Ship_Name'],
             'Ship_Add1' => $request->shipping['Ship_Add1'],

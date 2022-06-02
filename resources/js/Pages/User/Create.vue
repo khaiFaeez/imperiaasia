@@ -63,7 +63,7 @@ export default {
 <template>
 <Head title="Create User" />
 <AppLayout>
-            <h1 class="mb-8 text-2xl font-bold">
+            <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
                 <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
                 <span class="text-primary font-medium">/</span> Create
             </h1>

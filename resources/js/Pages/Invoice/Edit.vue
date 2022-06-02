@@ -49,6 +49,7 @@ export default {
                     Country:this.invoice.client.Country
             }),
             invoiceForm: this.$inertia.form({
+                Status_Inv:this.invoice.Status_Inv,
                 client:this.invoice.client.id,
                 products:{
                 grand_total:this.invoice.Grand_Total,
@@ -152,40 +153,37 @@ export default {
         goToViewPage(data) {
             window.open(route('portfolio.invoice.show',{'invoice': data.Id}), '_self');
         },
-        storeInvoice(){
-            this.invoiceForm.put(route('portfolio.invoice.update',{'invoice':this.invoice.Id}));
+        updateInvoice(){
+            this.invoiceForm.put(route('portfolio.invoice.update',{'invoice':this.invoice.Id}),{
+                    errorBag: 'updateInvoice',
+                    preserveScroll: true,
+            });
         },
+        copyAddress(){
+            this.invoiceForm.shipping.Ship_Name =  this.clientForm.Name
+            this.invoiceForm.shipping.Ship_Phone =  this.clientForm.Mobile_No
+            this.invoiceForm.shipping.Ship_Add1 =  this.clientForm.Address
+            this.invoiceForm.shipping.Ship_Add2 =  this.clientForm.Address_2
+            this.invoiceForm.shipping.Ship_poscode =  this.clientForm.Poscode
+            this.invoiceForm.shipping.Ship_City =  this.clientForm.City
+            this.invoiceForm.shipping.Ship_State =  this.clientForm.State
+            this.invoiceForm.shipping.Ship_Country =  this.clientForm.Country
 
-        // updateClient() {
-        //         this.form.put(route('portfolio.client.update'),{
-        //             errorBag: 'storeClient',
-        //             preserveScroll: true,
-        //              onFinish: () => {
-        //                 this.showUpdateForm = false;
-        //             },
-        //         });
-        //     },
-
-            copyAddress(){
-                this.invoiceForm.shipping.Ship_Name =  this.clientForm.Name
-                this.invoiceForm.shipping.Ship_Phone =  this.clientForm.Mobile_No
-                this.invoiceForm.shipping.Ship_Add1 =  this.clientForm.Address
-                this.invoiceForm.shipping.Ship_Add2 =  this.clientForm.Address_2
-                this.invoiceForm.shipping.Ship_poscode =  this.clientForm.Poscode
-                this.invoiceForm.shipping.Ship_City =  this.clientForm.City
-                this.invoiceForm.shipping.Ship_State =  this.clientForm.State
-                this.invoiceForm.shipping.Ship_Country =  this.clientForm.Country
-            },
-             clearAddress(){
-                this.invoiceForm.shipping.Ship_Name =  ""
-                this.invoiceForm.shipping.Ship_Phone =  ""
-                this.invoiceForm.shipping.Ship_Add1 =  ""
-                this.invoiceForm.shipping.Ship_Add2 =  ""
-                this.invoiceForm.shipping.Ship_poscode =  ""
-                this.invoiceForm.shipping.Ship_City =  ""
-                this.invoiceForm.shipping.Ship_State =  ""
-                this.invoiceForm.shipping.Ship_Country =  ""
-            }
+            this.$page.props.errors.updateInvoice = {};
+        },
+        clearAddress(){
+            this.invoiceForm.shipping.Ship_Name =  ""
+            this.invoiceForm.shipping.Ship_Phone =  ""
+            this.invoiceForm.shipping.Ship_Add1 =  ""
+            this.invoiceForm.shipping.Ship_Add2 =  ""
+            this.invoiceForm.shipping.Ship_poscode =  ""
+            this.invoiceForm.shipping.Ship_City =  ""
+            this.invoiceForm.shipping.Ship_State =  ""
+            this.invoiceForm.shipping.Ship_Country =  ""
+        },
+        updatePayment(){
+            this.invoiceForm.Status_Inv = "PAID"
+        }
     },
 
 }
@@ -193,19 +191,19 @@ export default {
 </script>
 
 <template>
-<Head title="Quick Order" />
+<Head title="Edit Invoice" />
 <app-layout>
-     <h1 class="mb-8 text-2xl font-bold">
+     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-      <span class="text-primary font-medium">/</span> Edit
+      <span class="text-primary font-medium">/</span> Edit {{invoice.Inv_No}} <span class="badge text-white" :class='invoiceForm.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoiceForm.Status_Inv}}</span>
     </h1>
 
-    <form @submit.prevent="storeInvoice" class="form">
+    <form @submit.prevent="updateInvoice" class="form">
             <div class="flex items-center justify-end">
-                <BreezeButton :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing">
-                    <i class="bi bi-save mr-3"></i>
-                        Save
-                </BreezeButton>
+                <p class="hover:underline hover:text-primary hover:cursor-pointer" v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">Update Payment</p>
+                <button class="btn btn-ghost" :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing" title="save">
+                    <i class="bi bi-save text-xl"></i>
+                </button>
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-1 gap-4">

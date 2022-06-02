@@ -176,9 +176,9 @@ data() {
 <template>
 <Head title="Create Invoice" />
 <AppLayout>
-     <h1 class="mb-8 text-2xl font-bold">
+     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center">
       <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-      <span class="text-primary font-medium">/</span> {{invoice.Inv_No}}
+      <span class="text-primary font-medium">/</span>View {{invoice.Inv_No}} <span class="badge text-white" :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoice.Status_Inv}}</span>
     </h1>
      <div class="flex items-center justify-end">
         <button @click="openPDF(invoice)" class="btn btn-ghost mr-3" title="Print Invoice">

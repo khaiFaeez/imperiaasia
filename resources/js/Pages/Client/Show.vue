@@ -24,7 +24,7 @@ export default {
 <template>
 <Head title="View Client" />
 <AppLayout>
-     <h1 class="mb-8 text-2xl font-bold">
+     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
       <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
       <span class="text-primary font-medium">/</span> {{client.Name}}
     </h1>
