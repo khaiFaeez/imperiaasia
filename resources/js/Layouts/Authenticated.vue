@@ -10,41 +10,29 @@ const showingNavigationDropdown = ref(false);
 
 <template>
     <div>
-        <div class="absolute bottom-5 inset-x-0 max-w-xl z-20" v-if="$page.props.flash.message" x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
+        <div class="absolute bottom-5 inset-x-0 max-w-xl z-20" v-if="$page.props.flash.message" x-data="{show: true}" x-init="setTimeout(() => show = false, 5000)" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
                 <div class="alert alert-success text-white">
                     <p>{{ $page.props.flash.message }}</p>
                 </div>
         </div>
-        <!-- <div class="absolute bottom-5 inset-x-0 max-w-xl z-20" v-if="$page.props.errors" x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-transition:enter="transition ease-out duration-500" x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
-                <div class="alert alert-error text-white">
-                    <p>{{ $page.props.errors }}</p>
-                </div>
-        </div> -->
         <div class="min-h-screen relative">
-
-
-
             <div class="drawer drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" class="drawer-toggle">
                 <div class="drawer-content flex flex-col">
-                                <!-- Page content here -->         <Navigation/>
+                                <!-- Page content here -->
+                                <Navigation/>
                                 <main class="py-6 px-4 sm:px-6 lg:px-8 w-full">
                                     <slot />
                                 </main>
                 </div>
-                <div class="drawer-side" >
+                <div class="drawer-side bg-neutral text-neutral-content overflow-y-visible" >
                     <label for="my-drawer-2" class="drawer-overlay"></label>
-                    <aside class="w-80 bg-neutral text-neutral-content">
-                    <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
-                    </ul>
-
+                    <ul class="menu menu-compact w-80 p-0 px-4 overflow-y-auto" >
                     <div class="h-20 flex items-center justify-center">
                     <Link :href="route('portfolio.dashboard')">
                         <BreezeApplicationLogo class="block w-auto px-4" />
                     </Link>
                     </div>
-
-                    <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
                     <!-- Sidebar content here -->
                     <li>
                         <BreezeResponsiveNavLink :href="route('portfolio.dashboard')"  :active="route().current('*.dashboard')">
@@ -82,7 +70,22 @@ const showingNavigationDropdown = ref(false);
                         </BreezeResponsiveNavLink>
                     </li>
 
-                     <li>
+                    <!-- tabindex will make the parent menu focusable to keep the submenu open if it's focused -->
+                    <!-- <li tabindex="0" class="relative">
+                        <span>  <i class="bi bi-person text-xl"></i> Admin</span>
+                        <ul class="rounded-box p-2 absolute w-12">
+                        <Link :href="route('users.index')"  :active="route().current('users.*')" >
+                        <i class="bi bi-person text-xl"></i>
+                            Users
+                        </Link>
+                        <Link :href="route('roles.index')"  :active="route().current('roles.*')" >
+                         <i class="bi bi-person-lines-fill text-xl"></i>
+                            User Roles
+                        </Link>
+                        </ul>
+                    </li> -->
+
+                    <li>
                         <BreezeResponsiveNavLink :href="route('users.index')"  :active="route().current('users.*')" >
                         <i class="bi bi-person text-xl"></i>
                             Users
@@ -90,7 +93,7 @@ const showingNavigationDropdown = ref(false);
                     </li>
 
                     <li>
-                        <BreezeResponsiveNavLink :href="route('roles.index')"  :active="route().current('roles.*')" >
+                         <BreezeResponsiveNavLink :href="route('roles.index')"  :active="route().current('roles.*')" >
                          <i class="bi bi-person-lines-fill text-xl"></i>
                             User Roles
                         </BreezeResponsiveNavLink>
@@ -100,7 +103,7 @@ const showingNavigationDropdown = ref(false);
                     </ul>
 
 
-                    </aside>
+
 
                     <!-- <aside class="w-80 bg-neutral text-neutral-content" v-show="route().current('*.invoice.show') || route().current('*.invoice.create') || route().current('*.invoice.repeat')">
                     <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >

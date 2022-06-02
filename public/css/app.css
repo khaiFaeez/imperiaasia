@@ -2493,6 +2493,9 @@ body[dir="rtl"] .checkbox:checked,
   background-color: hsl(var(--bc) / var(--tw-bg-opacity));
   --tw-bg-opacity: 0.2;
 }
+.rounded-box {
+  border-radius: var(--rounded-box, 1rem);
+}
 .glass,
   .glass:hover,
   .glass.btn-active {
@@ -2989,6 +2992,9 @@ body[dir="rtl"] .checkbox:checked,
 .w-52 {
   width: 13rem;
 }
+.w-12 {
+  width: 3rem;
+}
 .min-w-full {
   min-width: 100%;
 }
@@ -3184,11 +3190,17 @@ body[dir="rtl"] .checkbox:checked,
 .overflow-hidden {
   overflow: hidden;
 }
+.overflow-visible {
+  overflow: visible;
+}
 .overflow-x-auto {
   overflow-x: auto;
 }
 .overflow-y-auto {
   overflow-y: auto;
+}
+.overflow-y-visible {
+  overflow-y: visible;
 }
 .overflow-y-scroll {
   overflow-y: scroll;
