@@ -59,8 +59,10 @@ class Client extends Model
 
         if ($portfolios->count() > 0) {
             foreach ($portfolios as $portfolio) {
-                $q = DB::table(config('database.connections.' . $portfolio . '.database') . '.Invoice')->leftJoin(config('database.connections.' . $portfolio . '.database') . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select('Invoice.*')->where('Client.MyKad_SSM', $this->MyKad_SSM);
-                $invoices->union($q);
+                if ($portfolio) {
+                    $q = DB::table(config('database.connections.' . $portfolio . '.database') . '.Invoice')->leftJoin(config('database.connections.' . $portfolio . '.database') . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select('Invoice.*')->where('Client.MyKad_SSM', $this->MyKad_SSM);
+                    $invoices->union($q);
+                }
             }
         }
         return $invoices->get();
