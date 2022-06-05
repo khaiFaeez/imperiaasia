@@ -36,7 +36,6 @@ export default {
     methods: {
         storeClient() {
                 this.form.post(route('portfolio.client.store'),{
-                    // errorBag: 'storeClient',
                     preserveScroll: true,
                      onFinish: () => {
                         this.showUpdateForm = false;
@@ -66,7 +65,7 @@ export default {
 
         <form @submit.prevent="storeClient" class="form">
             <div class="flex items-center justify-end mb-8">
-                <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton :class="{ 'loading': form.processing }" :disabled="form.processing">
                     <i class="bi bi-save mr-3"></i>
                         Save
                 </BreezeButton>

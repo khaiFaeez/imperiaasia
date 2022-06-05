@@ -88,12 +88,12 @@ export default {
             <user-form :user="form" :options="options" ></user-form>
 
               <div class="flex items-center justify-end my-12">
-                <button class="btn btn-ghost mr-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <button class="btn btn-ghost mr-3" :class="{ 'loading': form.processing }" :disabled="form.processing">
                 <i class="bi bi-trash3 mr-3"></i>
                     Delete
                 </button>
 
-                <BreezeButton  :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton  :class="{ 'loading': form.processing }" :disabled="form.processing">
                 <i class="bi bi-save mr-3"></i>
                     Save
                 </BreezeButton>

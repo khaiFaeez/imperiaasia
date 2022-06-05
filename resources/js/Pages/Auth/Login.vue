@@ -58,7 +58,7 @@ const submit = () => {
                     Forgot your password?
                 </Link>
 
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton class="ml-4" :class="{ 'loading': form.processing }" :disabled="form.processing">
                     Log in
                 </BreezeButton>
             </div>

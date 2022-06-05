@@ -30,6 +30,7 @@ class ClientRequest extends FormRequest
             'Name' => 'required',
             'Mobile_No' => 'required | numeric | unique:' . \Auth::user()->current_portfolio()->first()->db_connection . '.Client',
             'Phone' => 'required | numeric',
+            'Off_Phone' => 'numeric',
             'Address' => 'required',
             'Address_2' => 'required',
             'Poscode' => 'required',

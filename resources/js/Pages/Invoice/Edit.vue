@@ -1,16 +1,12 @@
 <script>
 import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
-import BreezeButton from '@/Components/Button.vue'
-import BreezeLabel from '@/Components/Label.vue'
-import BreezeInput from '@/Components/Input.vue'
-import BreezeInputError from  '@/Components/InputError.vue'
-import ClientForm from '@/Components/Forms/ClientForm.vue'
 import ProductForm from '@/Components/Forms/ProductForm.vue'
 import SalesForm from '@/Components/Forms/SalesForm.vue'
 import PaymentForm from '@/Components/Forms/PaymentForm.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import PostageForm from '@/Components/Forms/PostageForm.vue'
+import BreezeButton from '@/Components/Button.vue'
 
 
 export default {
@@ -19,18 +15,14 @@ export default {
     ],
     components:{
     AppLayout,
-    BreezeLabel,
-    BreezeButton,
-    BreezeInput,
-    BreezeInputError,
     Link,
     Head,
-    ClientForm,
     ClientDisplay,
     ProductForm,
     SalesForm,
     PaymentForm,
-    PostageForm
+    PostageForm,
+    BreezeButton
 },
     data() {
         return {
@@ -113,20 +105,20 @@ export default {
                     }
                 ]},
                 payment:{
-                    total_settlement:"",
+                    total_settlement:0,
                     items:[
                     {
-                        ptp:"",
-                        settlement:""
+                        ptp:this.invoice.Promise_pay,
+                        settlement:this.invoice.Payment1
                     }, {
-                        ptp:"",
-                        settlement:""
+                        ptp:this.invoice.Promise_pay2,
+                        settlement:this.invoice.Payment2
                     }, {
-                        ptp:"",
-                        settlement:""
+                        ptp:this.invoice.Promise_pay3,
+                        settlement:this.invoice.Payment3
                     }, {
-                        ptp:"",
-                        settlement:""
+                        ptp:this.invoice.Promise_pay4,
+                        settlement:this.invoice.Payment4
                     }
 
                 ]},
@@ -243,6 +235,12 @@ export default {
                 <sales-form
                     :consultants="$page.props.consultants"
                     :sales="invoiceForm.sales" />
+            </div>
+
+            <div class="my-3">
+            <div class="divider text-xl" id="sales">Payment</div>
+                <payment-form
+                    :payment="invoiceForm.payment" />
             </div>
         </div>
     </form>

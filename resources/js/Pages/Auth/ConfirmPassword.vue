@@ -34,7 +34,7 @@ const submit = () => {
             </div>
 
             <div class="flex justify-end mt-4">
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton class="ml-4" :class="{ 'loading': form.processing }" :disabled="form.processing">
                     Confirm
                 </BreezeButton>
             </div>

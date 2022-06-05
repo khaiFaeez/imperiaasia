@@ -74,7 +74,7 @@ export default {
                 <user-form :user="form" :options="options"></user-form>
 
                 <div class="flex items-center justify-end my-12">
-                <BreezeButton  :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton  :class="{ 'loading': form.processing }" :disabled="form.processing">
                  <i class="bi bi-save"></i>
                     Register
                 </BreezeButton>

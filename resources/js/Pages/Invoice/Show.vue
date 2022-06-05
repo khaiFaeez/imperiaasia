@@ -1,16 +1,13 @@
 <script>
 import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
-import BreezeButton from '@/Components/Button.vue'
-import BreezeLabel from '@/Components/Label.vue'
-import BreezeInput from '@/Components/Input.vue'
-import BreezeInputError from  '@/Components/InputError.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import SalesForm from '@/Components/Forms/SalesForm.vue'
 import PaymentForm from '@/Components/Forms/PaymentForm.vue'
 import ProductDisplay from '@/Components/Forms/ProductDisplay.vue';
 import PostageDisplay from '@/Components/Forms/PostageDisplay.vue';
 import SalesDisplay from '@/Components/Forms/SalesDisplay.vue';
+import PaymentDisplay from '@/Components/Forms/PaymentDisplay.vue';
 
 
 export default {
@@ -22,10 +19,6 @@ export default {
     },
     components:{
     AppLayout,
-    BreezeLabel,
-    BreezeButton,
-    BreezeInput,
-    BreezeInputError,
     Link,
     Head,
     ClientDisplay,
@@ -33,7 +26,8 @@ export default {
     SalesForm,
     PaymentForm,
     PostageDisplay,
-    SalesDisplay
+    SalesDisplay,
+    PaymentDisplay
 },
 data() {
         return {
@@ -125,17 +119,17 @@ data() {
                     total_settlement:"",
                     items:[
                     {
-                        ptp:"",
-                        settlement:""
+                        ptp:this.invoice.Promise_pay,
+                        settlement:this.invoice.Payment1
                     }, {
-                        ptp:"",
-                        settlement:""
+                        ptp:this.invoice.Promise_pay2,
+                        settlement:this.invoice.Payment2
                     }, {
-                        ptp:"",
-                        settlement:""
+                        ptp:this.invoice.Promise_pay3,
+                        settlement:this.invoice.Payment3
                     }, {
-                        ptp:"",
-                        settlement:""
+                        ptp:this.invoice.Promise_pay4,
+                        settlement:this.invoice.Payment4
                     }
 
                 ]},
@@ -216,6 +210,12 @@ data() {
             <div class="divider text-xl" id="sales">Sales</div>
                 <SalesDisplay
                 :sales="invoiceForm.sales" />
+            </div>
+
+            <div class="my-3">
+            <div class="divider text-xl" id="sales">Payment</div>
+                <payment-display
+                    :payment="invoiceForm.payment" />
             </div>
         </div>
 </AppLayout>

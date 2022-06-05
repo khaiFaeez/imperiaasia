@@ -159,7 +159,17 @@ class InvoiceController extends Controller
             'Total_RM_8' => $request->products['items'][7]['total'],
 
             'Grand_Total' => $request->products['grand_total'],
-            'Promise_pay' => \Carbon\Carbon::now(),
+
+            'Promise_pay' => \Carbon\Carbon::parse($request->payment['items'][0]['ptp'])->format('Y-m-d'),
+            'Payment1' => $request->payment['items'][0]['settlement'],
+            'Promise_pay2' => \Carbon\Carbon::parse($request->payment['items'][1]['ptp'])->format('Y-m-d'),
+            'Payment2' => $request->payment['items'][1]['settlement'],
+            'Promise_pay3' => \Carbon\Carbon::parse($request->payment['items'][2]['ptp'])->format('Y-m-d'),
+            'Payment3' => $request->payment['items'][2]['settlement'],
+            'Promise_pay4' => \Carbon\Carbon::parse($request->payment['items'][3]['ptp'])->format('Y-m-d'),
+            'Payment4' => $request->payment['items'][3]['settlement'],
+
+
             'Consultant' => $request->sales['consultant'],
             'Channel' => $request->sales['channel'],
             'Created_By' => Auth::user()->username,

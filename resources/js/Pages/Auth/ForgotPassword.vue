@@ -40,7 +40,7 @@ const submit = () => {
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton :class="{ 'loading': form.processing }" :disabled="form.processing">
                     Email Password Reset Link
                 </BreezeButton>
             </div>

@@ -23,13 +23,13 @@ export default {
             <table class="table table-compact w-full">
                     <thead>
                         <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">U/Price</th>
-                        <th scope="col">Qty</th>
-                        <th scope="col">Disc %</th>
-                        <th scope="col">Disc RM</th>
-                        <th scope="col">Total</th>
+                        <th scope="col" >#</th>
+                        <th scope="col" >Product</th>
+                        <th scope="col" >U/Price</th>
+                        <th scope="col" >Qty</th>
+                        <th scope="col" >Disc %</th>
+                        <th scope="col" >Disc RM</th>
+                        <th scope="col" >Total</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -53,7 +53,7 @@ const submit = () => {
                     Already registered?
                 </Link>
 
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <BreezeButton class="ml-4" :class="{ 'loading': form.processing }" :disabled="form.processing">
                     Register
                 </BreezeButton>
             </div>
