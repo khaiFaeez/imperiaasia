@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         goToViewPage(data) {
-            window.open(route('roles.edit',{'role': data.id}), '_self');
+            this.$inertia.get(route('roles.edit',{'role': data.id}));
         }
     }
 }

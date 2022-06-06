@@ -8,21 +8,17 @@ module.exports = {
         "./resources/js/**/*.vue",
     ],
 
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
-            },
-        },
-    },
+    theme: {},
     daisyui: {
+        // base: false,
         themes: [
             {
                 autumn: {
                     ...require("daisyui/src/colors/themes")[
                         "[data-theme=autumn]"
                     ],
-
+                    "--rounded-box": "0",
+                    "--rounded-btn": "0",
                     neutral: "#000000",
                 },
             },

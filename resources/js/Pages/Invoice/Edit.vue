@@ -8,7 +8,6 @@ import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import PostageForm from '@/Components/Forms/PostageForm.vue'
 import BreezeButton from '@/Components/Button.vue'
 
-
 export default {
     props:[
         'client','invoice'
@@ -141,10 +140,6 @@ export default {
         };
     },
     methods: {
-
-        goToViewPage(data) {
-            window.open(route('portfolio.invoice.show',{'invoice': data.Id}), '_self');
-        },
         updateInvoice(){
             this.invoiceForm.put(route('portfolio.invoice.update',{'invoice':this.invoice.Id}),{
                     errorBag: 'updateInvoice',
@@ -183,67 +178,67 @@ export default {
 </script>
 
 <template>
-<Head title="Edit Invoice" />
-<app-layout>
-     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
-      <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-      <span class="text-primary font-medium">/</span> Edit {{invoice.Inv_No}} <span class="badge text-white" :class='invoiceForm.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoiceForm.Status_Inv}}</span>
-    </h1>
 
-    <form @submit.prevent="updateInvoice" class="form">
-            <div class="flex items-center justify-end">
-                <p class="hover:underline hover:text-primary hover:cursor-pointer" v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">Update Payment</p>
-                <button class="btn btn-ghost" :class="{ 'opacity-25': invoiceForm.processing }" :disabled="invoiceForm.processing" title="save">
+    <Head title="Edit Invoice" />
+    <app-layout>
+        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+            <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
+            <span class="text-primary font-medium">/</span> Edit {{invoice.Inv_No}} <span class="badge text-white"
+                :class='invoiceForm.Status_Inv == "PAID" ? "badge-success " : "badge-error"'>
+                {{invoiceForm.Status_Inv}}</span>
+        </h1>
+
+        <form @submit.prevent="updateInvoice" class="form">
+            <div class="flex items-center justify-end gap-4">
+                <p class="hover:underline hover:text-primary hover:cursor-pointer"
+                    v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">Update Payment</p>
+                <BreezeButton :class="{ 'loading': invoiceForm.processing }" :disabled="invoiceForm.processing">
+                    <i class="bi bi-save mr-3"></i>
+                    Save
+                </BreezeButton>
+                <!-- <button class="btn btn-ghost" :class="{ 'opacity-25': invoiceForm.processing }"
+                    :disabled="invoiceForm.processing" title="save">
                     <i class="bi bi-save text-xl"></i>
-                </button>
+                </button> -->
             </div>
 
-            <div class="grid grid-cols-1 xl:grid-cols-1 gap-4">
-            <div class="my-3">
-            <div class="divider text-xl" id="client">Client</div>
-            <client-display
-                :client="clientForm"
-                :states="$page.props.states"
-            />
-            </div>
+            <div class="grid grid-cols-1 xl:grid-cols-1">
+                <div class="my-3">
+                    <div class="divider text-xl" id="client">Client</div>
+                    <client-display :client="clientForm" :states="$page.props.states" />
+                </div>
 
-            <div class="my-3">
-            <div class="divider text-xl" id="postage">Postage</div>
-            <div class="flex items-end justify-end gap-2">
-                    <button @click="copyAddress" type="button" class="btn btn-ghost btn-sm" title="Copy Client Details">
-                   <i class="bi bi-files"></i>
-                    </button>
+                <div class="my-3">
+                    <div class="divider text-xl" id="postage">Postage</div>
+                    <div class="flex items-end justify-end gap-2">
+                        <button @click="copyAddress" type="button" class="btn btn-ghost btn-sm"
+                            title="Copy Client Details">
+                            <i class="bi bi-files"></i>
+                        </button>
 
-                    <button @click="clearAddress" type="button" class="btn btn-ghost btn-sm" title="Clear Postage Detail">
-                  <i class="bi bi-eraser-fill"></i></button>
-            </div>
-            <postage-form
-                :states="$page.props.states"
-                :shipping="invoiceForm.shipping"
-            />
-            </div>
+                        <button @click="clearAddress" type="button" class="btn btn-ghost btn-sm"
+                            title="Clear Postage Detail">
+                            <i class="bi bi-eraser-fill"></i></button>
+                    </div>
+                    <postage-form :states="$page.props.states" :shipping="invoiceForm.shipping" />
+                </div>
 
-            <div class="my-3">
-            <div class="divider text-xl" id="product">Product</div>
-            <product-form
-                :products="invoiceForm.products"
-                :productLists="$page.props.products" />
-            </div>
+                <div class="my-3">
+                    <div class="divider text-xl" id="product">Product</div>
+                    <product-form :products="invoiceForm.products" :productLists="$page.props.products" />
+                </div>
 
-            <div class="my-3">
-            <div class="divider text-xl" id="sales">Sales</div>
-                <sales-form
-                    :consultants="$page.props.consultants"
-                    :sales="invoiceForm.sales" />
-            </div>
+                <div class="my-3">
+                    <div class="divider text-xl" id="sales">Sales</div>
+                    <sales-form :consultants="$page.props.consultants" :sales="invoiceForm.sales" />
+                </div>
 
-            <div class="my-3">
-            <div class="divider text-xl" id="sales">Payment</div>
-                <payment-form
-                    :payment="invoiceForm.payment" />
+                <div class="my-3">
+                    <div class="divider text-xl" id="sales">Payment</div>
+                    <payment-form :payment="invoiceForm.payment" />
+                </div>
             </div>
-        </div>
-    </form>
-</app-layout>
+        </form>
+    </app-layout>
 
 </template>

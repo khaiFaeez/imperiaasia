@@ -44,10 +44,7 @@ export default {
                         // });
                     },
                 });
-            },
-             goToViewPage(data) {
-            window.open(route('portfolio.invoice.show',{'invoice': data.Id}), '_self');
-        },
+            }
     }
 }
 

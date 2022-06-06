@@ -152,10 +152,6 @@ data() {
         };
     },
     methods: {
-
-        goToViewPage(data) {
-            window.open(route('portfolio.invoice.show',{'invoice': data.Id}), '_self');
-        },
         openPDF(data){
             window.open(route('portfolio.invoice.pdf',{'invoice': data.Id}), '_blank')
         },
@@ -183,7 +179,7 @@ data() {
         </button>
     </div>
 
-        <div class="grid grid-cols-1 xl:grid-cols-1 gap-4">
+        <div class="grid grid-cols-1 xl:grid-cols-1">
             <div class="my-3">
             <div class="divider text-xl" id="client">Client</div>
               <ClientDisplay

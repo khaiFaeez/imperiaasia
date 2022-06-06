@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         goToViewPage(data) {
-            window.open(route('portfolio.client.show',{'client': data.id}), '_self');
+            this.$inertia.get(route('portfolio.client.show',{'client': data.id}));
         },
          reset() {
             this.form = {

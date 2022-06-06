@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         goToViewPage(data) {
-            window.open(route('users.edit',{'user': data.id}), '_self');
+            this.$inertia.get(route('users.edit',{'user': data.id}));
         }
     }
 }

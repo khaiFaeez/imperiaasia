@@ -105,7 +105,7 @@ export default {
         </div>
 
         <div class="my-12 ">
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-3">
                  <Bar
                     :chart-options="chartOptions"
                     :chart-data="chartData"

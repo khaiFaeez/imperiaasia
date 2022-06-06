@@ -141,10 +141,6 @@ export default {
         };
     },
     methods: {
-
-        goToViewPage(data) {
-            window.open(route('portfolio.invoice.show',{'invoice': data.Id}), '_self');
-        },
         storeInvoice(){
             this.invoiceForm.post(route('portfolio.invoice.store'));
         },
@@ -201,7 +197,7 @@ export default {
                         Save
                 </BreezeButton>
             </div>
-            <div class="grid grid-cols-1 xl:grid-cols-1 gap-4">
+            <div class="grid grid-cols-1 xl:grid-cols-1">
             <div class="my-3">
             <div class="divider text-xl" id="client">Client</div>
             <client-display

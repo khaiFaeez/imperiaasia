@@ -32,7 +32,7 @@ export default {
 </script>
 <template>
 
-<div class="w-full  grid md:grid-cols-2 gap-4">
+<div class="w-full grid md:grid-cols-2 gap-x-4">
   <div class="md:flex md:items-center">
     <div class="md:w-1/3">
         <BreezeLabel value="IC Number / Passport"/>

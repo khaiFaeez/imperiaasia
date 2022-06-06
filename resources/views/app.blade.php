@@ -24,7 +24,7 @@ $theme = 'autumn';
         @inertiaHead
 
     </head>
-    <body class="font-sans antialiased">
+    <body class="">
         @inertia
     </body>
 </html>
