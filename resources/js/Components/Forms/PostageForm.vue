@@ -19,7 +19,7 @@ export default {
 </script>
 <template>
 
-    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-x-4">
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="md:flex md:items-center">
             <div class="md:w-1/3">
                 <BreezeLabel value="Shipping Name" />
@@ -91,7 +91,7 @@ export default {
                 <BreezeLabel value="Shipping State" />
             </div>
             <div class="md:w-2/3">
-                <select name="State" v-model="shipping.Ship_State" class="select border-primary w-full">
+                <select name="State" v-model="shipping.Ship_State" class="select input-bordered w-full">
                     <option value=''>Please select state</option>
                     <option v-for="$state in $page.props.states" :key="$state.id" :value="$state.id">{{$state.Negeri}}
                     </option>
@@ -106,7 +106,7 @@ export default {
                 <BreezeLabel value="Shipping Country" />
             </div>
             <div class="md:w-2/3">
-                <select name="Country" v-model="shipping.Ship_Country" class="select border-primary w-full">
+                <select name="Country" v-model="shipping.Ship_Country" class="select input-bordered w-full">
                     <option v-for="$country in $page.props.countries" :key="$country" :value="$country">{{$country}}
                     </option>
                 </select>

@@ -182,67 +182,58 @@ export default {
 </script>
 
 <template>
-<Head title="Create Invoice" />
-<AppLayout>
 
-     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
-      <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-      <span class="text-primary font-medium">/</span> Create
-    </h1>
+    <Head title="Create Invoice" />
+    <AppLayout>
 
-    <form @submit.prevent="storeInvoice" class="form">
-        <div class="flex items-center justify-end ">
-                <BreezeButton :class="{ 'loading': invoiceForm.processing }" :disabled="invoiceForm.processing">
-                    <i class="bi bi-save mr-3"></i>
-                        Save
+        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+            <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
+            <span class="text-primary font-medium">/</span> Create
+        </h1>
+
+        <form @submit.prevent="storeInvoice" class="form">
+            <div class="flex items-center justify-end ">
+                <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }" :disabled="invoiceForm.processing">
+                    Save
                 </BreezeButton>
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-1">
-            <div class="my-3">
-            <div class="divider text-xl" id="client">Client</div>
-            <client-display
-                :client="clientForm"
-                :states="$page.props.states"
-            />
-            </div>
+                <div class="my-3">
+                    <div class="divider text-xl" id="client">Client</div>
+                    <client-display :client="clientForm" :states="$page.props.states" />
+                </div>
 
-            <div class="my-3">
-            <div class="divider text-xl" id="postage">Postage</div>
-            <div class="flex items-end justify-end gap-2">
-                    <button @click="copyAddress" type="button" class="btn btn-ghost btn-sm" title="Copy Client Details">
-                   <i class="bi bi-files"></i>
-                    </button>
+                <div class="my-3">
+                    <div class="divider text-xl" id="postage">Postage</div>
+                    <div class="flex items-end justify-end gap-2">
+                        <button @click="copyAddress" type="button" class="btn btn-ghost btn-sm"
+                            title="Copy Client Details">
+                            <i class="bi bi-files"></i>
+                        </button>
 
-                    <button @click="clearAddress" type="button" class="btn btn-ghost btn-sm" title="Clear Postage Detail">
-                  <i class="bi bi-eraser-fill"></i></button>
-            </div>
-            <postage-form
-                :states="$page.props.states"
-                :shipping="invoiceForm.shipping"
-            />
-            </div>
+                        <button @click="clearAddress" type="button" class="btn btn-ghost btn-sm"
+                            title="Clear Postage Detail">
+                            <i class="bi bi-eraser-fill"></i></button>
+                    </div>
+                    <postage-form :states="$page.props.states" :shipping="invoiceForm.shipping" />
+                </div>
 
-            <div class="my-3">
-            <div class="divider text-xl" id="product">Product</div>
-            <product-form
-                :products="invoiceForm.products"
-                :productLists="$page.props.products" />
-            </div>
+                <div class="my-3">
+                    <div class="divider text-xl" id="product">Product</div>
+                    <product-form :products="invoiceForm.products" :productLists="$page.props.products" />
+                </div>
 
-            <div class="my-3">
-            <div class="divider text-xl" id="sales">Sales</div>
-                <sales-form
-                    :consultants="$page.props.consultants"
-                    :sales="invoiceForm.sales" />
-            </div>
+                <div class="my-3">
+                    <div class="divider text-xl" id="sales">Sales</div>
+                    <sales-form :consultants="$page.props.consultants" :sales="invoiceForm.sales" />
+                </div>
 
-            <div class="my-3">
-            <div class="divider text-xl" id="sales">Payment</div>
-                <payment-form
-                    :payment="invoiceForm.payment" />
+                <div class="my-3">
+                    <div class="divider text-xl" id="sales">Payment</div>
+                    <payment-form :payment="invoiceForm.payment" />
+                </div>
             </div>
-        </div>
-    </form>
-</AppLayout>
+        </form>
+    </AppLayout>
 
 </template>

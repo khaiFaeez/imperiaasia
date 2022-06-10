@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Client;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ClientRequest extends FormRequest
 {
@@ -25,12 +28,18 @@ class ClientRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'MyKad_SSM' => ['required', 'unique:' . \Auth::user()->current_portfolio()->first()->db_connection . '.Client'],
+            'MyKad_SSM' => [
+                'required',
+                Rule::unique(Auth::user()->current_portfolio()->first()->db_connection . '.Client', 'MyKad_SSM')->ignore($this->id),
+            ],
             'Name' => 'required',
-            'Mobile_No' => 'required | numeric | unique:' . \Auth::user()->current_portfolio()->first()->db_connection . '.Client',
-            'Phone' => 'required | numeric',
-            'Off_Phone' => 'numeric',
+            'Mobile_No' => [
+                'required',
+                'numeric',
+                Rule::unique(Auth::user()->current_portfolio()->first()->db_connection . '.Client', 'Mobile_No')->ignore($this->id)
+            ],
             'Address' => 'required',
             'Address_2' => 'required',
             'Poscode' => 'required',

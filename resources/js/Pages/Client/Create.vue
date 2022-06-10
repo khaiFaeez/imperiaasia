@@ -62,8 +62,7 @@ export default {
 
         <form @submit.prevent="storeClient" class="form">
             <div class="flex items-center justify-end mb-8">
-                <BreezeButton :class="{ 'loading': form.processing }" :disabled="form.processing">
-                    <i class="bi bi-save mr-3"></i>
+                <BreezeButton :class="{ 'loading mr-2': form.processing }" :disabled="form.processing">
                         Save
                 </BreezeButton>
             </div>

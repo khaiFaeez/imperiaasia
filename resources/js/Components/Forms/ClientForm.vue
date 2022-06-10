@@ -18,7 +18,7 @@ export default {
 
 </script>
 <template>
-    <div class="w-full grid md:grid-cols-2 gap-x-4">
+    <div class="w-full grid md:grid-cols-2 gap-4">
         <div class="md:flex md:items-center">
             <div class="md:w-1/3">
                 <BreezeLabel value="IC Number / Passport" />
@@ -74,7 +74,7 @@ export default {
                 <BreezeLabel value="Client Occupation" />
             </div>
             <div class="md:w-2/3">
-                <select name="Occupation" v-model="client.occupation" class="input border-primary w-full">
+                <select name="Occupation" v-model="client.occupation" class="input input-bordered w-full">
                     <option value=''>Please select</option>
                     <option value='A'>Gaji Bulanan</option>
                     <option value='B'>Bekerja Sendiri/berniaga</option>
@@ -134,7 +134,7 @@ export default {
                 <BreezeLabel value="State" />
             </div>
             <div class="md:w-2/3">
-                <select name="State" v-model="client.State" class="select border-primary w-full">
+                <select name="State" v-model="client.State" class="select input-bordered w-full">
                     <option value=''>Please select state</option>
                     <option v-for="$state in states" :key="$state.id" :value="$state.id">{{$state.Negeri}}</option>
                 </select>
@@ -147,7 +147,7 @@ export default {
                 <BreezeLabel value="Country" />
             </div>
             <div class="md:w-2/3">
-                <select name="Country" v-model="client.Country" class="select border-primary w-full">
+                <select name="Country" v-model="client.Country" class="select input-bordered w-full">
                     <option v-for="$country in countries" :key="$country" :value="$country">{{$country}}</option>
                 </select>
                 <BreezeInputError :message="$page.props.errors.Country" />

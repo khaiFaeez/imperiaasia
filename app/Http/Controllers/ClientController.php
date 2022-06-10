@@ -23,10 +23,12 @@ class ClientController extends Controller
         Auth::user()->hasPermissionTo('invoice-list');
 
         $filter = Request::input('search');
-        $clients = Client::with('state')
+        $clients = Client::query()
+            ->with('state:id,Negeri')
             ->when($filter, function ($query, $filter) {
                 $query->where('MyKad_SSM', 'LIKE', '%' . $filter . '%');
             })
+            ->select('id', 'Name', 'MyKad_SSM', 'Created_Date', 'Mobile_No', 'State')
             ->paginate(20);
 
         $clients->map(function ($query) {
@@ -66,8 +68,6 @@ class ClientController extends Controller
 
         $id = Client::create($request->validated());
 
-
-
         return redirect()->route('portfolio.client.show', [
             "client" => $id->id
         ])
@@ -97,9 +97,14 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($portfolio, $id)
     {
-        //
+        $client = Client::with('state')->where('id', $id)->firstOrFail();
+        return Inertia::render('Client/Edit', [
+            'client' => $client,
+            'states' => State::get(),
+            'countries' => config('countries')
+        ]);
     }
 
     /**
@@ -109,9 +114,13 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ClientRequest $request, $portfolio, $id)
     {
-        //
+        Auth::user()->hasPermissionTo('invoice-create');
+
+        $id = Client::where('id', $id)->update($request->validated());
+
+        return back()->with('message', 'Client created successfully');
     }
 
     /**

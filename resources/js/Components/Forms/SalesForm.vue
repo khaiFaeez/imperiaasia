@@ -22,10 +22,10 @@ export default {
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <template>
-    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-x-4">
+    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
             <BreezeLabel value="Sales Person" />
-            <select id="Sales_Person" name="Sales_Person" class="select border-primary w-full input"
+            <select id="Sales_Person" name="Sales_Person" class="select input-bordered w-full input"
                 v-model="sales.consultant">
                 <option value=''>Please select consultant</option>
                 <option v-for="($consultant,i) in consultants" :key="i" :value="$consultant.id"
@@ -37,7 +37,7 @@ export default {
 
         <div class="col-lg-3">
             <BreezeLabel value="Sales Channel" />
-            <select id="Channel" name="Channel" class="form-control form-control-sm input" v-model="sales.channel">
+            <select id="Channel" name="Channel" class="select input-bordered  w-full input" v-model="sales.channel">
                 <option value=''>Please select</option>
                 <option value='1'>ONLINE</option>
                 <option value='2'>DISTRIBUTOR</option>
@@ -48,7 +48,7 @@ export default {
 
         <div class="col-lg-3">
             <BreezeLabel value="Closing Source" />
-            <select id="Closing" name="Closing" class="form-control form-control-sm input" v-model="sales.closing">
+            <select id="Closing" name="Closing" class="select input-bordered  w-full input" v-model="sales.closing">
                 <option value=''>Please select</option>
                 <option value='A'>A - CALL</option>
                 <option value='B'>B - WHATSAPP</option>

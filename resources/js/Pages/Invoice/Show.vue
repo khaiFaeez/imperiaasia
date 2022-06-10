@@ -164,56 +164,52 @@ data() {
 
 </script>
 <template>
-<Head title="Create Invoice" />
-<AppLayout>
-     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center">
-      <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-      <span class="text-primary font-medium">/</span>View {{invoice.Inv_No}} <span class="badge text-white" :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoice.Status_Inv}}</span>
-    </h1>
-     <div class="flex items-center justify-end">
-        <button @click="openPDF(invoice)" class="btn btn-ghost mr-3" title="Print Invoice">
-        <i class="bi bi-printer text-xl"></i>
-        </button>
-        <button @click="openDocket(invoice)" class="btn btn-ghost" title="Print Docket">
-        <i class="bi bi-printer-fill text-xl"></i>
-        </button>
-    </div>
+
+    <Head title="Create Invoice" />
+    <AppLayout>
+        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center">
+            <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
+            <span class="text-primary font-medium">/</span>View {{invoice.Inv_No}} <span class="badge text-white"
+                :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoice.Status_Inv}}</span>
+        </h1>
+        <div class="flex items-center justify-end">
+            <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})" class="btn btn-ghost">
+            <i class="bi bi-pencil-square  text-xl"></i>
+            </Link>
+            <button @click="openPDF(invoice)" class="btn btn-ghost" title="Print Invoice">
+                <i class="bi bi-printer text-xl"></i>
+            </button>
+            <button @click="openDocket(invoice)" class="btn btn-ghost" title="Print Docket">
+                <i class="bi bi-printer-fill text-xl"></i>
+            </button>
+        </div>
 
         <div class="grid grid-cols-1 xl:grid-cols-1">
             <div class="my-3">
-            <div class="divider text-xl" id="client">Client</div>
-              <ClientDisplay
-                :client="invoice.client"
-                :states="$page.props.states"/>
+                <div class="divider text-xl" id="client">Client</div>
+                <ClientDisplay :client="invoice.client" :states="$page.props.states" />
             </div>
 
             <div class="my-3">
-            <div class="divider text-xl" id="postage">Postage</div>
-             <PostageDisplay
-                :states="$page.props.states"
-                :shipping="invoiceForm.shipping"
-            />
+                <div class="divider text-xl" id="postage">Postage</div>
+                <PostageDisplay :states="$page.props.states" :shipping="invoiceForm.shipping" />
             </div>
 
             <div class="my-3">
-            <div class="divider text-xl" id="product">Product</div>
-              <ProductDisplay
-                :products="invoiceForm.products"
-                :productLists="$page.props.products" />
+                <div class="divider text-xl" id="product">Product</div>
+                <ProductDisplay :products="invoiceForm.products" :productLists="$page.props.products" />
             </div>
 
             <div class="my-3">
-            <div class="divider text-xl" id="sales">Sales</div>
-                <SalesDisplay
-                :sales="invoiceForm.sales" />
+                <div class="divider text-xl" id="sales">Sales</div>
+                <SalesDisplay :sales="invoiceForm.sales" />
             </div>
 
             <div class="my-3">
-            <div class="divider text-xl" id="sales">Payment</div>
-                <payment-display
-                    :payment="invoiceForm.payment" />
+                <div class="divider text-xl" id="sales">Payment</div>
+                <payment-display :payment="invoiceForm.payment" />
             </div>
         </div>
-</AppLayout>
+    </AppLayout>
 
 </template>

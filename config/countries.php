@@ -1,3 +1,3 @@
 <?php
 
-return ["Malaysia", "Indonesia", "Philippine"];
+return ["MALAYSIA", "INDONESIA", "PHILIPPINE"];

@@ -38,7 +38,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
-                'list' => $request->user()?->portfolios()->pluck('name', 'id')
+                'portfolio' => $request->user()?->portfolios()->pluck('name', 'id')
 
             ],
             'ziggy' => function () {
@@ -46,10 +46,6 @@ class HandleInertiaRequests extends Middleware
             },
             'flash' => [
                 'message' => $request->session()->get('message')
-            ],
-            'portfolio' => [
-                'list' => $request->user()?->portfolios()->pluck('name', 'id')
-
             ],
             'app_name' => config('app.name')
         ]);

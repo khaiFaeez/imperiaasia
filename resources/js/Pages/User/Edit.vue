@@ -73,9 +73,10 @@ export default {
 </script>
 
 <template>
-<Head title="Edit User" />
-<AppLayout>
-    <div class="max-w-7xl">
+
+    <Head title="Edit User" />
+    <AppLayout>
+        <div class="max-w-7xl">
             <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
                 <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
                 <span class="text-primary font-medium">/</span> Edit
@@ -84,26 +85,26 @@ export default {
 
 
 
-        <form @submit.prevent="updateUser($page.props.user.id)" class="form mb-12">
-            <user-form :user="form" :options="options" ></user-form>
+            <form @submit.prevent="updateUser($page.props.user.id)" class="form mb-12">
+                <user-form :user="form" :options="options"></user-form>
 
-              <div class="flex items-center justify-end my-12">
-                <button class="btn btn-ghost mr-3" :class="{ 'loading': form.processing }" :disabled="form.processing">
-                <i class="bi bi-trash3 mr-3"></i>
-                    Delete
-                </button>
+                <div class="flex items-center justify-end my-12">
+                    <button class="btn btn-ghost mr-3" :class="{ 'loading': form.processing }"
+                        :disabled="form.processing">
+                        <i class="bi bi-trash3 mr-3"></i>
+                        Delete
+                    </button>
 
-                <BreezeButton  :class="{ 'loading': form.processing }" :disabled="form.processing">
-                <i class="bi bi-save mr-3"></i>
-                    Save
-                </BreezeButton>
-
-
+                    <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing">
+                        Save
+                    </BreezeButton>
 
 
-            </div>
-        </form>
 
-    </div>
-</AppLayout>
+
+                </div>
+            </form>
+
+        </div>
+    </AppLayout>
 </template>

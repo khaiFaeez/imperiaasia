@@ -61,26 +61,26 @@ export default {
 </script>
 
 <template>
-<Head title="Create User" />
-<AppLayout>
-            <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
-                <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
-                <span class="text-primary font-medium">/</span> Create
-            </h1>
+
+    <Head title="Create User" />
+    <AppLayout>
+        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+            <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
+            <span class="text-primary font-medium">/</span> Create
+        </h1>
 
 
 
         <form @submit.prevent="storeUser" class="form">
-                <user-form :user="form" :options="options"></user-form>
+            <user-form :user="form" :options="options"></user-form>
 
-                <div class="flex items-center justify-end my-12">
-                <BreezeButton  :class="{ 'loading': form.processing }" :disabled="form.processing">
-                 <i class="bi bi-save"></i>
+            <div class="flex items-center justify-end my-12">
+                <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing">
                     Register
                 </BreezeButton>
-        </div>
+            </div>
         </form>
 
-</AppLayout>
+    </AppLayout>
 
 </template>

@@ -55,12 +55,14 @@ class Client extends Model
 
         $first = $portfolios->shift();
 
-        $invoices = DB::table(config('database.connections.' . $first . '.database') . '.Invoice')->leftJoin(config('database.connections.' . $first . '.database') . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select('Invoice.*')->where('Client.MyKad_SSM', $this->MyKad_SSM);
+        $select = ['Invoice.Id', 'Invoice.Aging', 'Invoice.Date', 'Invoice.Status_Inv', 'Invoice.Inv_No', 'Invoice.Created_Date'];
+
+        $invoices = DB::table(config('database.connections.' . $first . '.database') . '.Invoice')->leftJoin(config('database.connections.' . $first . '.database') . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select($select)->where('Client.MyKad_SSM', $this->MyKad_SSM);
 
         if ($portfolios->count() > 0) {
             foreach ($portfolios as $portfolio) {
                 if ($portfolio !== "") {
-                    $q = DB::table(config('database.connections.' . $portfolio . '.database') . '.Invoice')->leftJoin(config('database.connections.' . $portfolio . '.database') . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select('Invoice.*')->where('Client.MyKad_SSM', $this->MyKad_SSM);
+                    $q = DB::table(config('database.connections.' . $portfolio . '.database') . '.Invoice')->leftJoin(config('database.connections.' . $portfolio . '.database') . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select($select)->where('Client.MyKad_SSM', $this->MyKad_SSM);
                     $invoices->union($q);
                 }
             }

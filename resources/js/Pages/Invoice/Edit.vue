@@ -25,6 +25,7 @@ export default {
 },
     data() {
         return {
+            componentKey: 0,
             clientForm:this.$inertia.form({
                     id:this.invoice.client.id,
                     MyKad_SSM:this.invoice.client.MyKad_SSM,
@@ -140,6 +141,9 @@ export default {
         };
     },
     methods: {
+        forceRerender() {
+            this.componentKey += 1;
+        },
         updateInvoice(){
             this.invoiceForm.put(route('portfolio.invoice.update',{'invoice':this.invoice.Id}),{
                     errorBag: 'updateInvoice',
@@ -170,7 +174,72 @@ export default {
         },
         updatePayment(){
             this.invoiceForm.Status_Inv = "PAID"
-        }
+        },
+        cancelOrder() {
+            this.invoiceForm.Status_Inv = "PAID";
+            this.invoiceForm.products.items = [
+                {
+                    product: "",
+                    price: 0,
+                    qty: 0,
+                    discount: 0,
+                    discounted_price: 0,
+                    total: 0,
+                }, {
+                    product: "",
+                    price: 0,
+                    qty: 0,
+                    discount: 0,
+                    discounted_price: 0,
+                    total: 0,
+                }, {
+                    product: "",
+                    price: 0,
+                    qty: 0,
+                    discount: 0,
+                    discounted_price: 0,
+                    total: 0,
+                }, {
+                    product: "",
+                    price: 0,
+                    qty: 0,
+                    discount: 0,
+                    discounted_price: 0,
+                    total: 0,
+                }, {
+                    product: "",
+                    price: 0,
+                    qty: 0,
+                    discount: 0,
+                    discounted_price: 0,
+                    total: 0,
+                }, {
+                    product: "",
+                    price: 0,
+                    qty: 0,
+                    discount: 0,
+                    discounted_price: 0,
+                    total: 0,
+                }, {
+                    product: "",
+                    price: 0,
+                    qty: 0,
+                    discount: 0,
+                    discounted_price: 0,
+                    total: 0,
+                }, {
+                    product: "",
+                    price: 0,
+                    qty: 0,
+                    discount: 0,
+                    discounted_price: 0,
+                    total: 0,
+                }
+            ];
+
+            this.forceRerender();
+        },
+
     },
 
 }
@@ -191,15 +260,12 @@ export default {
         <form @submit.prevent="updateInvoice" class="form">
             <div class="flex items-center justify-end gap-4">
                 <p class="hover:underline hover:text-primary hover:cursor-pointer"
+                    v-show="invoice.Status_Inv == 'PENDING'" @click="cancelOrder">Cancel Order</p>
+                <p class="hover:underline hover:text-primary hover:cursor-pointer"
                     v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">Update Payment</p>
-                <BreezeButton :class="{ 'loading': invoiceForm.processing }" :disabled="invoiceForm.processing">
-                    <i class="bi bi-save mr-3"></i>
+                <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }" :disabled="invoiceForm.processing">
                     Save
                 </BreezeButton>
-                <!-- <button class="btn btn-ghost" :class="{ 'opacity-25': invoiceForm.processing }"
-                    :disabled="invoiceForm.processing" title="save">
-                    <i class="bi bi-save text-xl"></i>
-                </button> -->
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-1">
@@ -225,7 +291,8 @@ export default {
 
                 <div class="my-3">
                     <div class="divider text-xl" id="product">Product</div>
-                    <product-form :products="invoiceForm.products" :productLists="$page.props.products" />
+                    <product-form :products="invoiceForm.products" :productLists="$page.props.products"
+                        :key="componentKey" />
                 </div>
 
                 <div class="my-3">
