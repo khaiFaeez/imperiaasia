@@ -31,7 +31,7 @@ class Invoice extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->connection = \Auth::user()->current_portfolio()->first()->db_connection;
+        $this->connection = \Auth::user()->current_portfolio->db_connection;
     }
 
     public function client()
@@ -99,7 +99,7 @@ class Invoice extends Model
         static::creating(function ($model) {
 
             $number = Invoice::max('id') + 1;
-            $model->Inv_No = config('portfolio.invoice_prefix.platinum') . str_pad($number, 7, 0, STR_PAD_LEFT);
+            $model->Inv_No = config('portfolio.invoice_prefix.' . \Auth::user()->current_portfolio->db_connection) . str_pad($number, 7, 0, STR_PAD_LEFT);
         });
     }
 }

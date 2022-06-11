@@ -18,7 +18,7 @@ class SetDefaultPortfolioForUrls
     public function handle($request, Closure $next)
     {
         if (Route::current('portfolio.*')) {
-            URL::defaults(['portfolio' => $request->user()->current_portfolio->name ?? ""]);
+            URL::defaults(['portfolio' => $request->user()->current_portfolio->db_connection ?? ""]);
         }
 
         return $next($request);

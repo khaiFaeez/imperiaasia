@@ -17,7 +17,7 @@ class Consultant extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->connection = \Auth::user()->current_portfolio()->first()->db_connection;
+        $this->connection = \Auth::user()->current_portfolio->db_connection;
     }
 
     public static function boot()

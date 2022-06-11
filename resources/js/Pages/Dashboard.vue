@@ -1,7 +1,7 @@
 <script>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head } from '@inertiajs/inertia-vue3';
-import { Bar } from 'vue-chartjs'
+import { Bar, Pie } from 'vue-chartjs'
 
 
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
@@ -14,7 +14,7 @@ export default {
   components: {
       BreezeAuthenticatedLayout,
       Head,
-      Bar
+      Bar,
       },
   props: {
     chartId: {
@@ -40,7 +40,7 @@ export default {
     styles: {
       type: Object,
       default: () => {
-          'bg-base-300'
+          'bg-accent'
       }
     },
     plugins: {
@@ -63,6 +63,7 @@ export default {
 </script>
 
 <template>
+
     <Head title="Dashboard" />
 
     <BreezeAuthenticatedLayout>
@@ -74,49 +75,64 @@ export default {
 
         <div class="my-12 p-3 bg-base-300">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="stats stats-vertical lg:stats-horizontal w-full shadow-xl">
+                <div class="stats stats-vertical lg:stats-horizontal shadow w-full">
 
-            <div class="stat">
-                <div class="stat-title">Invoices</div>
-                <div class="stat-value">{{ $page.props.total_invoice.toLocaleString() }}</div>
-                <div class="stat-desc"></div>
-            </div>
+                    <div class="stat">
+                        <div class="stat-figure text-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                class="inline-block w-8 h-8 stroke-current">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="stat-title">Client</div>
+                        <div class="stat-value text-primary">{{ $page.props.clients.toLocaleString() }}</div>
+                        <div class="stat-desc">21% more than last month</div>
+                    </div>
 
-            <div class="stat">
-                <div class="stat-title">Users</div>
-                <div class="stat-value">{{ $page.props.users.toLocaleString() }}</div>
-                <div class="stat-desc"></div>
-            </div>
+                    <div class="stat">
+                        <div class="stat-figure text-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                class="inline-block w-8 h-8 stroke-current">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div class="stat-title">Invoices</div>
+                        <div class="stat-value text-secondary">{{ $page.props.total_invoice.toLocaleString() }}</div>
+                        <div class="stat-desc">Performing 21% more than last month</div>
+                    </div>
 
-            <div class="stat">
-                <div class="stat-title">Portfolios</div>
-                <div class="stat-value">{{ $page.props.portfolios }}</div>
-                <div class="stat-desc"></div>
-            </div>
+                    <div class="stat">
+                        <div class="stat-figure text-secondary">
+                            <div class="avatar online">
+                                <div class="w-16 rounded-full">
+                                    <img src="https://api.lorem.space/image/face?w=128&h=128" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-value">{{ $page.props.users }}</div>
+                        <div class="stat-title">Users</div>
+                        <div class="stat-desc text-secondary">Online</div>
+                    </div>
 
-            <div class="stat">
-                <div class="stat-title">Clients</div>
-                <div class="stat-value">{{ $page.props.clients.toLocaleString() }}</div>
-                <div class="stat-desc"></div>
-            </div>
-            </div>
+                    <div class="stat">
+                        <div class="stat-title">Portfolio</div>
+                        <div class="stat-value">{{ $page.props.portfolios }}</div>
+                        <div class="stat-desc">actives</div>
+                    </div>
+
+                </div>
 
             </div>
         </div>
 
         <div class="my-12 ">
             <div class="grid grid-cols-3">
-                 <Bar
-                    :chart-options="chartOptions"
-                    :chart-data="chartData"
-                    :chart-id="chartId"
-                    :dataset-id-key="datasetIdKey"
-                    :plugins="plugins"
-                    :css-classes="cssClasses"
-                    :styles="styles"
-                    :width="width"
-                    :height="height"
-                />
+                <Bar :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
+                    :dataset-id-key="datasetIdKey" :plugins="plugins" :css-classes="cssClasses" :styles="styles"
+                    :width="width" :height="height" />
             </div>
         </div>
 

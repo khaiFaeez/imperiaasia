@@ -32,7 +32,7 @@ export default {
         </h1>
 
         <div class="flex items-end justify-end mb-3">
-                <Link class="btn btn-primary btn-md" :href="route('users.create')"><i class="bi bi-person-plus-fill mr-3"></i> Create New User</Link>
+                <Link class="btn btn-primary" :href="route('users.create')"><i class="bi bi-person-plus-fill mr-3"></i> Create New User</Link>
         </div>
 
 

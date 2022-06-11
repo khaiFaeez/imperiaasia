@@ -35,6 +35,8 @@ return [
 
     'connections' => [
 
+
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),
@@ -83,46 +85,6 @@ return [
             ]) : [],
         ],
 
-        'platinum' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL_PLATI'),
-            'host' => env('DB_HOST_PLATI', '127.0.0.1'),
-            'port' => env('DB_PORT_PLATI', '3306'),
-            'database' => env('DB_DATABASE_PLATI', 'forge'),
-            'username' => env('DB_USERNAME_PLATI', 'forge'),
-            'password' => env('DB_PASSWORD_PLATI', ''),
-            'unix_socket' => env('DB_SOCKET_PLATI', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
-        'platinum2' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL_PLATI2'),
-            'host' => env('DB_HOST_PLATI', '127.0.0.1'),
-            'port' => env('DB_PORT_PLATI', '3306'),
-            'database' => env('DB_DATABASE_PLATI2', 'forge'),
-            'username' => env('DB_USERNAME_PLATI2', 'forge'),
-            'password' => env('DB_PASSWORD_PLATI2', ''),
-            'unix_socket' => env('DB_SOCKET_PLATI2', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
-        ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
@@ -149,6 +111,108 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+        ],
+
+
+        //ADD PORTFOLIO DB CONNECTION HERE, matches with ENV
+        'platinum' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_PLATI'),
+            'host' => env('DB_HOST_PLATI', '127.0.0.1'),
+            'port' => env('DB_PORT_PLATI', '3306'),
+            'database' => env('DB_DATABASE_PLATI', 'forge'),
+            'username' => env('DB_USERNAME_PLATI', 'forge'),
+            'password' => env('DB_PASSWORD_PLATI', ''),
+            'unix_socket' => env('DB_SOCKET_PLATI', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'dresella' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_DM'),
+            'host' => env('DB_HOST_DM', '127.0.0.1'),
+            'port' => env('DB_PORT_DM', '3306'),
+            'database' => env('DB_DATABASE_DM', 'forge'),
+            'username' => env('DB_USERNAME_DM', 'forge'),
+            'password' => env('DB_PASSWORD_DM', ''),
+            'unix_socket' => env('DB_SOCKET_DM', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'cilikering' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_TCK'),
+            'host' => env('DB_HOST_TCK', '127.0.0.1'),
+            'port' => env('DB_PORT_TCK', '3306'),
+            'database' => env('DB_DATABASE_TCK', 'forge'),
+            'username' => env('DB_USERNAME_TCK', 'forge'),
+            'password' => env('DB_PASSWORD_TCK', ''),
+            'unix_socket' => env('DB_SOCKET_TCK', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'agri' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_AGRI'),
+            'host' => env('DB_HOST_AGRI', '127.0.0.1'),
+            'port' => env('DB_PORT_AGRI', '3306'),
+            'database' => env('DB_DATABASE_AGRI', 'forge'),
+            'username' => env('DB_USERNAME_AGRI', 'forge'),
+            'password' => env('DB_PASSWORD_AGRI', ''),
+            'unix_socket' => env('DB_SOCKET_AGRI', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'maryamgold' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL_CHM'),
+            'host' => env('DB_HOST_CHM', '127.0.0.1'),
+            'port' => env('DB_PORT_CHM', '3306'),
+            'database' => env('DB_DATABASE_CHM', 'forge'),
+            'username' => env('DB_USERNAME_CHM', 'forge'),
+            'password' => env('DB_PASSWORD_CHM', ''),
+            'unix_socket' => env('DB_SOCKET_CHM', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
         ],
 
     ],

@@ -26,7 +26,7 @@ class CreatePortfolios extends Seeder
 
         Portfolio::create([
             'name' => 'dresella',
-            'db_connection' => 'platinum2',
+            'db_connection' => 'dresella',
             'created_at' => Carbon::now()
         ]);
 
