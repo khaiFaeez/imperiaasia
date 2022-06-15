@@ -5,46 +5,23 @@ module.exports = {
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
+        "./resources/js/**/*.vue",
     ],
 
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
-            },
-        },
-    },
+    theme: {},
     daisyui: {
+        // base: false,
         themes: [
-            "light",
-            "dark",
-            "cupcake",
-            "bumblebee",
-            "emerald",
-            "corporate",
-            "synthwave",
-            "retro",
-            "cyberpunk",
-            "valentine",
-            "halloween",
-            "garden",
-            "forest",
-            "aqua",
-            "lofi",
-            "pastel",
-            "fantasy",
-            "wireframe",
-            "black",
-            "luxury",
-            "dracula",
-            "cmyk",
-            "autumn",
-            "business",
-            "acid",
-            "lemonade",
-            "night",
-            "coffee",
-            "winter",
+            {
+                autumn: {
+                    ...require("daisyui/src/colors/themes")[
+                        "[data-theme=autumn]"
+                    ],
+                    "--rounded-box": "0",
+                    "--rounded-btn": "0",
+                    neutral: "#000000",
+                },
+            },
         ],
     },
 

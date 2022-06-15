@@ -1,7 +1,38 @@
-require('./bootstrap');
+require("./bootstrap");
 
-import Alpine from 'alpinejs';
+import { createApp, h } from "vue";
+import { createInertiaApp } from "@inertiajs/inertia-vue3";
+import { InertiaProgress } from "@inertiajs/progress";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import VueScrollTo from "vue-scrollto";
 
-window.Alpine = Alpine;
+const appName =
+    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
-Alpine.start();
+createInertiaApp({
+    title: (title) => `${title} - ${appName}`,
+    resolve: (name) => require(`./Pages/${name}.vue`),
+    setup({ el, app, props, plugin }) {
+        return createApp({ render: () => h(app, props) })
+            .use(plugin)
+            .use(VueScrollTo, {
+                container: ".drawer-content",
+                duration: 500,
+                easing: "ease",
+                offset: -30,
+                force: true,
+                cancelable: true,
+                onStart: false,
+                onDone: false,
+                onCancel: false,
+                x: false,
+                y: true,
+            })
+            .use(VueAxios, axios)
+            .mixin({ methods: { route } })
+            .mount(el);
+    },
+});
+
+InertiaProgress.init({ color: "red", showSpinner: true });

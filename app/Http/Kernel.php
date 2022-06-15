@@ -36,6 +36,10 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\HandleInertiaRequests::class,
+            \App\Http\Middleware\SetDefaultPortfolioForUrls::class,
+            \App\Http\Middleware\AbortUserNoPortfolio::class,
+
         ],
 
         'api' => [
@@ -67,6 +71,6 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
-        'restrictothers' => \App\Http\Middleware\RestrictRegistrationToOneAdmin::class
+        'admin' => \App\Http\Middleware\RestrictRegistrationToOneAdmin::class
     ];
 }

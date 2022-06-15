@@ -21,7 +21,7 @@ class CreateAdminUserSeeder extends Seeder
             'name' => 'Superadmin',
             'username' => 'superadmin',
             'staff_id' => 'en000',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
         ]);
 
 
