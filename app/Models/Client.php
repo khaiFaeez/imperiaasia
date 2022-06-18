@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\State;
 use Illuminate\Support\Facades\DB;
 use App\Models\Invoice;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class Client extends Model
@@ -36,7 +37,7 @@ class Client extends Model
     public function __construct()
     {
         parent::__construct();
-        $this->connection = \Auth::user()->current_portfolio->db_connection;
+        $this->connection = Auth::user()->current_portfolio->db_connection;
     }
 
     public function state()
@@ -51,7 +52,7 @@ class Client extends Model
 
     public function getAllInvoice()
     {
-        $portfolios = Portfolio::pluck('db_connection');
+        $portfolios = Portfolio::where('status', 1)->pluck('db_connection');
 
         $first = $portfolios->shift();
 

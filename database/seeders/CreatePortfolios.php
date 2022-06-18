@@ -19,14 +19,37 @@ class CreatePortfolios extends Seeder
     {
 
         $insert  =  Portfolio::create([
-            'name' => 'platinum',
+            'name' => 'Platinum',
             'db_connection' => 'platinum',
+            'status' => 1,
             'created_at' => Carbon::now()
         ]);
 
         Portfolio::create([
-            'name' => 'dresella',
+            'name' => 'Dresella',
             'db_connection' => 'dresella',
+            'status' => 0,
+            'created_at' => Carbon::now()
+        ]);
+
+        Portfolio::create([
+            'name' => 'Cili Kering',
+            'db_connection' => 'cilikering',
+            'status' => 0,
+            'created_at' => Carbon::now()
+        ]);
+
+        Portfolio::create([
+            'name' => 'Agri',
+            'db_connection' => 'agri',
+            'status' => 0,
+            'created_at' => Carbon::now()
+        ]);
+
+        Portfolio::create([
+            'name' => 'Maryam Gold',
+            'status' => 0,
+            'db_connection' => 'maryamgold',
             'created_at' => Carbon::now()
         ]);
 
