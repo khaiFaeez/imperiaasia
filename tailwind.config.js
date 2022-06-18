@@ -1,5 +1,3 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
-
 module.exports = {
     content: [
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
@@ -7,27 +5,26 @@ module.exports = {
         "./resources/views/**/*.blade.php",
         "./resources/js/**/*.vue",
     ],
-
-    theme: {},
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ["Roboto"],
+            },
+        },
+    },
     daisyui: {
-        // base: false,
         themes: [
             {
                 autumn: {
                     ...require("daisyui/src/colors/themes")[
                         "[data-theme=autumn]"
                     ],
-                    "--rounded-box": "0",
-                    "--rounded-btn": "0",
+                    "--rounded-box": "0.2rem",
+                    "--rounded-btn": "0.2rem",
                     neutral: "#000000",
                 },
             },
         ],
     },
-
-    plugins: [
-        require("@tailwindcss/forms"),
-        require("@tailwindcss/typography"),
-        require("daisyui"),
-    ],
+    plugins: [require("daisyui"), require("@tailwindcss/typography")],
 };

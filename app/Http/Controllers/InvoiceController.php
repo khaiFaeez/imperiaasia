@@ -10,15 +10,22 @@ use App\Models\Consultant;
 use App\Models\Collector;
 use App\Models\Product;
 use App\Models\State;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Request;
 
 class InvoiceController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:invoice-list|invoice-create|invoice-edit|invoice-delete', ['only' => ['index', 'store', 'show']]);
+        $this->middleware('permission:invoice-create', ['only' => ['create', 'store', 'repeatOrder']]);
+        $this->middleware('permission:invoice-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:invoice-delete', ['only' => ['destroy']]);
+    }
 
     public function index()
     {
-        Auth::user()->hasPermissionTo('invoice-list');
 
         $filter = Request::input('search');
         return Inertia::render('Invoice/Index', [
@@ -39,10 +46,6 @@ class InvoiceController extends Controller
 
     public function show($portfolio, $id)
     {
-        Auth::user()->hasPermissionTo('invoice-edit');
-
-
-
         return Inertia::render('Invoice/Show', [
             "invoice" => Invoice::with('client')->with('product')->with('product2')->with('product3')->with('product4')->with('product5')->with('state')->with('consultant')->where('Id', $id)->first(),
             "states" => State::get(),
@@ -55,7 +58,6 @@ class InvoiceController extends Controller
 
     public function repeatOrder($portfolio, $id)
     {
-        Auth::user()->hasPermissionTo('invoice-edit');
 
         return Inertia::render('Invoice/Repeat', [
             "invoice" => Invoice::with('client')->with('state')->where('Id', $id)->first(),
@@ -69,7 +71,6 @@ class InvoiceController extends Controller
 
     public function create($portfolio, $client_id)
     {
-        Auth::user()->hasPermissionTo('invoice-create');
 
         return Inertia::render('Invoice/Create', [
             "client" => Client::where('id', $client_id)->first(),
@@ -83,7 +84,6 @@ class InvoiceController extends Controller
 
     public function store(InvoiceRequest $request)
     {
-        Auth::user()->hasPermissionTo('invoice-create');
 
 
         // dd($request->products['items'][0]['product']);
@@ -185,7 +185,6 @@ class InvoiceController extends Controller
 
     public function edit($portfolio, $id)
     {
-        Auth::user()->hasPermissionTo('invoice-edit');
 
         return Inertia::render('Invoice/Edit', [
             "invoice" => Invoice::with('client')->with('consultant')->find($id),

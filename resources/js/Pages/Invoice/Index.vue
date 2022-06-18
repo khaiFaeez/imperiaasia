@@ -16,6 +16,15 @@ export default {
     props:[
         'invoice','filters'
     ],
+
+    components: {
+        Pagination,
+        AppLayout,
+        Head,
+        Link,
+        SearchFilter,
+    },
+
      data() {
         return {
         form: {
@@ -23,6 +32,7 @@ export default {
         },
         }
     },
+
      watch: {
         form: {
         deep: true,
@@ -31,16 +41,11 @@ export default {
         }, 150),
         },
     },
-    components:{
-        Pagination,
-        AppLayout,
-        Head,
-        Link,
-        SearchFilter,
-    },
+
     created: function () {
         this.moment = moment;
     },
+
     methods: {
         goToViewPage(data,event) {
             this.$inertia.get(route('portfolio.invoice.show', { 'invoice': data.Id }));
@@ -67,7 +72,7 @@ export default {
         <div class="flex flex-row items-center justify-between">
             <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
             </search-filter>
-            <Link :href="route('portfolio.client.create')" class="btn btn-primary hidden">
+            <Link :href="route('portfolio.client.create')" class="btn btn-primary hidden  btn-sm">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -79,7 +84,7 @@ export default {
             </Link>
         </div>
         <div class="overflow-auto my-5">
-            <table class="table table-compact table-bordered w-full">
+            <table class="table table-compact table-bordered w-full bg-white">
                 <thead>
                     <tr>
                         <th></th>

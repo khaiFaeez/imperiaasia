@@ -26,7 +26,7 @@ const showingNavigationDropdown = ref(false);
                             viewBox="0 0 24 24">
                             <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
                         </svg></label>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral w-52 ">
+                    <ul tabindex="0" class="dropdown-content menu shadow bg-neutral w-52 ">
                         <li v-for="(value,key) in $page.props.auth.portfolio" :key="key">
                             <Link :href="route('portfolio.change', { portfolio:key})" method="post" as="button"
                                 class="uppercase">{{value}}</Link>
@@ -37,12 +37,12 @@ const showingNavigationDropdown = ref(false);
         </div>
         <div class="navbar-center hidden lg:flex">
             <div class="dropdown">
-                <label tabindex="0" class="btn btn-ghost m-1 no-animation"> {{
-                $page.props.auth.user.current_portfolio.name }} <svg class="fill-current"
+                <label tabindex="0" class="btn btn-ghost m-1"> {{
+                    $page.props.auth.user.current_portfolio.name }} <svg class="fill-current"
                         xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                         <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                     </svg></label>
-                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral w-52">
+                <ul tabindex="0" class="dropdown-content menu shadow bg-neutral w-52">
                     <li v-for="(value,key) in $page.props.auth.portfolio" :key="key">
                         <Link :href="route('portfolio.change',{portfolio:key})" method="post" as="button"
                             class="uppercase">{{value}}</Link>
@@ -53,9 +53,10 @@ const showingNavigationDropdown = ref(false);
         <div class="navbar-end">
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn m-1 btn-ghost "> {{ $page.props.auth.user.name }}</label>
-                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral w-52">
+                <ul tabindex="0" class="dropdown-content menu shadow bg-neutral w-52">
                     <li>
-                        <Link :href="route('logout')" method="post" as="button"> Log Out</Link>
+                        <Link :href="route('logout')" method="post" as="button"><i
+                            class="mr-4 bi bi-box-arrow-right text-xl"></i>Log Out</Link>
                     </li>
                 </ul>
             </div>

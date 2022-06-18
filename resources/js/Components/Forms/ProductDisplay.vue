@@ -26,20 +26,20 @@ export default {
 
                     <tr class="line_items" v-for="(n, i) in products.items.length" :key="i">
                         <td class="">{{n}}</td>
-                        <td class="p-0">
+                        <td>
                             {{ products.items[i].product_name }}
                         </td>
-                        <td class="p-0">{{ products.items[i].price }}</td>
-                        <td class="p-0">{{ products.items[i].qty }}</td>
-                        <td class="p-0">{{ products.items[i].discount }}</td>
-                        <td class="p-0">{{ products.items[i].discounted_price }}</td>
-                        <td class="p-0">{{ products.items[i].total }}</td>
+                        <td>{{ products.items[i].price }}</td>
+                        <td>{{ products.items[i].qty }}</td>
+                        <td>{{ products.items[i].discount }}</td>
+                        <td>{{ products.items[i].discounted_price }}</td>
+                        <td>{{ products.items[i].total }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
                     <th colspan=5></th>
-                    <th class="p-0">Grand Total</th>
-                    <th class="p-0">{{products.grand_total}}</th>
+                    <th>Grand Total</th>
+                    <th>{{products.grand_total}}</th>
                     </tfoot>
             </table>
             </div>

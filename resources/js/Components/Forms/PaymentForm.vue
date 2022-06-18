@@ -31,12 +31,12 @@ export default {
 
                     <tr class="line_items" v-for="(n, i) in payment.items.length" :key="i">
                         <td class="">{{n}}</td>
-                        <td class="p-0">
+                        <td>
                               <!-- <Datepicker v-model="payment.items[i].ptp"  :format="YYYY-MM-dd" :previewFormat="YYYY-MM-dd"  type="date"></Datepicker> -->
 
                             <BreezeInput type="date" v-model="payment.items[i].ptp" placeholder="" class="border-0"/>
                         </td>
-                        <td class="p-0">
+                        <td>
                             <BreezeInput v-model="payment.items[i].settlement" placeholder="" class="border-0" @change="totalSettlement(i)"/>
                         </td>
                         </tr>

@@ -17,6 +17,10 @@ $theme = 'autumn';
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz@6..96&family=Roboto:wght@400&display=swap" rel="stylesheet">
+
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
@@ -24,7 +28,7 @@ $theme = 'autumn';
         @inertiaHead
 
     </head>
-    <body class="">
+    <body class="antialiased">
         @inertia
     </body>
 </html>

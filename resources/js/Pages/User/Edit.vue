@@ -3,12 +3,11 @@ import { ref } from 'vue';
 import { Link, Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import Pagination from '@/Components/Pagination'
-import moment from 'moment'
 import BreezeButton from '@/Components/Button.vue'
 import BreezeLabel from '@/Components/Label.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from  '@/Components/InputError.vue'
-import UserForm from '@/Components/Forms/UserForm.vue';
+import UserForm from '@/Components/Forms/UserEditForm.vue';
 
 const showingNavigationDropdown = ref(false);
 
@@ -30,43 +29,47 @@ export default {
     },
     data() {
         return {
+            checked:false,
             form: this.$inertia.form({
                  _method: 'PUT',
                 id:this.$page.props.user.id,
                 username:this.$page.props.user.username,
                 name:this.$page.props.user.name,
                 staff_id:this.$page.props.user.staff_id,
-                roles:Object.values(this.$page.props.userRole),
-                portfolios:Object.values(this.$page.props.userPortfolio)
+                roles: this.$page.props.userRole,
             }),
-             // define options
-            options: [ {
-            id: '1',
-            label: 'Platinum',
-            children: [ {
-                id: '11',
-                label: 'Admin',
-            }, {
-                id: '12',
-                label: 'Clerk',
-            } ],
-            }, {
-            id: '2',
-            label: 'Dresella',
-            }, {
-            id: '3',
-            label: 'TCK',
-            } ],
         }
     },
     methods: {
-        updateUser(id) {
+        updateUser() {
 
-                this.form.post(route('users.update',{"user":id}),{
-                    errorBag: 'updateMembershipInformation',
+            this.form.post(route('users.update', { "user": this.$page.props.user.id }),{
+                    errorBag: 'updateUsersInformation',
                     preserveScroll: true,
                 });
             },
+        deactivate() {
+
+           this.$inertia.delete(route('users.destroy', { "user": this.$page.props.user.id }), {
+                errorBag: 'deactivateUser',
+                preserveScroll: true,
+               onFinish: () => {
+                   this.$refs.check.checked = !this.$refs.check.checked;
+               },
+            });
+        },
+
+        reactivate() {
+           this.$inertia.post(route('users.restore', { "user": this.$page.props.user.id }), {
+                errorBag: 'restoreUser',
+                preserveScroll: true,
+                onFinish: () => {
+                    this.$refs.check.checked = !this.$refs.check.checked;
+               },
+
+            });
+
+        },
     }
 }
 
@@ -76,34 +79,62 @@ export default {
 
     <Head title="Edit User" />
     <AppLayout>
-        <div class="max-w-7xl">
+        <div class="w-full">
             <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
                 <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
-                <span class="text-primary font-medium">/</span> Edit
+                <span class="text-primary font-medium capitalize">/</span> {{ $page.props.user.username }}
             </h1>
 
+            <div class="flex items-end justify-end mb-3 gap-3">
+                <!-- The button to open modal -->
+                <label for="my-modal-4" class="btn modal-button btn-sm btn-ghost"
+                    :title="!$page.props.user.deleted_at ? 'Deactivate' : 'Activate' "><i class="text-xl bi"
+                        :class="!$page.props.user.deleted_at ? 'bi-lock' : 'bi-unlock'"></i>
+                </label>
 
 
+            </div>
 
-            <form @submit.prevent="updateUser($page.props.user.id)" class="form mb-12">
-                <user-form :user="form" :options="options"></user-form>
-
-                <div class="flex items-center justify-end my-12">
-                    <button class="btn btn-ghost mr-3" :class="{ 'loading': form.processing }"
-                        :disabled="form.processing">
-                        <i class="bi bi-trash3 mr-3"></i>
-                        Delete
-                    </button>
-
-                    <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing">
-                        Save
-                    </BreezeButton>
-
-
-
-
+            <form @submit.prevent="updateUser" class="form max-w-4xl">
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <user-form :user="form"></user-form>
+                        <div class="flex items-center justify-end">
+                            <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing">
+                                Update
+                            </BreezeButton>
+                        </div>
+                    </div>
                 </div>
+
+
             </form>
+
+
+            <!-- Put this part before </body> tag -->
+            <input type="checkbox" id="my-modal-4" class="modal-toggle" ref="check" />
+            <label for="my-modal-4" class="modal cursor-pointer">
+                <label class="modal-box relative" for="">
+                    <h3 class="text-lg font-bold">Confirm?</h3>
+                    <p class="py-4">{{ !$page.props.user.deleted_at ? 'Deactivate' :
+                    'Reactivate' }} user?</p>
+
+                    <div class="flex items-end justify-end mb-3">
+
+                        <button v-if="!$page.props.user.deleted_at" class="btn  btn-ghost btn-sm mr-3"
+                            :class="{ 'loading': form.processing }" :disabled="form.processing" @click="deactivate">
+                            Yes
+                        </button>
+
+                        <button v-else class="btn  btn-ghost  btn-sm mr-3" :class="{ 'loading': form.processing }"
+                            :disabled="form.processing" @click="reactivate">
+                            Yes
+                        </button>
+
+                        <label for="my-modal-4" class="btn btn-ghost btn-sm mr-3">No</label>
+                    </div>
+                </label>
+            </label>
 
         </div>
     </AppLayout>

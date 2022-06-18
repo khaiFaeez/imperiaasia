@@ -4,23 +4,28 @@ import { Head } from '@inertiajs/inertia-vue3';
 import { Bar, Pie } from 'vue-chartjs'
 
 
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
 
 
 export default {
-  name: 'BarChart',
   components: {
       BreezeAuthenticatedLayout,
       Head,
       Bar,
-      },
+      Pie
+    },
+
   props: {
     chartId: {
       type: String,
       default: 'bar-chart'
     },
+    pieId: {
+          type: String,
+          default: 'pie-chart'
+      },
     datasetIdKey: {
       type: String,
       default: 'label'
@@ -50,10 +55,38 @@ export default {
   },
   data() {
     return {
-      chartData: {
-        labels: [ 'January', 'February', 'March' ],
-        datasets: [ { data: [40, 20, 12] } ]
-      },
+        chartData : {
+            labels: [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+            ],
+            datasets: [
+                {
+                    label: 'Data One',
+                    backgroundColor: 'rgb(215, 80, 80)',
+                    data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+                }
+            ]
+        },
+        pieData: {
+            labels: ['VueJs', 'EmberJs', 'ReactJs', 'AngularJs'],
+            datasets: [
+                {
+                    backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+                    data: [40, 20, 80, 10]
+                }
+            ]
+        },
       chartOptions: {
         responsive: true
       }
@@ -73,9 +106,9 @@ export default {
             </h2>
         </template>
 
-        <div class="my-12 p-3 bg-base-300">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="stats stats-vertical lg:stats-horizontal shadow w-full">
+        <div class="my-12 p-3">
+            <div class="max-w-7xl">
+                <div class="stats stats-vertical lg:stats-horizontal shadow w-full border-2 border-secondary">
 
                     <div class="stat">
                         <div class="stat-figure text-primary">
@@ -114,7 +147,7 @@ export default {
                         </div>
                         <div class="stat-value">{{ $page.props.users }}</div>
                         <div class="stat-title">Users</div>
-                        <div class="stat-desc text-secondary">Online</div>
+                        <div class="stat-desc text-secondary">Active</div>
                     </div>
 
                     <div class="stat">
@@ -133,6 +166,9 @@ export default {
                 <Bar :chart-options="chartOptions" :chart-data="chartData" :chart-id="chartId"
                     :dataset-id-key="datasetIdKey" :plugins="plugins" :css-classes="cssClasses" :styles="styles"
                     :width="width" :height="height" />
+
+                <Pie :chart-options="chartOptions" :chart-data="pieData" :width="width" :height="height"
+                    :chart-id="pieId" />
             </div>
         </div>
 

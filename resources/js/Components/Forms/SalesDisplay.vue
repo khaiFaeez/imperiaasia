@@ -33,21 +33,23 @@ export default {
 }
 </script>
 <template>
-    <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-x-4">
-        <div>
-            <BreezeLabel value="Sales Person" />
-            <p>{{sales.consultant}}</p>
-        </div>
+    <div class="w-full card bg-white">
+        <div class="card-body grid md:grid-cols-3 gap-x-4 ">
+            <div>
+                <BreezeLabel value="Sales Person" />
+                <p>{{sales.consultant}}</p>
+            </div>
 
 
-        <div class="col-lg-3">
-            <BreezeLabel value="Sales Channel" />
-            <p>{{activeSales}}</p>
-        </div>
+            <div class="col-lg-3">
+                <BreezeLabel value="Sales Channel" />
+                <p>{{activeSales}}</p>
+            </div>
 
-        <div class="col-lg-3">
-            <BreezeLabel value="Closing Source" />
-            <p>{{activeClosing}}</p>
+            <div class="col-lg-3">
+                <BreezeLabel value="Closing Source" />
+                <p>{{activeClosing}}</p>
+            </div>
         </div>
     </div>
 </template>

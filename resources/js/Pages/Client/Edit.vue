@@ -51,37 +51,39 @@ export default {
 
 </script>
 <template>
-<Head title="Edit Client" />
-<AppLayout>
 
-<div >
-     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
-      <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
-      <span class="text-primary font-medium">/</span> Edit
-    </h1>
+    <Head title="Edit Client" />
+    <AppLayout>
+
+        <div>
+            <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+                <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
+                <span class="text-primary font-medium">/</span> Edit
+            </h1>
 
 
-        <form @submit.prevent="storeClient" class="form">
-            <div class="flex items-center justify-end mb-8">
-                <BreezeButton :class="{ 'loading mr-2': form.processing }" :disabled="form.processing">
+            <form @submit.prevent="storeClient" class="form">
+                <div class="flex items-center justify-end mb-8 gap-3">
+                    <Link :href="route('portfolio.client.index')" class="btn btn-error">
+                        Exit
+                    </Link >
+                    <BreezeButton :class="{ 'loading mr-2': form.processing }" :disabled="form.processing">
                         Save
-                </BreezeButton>
-            </div>
-            <ClientForm class=" mb-12"
-                :client="form"
-                :countries="$page.props.countries"
-                :states="$page.props.states"/>
+                    </BreezeButton>
+                </div>
+                <ClientForm class=" mb-12" :client="form" :countries="$page.props.countries"
+                    :states="$page.props.states" />
                 <div>
 
-            </div>
+                </div>
 
 
 
 
-        </form>
+            </form>
 
 
 
-</div>
-</AppLayout>
+        </div>
+    </AppLayout>
 </template>
