@@ -66,6 +66,7 @@ export default {
             <div class="md:w-2/3">
                 <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="user.password" required
                     autocomplete="new-password" />
+                <BreezeInputError :message="$page.props.errors.password" />
             </div>
         </div>
 
@@ -88,7 +89,7 @@ export default {
                 <select name="roles" id="roles" multiple v-model="user.roles"
                     class="select input-bordered border-primary w-full h-52">
                     <option v-for="(role, i ) in $page.props.roles" :key="i" :value="role.id">{{ role.portfolio }} - {{
-                        role.name }}</option>
+                    role.name }}</option>
                 </select>
                 <BreezeInputError :message="$page.props.errors.roles" />
                 <Link :href="route('roles.index')" class="underline">Manage Roles</Link>
