@@ -84,9 +84,6 @@ class InvoiceController extends Controller
 
     public function store(InvoiceRequest $request)
     {
-
-
-        // dd($request->products['items'][0]['product']);
         $id = Invoice::create([
             'MyKad_SSM' => $request->client,
             'Name' => $request->client,
@@ -160,13 +157,13 @@ class InvoiceController extends Controller
 
             'Grand_Total' => $request->products['grand_total'],
 
-            'Promise_pay' => \Carbon\Carbon::parse($request->payment['items'][0]['ptp'])->format('Y-m-d'),
+            'Promise_pay' => $request->payment['items'][0]['ptp'] ? \Carbon\Carbon::parse($request->payment['items'][0]['ptp'])->format('Y-m-d') : "0000-00-00",
             'Payment1' => $request->payment['items'][0]['settlement'],
-            'Promise_pay2' => \Carbon\Carbon::parse($request->payment['items'][1]['ptp'])->format('Y-m-d'),
+            'Promise_pay2' => $request->payment['items'][1]['ptp'] ? \Carbon\Carbon::parse($request->payment['items'][1]['ptp'])->format('Y-m-d') : null,
             'Payment2' => $request->payment['items'][1]['settlement'],
-            'Promise_pay3' => \Carbon\Carbon::parse($request->payment['items'][2]['ptp'])->format('Y-m-d'),
+            'Promise_pay3' => $request->payment['items'][2]['ptp'] ? \Carbon\Carbon::parse($request->payment['items'][2]['ptp'])->format('Y-m-d') : null,
             'Payment3' => $request->payment['items'][2]['settlement'],
-            'Promise_pay4' => \Carbon\Carbon::parse($request->payment['items'][3]['ptp'])->format('Y-m-d'),
+            'Promise_pay4' => $request->payment['items'][3]['ptp'] ? \Carbon\Carbon::parse($request->payment['items'][3]['ptp'])->format('Y-m-d') : null,
             'Payment4' => $request->payment['items'][3]['settlement'],
 
 
@@ -259,7 +256,16 @@ class InvoiceController extends Controller
             'Total_RM_8' => $request->products['items'][7]['total'],
 
             'Grand_Total' => $request->products['grand_total'],
-            'Promise_pay' => \Carbon\Carbon::now(),
+
+            'Promise_pay' => $request->payment['items'][0]['ptp'] ? \Carbon\Carbon::parse($request->payment['items'][0]['ptp'])->format('Y-m-d') : "0000-00-00",
+            'Payment1' => $request->payment['items'][0]['settlement'],
+            'Promise_pay2' => $request->payment['items'][1]['ptp'] ? \Carbon\Carbon::parse($request->payment['items'][1]['ptp'])->format('Y-m-d') : null,
+            'Payment2' => $request->payment['items'][1]['settlement'],
+            'Promise_pay3' => $request->payment['items'][2]['ptp'] ? \Carbon\Carbon::parse($request->payment['items'][2]['ptp'])->format('Y-m-d') : null,
+            'Payment3' => $request->payment['items'][2]['settlement'],
+            'Promise_pay4' => $request->payment['items'][3]['ptp'] ? \Carbon\Carbon::parse($request->payment['items'][3]['ptp'])->format('Y-m-d') : null,
+            'Payment4' => $request->payment['items'][3]['settlement'],
+
             'Consultant' => $request->sales['consultant'],
             'Channel' => $request->sales['channel'],
             'Last_Edited_By' => Auth::user()->username,

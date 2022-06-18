@@ -134,7 +134,7 @@ data() {
 
                 ]},
                 sales:{
-                    consultant:this.invoice.consultant.Name,
+                    consultant:this.invoice.consultant?.Name,
                     channel:this.invoice.Channel,
                     closing:""
                 },

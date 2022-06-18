@@ -26,6 +26,16 @@ class InvoiceRequest extends FormRequest
         return [
             'shipping.Ship_Name' => 'required',
             'client' => 'required ',
+            'payment.items.0.ptp' => 'required',
+            'sales.consultant' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'payment.items.0.ptp.required' => 'Please add first Promise-To-Pay ',
+            'sales.consultant.required' => 'Please specify a consultant'
         ];
     }
 }

@@ -123,7 +123,7 @@ export default {
 
                 ]},
                 sales:{
-                    consultant:this.invoice.consultant.id,
+                    consultant:this.invoice.consultant?.id,
                     channel:"",
                     closing:""
                 },

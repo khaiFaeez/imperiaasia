@@ -1,5 +1,6 @@
 <script>
 import BreezeInput from '@/Components/Input.vue';
+import BreezeInputError from '@/Components/InputError.vue'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -7,7 +8,8 @@ export default {
     props:['payment'],
     components:{
         BreezeInput,
-        Datepicker
+        Datepicker,
+        BreezeInputError
     },
     methods:{
          totalSettlement () {
@@ -18,36 +20,39 @@ export default {
 </script>
 
 <template>
-<div class="overflow-x-auto py-2">
-            <table class="table table-compact w-full">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Promise To Pay (PTP)</th>
-                            <th scope="col">Settlement (RM)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+    <div class="overflow-x-auto py-2">
+        <BreezeInputError
+            :message="$page.props.errors.updateInvoice?.hasOwnProperty('payment.items.0.ptp') ? $page.props.errors.updateInvoice['payment.items.0.ptp'] : ''" />
+        <table class=" table table-compact w-full">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Promise To Pay (PTP)</th>
+                    <th scope="col">Settlement (RM)</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                    <tr class="line_items" v-for="(n, i) in payment.items.length" :key="i">
-                        <td class="">{{n}}</td>
-                        <td>
-                              <!-- <Datepicker v-model="payment.items[i].ptp"  :format="YYYY-MM-dd" :previewFormat="YYYY-MM-dd"  type="date"></Datepicker> -->
-
-                            <BreezeInput type="date" v-model="payment.items[i].ptp" placeholder="" class="border-0"/>
-                        </td>
-                        <td>
-                            <BreezeInput v-model="payment.items[i].settlement" placeholder="" class="border-0" @change="totalSettlement(i)"/>
-                        </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                    <th colspan=1></th>
-                    <th >Total Settlement (RM)</th>
-                    <th ><BreezeInput v-model="payment.total_settlement" name="total_settlement"  placeholder="" /></th>
-                    </tfoot>
-            </table>
-            </div>
+                <tr class="line_items" v-for="(n, i) in payment.items.length" :key="i">
+                    <td class="">{{n}}</td>
+                    <td>
+                        <BreezeInput type="date" v-model="payment.items[i].ptp" placeholder="" class="border-0" />
+                    </td>
+                    <td>
+                        <BreezeInput v-model="payment.items[i].settlement" placeholder="" class="border-0"
+                            @change="totalSettlement(i)" />
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <th colspan=1></th>
+                <th>Total Settlement (RM)</th>
+                <th>
+                    <BreezeInput v-model="payment.total_settlement" name="total_settlement" placeholder="" />
+                </th>
+            </tfoot>
+        </table>
+    </div>
 </template>
 
 

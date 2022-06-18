@@ -142,18 +142,15 @@ export default {
     },
     methods: {
         storeInvoice(){
-            this.invoiceForm.post(route('portfolio.invoice.store'));
+            this.invoiceForm.post(route('portfolio.invoice.store'), {
+                errorBag: 'updateInvoice',
+                preserveScroll: true,
+                onFinish: () => {
+                    this.showUpdateForm = false;
+                },
+            });
         },
 
-        storeClient() {
-                this.form.post(route('portfolio.client.store'),{
-                    errorBag: 'storeClient',
-                    preserveScroll: true,
-                     onFinish: () => {
-                        this.showUpdateForm = false;
-                    },
-                });
-            },
 
             copyAddress(){
                 this.invoiceForm.shipping.Ship_Name =  this.clientForm.Name
