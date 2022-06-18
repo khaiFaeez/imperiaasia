@@ -24,24 +24,30 @@ export default {
 </script>
 
 <template>
-<Head title="Role List" />
-<AppLayout>
-    <div class="flex items-end justify-end mb-3">
-            <Link class="btn btn-neutral" :href="route('roles.create')"> Add New Role</Link>
-    </div>
 
-    <table class="table table-bordered w-full">
-    <thead>
-    <tr>
-    <th>Role</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="hover hover:cursor-pointer" v-for="$roles in $page.props.roles.data" :key="$roles.Id" @click="goToViewPage($roles)" >
-        <td>{{ $roles.name }}</td>
-    </tr>
-    </tbody>
-    </table>
-</AppLayout>
+    <Head title="Role List" />
+    <AppLayout>
+            <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+                <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
+                <span class="text-primary font-medium">/</span> Roles
+            </h1>
+                <div class="flex items-end justify-end mb-3">
+                    <Link class="btn btn-neutral btn-sm" :href="route('roles.create')"> Add New Role</Link>
+                </div>
+
+                <table class="table table-bordered w-full">
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover hover:cursor-pointer" v-for="role in $page.props.roles" :key="role.Id"
+                            @click="goToViewPage(role)">
+                            <td>{{ role.portfolio_name }} - {{ role.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </AppLayout>
 
 </template>

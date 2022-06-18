@@ -7,10 +7,18 @@ use Inertia\Inertia;
 use App\Models\Client;
 use App\Models\State;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
 
 class ClientController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:client-list|client-create|client-edit|client-delete', ['only' => ['index', 'store', 'show']]);
+        $this->middleware('permission:client-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:client-edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:client-delete', ['only' => ['destroy']]);
+    }
 
     /**
      * Display a listing of the resource.
@@ -19,8 +27,6 @@ class ClientController extends Controller
      */
     public function index()
     {
-
-        Auth::user()->hasPermissionTo('invoice-list');
 
         $filter = Request::input('search');
         $clients = Client::query()
@@ -48,7 +54,6 @@ class ClientController extends Controller
      */
     public function create()
     {
-        Auth::user()->hasPermissionTo('invoice-create');
 
         return Inertia::render('Client/Create', [
             'states' => State::get(),
@@ -64,7 +69,6 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-        Auth::user()->hasPermissionTo('invoice-create');
 
         $id = Client::create($request->validated());
 
@@ -82,6 +86,7 @@ class ClientController extends Controller
      */
     public function show($portfolio, $id)
     {
+
         $client = Client::with('state')->where('id', $id)->first();
         $client->invoices = $client->getAllInvoice();
         return Inertia::render('Client/Show', [
@@ -99,6 +104,7 @@ class ClientController extends Controller
      */
     public function edit($portfolio, $id)
     {
+
         $client = Client::with('state')->where('id', $id)->firstOrFail();
         return Inertia::render('Client/Edit', [
             'client' => $client,
@@ -116,7 +122,6 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, $portfolio, $id)
     {
-        Auth::user()->hasPermissionTo('invoice-create');
 
         $id = Client::where('id', $id)->update($request->validated());
 

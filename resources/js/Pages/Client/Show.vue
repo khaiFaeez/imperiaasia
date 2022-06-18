@@ -45,14 +45,14 @@ export default {
             </div>
         </div>
         <div class="flex flex-row justify-end mb-5">
-            <Link :href="route('portfolio.client.edit',{client:client.id})" class="btn btn-ghost">
+            <Link :href="route('portfolio.client.edit',{client:client.id})" class="btn btn-ghost btn-sm">
             <i class="bi bi-pencil-square  text-xl"></i>
             </Link>
         </div>
         <ClientDisplay class="mb-12" :client="client" :states="$page.props.states" />
 
         <div class="flex flex-row justify-end mb-5">
-            <Link :href="route('portfolio.invoice.create',{client_id:client.id})" class="btn btn-primary"
+            <Link :href="route('portfolio.invoice.create',{client_id:client.id})" class="btn btn-primary btn-sm"
                 v-if="!isPending">
             New Invoice
             </Link>
@@ -60,6 +60,7 @@ export default {
                 New Invoice
             </div>
         </div>
+
         <table class="table table-compact table-bordered w-full">
             <thead>
                 <tr>

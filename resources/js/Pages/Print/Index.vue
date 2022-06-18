@@ -30,7 +30,9 @@ export default {
 				for (let i in this.invoices.data) {
 					this.selected.push(this.invoices.data[i].Id);
 				}
-			}
+			}else{
+                this.selected = [];
+            }
          },
          check_form(event){
              if( this.selected.length > 0){
@@ -62,7 +64,7 @@ export default {
                 v-if="$page.props.invoices.data.length > 0">
                 <input type="hidden" :value="$page.props.attribute_name" name="_token" />
                 <input type="hidden" :value="selected" name="ids" />
-                <button class="btn btn-primary " @click="check_form">
+                <button class="btn btn-primary btn-sm" @click="check_form">
                     <i class="bi bi-printer text-xl mr-3"></i>
                     Print Invoices
                 </button>
@@ -72,7 +74,7 @@ export default {
                 v-if="$page.props.invoices.data.length > 0">
                 <input type="hidden" :value="$page.props.attribute_name" name="_token" />
                 <input type="hidden" :value="selected" name="ids" />
-                <button class="btn btn-secondary " @click="check_form">
+                <button class="btn btn-secondary btn-sm" @click="check_form">
                     <i class="bi bi-printer-fill text-xl mr-3"></i>
                     Print Docket</button>
             </form>
@@ -81,14 +83,14 @@ export default {
 
 
         <div class="overflow-auto my-5">
-            <table class="table table-compact table-bordered w-full">
+            <table class="table table-compact table-bordered w-full max-w-7xl">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" class="checkbox" v-model="selectAll" @click="select"> </th>
+                        <th><input type="checkbox" class="checkbox checkbox-sm" v-model="selectAll" @click="select">
+                        </th>
                         <th class="w-8">Invoice Status</th>
                         <th class="w-8">Docket Status</th>
                         <th>Inv No</th>
-                        <th>ID Card</th>
                         <th>Ship Phone</th>
                         <th>Ship Name</th>
                         <th>Ship Postcode</th>
@@ -98,20 +100,19 @@ export default {
                 </thead>
                 <tbody>
                     <tr v-for="$invoice in $page.props.invoices.data" :key="$invoice.Id">
-                        <td><input type="checkbox" class="checkbox" :value="$invoice.Id" v-model="selected"></td>
-                        <td>
+                        <td><input type="checkbox" class="checkbox checkbox-sm" :value="$invoice.Id" v-model="selected">
+                        </td>
+                        <td class="text-center">
                             <div class="badge text-white"
                                 :class='$invoice.Invoice_Status == "1" ? "badge-success " : "badge-error"'> <i
                                     :class='$invoice.Invoice_Status == "1" ? "bi bi-check-lg" : "bi bi-x-lg"'></i></div>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <div class="badge text-white"
                                 :class='$invoice.Docket_Status == "1" ? "badge-success " : "badge-error"'> <i
                                     :class='$invoice.Docket_Status == "1" ? "bi bi-check-lg" : "bi bi-x-lg"'></i></div>
                         </td>
                         <td>{{ $invoice.Inv_No }}</td>
-
-                        <td>{{ $invoice.client.MyKad_SSM }}</td>
                         <td>{{ $invoice.Ship_Phone }}</td>
                         <td>{{ $invoice.Ship_Name }}</td>
                         <td>{{ $invoice.Ship_poscode }}</td>

@@ -28,30 +28,11 @@ export default {
                 password:"",
                 password_confirmation:"",
             }),
-            // define options
-            options: [ {
-            id: '1',
-            label: 'Platinum',
-            children: [ {
-                id: '11',
-                label: 'Admin',
-            }, {
-                id: '12',
-                label: 'Clerk',
-            } ],
-            }, {
-            id: '2',
-            label: 'Dresella',
-            }, {
-            id: '3',
-            label: 'TCK',
-            } ],
         }
     },
     methods: {
         storeUser() {
                 this.form.post(route('users.store'),{
-                    errorBag: 'storeUser',
                     preserveScroll: true,
                 });
             },
@@ -71,14 +52,19 @@ export default {
 
 
 
-        <form @submit.prevent="storeUser" class="form">
-            <user-form :user="form" :options="options"></user-form>
-
-            <div class="flex items-center justify-end my-12">
-                <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing">
-                    Register
-                </BreezeButton>
+        <form @submit.prevent="storeUser" class="form max-w-4xl">
+            <div class="card bg-white">
+                <div class="card-body">
+                    <user-form :user="form"></user-form>
+                    <div class="flex items-center justify-end">
+                        <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing" class="btn-md">
+                            Register
+                        </BreezeButton>
+                    </div>
+                </div>
             </div>
+
+
         </form>
 
     </AppLayout>

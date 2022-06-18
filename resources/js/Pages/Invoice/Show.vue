@@ -134,7 +134,7 @@ data() {
 
                 ]},
                 sales:{
-                    consultant:this.invoice.consultant.Name,
+                    consultant:this.invoice.consultant?.Name,
                     channel:this.invoice.Channel,
                     closing:""
                 },
@@ -176,10 +176,10 @@ data() {
             <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})" class="btn btn-ghost">
             <i class="bi bi-pencil-square  text-xl"></i>
             </Link>
-            <button @click="openPDF(invoice)" class="btn btn-ghost" title="Print Invoice">
+            <button @click="openPDF(invoice)" class="btn btn-ghost btn-sm" title="Print Invoice">
                 <i class="bi bi-printer text-xl"></i>
             </button>
-            <button @click="openDocket(invoice)" class="btn btn-ghost" title="Print Docket">
+            <button @click="openDocket(invoice)" class="btn btn-ghost btn-sm" title="Print Docket">
                 <i class="bi bi-printer-fill text-xl"></i>
             </button>
         </div>

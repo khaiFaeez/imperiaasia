@@ -25,8 +25,9 @@ Route::get('/', function () {
 require __DIR__ . '/auth.php';
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::resource('roles', RoleController::class)->except(['store', 'show', 'destroy']);
-    Route::resource('users', UserController::class)->except('destroy');
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::post('users/{user}/restore', [UserController::class, 'restore'])->name('users.restore');
     Route::post('register', [RegisteredUserController::class, 'register']);
 });
 

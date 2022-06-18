@@ -33,76 +33,78 @@ export default {
 </script>
 <template>
 
-    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-x-4">
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Shipping Name" />
+    <div class="w-full card bg-white">
+        <div class="card-body grid md:grid-cols-2 gap-x-4 ">
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3">
+                    <BreezeLabel value="Shipping Name" />
+                </div>
+                <div class="md:w-2/3">
+                    <p>{{shipping.Ship_Name}}</p>
+                </div>
             </div>
-            <div class="md:w-2/3">
-                <p>{{shipping.Ship_Name}}</p>
-            </div>
-        </div>
 
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Shipping Phone" />
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3">
+                    <BreezeLabel value="Shipping Phone" />
+                </div>
+                <div class="md:w-2/3">
+                    <p>{{shipping.Ship_Phone}}</p>
+                </div>
             </div>
-            <div class="md:w-2/3">
-                <p>{{shipping.Ship_Phone}}</p>
-            </div>
-        </div>
 
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Shipping Address" />
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3">
+                    <BreezeLabel value="Shipping Address" />
+                </div>
+                <div class="md:w-2/3">
+                    <p>{{shipping.Ship_Add1}}</p>
+                </div>
             </div>
-            <div class="md:w-2/3">
-                <p>{{shipping.Ship_Add1}}</p>
-            </div>
-        </div>
 
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Shipping Address" />
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3">
+                    <BreezeLabel value="Shipping Address" />
+                </div>
+                <div class="md:w-2/3">
+                    <p>{{shipping.Ship_Add2}}</p>
+                </div>
             </div>
-            <div class="md:w-2/3">
-                <p>{{shipping.Ship_Add2}}</p>
-            </div>
-        </div>
 
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Shipping Postcode" />
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3">
+                    <BreezeLabel value="Shipping Postcode" />
+                </div>
+                <div class="md:w-2/3">
+                    <p>{{shipping.Ship_poscode}}</p>
+                </div>
             </div>
-            <div class="md:w-2/3">
-                <p>{{shipping.Ship_poscode}}</p>
-            </div>
-        </div>
 
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Shipping City" />
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3">
+                    <BreezeLabel value="Shipping City" />
+                </div>
+                <div class="md:w-2/3">
+                    <p>{{shipping.Ship_City}}</p>
+                </div>
             </div>
-            <div class="md:w-2/3">
-                <p>{{shipping.Ship_City}}</p>
-            </div>
-        </div>
 
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Shipping State" />
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3">
+                    <BreezeLabel value="Shipping State" />
+                </div>
+                <div class="md:w-2/3">
+                    <p>{{activeState?.Negeri}}</p>
+                </div>
             </div>
-            <div class="md:w-2/3">
-                <p>{{activeState?.Negeri}}</p>
-            </div>
-        </div>
 
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Shipping Country" />
-            </div>
-            <div class="md:w-2/3">
-                <p>{{shipping.Ship_Country}}</p>
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/3">
+                    <BreezeLabel value="Shipping Country" />
+                </div>
+                <div class="md:w-2/3">
+                    <p>{{shipping.Ship_Country}}</p>
+                </div>
             </div>
         </div>
     </div>

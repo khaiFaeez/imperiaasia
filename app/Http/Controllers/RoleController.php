@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Portfolio;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use DB;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -33,9 +34,12 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::whereNot('id', 1)->orderBy('id', 'DESC')->paginate(5);
-        return Inertia::render('Role/Index', compact('roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        return Inertia::render('Role/Index', [
+            'roles' => Role::select('roles.*', 'portfolios.name as portfolio_name')
+                ->leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')
+                ->whereNot('roles.id', 1)->orderBy('roles.id', 'DESC')
+                ->get()
+        ]);
     }
 
     /**
@@ -46,7 +50,10 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::get();
-        return Inertia::render('Role/Create', compact('permissions'));
+        return Inertia::render('Role/Create', [
+            'permissions' => Permission::get(),
+            'portfolios' => Portfolio::pluck('name', 'id')->all()
+        ]);
     }
 
     /**
@@ -57,16 +64,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        Auth::user()->hasPermissionTo('role-create');
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
         ]);
 
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = Role::create(['name' => $request->input('name'), 'portfolio_id' => $request->input('portfolio')]);
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('roles.index')
+        return redirect()->route('users.index')
             ->with('message', 'Role created successfully');
     }
     /**
@@ -77,7 +83,8 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $role = Role::find($id);
+        abort_if(($id == 1), 403);
+        $role = Role::select('roles.*', 'portfolios.name as portfolio_name')->leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')->find($id);
         $rolePermissions = Permission::join("role_has_permissions", "role_has_permissions.permission_id", "=", "permissions.id")
             ->where("role_has_permissions.role_id", $id)
             ->get();
@@ -93,15 +100,15 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        Auth::user()->hasPermissionTo('role-edit');
-        $role = Role::find($id);
-        $permissions = Permission::get();
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
+        abort_if(($id == 1), 404);
 
-        return Inertia::render('Role/Edit', compact('role', 'permissions', 'rolePermissions'));
-        // return view('roles.edit', compact('role', 'permissions', 'rolePermissions'));
+        return Inertia::render('Role/Edit', [
+            'role' => Role::select('roles.*', 'portfolios.name as portfolio_name')->leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')->find($id),
+            'permissions' =>  Permission::get(),
+            'rolePermissions' =>  DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
+                ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+                ->all()
+        ]);
     }
 
     /**
@@ -113,7 +120,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Auth::user()->hasPermissionTo('role-edit');
+        abort_if(($id == 1), 404);
+
         $this->validate($request, [
             'name' => 'required',
             'permission' => 'required',
@@ -136,7 +144,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        Auth::user()->hasPermissionTo('role-destroy');
+        abort_if(($id == 1), 404);
+
         DB::table("roles")->where('id', $id)->delete();
         return redirect()->route('roles.index')
             ->with('message', 'Role deleted successfully');

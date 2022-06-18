@@ -68,22 +68,6 @@ const showingNavigationDropdown = ref(false);
                             Print Invoices
                         </BreezeResponsiveNavLink>
                     </li>
-
-                    <!-- tabindex will make the parent menu focusable to keep the submenu open if it's focused -->
-                    <!-- <li tabindex="0" class="relative">
-                        <span>  <i class="bi bi-person text-xl"></i> Admin</span>
-                        <ul class="rounded-box p-2 absolute w-12">
-                        <Link :href="route('users.index')"  :active="route().current('users.*')" >
-                        <i class="bi bi-person text-xl"></i>
-                            Users
-                        </Link>
-                        <Link :href="route('roles.index')"  :active="route().current('roles.*')" >
-                         <i class="bi bi-person-lines-fill text-xl"></i>
-                            User Roles
-                        </Link>
-                        </ul>
-                    </li> -->
-
                     <li>
                         <BreezeResponsiveNavLink :href="route('users.index')"  :active="route().current('users.*')" >
                         <i class="bi bi-person text-xl"></i>
@@ -91,43 +75,8 @@ const showingNavigationDropdown = ref(false);
                         </BreezeResponsiveNavLink>
                     </li>
 
-                    <li>
-                         <BreezeResponsiveNavLink :href="route('roles.index')"  :active="route().current('roles.*')" >
-                         <i class="bi bi-person-lines-fill text-xl"></i>
-                            User Roles
-                        </BreezeResponsiveNavLink>
-                    </li>
-
 
                     </ul>
-
-
-
-                    <!-- <aside class="w-80 bg-neutral text-neutral-content" v-show="route().current('*.invoice.show') || route().current('*.invoice.create') || route().current('*.invoice.repeat')">
-                    <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto" >
-                    </ul>
-
-                    <div class="h-20"></div>
-
-                    <ul class="menu menu-compact flex flex-col p-0 px-4 overflow-y-auto">
-                    <p>Jump to</p>
-                    <li>
-                        <button v-scroll-to="{ el: '#client' }" class=""> Client </button>
-                    </li>
-                    <li>
-                         <button v-scroll-to="{ el: '#postage' }" class=""> Postage </button>
-                    </li>
-
-                     <li>
-                         <button v-scroll-to="{ el: '#product' }" class=""> Product </button>
-                    </li>
-                    <li>
-                         <button v-scroll-to="{ el: '#sales' }" class=""> Sales </button>
-                    </li>
-                    </ul>
-
-
-                    </aside> -->
                 </div>
             </div>
         </div>

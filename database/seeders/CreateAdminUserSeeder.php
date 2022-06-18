@@ -27,10 +27,10 @@ class CreateAdminUserSeeder extends Seeder
 
         $role = Role::create(['name' => 'superadmin']);
 
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'account']);
-        Role::create(['name' => 'logistic']);
-        Role::create(['name' => 'clerk']);
+        Role::create(['name' => 'admin', 'portfolio_id' => 1]);
+        Role::create(['name' => 'account', 'portfolio_id' => 1]);
+        Role::create(['name' => 'logistic', 'portfolio_id' => 1]);
+        Role::create(['name' => 'clerk', 'portfolio_id' => 1]);
 
 
         $permissions = Permission::pluck('id', 'id')->all();

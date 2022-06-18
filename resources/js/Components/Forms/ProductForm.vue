@@ -36,17 +36,17 @@ export default {
 
                     <tr class="line_items" v-for="(n, i) in products.items.length" :key="i">
                         <td class="">{{n}}</td>
-                        <td class="p-0">
+                        <td>
                             <select class="border-0 p-0 select" v-model="products.items[i].product">
                                             <option  value=''>Product</option>
                                             <option v-for="product in productLists" :key="product.id" :value="product.id" >{{product.Product_Name}}</option>
                             </select>
                         </td>
-                        <td class="p-0"><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].price"  @change="total(i)"/></td>
-                        <td class="p-0"><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].qty"  @change="total(i)"/></td>
-                        <td class="p-0"><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].discount"  @change="total(i)"/></td>
-                        <td class="p-0"><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].discounted_price"  @change="total(i)"/></td>
-                        <td class="p-0"><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].total" @change="grandTotal(i)"/></td>
+                        <td><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].price"  @change="total(i)"/></td>
+                        <td><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].qty"  @change="total(i)"/></td>
+                        <td><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].discount"  @change="total(i)"/></td>
+                        <td><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].discounted_price"  @change="total(i)"/></td>
+                        <td><BreezeInput class="border-0" type="number" step="any" placeholder="" v-model="products.items[i].total" @change="grandTotal(i)"/></td>
                         </tr>
                     </tbody>
                     <tfoot>
