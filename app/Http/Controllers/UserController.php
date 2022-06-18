@@ -68,7 +68,11 @@ class UserController extends Controller
         return Inertia::render('User/Create', [
             'roles' => Role::pluck('name', 'name')->all(),
             'portfolios' => Portfolio::pluck('name', 'id')->all(),
-            'roles' => Role::pluck('name', 'id')->all()
+            'roles' => Role::leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')
+                ->whereNot('roles.id', 1)
+                ->orderBy('roles.id', 'DESC')
+                ->select('roles.id', 'portfolios.name as portfolio', 'roles.name')
+                ->get()
         ]);
     }
 
