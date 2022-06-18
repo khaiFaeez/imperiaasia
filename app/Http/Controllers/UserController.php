@@ -112,7 +112,7 @@ class UserController extends Controller
         $user->setStatus('pending');
 
         return redirect()->route('users.index')
-            ->with('status', 'User created successfully');
+            ->with('message', 'User created successfully');
     }
 
     /**
