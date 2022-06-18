@@ -173,7 +173,8 @@ data() {
                 :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoice.Status_Inv}}</span>
         </h1>
         <div class="flex items-center justify-end">
-            <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})" class="btn btn-ghost">
+            <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})"
+                v-if="hasAnyPermission(['invoice-edit'])" class="btn btn-ghost">
             <i class="bi bi-pencil-square  text-xl"></i>
             </Link>
             <button @click="openPDF(invoice)" class="btn btn-ghost btn-sm" title="Print Invoice">

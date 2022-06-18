@@ -55,4 +55,11 @@ class User extends Authenticatable
     {
         return $this->hasOne(Portfolio::class, 'id', 'current_portfolio_id');
     }
+
+    public function getPermissionArray()
+    {
+        return $this->getAllPermissions()->mapWithKeys(function ($pr) {
+            return [$pr['name'] => true];
+        });
+    }
 }
