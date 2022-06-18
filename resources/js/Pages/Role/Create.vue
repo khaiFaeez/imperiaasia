@@ -87,7 +87,7 @@ export default {
                 <div class="col-span-6">
                     <BreezeLabel>Permission:</BreezeLabel>
                     <div v-for="(permission, i) in $page.props.permissions" :key="i">
-                        <input class="checkbox" type="checkbox checkbox-sm" name="permission[]"
+                        <input class="checkbox  checkbox-sm" type="checkbox" name="permission[]"
                             v-model="form.permission" :value="permission.id" />
                         <label class="mx-3"> {{ permission.name }}</label>
                     </div>
