@@ -38,7 +38,6 @@ export default {
     methods: {
         createRole() {
             this.form.post(route('roles.store'), {
-                errorBag: 'storeRoles',
                 preserveScroll: true,
             });
         },
@@ -70,7 +69,7 @@ export default {
                 <div class="col-span-6">
                     <select name="portfolio" id="portfolio" v-model="form.portfolio"
                         class="select w-full input-bordered border-primary max-w-xl">
-                        <option value=""> </option>
+                        <option value="">*</option>
                         <option v-for="(portfolio, i ) in $page.props.portfolios" :key="i" :value="i">
                             {{ portfolio }}
                         </option>
@@ -81,6 +80,7 @@ export default {
                     <BreezeLabel>Name:</BreezeLabel>
                     <BreezeInput id="name" type="text" v-model="form.name" required autocomplete="name"
                         class="max-w-xl" />
+                    <BreezeInputError :message="$page.props.errors.name" />
                 </div>
 
 

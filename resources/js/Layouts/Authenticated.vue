@@ -91,6 +91,13 @@ const showingNavigationDropdown = ref(false);
                         </BreezeResponsiveNavLink>
                     </li>
 
+                    <li v-if="hasAnyPermission(['role-list', 'role-edit', 'role-create'])">
+                        <BreezeResponsiveNavLink :href="route('roles.index')" :active="route().current('roles.*')">
+                            <i class="bi bi-person text-xl"></i>
+                            Roles
+                        </BreezeResponsiveNavLink>
+                    </li>
+
 
                 </ul>
             </div>

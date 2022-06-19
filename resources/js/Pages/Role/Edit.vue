@@ -86,9 +86,6 @@ export default {
                     </div>
 
                 </div>
-
-
-
             </div>
         </form>
     </AppLayout>

@@ -7,6 +7,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePortfolios extends Seeder
 {
@@ -17,6 +19,10 @@ class CreatePortfolios extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
+        DB::table('portfolios')->truncate();
+        Schema::enableForeignKeyConstraints();
 
         $insert  =  Portfolio::create([
             'name' => 'Platinum',
@@ -49,16 +55,15 @@ class CreatePortfolios extends Seeder
         Portfolio::create([
             'name' => 'Maryam Gold',
             'status' => 0,
-            'db_connection' => 'maryamgold',
+            'db_connection' => 'maryam',
             'created_at' => Carbon::now()
         ]);
 
 
-        $users = User::get();
+        $user = User::first();
+        $portfolio = Portfolio::pluck('id')->toArray();
 
-        foreach ($users as $user) {
-            User::where('id', $user->id)->update(['current_portfolio_id' => $insert->id]);
-            $user->portfolios()->attach($insert->id);
-        }
+        User::where('id', $user->id)->update(['current_portfolio_id' => $insert->id]);
+        $user->portfolios()->attach($portfolio);
     }
 }

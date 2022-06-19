@@ -136,7 +136,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
         $user = User::withTrashed()->findOrFail($id);
 
         return Inertia::render('User/Edit', [
@@ -148,7 +147,7 @@ class UserController extends Controller
                 ->whereNot('roles.id', 1)
                 ->orderBy('roles.id', 'DESC')
                 ->select('roles.id', 'portfolios.name as portfolio', 'roles.name')
-                ->get()
+                ->get(),
         ]);
     }
 

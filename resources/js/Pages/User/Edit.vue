@@ -86,11 +86,16 @@ export default {
             </h1>
 
             <div class="flex items-end justify-end mb-3 gap-3">
+                <Link :href="route('password.reset', { user: $page.props.user.id })" class="underline">Reset Password
+                </Link>
                 <!-- The button to open modal -->
-                <label for="my-modal-4" class="btn modal-button btn-sm btn-ghost"
-                    :title="!$page.props.user.deleted_at ? 'Deactivate' : 'Activate' "><i class="text-xl bi"
-                        :class="!$page.props.user.deleted_at ? 'bi-lock' : 'bi-unlock'"></i>
+                <label for="my-modal-4" class="btn modal-button btn-sm btn-error"
+                    :title="!$page.props.user.deleted_at ? 'Deactivate' : 'Activate' ">
+                    <i class="text-xl bi" :class="!$page.props.user.deleted_at ? 'bi-lock' : 'bi-unlock'"></i>
                 </label>
+
+
+
 
 
             </div>
