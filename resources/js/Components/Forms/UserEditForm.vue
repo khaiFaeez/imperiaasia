@@ -34,10 +34,10 @@ export default {
 <style src="@vueform/multiselect/themes/default.css">
 </style>
 
-<style scoped>
-    table>tbody>tr>td{
-        background:transparent;
-    }
+<style>
+.multiselect-tag {
+            background:rgb(110, 2, 31) !important;
+        }
 </style>
 <template>
     <div class="w-full">
@@ -80,7 +80,7 @@ export default {
                 <BreezeLabel value="Portfolio & Roles" />
             </div>
             <div class="md:w-2/3">
-                <Multiselect name="roles" id="roles" mode="tags" :close-on-select="false"
+                <Multiselect name="roles" id="roles" mode="tags" :close-on-select="true"
                     v-model=" user.roles" :options="$page.props.roles" searchable=true valueProp="id" label="name"
                     class="select input-bordered border-primary w-full">
                 </Multiselect>

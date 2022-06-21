@@ -93,24 +93,19 @@ class UserController extends Controller
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'staff_id' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'roles' => 'required'
         ]);
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
 
-        //GetPortfolios
-        $portfolio_id = Role::whereIn('id', $request->input('roles'))->get();
-        $portfolio_key = array_keys($portfolio_id->groupBy('portfolio_id')->toArray());
+        $session_team_id = getPermissionsTeamId();
 
-        User::where('id', $user->id)->update(['current_portfolio_id' => reset($portfolio_key)]);
-        foreach ($portfolio_key as $portfolio) {
-            $user->portfolios()->attach($portfolio);
-        }
+        $user->syncRoles($request->input('roles'));
+        empty($request->input('roles')) ? $user->portfolios()->detach($session_team_id) : $user->portfolios()->attach($session_team_id);
 
+        User::where('id', $user->id)->update(['current_portfolio_id' => $session_team_id]);
 
         $user->setStatus('pending');
 
@@ -173,21 +168,12 @@ class UserController extends Controller
             'staff_id' =>  ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
         ]);
 
-        $input = $request->all();
+        $user->update($request->all());
 
-        $user->update($input);
+        $session_team_id = getPermissionsTeamId();
 
-        // $user->givePermissionTo($request->permission);
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
-
-
-        $roles = Role::whereIn('id', $request->input('roles'))->select('id', 'portfolio_id')->get();
-
-        foreach ($roles as $role) {
-            app(PermissionRegistrar::class)->setPermissionsTeamId($role->portfolio_id);
-            $user->assignRole($role->id);
-            $user->portfolios()->sync($role->portfolio_id);
-        }
+        $user->syncRoles($request->input('roles'));
+        empty($request->input('roles')) ? $user->portfolios()->detach($session_team_id) : $user->portfolios()->attach($session_team_id);
 
         return back()
             ->with('message', 'User Updated');
