@@ -90,6 +90,11 @@ class Invoice extends Model
         return $this->hasOne(Delivery::class, 'Inv_No', 'Id');
     }
 
+    public function notes()
+    {
+        return $this->hasMany(InvoiceNote::class, 'Inv_No', 'Id');
+    }
+
 
 
     public static function boot()

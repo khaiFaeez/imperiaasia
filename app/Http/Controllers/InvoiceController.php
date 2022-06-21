@@ -47,7 +47,7 @@ class InvoiceController extends Controller
     public function show($portfolio, $id)
     {
         return Inertia::render('Invoice/Show', [
-            "invoice" => Invoice::with('client')->with('product')->with('product2')->with('product3')->with('product4')->with('product5')->with('state')->with('consultant')->where('Id', $id)->first(),
+            "invoice" => Invoice::with('client')->with('notes:Inv_No,Notes,Created_By,Created_On')->with('product')->with('product2')->with('product3')->with('product4')->with('product5')->with('state')->with('consultant')->where('Id', $id)->first(),
             "states" => State::get(),
             "countries" => config('countries'),
             "products" => Product::select('id', 'Code', 'Product_Name')->get(),

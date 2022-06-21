@@ -40,6 +40,10 @@ class PermissionTableSeeder extends Seeder
             'user-create',
             'user-edit',
             'user-delete',
+            'note-list',
+            'note-create',
+            'note-edit',
+            'note-delete',
         ];
 
         foreach ($permissions as $permission) {
