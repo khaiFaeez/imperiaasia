@@ -32,5 +32,5 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('/portfolio/change/{portfolio}', [PortfolioController::class, 'change_portfolio'])->name('portfolio.change');
+    Route::post('/portfolio/change/{portfolio}', PortfolioController::class)->name('portfolio.change');
 });

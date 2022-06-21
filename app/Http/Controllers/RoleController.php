@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Permission;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class RoleController extends Controller
 {
@@ -34,11 +35,18 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
+
+        $filter = FacadesRequest::input('search');
+
         return Inertia::render('Role/Index', [
             'roles' => Role::select('roles.*', 'portfolios.name as portfolio_name')
                 ->leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')
-                ->whereNot('roles.id', 1)->orderBy('roles.id', 'DESC')
-                ->get()
+                ->whereNot('roles.id', 1)
+                ->when($filter, function ($query, $filter) {
+                    $query->where('roles.name', 'LIKE', '%' . $filter . '%');
+                })
+                ->get(),
+            'filters' => FacadesRequest::all('search', 'trashed'),
         ]);
     }
 
@@ -102,9 +110,10 @@ class RoleController extends Controller
     public function edit($id)
     {
         abort_if(($id == 1), 404);
-
         return Inertia::render('Role/Edit', [
-            'role' => Role::select('roles.*', 'portfolios.name as portfolio_name')->leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')->find($id),
+            'role' => Role::select('roles.*', 'portfolios.name as portfolio_name')
+                ->leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')
+                ->find($id),
             'permissions' =>  Permission::get(),
             'rolePermissions' =>  DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
                 ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')

@@ -23,7 +23,7 @@ class CreateRoles extends Seeder
         DB::table('roles')->truncate();
         Schema::enableForeignKeyConstraints();
 
-        $role = Role::create(['name' => 'superadmin', 'portfolio_id' => '*']);
+        $role = Role::create(['name' => 'superadmin']);
 
         Role::create(['name' => 'admin platinum', 'portfolio_id' => 1]);
         Role::create(['name' => 'account platinum', 'portfolio_id' => 1]);
@@ -54,9 +54,5 @@ class CreateRoles extends Seeder
         $permissions = Permission::pluck('id', 'id')->all();
 
         $role->syncPermissions($permissions);
-
-        $user =  User::first();
-
-        $user->assignRole([$role->id]);
     }
 }

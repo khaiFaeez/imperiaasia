@@ -6,6 +6,7 @@ import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from '@/Components/InputError.vue'
 import BreezeCheckbox from '@/Components/Checkbox.vue'
 import BreezeDropDown from '@/Components/Dropdown.vue'
+import Multiselect from '@vueform/multiselect'
 // import the component
 import Treeselect from 'vue3-treeselect'
 import { ref } from 'vue';
@@ -22,11 +23,16 @@ export default {
         Link,
         Treeselect,
         BreezeCheckbox,
-        BreezeDropDown
+        BreezeDropDown,
+        Multiselect
+
     }
 }
 
 </script>
+
+<style src="@vueform/multiselect/themes/default.css">
+</style>
 
 <style scoped>
     table>tbody>tr>td{
@@ -74,12 +80,10 @@ export default {
                 <BreezeLabel value="Portfolio & Roles" />
             </div>
             <div class="md:w-2/3">
-                <select name="roles" id="roles" multiple v-model="user.roles"
-                    class="select input-bordered border-primary w-full h-52">
-                    <option v-for="(role, i ) in $page.props.roles" :key="i" :value="role.id">{{ role.portfolio }}
-                        - {{
-                        role.name }}</option>
-                </select>
+                <Multiselect name="roles" id="roles" mode="tags" :close-on-select="false"
+                    v-model=" user.roles" :options="$page.props.roles" searchable=true valueProp="id" label="name"
+                    class="select input-bordered border-primary w-full">
+                </Multiselect>
                 <BreezeInputError :message="$page.props.errors.roles" />
 
                 <Link :href="route('roles.index')" class="underline">Manage Roles</Link>
