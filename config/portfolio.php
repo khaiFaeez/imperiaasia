@@ -6,7 +6,7 @@ return [
         "dresella" => "DRE-",
         "cilikering" => "TCK-",
         "agri" => "AGRI-",
-        "maryamgold" => "CHM-",
+        "maryam" => "CHM-",
     ],
 
     'invoice_padding' => [
@@ -14,7 +14,7 @@ return [
         "dresella" => 7,
         "cilikering" => 7,
         "agri" => 7,
-        "maryamgold" => 7,
+        "maryam" => 7,
     ],
 
 
@@ -46,8 +46,8 @@ return [
             'address' => 'Wisma Imperia Asia No.24, Jalan Klang Sentral 2/KU5,  Klang Sentral, 41050 Klang, Selangor.',
             'contact' => 'Tel : +603-3341 9822 / +6016 447 1982 / 1 800 88 1982 E-Mail : hi@imperiaasia.com Website : www.imperiaasia.com'
         ],
-        'maryamgold' => [
-            'name' => 'IMPERIA ASIA RESOURCES',
+        'maryam' => [
+            'name' => 'MARYAM GOLD',
             'ssm'  => 'SA017174-U',
             'address' => 'Wisma Imperia Asia No.24, Jalan Klang Sentral 2/KU5,  Klang Sentral, 41050 Klang, Selangor.',
             'contact' => 'Tel : +603-3341 9822 / +6016 447 1982 / 1 800 88 1982 E-Mail : hi@imperiaasia.com Website : www.imperiaasia.com'

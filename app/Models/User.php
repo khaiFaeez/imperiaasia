@@ -48,11 +48,19 @@ class User extends Authenticatable
 
     public function portfolios()
     {
-        return $this->belongsToMany(Portfolio::class);
+        return $this->belongsToMany(Portfolio::class)->where('status', 1);
     }
 
     public function current_portfolio()
     {
         return $this->hasOne(Portfolio::class, 'id', 'current_portfolio_id');
+    }
+
+    public function getPermissionArray()
+    {
+        setPermissionsTeamId(auth()->user()->current_portfolio_id);
+        return $this->getAllPermissions()->mapWithKeys(function ($pr) {
+            return [$pr['name'] => true];
+        });
     }
 }

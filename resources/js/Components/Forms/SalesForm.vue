@@ -1,7 +1,7 @@
 <script>
 import BreezeInput from '@/Components/Input.vue'
 import BreezeLabel from '@/Components/Label.vue'
- import Multiselect from '@vueform/multiselect'
+import Multiselect from '@vueform/multiselect'
 
 export default {
     props:['consultants','sales'],

@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
-
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 class UserController extends Controller
 {
@@ -65,13 +66,15 @@ class UserController extends Controller
     public function create()
     {
 
+        $session_team_id = getPermissionsTeamId();
+
         return Inertia::render('User/Create', [
             'roles' => Role::pluck('name', 'name')->all(),
             'portfolios' => Portfolio::pluck('name', 'id')->all(),
             'roles' => Role::leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')
-                ->whereNot('roles.id', 1)
-                ->orderBy('roles.id', 'DESC')
                 ->select('roles.id', 'portfolios.name as portfolio', 'roles.name')
+                ->whereNot('roles.id', 1)
+                ->where('portfolio_id', $session_team_id)
                 ->get()
         ]);
     }
@@ -97,17 +100,13 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
 
         $user = User::create($input);
-        $user->assignRole($request->input('roles'));
 
-        //GetPortfolios
-        $portfolio_id = Role::whereIn('id', $request->input('roles'))->get();
-        $portfolio_key = array_keys($portfolio_id->groupBy('portfolio_id')->toArray());
+        $session_team_id = getPermissionsTeamId();
 
-        User::where('id', $user->id)->update(['current_portfolio_id' => reset($portfolio_key)]);
-        foreach ($portfolio_key as $portfolio) {
-            $user->portfolios()->attach($portfolio);
-        }
+        $user->syncRoles($request->input('roles'));
+        empty($request->input('roles')) ? $user->portfolios()->detach($session_team_id) : $user->portfolios()->attach($session_team_id);
 
+        User::where('id', $user->id)->update(['current_portfolio_id' => $session_team_id]);
 
         $user->setStatus('pending');
 
@@ -136,8 +135,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
         $user = User::withTrashed()->findOrFail($id);
+
+
+        $session_team_id = getPermissionsTeamId();
 
         return Inertia::render('User/Edit', [
             'user' => $user,
@@ -146,9 +147,9 @@ class UserController extends Controller
             'userRole' => $user->roles->pluck('id')->all(),
             'roles' => Role::leftJoin('portfolios', 'portfolios.id', 'roles.portfolio_id')
                 ->whereNot('roles.id', 1)
-                ->orderBy('roles.id', 'DESC')
                 ->select('roles.id', 'portfolios.name as portfolio', 'roles.name')
-                ->get()
+                ->where('portfolio_id', $session_team_id)
+                ->get(),
         ]);
     }
 
@@ -161,19 +162,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $user = User::withTrashed()->find($id);
-        $user->update($this->validate($request, [
+
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'staff_id' =>  ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
-            'portfolios' => 'sometimes',
-            'roles' => 'sometimes'
-        ]));
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
+        ]);
 
-        $user->portfolios()->attach($request->input('portfolios'));
+        $user->update($request->all());
 
-        $user->assignRole($request->input('roles'));
+        $session_team_id = getPermissionsTeamId();
+
+        $user->syncRoles($request->input('roles'));
+        empty($request->input('roles')) ? $user->portfolios()->detach($session_team_id) : $user->portfolios()->attach($session_team_id);
 
         return back()
             ->with('message', 'User Updated');

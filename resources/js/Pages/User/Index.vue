@@ -83,6 +83,9 @@ export default {
                 </tr>
             </thead>
             <tbody>
+                <tr v-show="$page.props.users.data.length == 0">
+                    <td colspan="5">No user</td>
+                </tr>
                 <tr class="hover hover:cursor-pointer" v-for="$user in $page.props.users.data" :key="$user.Id"
                     @click="goToViewPage($user)">
                     <td>
@@ -94,7 +97,8 @@ export default {
                     <td>{{ $user.username }}</td>
                     <td>{{ $user.staff_id }}</td>
                     <td>
-                        <label class="badge badge-outline capitalize" v-for="$v in $user.roles" :key="$v.id">{{ $v.name }}</label>
+                        <label class="badge badge-outline capitalize" v-for="$v in $user.roles" :key="$v.id">{{ $v.name
+                            }}</label>
                     </td>
                 </tr>
             </tbody>

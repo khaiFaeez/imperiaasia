@@ -37,15 +37,15 @@ const showingNavigationDropdown = ref(false);
         </div>
         <div class="navbar-center hidden lg:flex">
             <div class="dropdown">
-                <label tabindex="0" class="btn btn-ghost m-1"> {{
-                    $page.props.auth.user.current_portfolio.name }} <svg class="fill-current"
+                <label tabindex="0" class="btn btn-ghost m-1"> {{ $page.props.auth.user.current_portfolio.name }}
+                <svg class="fill-current"
                         xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                         <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                     </svg></label>
                 <ul tabindex="0" class="dropdown-content menu shadow bg-neutral w-52">
                     <li v-for="(value,key) in $page.props.auth.portfolio" :key="key">
                         <Link :href="route('portfolio.change',{portfolio:key})" method="post" as="button"
-                            class="uppercase">{{value}}</Link>
+                            class="uppercase">{{ value}}</Link>
                     </li>
                 </ul>
             </div>

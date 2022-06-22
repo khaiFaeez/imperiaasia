@@ -37,6 +37,7 @@ export default {
                 name:this.$page.props.user.name,
                 staff_id:this.$page.props.user.staff_id,
                 roles: this.$page.props.userRole,
+                // permission: Object.keys(this.$page.props.userPermissions)
             }),
         }
     },
@@ -86,25 +87,36 @@ export default {
             </h1>
 
             <div class="flex items-end justify-end mb-3 gap-3">
+                <Link :href="route('password.reset', { user: $page.props.user.id })" class="underline">Reset Password
+                </Link>
                 <!-- The button to open modal -->
-                <label for="my-modal-4" class="btn modal-button btn-sm btn-ghost"
-                    :title="!$page.props.user.deleted_at ? 'Deactivate' : 'Activate' "><i class="text-xl bi"
-                        :class="!$page.props.user.deleted_at ? 'bi-lock' : 'bi-unlock'"></i>
+                <label for="my-modal-4" class="btn modal-button btn-sm btn-error"
+                    :title="!$page.props.user.deleted_at ? 'Deactivate' : 'Activate' ">
+                    <i class="text-xl bi" :class="!$page.props.user.deleted_at ? 'bi-lock' : 'bi-unlock'"></i>
                 </label>
 
 
-            </div>
 
+
+
+            </div>
             <form @submit.prevent="updateUser" class="form max-w-4xl">
-                <div class="card bg-white">
-                    <div class="card-body">
+                <div class="bg-white h-96 p-12 rounded-xl">
                         <user-form :user="form"></user-form>
+                        <!-- <div class="col-span-6">
+                            <BreezeLabel>Permission:</BreezeLabel>
+                            <div v-for="(permission, i) in $page.props.permissions" :key="i">
+                                <input class="checkbox  checkbox-sm" type="checkbox" name="permission[]"
+                                    v-model="form.permission" :value="permission.name" />
+                                <label class="mx-3"> {{ permission.name }}</label>
+                            </div>
+
+                        </div> -->
                         <div class="flex items-center justify-end">
                             <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing">
                                 Update
                             </BreezeButton>
                         </div>
-                    </div>
                 </div>
 
 

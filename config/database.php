@@ -195,7 +195,7 @@ return [
             ]) : [],
         ],
 
-        'maryamgold' => [
+        'maryam' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL_CHM'),
             'host' => env('DB_HOST_CHM', '127.0.0.1'),

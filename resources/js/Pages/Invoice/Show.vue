@@ -8,6 +8,9 @@ import ProductDisplay from '@/Components/Forms/ProductDisplay.vue';
 import PostageDisplay from '@/Components/Forms/PostageDisplay.vue';
 import SalesDisplay from '@/Components/Forms/SalesDisplay.vue';
 import PaymentDisplay from '@/Components/Forms/PaymentDisplay.vue';
+// import TipTap from '@/Components/TipTap.vue'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 
 export default {
@@ -27,7 +30,9 @@ export default {
     PaymentForm,
     PostageDisplay,
     SalesDisplay,
-    PaymentDisplay
+    PaymentDisplay,
+    // TipTap
+        QuillEditor
 },
 data() {
         return {
@@ -43,6 +48,9 @@ data() {
                     City:this.invoice.client.City,
                     State:this.invoice.client.State,
                     Country:this.invoice.client.Country
+            }),
+            noteForm:this.$inertia.form({
+                note:"Note"
             }),
             invoiceForm: this.$inertia.form({
                 client:this.invoice.client.id,
@@ -167,13 +175,37 @@ data() {
 
     <Head title="Create Invoice" />
     <AppLayout>
+
+        <!-- Put this part before </body> tag -->
+        <div class="modal" id="my-modal-2">
+            <div class="modal-box">
+                <QuillEditor theme="snow" toolbar="full" v-model:content="noteForm.note" contentType="html" />
+                <!-- <TipTap v-model="noteForm.note" /> -->
+                <div class="bg-white p-4 rounded-sm shadow-xl m-3" v-for="note,i in $page.props.invoice.notes" :key="i">
+                    <div class="textarea textarea-ghost" v-html="note.Notes">
+                    </div>
+                    <p class="text-sm text-gray-800">{{ note.Created_By }}</p>
+                    <p class="text-sm text-gray-800">{{ note.Created_On }}</p>
+                </div>
+
+                <div class="modal-action">
+                    <a href="#" class="btn">Yay!</a>
+                </div>
+            </div>
+        </div>
+
         <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
             <span class="text-primary font-medium">/</span>View {{invoice.Inv_No}} <span class="badge text-white"
                 :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoice.Status_Inv}}</span>
         </h1>
         <div class="flex items-center justify-end">
-            <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})" class="btn btn-ghost">
+            <!-- The button to open modal -->
+            <a href="#my-modal-2" class="btn btn-ghost"><i class="bi bi-journal-text text-xl"
+                    v-if="hasAnyPermission(['note-edit'])"></i></a>
+
+            <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})"
+                v-if="hasAnyPermission(['invoice-edit'])" class="btn btn-ghost">
             <i class="bi bi-pencil-square  text-xl"></i>
             </Link>
             <button @click="openPDF(invoice)" class="btn btn-ghost btn-sm" title="Print Invoice">
@@ -183,7 +215,6 @@ data() {
                 <i class="bi bi-printer-fill text-xl"></i>
             </button>
         </div>
-
         <div class="grid grid-cols-1 xl:grid-cols-1">
             <div class="my-3">
                 <div class="divider text-xl" id="client">Client</div>
