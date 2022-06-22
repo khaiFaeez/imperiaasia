@@ -10,7 +10,10 @@ import SalesDisplay from '@/Components/Forms/SalesDisplay.vue';
 import PaymentDisplay from '@/Components/Forms/PaymentDisplay.vue';
 // import TipTap from '@/Components/TipTap.vue'
 import { QuillEditor } from '@vueup/vue-quill'
+import ImageUploader from "quill-image-uploader";
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import Tabs from '@/Components/Tabs.vue';
+import Tab from '@/Components/Tab.vue';
 
 
 export default {
@@ -32,7 +35,9 @@ export default {
     SalesDisplay,
     PaymentDisplay,
     // TipTap
-        QuillEditor
+        QuillEditor,
+        Tabs,
+        Tab
 },
 data() {
         return {
@@ -49,9 +54,12 @@ data() {
                     State:this.invoice.client.State,
                     Country:this.invoice.client.Country
             }),
+
             noteForm:this.$inertia.form({
-                note:"Note"
+                invoice_id: this.invoice.Id,
+                note:""
             }),
+
             invoiceForm: this.$inertia.form({
                 client:this.invoice.client.id,
                 products:{
@@ -165,7 +173,19 @@ data() {
         },
         openDocket(data){
             window.open(route('portfolio.invoice.docket',{'invoice': data.Id}), '_blank')
+        },
+        storeNote() {
+            this.noteForm.post(route('portfolio.invoice.note'));
+        },
+    },
+
+    setup: () => {
+        const modules = {
+            name: 'imageUploader',
+            module: ImageUploader,
+            options: {/* options */ }
         }
+        return { modules }
     },
 
 }
@@ -177,20 +197,28 @@ data() {
     <AppLayout>
 
         <!-- Put this part before </body> tag -->
-        <div class="modal" id="my-modal-2">
-            <div class="modal-box">
-                <QuillEditor theme="snow" toolbar="full" v-model:content="noteForm.note" contentType="html" />
-                <!-- <TipTap v-model="noteForm.note" /> -->
-                <div class="bg-white p-4 rounded-sm shadow-xl m-3" v-for="note,i in $page.props.invoice.notes" :key="i">
-                    <div class="textarea textarea-ghost" v-html="note.Notes">
+        <input type="checkbox" id="my-modal" class="modal-toggle" />
+        <div class="modal">
+            <div class="modal-box w-full max-w-7xl h-[70vh] relative">
+                <label for="my-modal" class="btn btn-sm btn-circle btn-primary absolute right-2 top-2">✕</label>
+                <div class="grid grid-cols-2">
+                    <div class="overflow-y-scroll ">
+                        <div class="bg-white p-4 rounded-sm shadow-xl m-3" v-for="note,i in $page.props.invoice.notes"
+                            :key="i">
+                            <div v-html="note.Notes">
+                            </div>
+                            <p class="text-sm text-gray-800 italic">{{ note.Created_By }} ( {{ note.Created_On }} )</p>
+                        </div>
                     </div>
-                    <p class="text-sm text-gray-800">{{ note.Created_By }}</p>
-                    <p class="text-sm text-gray-800">{{ note.Created_On }}</p>
+
+                    <div v-if="hasAnyPermission(['note-edit'])" class="h-96">
+                        <QuillEditor theme="snow" toolbar="full" v-model:content="noteForm.note" contentType="html"
+                            class="bg-white" />
+
+                        <button class="btn btn-block btn-sm " @click="storeNote">Submit</button>
+                    </div>
                 </div>
 
-                <div class="modal-action">
-                    <a href="#" class="btn">Yay!</a>
-                </div>
             </div>
         </div>
 
@@ -201,8 +229,8 @@ data() {
         </h1>
         <div class="flex items-center justify-end">
             <!-- The button to open modal -->
-            <a href="#my-modal-2" class="btn btn-ghost"><i class="bi bi-journal-text text-xl"
-                    v-if="hasAnyPermission(['note-edit'])"></i></a>
+            <label for="my-modal" class="btn btn-ghost modal-button" v-if="hasAnyPermission(['note-edit','note-list'])">
+                <i class="bi bi-journal-text text-xl"></i></label>
 
             <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})"
                 v-if="hasAnyPermission(['invoice-edit'])" class="btn btn-ghost">
@@ -241,6 +269,24 @@ data() {
                 <payment-display :payment="invoiceForm.payment" />
             </div>
         </div>
+
+        <!-- <tabs>
+            <tab title="Client">
+                <ClientDisplay :client="invoice.client" :states="$page.props.states" />
+            </tab>
+            <tab title="Postage">
+                <PostageDisplay :states="$page.props.states" :shipping="invoiceForm.shipping" />
+            </tab>
+            <tab title="Product">
+                <ProductDisplay :products="invoiceForm.products" :productLists="$page.props.products" />
+            </tab>
+            <tab title="Sales">
+                <SalesDisplay :sales="invoiceForm.sales" />
+            </tab>
+            <tab title="Payment">
+                <payment-display :payment="invoiceForm.payment" />
+            </tab>
+        </tabs> -->
     </AppLayout>
 
 </template>

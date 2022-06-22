@@ -92,10 +92,8 @@ class Invoice extends Model
 
     public function notes()
     {
-        return $this->hasMany(InvoiceNote::class, 'Inv_No', 'Id');
+        return $this->hasMany(InvoiceNote::class, 'Inv_No', 'Id')->orderBy('Created_On', 'desc');
     }
-
-
 
     public static function boot()
     {
