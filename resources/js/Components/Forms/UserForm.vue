@@ -6,10 +6,6 @@ import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from '@/Components/InputError.vue'
 import Multiselect from '@vueform/multiselect'
 import { ref } from 'vue';
-  // import the component
-  import Treeselect from 'vue3-treeselect'
-  // import the styles
-  import 'vue3-treeselect/dist/vue3-treeselect.css'
 
 
 const showingNavigationDropdown = ref(false);
