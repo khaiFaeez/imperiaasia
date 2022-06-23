@@ -229,11 +229,12 @@ data() {
         </h1>
         <div class="flex items-center justify-end">
             <!-- The button to open modal -->
-            <label for="my-modal" class="btn btn-ghost modal-button" v-if="hasAnyPermission(['note-edit','note-list'])">
+            <label for="my-modal" class="btn btn-ghost  btn-sm modal-button"
+                v-if="hasAnyPermission(['note-edit','note-list'])" title="Notes">
                 <i class="bi bi-journal-text text-xl"></i></label>
 
             <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})"
-                v-if="hasAnyPermission(['invoice-edit'])" class="btn btn-ghost">
+                v-if="hasAnyPermission(['invoice-edit'])" class="btn btn-ghost btn-sm" title="Edit Invoice">
             <i class="bi bi-pencil-square  text-xl"></i>
             </Link>
             <button @click="openPDF(invoice)" class="btn btn-ghost btn-sm" title="Print Invoice">

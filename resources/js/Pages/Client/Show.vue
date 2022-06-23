@@ -55,7 +55,7 @@ export default {
                 v-if="!isPending && hasAnyPermission(['invoice-create'])">
             New Invoice
             </Link>
-            <div class="btn btn-primary btn-disabled" v-else>
+            <div class="btn btn-primary btn-sm btn-disabled" v-else>
                 New Invoice
             </div>
         </div>
