@@ -171,6 +171,7 @@ class InvoiceController extends Controller
 
             'Consultant' => $request->sales['consultant'],
             'Channel' => $request->sales['channel'],
+            'closing_code' => $request->sales['closing'],
             'Created_By' => Auth::user()->username,
             'Created_Date' => \Carbon\Carbon::now()
         ]);
@@ -271,6 +272,7 @@ class InvoiceController extends Controller
 
             'Consultant' => $request->sales['consultant'],
             'Channel' => $request->sales['channel'],
+            'closing_code' => $request->sales['closing'],
             'Last_Edited_By' => Auth::user()->username,
             'Last_Edited_Date' => \Carbon\Carbon::now()
         ]);

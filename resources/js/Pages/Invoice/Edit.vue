@@ -124,8 +124,8 @@ export default {
                 ]},
                 sales:{
                     consultant:this.invoice.consultant?.id,
-                    channel:"",
-                    closing:""
+                    channel: this.invoice.Channel,
+                    closing: this.invoice.closing_code
                 },
                 shipping:{
                     Ship_Name:this.invoice.Ship_Name,
@@ -259,6 +259,10 @@ export default {
 
         <form @submit.prevent="updateInvoice" class="form">
             <div class="flex items-center justify-end gap-4">
+                <Link :href="route('portfolio.invoice.show',{invoice:invoice.Id})"
+                    class="hover:underline hover:text-primary hover:cursor-pointe">
+                Cancel Edit
+                </Link>
                 <p class="hover:underline hover:text-primary hover:cursor-pointer"
                     v-show="invoice.Status_Inv == 'PENDING'" @click="cancelOrder">Cancel Order</p>
                 <p class="hover:underline hover:text-primary hover:cursor-pointer"
@@ -270,7 +274,6 @@ export default {
 
             <div class="grid grid-cols-1 xl:grid-cols-1">
                 <div class="my-3">
-                    <div class="divider text-xl" id="client">Client</div>
                     <client-display :client="clientForm" :states="$page.props.states" />
                 </div>
 

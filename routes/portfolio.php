@@ -10,7 +10,7 @@ use App\Http\Controllers\DocketController;
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::resource('invoice', InvoiceController::class)->except('create');
     Route::resource('client', ClientController::class);
     Route::get('/invoice/repeat/{invoice_id}', [InvoiceController::class, 'repeatOrder'])->name('invoice.repeat');

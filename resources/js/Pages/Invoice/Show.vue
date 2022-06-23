@@ -152,7 +152,7 @@ data() {
                 sales:{
                     consultant:this.invoice.consultant?.Name,
                     channel:this.invoice.Channel,
-                    closing:""
+                    closing: this.invoice.closing_code
                 },
                 shipping:{
                     Ship_Name:this.invoice.Ship_Name,
@@ -224,7 +224,7 @@ data() {
 
         <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-            <span class="text-primary font-medium">/</span>View {{invoice.Inv_No}} <span class="badge text-white"
+            <span class="text-primary font-medium">/</span> {{invoice.Inv_No}} <span class="badge text-white"
                 :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoice.Status_Inv}}</span>
         </h1>
         <div class="flex items-center justify-end">
@@ -245,38 +245,19 @@ data() {
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-1">
             <div class="my-3">
-                <div class="divider text-xl" id="client">Client</div>
                 <ClientDisplay :client="invoice.client" :states="$page.props.states" />
             </div>
 
             <div class="my-3">
-                <div class="divider text-xl" id="postage">Postage</div>
+                <div class="tabs">
+                    <a class="tab tab-lifted tab-active">Postage</a>
+                </div>
                 <PostageDisplay :states="$page.props.states" :shipping="invoiceForm.shipping" />
             </div>
 
-            <div class="my-3">
-                <div class="divider text-xl" id="product">Product</div>
-                <ProductDisplay :products="invoiceForm.products" :productLists="$page.props.products" />
-            </div>
-
-            <div class="my-3">
-                <div class="divider text-xl" id="sales">Sales</div>
-                <SalesDisplay :sales="invoiceForm.sales" />
-            </div>
-
-            <div class="my-3">
-                <div class="divider text-xl" id="sales">Payment</div>
-                <payment-display :payment="invoiceForm.payment" />
-            </div>
         </div>
 
-        <!-- <tabs>
-            <tab title="Client">
-                <ClientDisplay :client="invoice.client" :states="$page.props.states" />
-            </tab>
-            <tab title="Postage">
-                <PostageDisplay :states="$page.props.states" :shipping="invoiceForm.shipping" />
-            </tab>
+        <tabs>
             <tab title="Product">
                 <ProductDisplay :products="invoiceForm.products" :productLists="$page.props.products" />
             </tab>
@@ -286,7 +267,7 @@ data() {
             <tab title="Payment">
                 <payment-display :payment="invoiceForm.payment" />
             </tab>
-        </tabs> -->
+        </tabs>
     </AppLayout>
 
 </template>

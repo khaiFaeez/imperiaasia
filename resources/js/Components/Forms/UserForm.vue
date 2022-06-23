@@ -104,7 +104,8 @@ export default {
                     class="select input-bordered border-primary w-full">
                 </Multiselect>
                 <BreezeInputError :message="$page.props.errors.roles" />
-                <Link :href="route('roles.index')" class="underline">Manage Roles</Link>
+                <Link :href="route('roles.index')" class="hover:underline hover:text-primary hover:cursor-pointer">
+                Manage Roles</Link>
             </div>
         </div>
 

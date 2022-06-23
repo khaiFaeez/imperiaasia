@@ -65,7 +65,7 @@ export default {
             <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
             </search-filter>
             <Link :href="route('portfolio.client.create',{portfolio:route().params.portfolio})"
-                v-if="route().current('*.client.*')" class="btn btn-primary  btn-sm">
+                v-if="hasAnyPermission(['client-create'])" class="btn btn-primary  btn-sm">
             <i class="bi bi-plus-lg mr-3"></i>
             New Client
             </Link>
@@ -94,7 +94,8 @@ export default {
             </table>
             <div v-else>
                 <Link :href="route('portfolio.client.create',{portfolio:route().params.portfolio})"
-                    v-if="route().current('*.client.*')" class="text-3xl underline text-primary">
+                    v-if="hasAnyPermission(['client-create'])"
+                    class="text-3xl underline text-primary">
                 Create new Client
                 </Link>
             </div>

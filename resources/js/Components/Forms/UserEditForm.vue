@@ -7,11 +7,7 @@ import BreezeInputError from '@/Components/InputError.vue'
 import BreezeCheckbox from '@/Components/Checkbox.vue'
 import BreezeDropDown from '@/Components/Dropdown.vue'
 import Multiselect from '@vueform/multiselect'
-// import the component
-import Treeselect from 'vue3-treeselect'
 import { ref } from 'vue';
-// import the styles
-import 'vue3-treeselect/dist/vue3-treeselect.css'
 
 const showingNavigationDropdown = ref(false);
 export default {
@@ -21,7 +17,6 @@ export default {
         BreezeInput,
         BreezeInputError,
         Link,
-        Treeselect,
         BreezeCheckbox,
         BreezeDropDown,
         Multiselect
@@ -80,13 +75,14 @@ export default {
                 <BreezeLabel value="Portfolio & Roles" />
             </div>
             <div class="md:w-2/3">
-                <Multiselect name="roles" id="roles" mode="tags" :close-on-select="true"
-                    v-model=" user.roles" :options="$page.props.roles" searchable=true valueProp="id" label="name"
+                <Multiselect name="roles" id="roles" mode="tags" :close-on-select="true" v-model=" user.roles"
+                    :options="$page.props.roles" searchable=true valueProp="id" label="name"
                     class="select input-bordered border-primary w-full">
                 </Multiselect>
                 <BreezeInputError :message="$page.props.errors.roles" />
 
-                <Link :href="route('roles.index')" class="underline">Manage Roles</Link>
+                <Link :href="route('roles.index')" class="hover:underline hover:text-primary hover:cursor-pointer">Manage
+                Roles</Link>
             </div>
         </div>
 

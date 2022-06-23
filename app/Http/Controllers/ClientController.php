@@ -33,6 +33,7 @@ class ClientController extends Controller
             ->with('state:id,Negeri')
             ->when($filter, function ($query, $filter) {
                 $query->where('MyKad_SSM', 'LIKE', '%' . $filter . '%');
+                $query->orWhere('Mobile_No', 'LIKE', '%' . $filter . '%');
             })
             ->select('id', 'Name', 'MyKad_SSM', 'Created_Date', 'Mobile_No', 'State')
             ->paginate(20);
@@ -125,7 +126,7 @@ class ClientController extends Controller
 
         $id = Client::where('id', $id)->update($request->validated());
 
-        return back()->with('message', 'Client created successfully');
+        return back()->with('message', 'Client saved successfully');
     }
 
     /**

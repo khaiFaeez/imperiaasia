@@ -87,7 +87,8 @@ export default {
             </h1>
 
             <div class="flex items-end justify-end mb-3 gap-3">
-                <Link :href="route('password.reset', { user: $page.props.user.id })" class="underline">Reset Password
+                <Link :href="route('password.reset', { user: $page.props.user.id })"
+                    class="hover:underline hover:text-primary hover:cursor-pointer">Reset Password
                 </Link>
                 <!-- The button to open modal -->
                 <label for="my-modal-4" class="btn modal-button btn-sm btn-error"
@@ -102,8 +103,8 @@ export default {
             </div>
             <form @submit.prevent="updateUser" class="form max-w-4xl">
                 <div class="bg-white h-96 p-12 rounded-xl">
-                        <user-form :user="form"></user-form>
-                        <!-- <div class="col-span-6">
+                    <user-form :user="form"></user-form>
+                    <!-- <div class="col-span-6">
                             <BreezeLabel>Permission:</BreezeLabel>
                             <div v-for="(permission, i) in $page.props.permissions" :key="i">
                                 <input class="checkbox  checkbox-sm" type="checkbox" name="permission[]"
@@ -112,11 +113,11 @@ export default {
                             </div>
 
                         </div> -->
-                        <div class="flex items-center justify-end">
-                            <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing">
-                                Update
-                            </BreezeButton>
-                        </div>
+                    <div class="flex items-center justify-end">
+                        <BreezeButton :class="{ 'loading mr-3': form.processing }" :disabled="form.processing">
+                            Update
+                        </BreezeButton>
+                    </div>
                 </div>
 
 
@@ -129,7 +130,7 @@ export default {
                 <label class="modal-box relative" for="">
                     <h3 class="text-lg font-bold">Confirm?</h3>
                     <p class="py-4">{{ !$page.props.user.deleted_at ? 'Deactivate' :
-                    'Reactivate' }} user?</p>
+                        'Reactivate' }} user?</p>
 
                     <div class="flex items-end justify-end mb-3">
 

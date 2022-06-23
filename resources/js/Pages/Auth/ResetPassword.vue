@@ -4,7 +4,7 @@ import AppLayout from '@/Layouts/Authenticated.vue';
 import BreezeInput from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+import { Head, useForm,Link } from '@inertiajs/inertia-vue3';
 
 const props = defineProps({
     username: String,
@@ -29,8 +29,11 @@ const submit = () => {
         <Head title="Reset Password" />
 
         <BreezeValidationErrors class="mb-4" />
-
-        <form @submit.prevent="submit">
+        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+            <Link class="text-primary hover:text-primary-focus" :href="route('users.index')">User</Link>
+            <span class="text-primary font-medium">/</span> Reset Password
+        </h1>
+        <form @submit.prevent="submit" class="p-4 bg-white rounded-xl max-w-4xl">
             <div>
                 <BreezeLabel for="username" value="Username" />
                 <p class="mt-1 block w-full">{{form.username}}</p>
