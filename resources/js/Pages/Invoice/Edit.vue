@@ -259,14 +259,16 @@ export default {
 
         <form @submit.prevent="updateInvoice" class="form">
             <div class="flex items-center justify-end gap-4">
-                <Link :href="route('portfolio.invoice.show',{invoice:invoice.Id})"
-                    class="hover:underline hover:text-primary hover:cursor-pointe">
-                Cancel Edit
-                </Link>
                 <p class="hover:underline hover:text-primary hover:cursor-pointer"
                     v-show="invoice.Status_Inv == 'PENDING'" @click="cancelOrder">Cancel Order</p>
                 <p class="hover:underline hover:text-primary hover:cursor-pointer"
                     v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">Update Payment</p>
+
+                <Link :href="route('portfolio.invoice.show',{invoice:invoice.Id})"
+                    class="hover:underline hover:text-primary hover:cursor-pointe">
+                Cancel Edit
+                </Link>
+
                 <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }" :disabled="invoiceForm.processing">
                     Save
                 </BreezeButton>

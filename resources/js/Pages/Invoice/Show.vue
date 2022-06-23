@@ -256,19 +256,23 @@ data() {
                 <PostageDisplay :states="$page.props.states" :shipping="invoiceForm.shipping" />
             </div>
 
-        </div>
+            <div class="my-3">
+                <tabs>
+                    <tab title="Product">
+                        <ProductDisplay :products="invoiceForm.products" :productLists="$page.props.products" />
+                    </tab>
+                    <tab title="Sales">
+                        <SalesDisplay :sales="invoiceForm.sales" />
+                    </tab>
+                    <tab title="Payment">
+                        <payment-display :payment="invoiceForm.payment" />
+                    </tab>
+                </tabs>
+            </div>
 
-        <tabs>
-            <tab title="Product">
-                <ProductDisplay :products="invoiceForm.products" :productLists="$page.props.products" />
-            </tab>
-            <tab title="Sales">
-                <SalesDisplay :sales="invoiceForm.sales" />
-            </tab>
-            <tab title="Payment">
-                <payment-display :payment="invoiceForm.payment" />
-            </tab>
-        </tabs>
+            </div>
+
+
     </AppLayout>
 
 </template>
