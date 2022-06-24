@@ -10,11 +10,12 @@ use App\Http\Controllers\DocketController;
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::resource('invoice', InvoiceController::class)->except('create');
     Route::resource('client', ClientController::class);
     Route::get('/invoice/repeat/{invoice_id}', [InvoiceController::class, 'repeatOrder'])->name('invoice.repeat');
     Route::get('/invoice/create/{client_id}', [InvoiceController::class, 'create'])->name('invoice.create');
+    Route::post('/invoice/store-note', [InvoiceController::class, 'storeNote'])->name('invoice.note');
     Route::get('/invoice/pdf/{invoice}', [PdfController::class, 'printInvoice'])->name('invoice.pdf');
     Route::get('/invoice/docket/{invoice}', [DocketController::class, 'print'])->name('invoice.docket');
     Route::get('/print/invoice/', [PrintController::class, 'index'])->name('print.view.invoice');

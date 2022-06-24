@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
 use App\Models\Consultant;
 use App\Models\Collector;
+use App\Models\InvoiceNote;
 use App\Models\Product;
 use App\Models\State;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Request;
@@ -169,6 +171,7 @@ class InvoiceController extends Controller
 
             'Consultant' => $request->sales['consultant'],
             'Channel' => $request->sales['channel'],
+            'closing_code' => $request->sales['closing'],
             'Created_By' => Auth::user()->username,
             'Created_Date' => \Carbon\Carbon::now()
         ]);
@@ -178,6 +181,7 @@ class InvoiceController extends Controller
         ])
             ->with('message', 'Invoice created successfully');
     }
+
 
 
     public function edit($portfolio, $id)
@@ -268,6 +272,7 @@ class InvoiceController extends Controller
 
             'Consultant' => $request->sales['consultant'],
             'Channel' => $request->sales['channel'],
+            'closing_code' => $request->sales['closing'],
             'Last_Edited_By' => Auth::user()->username,
             'Last_Edited_Date' => \Carbon\Carbon::now()
         ]);
@@ -285,5 +290,22 @@ class InvoiceController extends Controller
     public function calculateAging()
     {
         return 0;
+    }
+
+    public function storeNote(HttpRequest $request)
+    {
+        $this->validate($request, [
+            'invoice_id' => 'required'
+        ]);
+
+
+        InvoiceNote::create([
+            'Inv_No' => $request->invoice_id,
+            'Notes' => $request->note,
+            'Created_By' => Auth::user()->username,
+            'Created_On' =>  \Carbon\Carbon::now()
+        ]);
+
+        return back();
     }
 }

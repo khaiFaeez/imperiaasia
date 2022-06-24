@@ -64,8 +64,9 @@ export default {
 
             <form @submit.prevent="storeClient" class="form">
                 <div class="flex items-center justify-end mb-8 gap-3">
-                    <Link :href="route('portfolio.client.index')" class="btn btn-ghost btn-sm">
-                    <i class="bi bi-x-circle text-xl"></i>
+                    <Link :href="route('portfolio.client.show',{client:client.id})"
+                        class="hover:underline hover:text-primary hover:cursor-pointer">
+                    Cancel Edit
                     </Link>
                     <BreezeButton :class="{ 'loading mr-2': form.processing }" :disabled="form.processing">
                         Save

@@ -1,14 +1,11 @@
 <script>
 import BreezeInput from '@/Components/Input.vue';
 import BreezeInputError from '@/Components/InputError.vue'
-import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
 
 export default {
     props:['payment'],
     components:{
         BreezeInput,
-        Datepicker,
         BreezeInputError
     },
     methods:{

@@ -6,10 +6,6 @@ import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from '@/Components/InputError.vue'
 import Multiselect from '@vueform/multiselect'
 import { ref } from 'vue';
-  // import the component
-  import Treeselect from 'vue3-treeselect'
-  // import the styles
-  import 'vue3-treeselect/dist/vue3-treeselect.css'
 
 
 const showingNavigationDropdown = ref(false);
@@ -104,7 +100,8 @@ export default {
                     class="select input-bordered border-primary w-full">
                 </Multiselect>
                 <BreezeInputError :message="$page.props.errors.roles" />
-                <Link :href="route('roles.index')" class="underline">Manage Roles</Link>
+                <Link :href="route('roles.index')" class="hover:underline hover:text-primary hover:cursor-pointer">
+                Manage Roles</Link>
             </div>
         </div>
 

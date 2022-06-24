@@ -15,10 +15,10 @@ export default {
                 4:'SPECIAL ORDER'
             },
             closing:{
-                'A':'CALL',
-                'B':'WHATSAPP',
-                'C':'WALKIN',
-                'D':'ROADSHOW'
+                '0':'CALL',
+                '1':'WHATSAPP',
+                '2':'WALKIN',
+                '3':'ROADSHOW'
             }
         }
     },
@@ -27,7 +27,7 @@ export default {
                     return this.channel[this.sales.channel]
                 },
                 activeClosing() {
-                    return this.channel[this.sales.closing]
+                    return this.closing[this.sales.closing]
                 }
   }
 }

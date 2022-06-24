@@ -33,11 +33,7 @@
     },
     "dependencies": {
         "@heroicons/vue": "^1.0.6",
-        "@tinymce/tinymce-vue": "^4.0.7",
-        "@tiptap/starter-kit": "^2.0.0-beta.189",
-        "@tiptap/vue-3": "^2.0.0-beta.95",
         "@vueform/multiselect": "^2.3.4",
-        "@vuepic/vue-datepicker": "^3.2.1",
         "@vueup/vue-quill": "^1.0.0-beta.8",
         "axios": "^0.26.1",
         "bootstrap-icons": "^1.8.3",
@@ -45,9 +41,9 @@
         "daisyui": "^2.15.2",
         "inertia-table": "^1.0.8",
         "moment": "^2.29.3",
+        "quill-image-uploader": "^1.2.2",
         "vue-axios": "^3.4.1",
         "vue-chartjs": "^4.1.1",
-        "vue-scrollto": "^2.20.0",
-        "vue3-treeselect": "^0.1.10"
+        "vue-scrollto": "^2.20.0"
     }
 }

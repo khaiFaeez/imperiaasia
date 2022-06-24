@@ -14,7 +14,7 @@ export default {
         Link,
         Head,
         ClientForm,
-        BreezeButton
+        BreezeButton,
     },
     data(){
         return {
@@ -44,43 +44,44 @@ export default {
                         // });
                     },
                 });
-            }
+            },
     }
 }
 
 </script>
 <template>
-<Head title="View Client" />
-<AppLayout>
 
-<div >
-     <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
-      <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
-      <span class="text-primary font-medium">/</span> Create
-    </h1>
+    <Head title="View Client" />
+    <AppLayout>
 
-
-        <form @submit.prevent="storeClient" class="form">
-            <div class="flex items-center justify-end mb-8">
-                <BreezeButton :class="{ 'loading mr-2': form.processing }" :disabled="form.processing">
+        <div>
+            <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+                <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
+                <span class="text-primary font-medium">/</span> Create
+            </h1>
+            <template>
+                <button @click="deleteAllUsers"/>
+                    <button @click="deleteAllUsersWithAsync"/>
+            </template>
+            <form @submit.prevent="storeClient" class="form">
+                <div class="flex items-center justify-end mb-8">
+                    <BreezeButton :class="{ 'loading mr-2': form.processing }" :disabled="form.processing">
                         Save
-                </BreezeButton>
-            </div>
-            <ClientForm class=" mb-12"
-                :client="form"
-                :countries="$page.props.countries"
-                :states="$page.props.states"/>
+                    </BreezeButton>
+                </div>
+                <ClientForm class=" mb-12" :client="form" :countries="$page.props.countries"
+                    :states="$page.props.states" />
                 <div>
 
-            </div>
+                </div>
 
 
 
 
-        </form>
+            </form>
 
 
 
-</div>
-</AppLayout>
+        </div>
+    </AppLayout>
 </template>

@@ -196,7 +196,6 @@ export default {
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-1">
                 <div class="my-3">
-                    <div class="divider text-xl" id="client">Client</div>
                     <client-display :client="clientForm" :states="$page.props.states" />
                 </div>
 

@@ -124,8 +124,8 @@ export default {
                 ]},
                 sales:{
                     consultant:this.invoice.consultant?.id,
-                    channel:"",
-                    closing:""
+                    channel: this.invoice.Channel,
+                    closing: this.invoice.closing_code
                 },
                 shipping:{
                     Ship_Name:this.invoice.Ship_Name,
@@ -263,6 +263,12 @@ export default {
                     v-show="invoice.Status_Inv == 'PENDING'" @click="cancelOrder">Cancel Order</p>
                 <p class="hover:underline hover:text-primary hover:cursor-pointer"
                     v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">Update Payment</p>
+
+                <Link :href="route('portfolio.invoice.show',{invoice:invoice.Id})"
+                    class="hover:underline hover:text-primary hover:cursor-pointe">
+                Cancel Edit
+                </Link>
+
                 <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }" :disabled="invoiceForm.processing">
                     Save
                 </BreezeButton>
@@ -270,7 +276,6 @@ export default {
 
             <div class="grid grid-cols-1 xl:grid-cols-1">
                 <div class="my-3">
-                    <div class="divider text-xl" id="client">Client</div>
                     <client-display :client="clientForm" :states="$page.props.states" />
                 </div>
 

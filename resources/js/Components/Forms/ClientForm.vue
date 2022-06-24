@@ -19,7 +19,7 @@ export default {
 </script>
 <template>
     <div class="w-full card bg-white">
-        <div class="card-body grid md:grid-cols-2 gap-x-4 ">
+        <div class="card-body grid grid-cols-1 xl:grid-cols-2 gap-x-4 ">
             <div class="md:flex md:items-center">
                 <div class="md:w-1/3">
                     <BreezeLabel value="IC Number / Passport" />
@@ -70,7 +70,7 @@ export default {
                 </div>
             </div>
 
-            <div class="md:flex md:items-center">
+            <!-- <div class="md:flex md:items-center">
                 <div class="md:w-1/3">
                     <BreezeLabel value="Client Occupation" />
                 </div>
@@ -84,7 +84,7 @@ export default {
                     </select>
                     <BreezeInputError :message="$page.props.errors.occupation" />
                 </div>
-            </div>
+            </div> -->
 
             <div class="md:flex md:items-center">
                 <div class="md:w-1/3">
