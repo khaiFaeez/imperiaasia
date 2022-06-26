@@ -14,7 +14,7 @@ import ImageUploader from "quill-image-uploader";
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import Tabs from '@/Components/Tabs.vue';
 import Tab from '@/Components/Tab.vue';
-
+import moment from 'moment';
 
 export default {
     props:{
@@ -97,41 +97,43 @@ data() {
                         discount : this.invoice.Discount_4,
                         discounted_price : 0,
                         total : this.invoice.Total_RM_4,
-                    }, {
-                         product:this.invoice.Product_5,
-                        product_name:this.invoice.product5?.Product_Name,
-                        price : this.invoice.Price_5,
-                        qty : this.invoice.Qty_5,
-                        discount : this.invoice.Discount_5,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_5,
-                    },{
-                         product:this.invoice.Product_6,
-                        product_name:this.invoice.product6?.Product_Name,
-                        price : this.invoice.Price_6,
-                        qty : this.invoice.Qty_6,
-                        discount : this.invoice.Discount_6,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_6,
-                    },{
-                         product:this.invoice.Product_7,
-                        product_name:this.invoice.product7?.Product_Name,
-                        price : this.invoice.Price_7,
-                        qty : this.invoice.Qty_7,
-                        discount : this.invoice.Discount_7,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_7,
-                    },{
-                         product:this.invoice.Product_8,
-                        product_name:this.invoice.product8?.Product_Name,
-                        price : this.invoice.Price_8,
-                        qty : this.invoice.Qty_8,
-                        discount : this.invoice.Discount_8,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_8,
                     }
+                    // , {
+                    //      product:this.invoice.Product_5,
+                    //     product_name:this.invoice.product5?.Product_Name,
+                    //     price : this.invoice.Price_5,
+                    //     qty : this.invoice.Qty_5,
+                    //     discount : this.invoice.Discount_5,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_5,
+                    // },{
+                    //      product:this.invoice.Product_6,
+                    //     product_name:this.invoice.product6?.Product_Name,
+                    //     price : this.invoice.Price_6,
+                    //     qty : this.invoice.Qty_6,
+                    //     discount : this.invoice.Discount_6,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_6,
+                    // },{
+                    //      product:this.invoice.Product_7,
+                    //     product_name:this.invoice.product7?.Product_Name,
+                    //     price : this.invoice.Price_7,
+                    //     qty : this.invoice.Qty_7,
+                    //     discount : this.invoice.Discount_7,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_7,
+                    // },{
+                    //      product:this.invoice.Product_8,
+                    //     product_name:this.invoice.product8?.Product_Name,
+                    //     price : this.invoice.Price_8,
+                    //     qty : this.invoice.Qty_8,
+                    //     discount : this.invoice.Discount_8,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_8,
+                    // }
                 ]},
                 payment:{
+                    occupation: this.invoice.occupation_code,
                     total_settlement:"",
                     items:[
                     {
@@ -167,6 +169,9 @@ data() {
             }),
         };
     },
+    created: function () {
+        this.moment = moment;
+    },
     methods: {
         openPDF(data){
             window.open(route('portfolio.invoice.pdf',{'invoice': data.Id}), '_blank')
@@ -199,24 +204,13 @@ data() {
         <!-- Put this part before </body> tag -->
         <input type="checkbox" id="my-modal" class="modal-toggle" />
         <div class="modal">
-            <div class="modal-box w-full max-w-7xl h-[70vh] relative">
+            <div class="modal-box w-full lg:max-w-xl xl:max-w-7xl h-[80vh] relative">
                 <label for="my-modal" class="btn btn-sm btn-circle btn-primary absolute right-2 top-2">✕</label>
-                <div class="grid grid-cols-2">
-                    <div class="overflow-y-scroll ">
-                        <div class="bg-white p-4 rounded-sm shadow-xl m-3" v-for="note,i in $page.props.invoice.notes"
-                            :key="i">
-                            <div v-html="note.Notes">
-                            </div>
-                            <p class="text-sm text-gray-800 italic">{{ note.Created_By }} ( {{ note.Created_On }} )</p>
-                        </div>
-                    </div>
-
-                    <div v-if="hasAnyPermission(['note-edit'])" class="h-96">
-                        <QuillEditor theme="snow" toolbar="full" v-model:content="noteForm.note" contentType="html"
-                            class="bg-white" />
-
-                        <button class="btn btn-block btn-sm " @click="storeNote">Submit</button>
-                    </div>
+                <div class="h-96">
+                    <h3 class="font-bold text-lg">Add note</h3>
+                    <QuillEditor theme="snow" toolbar="full" v-model:content="noteForm.note" contentType="html"
+                        class="bg-white" />
+                    <button class="btn btn-block btn-sm " @click="storeNote">Submit</button>
                 </div>
 
             </div>
@@ -224,25 +218,55 @@ data() {
 
         <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-            <span class="text-primary font-medium">/</span> {{invoice.Inv_No}} <span class="badge text-white"
-                :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'> {{invoice.Status_Inv}}</span>
-        </h1>
-        <div class="flex items-center justify-end">
-            <!-- The button to open modal -->
-            <label for="my-modal" class="btn btn-ghost  btn-sm modal-button"
-                v-if="hasAnyPermission(['note-edit','note-list'])" title="Notes">
-                <i class="bi bi-journal-text text-xl"></i></label>
+            <span class="text-primary font-medium">/</span> {{invoice.Inv_No}}
 
-            <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})"
-                v-if="hasAnyPermission(['invoice-edit'])" class="btn btn-ghost btn-sm" title="Edit Invoice">
-            <i class="bi bi-pencil-square  text-xl"></i>
-            </Link>
-            <button @click="openPDF(invoice)" class="btn btn-ghost btn-sm" title="Print Invoice">
-                <i class="bi bi-printer text-xl"></i>
-            </button>
-            <button @click="openDocket(invoice)" class="btn btn-ghost btn-sm" title="Print Docket">
-                <i class="bi bi-printer-fill text-xl"></i>
-            </button>
+        </h1>
+
+        <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+                <div class="stats stats-vertical lg:stats-horizontal shadow bg-white" v-show="true">
+
+                    <div class="stat">
+                        <div class="stat-title">Status</div>
+                        <div class="stat-value"
+                            :class='invoice.Status_Inv == "PAID" ? "text-success " : "text-warning"'>
+                            {{invoice.Status_Inv}}</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-title">Aging</div>
+                        <div class="stat-value">{{ Math.abs(
+                            moment(invoice.Date, 'YYYY-MM-DD')
+                            .startOf('day')
+                            .diff(moment(new Date(), 'YYYY-MM-DD').startOf('day'), 'days')
+                            ) + 1}} Days</div>
+                    </div>
+
+                    <div class="stat">
+                        <div class="stat-title">Date</div>
+                        <div class="stat-value">{{ moment(invoice.Date).format('LL') }}</div>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <!-- The button to open modal -->
+                <label for="my-modal" class="btn btn-ghost  btn-sm modal-button" v-if="hasAnyPermission(['note-edit'])"
+                    title="Notes">
+                    <i class="bi bi-journal-text text-xl"></i></label>
+
+                <Link :href="route('portfolio.invoice.edit', {invoice:invoice.Id})"
+                    v-if="hasAnyPermission(['invoice-edit'])" class="btn btn-ghost btn-sm" title="Edit Invoice">
+                <i class="bi bi-pencil-square  text-xl"></i>
+                </Link>
+                <button @click="openPDF(invoice)" class="btn btn-ghost btn-sm" title="Print Invoice">
+                    <i class="bi bi-printer text-xl"></i>
+                </button>
+                <button @click="openDocket(invoice)" class="btn btn-ghost btn-sm" title="Print Docket">
+                    <i class="bi bi-printer-fill text-xl"></i>
+                </button>
+            </div>
+
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-1">
             <div class="my-3">
@@ -270,7 +294,27 @@ data() {
                 </tabs>
             </div>
 
+            <div class="my-3">
+                <div class="tabs">
+                    <a class="tab tab-lifted tab-active">Invoice Notes</a>
+                </div>
+                <div class="overflow-y-scroll ">
+                    <div class="bg-white p-4 rounded-sm shadow-xl m-3" v-for="note,i in $page.props.invoice.notes"
+                        :key="i">
+                        <div v-html="note.Notes">
+                        </div>
+                        <p class="text-sm text-gray-800 italic">{{ note.Created_By }} ( {{ note.Created_On }} )</p>
+                    </div>
+                </div>
             </div>
+
+        </div>
+
+        <div>
+            <p>Created By {{ invoice.Created_By }} at {{ invoice.Created_Date }}</p>
+            <p>Last Edited By {{ invoice.Last_Edited_By }} at {{ invoice.Last_Edited_Date }}</p>
+
+        </div>
 
 
     </AppLayout>

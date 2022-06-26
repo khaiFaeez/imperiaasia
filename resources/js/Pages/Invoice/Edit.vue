@@ -7,6 +7,7 @@ import PaymentForm from '@/Components/Forms/PaymentForm.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import PostageForm from '@/Components/Forms/PostageForm.vue'
 import BreezeButton from '@/Components/Button.vue'
+import moment from 'moment';
 
 export default {
     props:[
@@ -22,7 +23,11 @@ export default {
     PaymentForm,
     PostageForm,
     BreezeButton
-},
+    },
+
+    created: function () {
+        this.moment = moment;
+    },
     data() {
         return {
             componentKey: 0,
@@ -74,37 +79,39 @@ export default {
                         discount : this.invoice.Discount_4,
                         discounted_price : 0,
                         total : this.invoice.Total_RM_4,
-                    }, {
-                         product:this.invoice.Product_5,
-                        price : this.invoice.Price_5,
-                        qty : this.invoice.Qty_5,
-                        discount : this.invoice.Discount_5,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_5,
-                    },{
-                        product:this.invoice.Product_6,
-                        price : this.invoice.Price_6,
-                        qty : this.invoice.Qty_6,
-                        discount : this.invoice.Discount_6,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_6,
-                    },{
-                        product:this.invoice.Product_7,
-                        price : this.invoice.Price_7,
-                        qty : this.invoice.Qty_7,
-                        discount : this.invoice.Discount_7,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_7,
-                    },{
-                        product:this.invoice.Product_8,
-                        price : this.invoice.Price_8,
-                        qty : this.invoice.Qty_8,
-                        discount : this.invoice.Discount_8,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_8,
-                    }
+                    },
+                    //  {
+                    //      product:this.invoice.Product_5,
+                    //     price : this.invoice.Price_5,
+                    //     qty : this.invoice.Qty_5,
+                    //     discount : this.invoice.Discount_5,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_5,
+                    // },{
+                    //     product:this.invoice.Product_6,
+                    //     price : this.invoice.Price_6,
+                    //     qty : this.invoice.Qty_6,
+                    //     discount : this.invoice.Discount_6,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_6,
+                    // },{
+                    //     product:this.invoice.Product_7,
+                    //     price : this.invoice.Price_7,
+                    //     qty : this.invoice.Qty_7,
+                    //     discount : this.invoice.Discount_7,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_7,
+                    // },{
+                    //     product:this.invoice.Product_8,
+                    //     price : this.invoice.Price_8,
+                    //     qty : this.invoice.Qty_8,
+                    //     discount : this.invoice.Discount_8,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_8,
+                    // }
                 ]},
-                payment:{
+                payment: {
+                    occupation: this.invoice.occupation_code,
                     total_settlement:0,
                     items:[
                     {
@@ -135,7 +142,7 @@ export default {
                     Ship_poscode:this.invoice.Ship_poscode,
                     Ship_City:this.invoice.Ship_City,
                     Ship_State:this.invoice.Ship_State,
-                    Ship_Country:this.invoice.Ship_Country
+                    Ship_Country:this.invoice.Ship_Country,
                 }
             }),
         };
@@ -252,26 +259,54 @@ export default {
     <app-layout>
         <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
-            <span class="text-primary font-medium">/</span> Edit {{invoice.Inv_No}} <span class="badge text-white"
-                :class='invoiceForm.Status_Inv == "PAID" ? "badge-success " : "badge-error"'>
-                {{invoiceForm.Status_Inv}}</span>
+            <span class="text-primary font-medium">/</span> Edit {{invoice.Inv_No}}
         </h1>
 
         <form @submit.prevent="updateInvoice" class="form">
-            <div class="flex items-center justify-end gap-4">
-                <p class="hover:underline hover:text-primary hover:cursor-pointer"
-                    v-show="invoice.Status_Inv == 'PENDING'" @click="cancelOrder">Cancel Order</p>
-                <p class="hover:underline hover:text-primary hover:cursor-pointer"
-                    v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">Update Payment</p>
+            <div class="flex items-center justify-between ">
+                <div class="flex flex-col">
+                    <div class="stats stats-vertical lg:stats-horizontal shadow bg-white" v-show="true">
 
-                <Link :href="route('portfolio.invoice.show',{invoice:invoice.Id})"
-                    class="hover:underline hover:text-primary hover:cursor-pointe">
-                Cancel Edit
-                </Link>
+                        <div class="stat">
+                            <div class="stat-title">Status</div>
+                            <div class="stat-value"
+                                :class='invoice.Status_Inv == "PAID" ? "text-success " : "text-warning"'>
+                                {{invoice.Status_Inv}}</div>
+                        </div>
 
-                <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }" :disabled="invoiceForm.processing">
-                    Save
-                </BreezeButton>
+                        <div class="stat">
+                            <div class="stat-title">Aging</div>
+                            <div class="stat-value">{{ Math.abs(
+                                moment(invoice.Date, 'YYYY-MM-DD')
+                                .startOf('day')
+                                .diff(moment(new Date(), 'YYYY-MM-DD').startOf('day'), 'days')
+                                ) + 1}} Days</div>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-title">Date</div>
+                            <div class="stat-value">{{ moment(invoice.Date).format('LL') }}</div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="flex flex-row gap-3 items-center">
+                    <p class="hover:underline hover:text-primary hover:cursor-pointer"
+                        v-show="invoice.Status_Inv == 'PENDING'" @click="cancelOrder">Cancel Order</p>
+                    <p class="hover:underline hover:text-primary hover:cursor-pointer"
+                        v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">Update Payment</p>
+
+                    <Link :href="route('portfolio.invoice.show',{invoice:invoice.Id})"
+                        class="hover:underline hover:text-primary hover:cursor-pointe">
+                    Cancel Edit
+                    </Link>
+
+                    <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }"
+                        :disabled="invoiceForm.processing">
+                        Save
+                    </BreezeButton>
+                </div>
+
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-1">
@@ -311,6 +346,11 @@ export default {
                 </div>
             </div>
         </form>
+        <div>
+            <p>Created By {{ invoice.Created_By }} at {{ invoice.Created_Date }}</p>
+            <p>Last Edited By {{ invoice.Last_Edited_By }} at {{ invoice.Last_Edited_Date }}</p>
+
+        </div>
     </app-layout>
 
 </template>

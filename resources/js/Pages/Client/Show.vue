@@ -79,7 +79,7 @@ export default {
 
                         <td>
                             <div class="badge text-white"
-                                :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-error"'>
+                                :class='invoice.Status_Inv == "PAID" ? "badge-success " : "badge-warning"'>
                                 {{invoice.Status_Inv}}</div>
                         </td>
                         <td>

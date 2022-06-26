@@ -96,7 +96,7 @@ export default {
             </div>
             <div class="md:w-2/3">
                 <Multiselect name="roles" id="roles" mode="tags" :close-on-select="true" v-model=" user.roles"
-                    :options="$page.props.roles" searchable=true valueProp="id" label="name"
+                    :options="$page.props.roles" :searchable="true" valueProp="id" label="name"
                     class="select input-bordered border-primary w-full">
                 </Multiselect>
                 <BreezeInputError :message="$page.props.errors.roles" />

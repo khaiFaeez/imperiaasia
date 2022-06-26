@@ -3,6 +3,7 @@
 import { Link,Head } from '@inertiajs/inertia-vue3';
 import AppLayout from '@/Layouts/Authenticated.vue';
 import BreezeLabel from '@/Components/Label.vue'
+import { ref } from 'vue';
 
 
 export default {
@@ -25,42 +26,58 @@ export default {
                         }
                     })
                     return x;
-                }
+                },
+
   }
 }
 
 </script>
 <template>
-    <div class="card bg-white rounded-xl">
-        <div class="card-body">
-            <h2 class="card-title text-2xl">
+    <div class="card bg-white rounded-xl transition ease-in-out hover:bg-base-200 duration-300">
+        <div class="card-body collapse p-0">
+            <input type="checkbox" :checked="route().current('*.client.*')" />
+            <h2 class="card-title text-lg collapse-title">
                 {{client.Name}}
                 <div class="">
-                    <p v-if="route().current('*.client.*')" class="text-gray-500 italic hover:underline">
-                        {{client.MyKad_SSM}}</p>
-                    <Link :href="route('portfolio.client.show',{'client': client.id})"
-                        class="text-gray-500 italic hover:underline" v-else>{{client.MyKad_SSM}}</Link>
+                    <p class="hover:underline">
+                        ( {{client.MyKad_SSM}} )
+                    </p>
                 </div>
             </h2>
-            <div class="grid grid-cols-2">
-                <div class="p-3">
-                    <p> {{client.Address}}</p>
-                    <p>{{client.Address_2}}</p>
-                    <p>{{ client.Poscode }}</p>
-                    <p>{{ client.City }}</p>
-                    <p>{{activeState?.Negeri}}</p>
-                    <p>{{ client.Country }}</p>
+            <div class=" collapse-content ">
+                <div class="grid grid-cols-2">
+                    <div v-if="route().current('*.client.*')" class="">
+                        <p> {{client.Address}}</p>
+                        <p>{{client.Address_2}}</p>
+                        <p>{{ client.Poscode }}</p>
+                        <p>{{ client.City }}</p>
+                        <p>{{activeState?.Negeri}}</p>
+                        <p>{{ client.Country }}</p>
+                    </div>
+
+                    <Link v-else :href="route('portfolio.client.show',{'client': client.id})">
+                    <div class="">
+                        <p> {{client.Address}}</p>
+                        <p>{{client.Address_2}}</p>
+                        <p>{{ client.Poscode }}</p>
+                        <p>{{ client.City }}</p>
+                        <p>{{activeState?.Negeri}}</p>
+                        <p>{{ client.Country }}</p>
+                    </div>
+                    </Link>
+                    <div>
+
+                    </div>
                 </div>
-            </div>
 
 
-            <div class="card-actions justify-end">
-                <div class="badge badge-outline badge-lg">{{client.Mobile_No}}</div>
-                <div class="badge badge-outline badge-lg">{{client.Phone}}</div>
-                <div class="badge badge-outline badge-lg">{{ client.Off_Phone }}</div>
+                <div class="card-actions justify-end">
+                    <div class="badge badge-outline badge-lg">{{client.Mobile_No}}</div>
+                    <div class="badge badge-outline badge-lg">{{client.Phone}}</div>
+                    <div class="badge badge-outline badge-lg">{{ client.Off_Phone }}</div>
+                </div>
             </div>
         </div>
     </div>
-
 
 </template>

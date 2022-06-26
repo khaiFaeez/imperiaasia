@@ -74,37 +74,39 @@ export default {
                         discount : 0,
                         discounted_price : 0,
                         total : 0,
-                    }, {
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
-                        discounted_price : 0,
-                        total : 0,
-                    },{
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
-                        discounted_price : 0,
-                        total : 0,
-                    },{
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
-                        discounted_price : 0,
-                        total : 0,
-                    },{
-                        product:"",
-                        price : 0,
-                        qty : 0,
-                        discount : 0,
-                        discounted_price : 0,
-                        total : 0,
-                    }
+                    },
+                    // {
+                    //     product:"",
+                    //     price : 0,
+                    //     qty : 0,
+                    //     discount : 0,
+                    //     discounted_price : 0,
+                    //     total : 0,
+                    // },{
+                    //     product:"",
+                    //     price : 0,
+                    //     qty : 0,
+                    //     discount : 0,
+                    //     discounted_price : 0,
+                    //     total : 0,
+                    // },{
+                    //     product:"",
+                    //     price : 0,
+                    //     qty : 0,
+                    //     discount : 0,
+                    //     discounted_price : 0,
+                    //     total : 0,
+                    // },{
+                    //     product:"",
+                    //     price : 0,
+                    //     qty : 0,
+                    //     discount : 0,
+                    //     discounted_price : 0,
+                    //     total : 0,
+                    // }
                 ]},
                 payment:{
+                    occupation: null,
                     total_settlement:"",
                    items:[
                     {
