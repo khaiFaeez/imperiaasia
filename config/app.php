@@ -195,4 +195,28 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+
+    /**
+     * Custom variable
+     */
+
+    'occupation' => [
+        1 => 'Gaji Bulanan',
+        2 => 'Bekerja Sendiri/berniaga',
+        3 => 'Suri Rumah',
+        4 => 'Goverment Staff'
+    ],
+    'channel' => [
+        1 => 'ONLINE',
+        2 => 'DISTRIBUTOR',
+        3 => 'OFFLINE',
+        4 => 'SPECIAL ORDER'
+    ],
+    'closing' => [
+        1 => 'CALL',
+        2 => 'WHATSAPP',
+        3 => 'WALKIN',
+        4 => 'ROADSHOW'
+    ]
+
 ];

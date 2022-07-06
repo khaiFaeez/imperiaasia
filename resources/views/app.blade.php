@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 @php
-$theme = 'autumn';
+$theme = 'dark';
 @endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{$theme}}">
     <head>

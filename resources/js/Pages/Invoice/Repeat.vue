@@ -75,37 +75,39 @@ export default {
                         discount : this.invoice.Discount_4,
                         discounted_price : 0,
                         total : this.invoice.Total_RM_4,
-                    }, {
-                         product:this.invoice.Product_5,
-                        price : this.invoice.Price_5,
-                        qty : this.invoice.Qty_5,
-                        discount : this.invoice.Discount_5,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_5,
-                    },{
-                        product:this.invoice.Product_6,
-                        price : this.invoice.Price_6,
-                        qty : this.invoice.Qty_6,
-                        discount : this.invoice.Discount_6,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_6,
-                    },{
-                        product:this.invoice.Product_7,
-                        price : this.invoice.Price_7,
-                        qty : this.invoice.Qty_7,
-                        discount : this.invoice.Discount_7,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_7,
-                    },{
-                        product:this.invoice.Product_8,
-                        price : this.invoice.Price_8,
-                        qty : this.invoice.Qty_8,
-                        discount : this.invoice.Discount_8,
-                        discounted_price : 0,
-                        total : this.invoice.Total_RM_8,
-                    }
+                    },
+                    // {
+                    //      product:this.invoice.Product_5,
+                    //     price : this.invoice.Price_5,
+                    //     qty : this.invoice.Qty_5,
+                    //     discount : this.invoice.Discount_5,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_5,
+                    // },{
+                    //     product:this.invoice.Product_6,
+                    //     price : this.invoice.Price_6,
+                    //     qty : this.invoice.Qty_6,
+                    //     discount : this.invoice.Discount_6,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_6,
+                    // },{
+                    //     product:this.invoice.Product_7,
+                    //     price : this.invoice.Price_7,
+                    //     qty : this.invoice.Qty_7,
+                    //     discount : this.invoice.Discount_7,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_7,
+                    // },{
+                    //     product:this.invoice.Product_8,
+                    //     price : this.invoice.Price_8,
+                    //     qty : this.invoice.Qty_8,
+                    //     discount : this.invoice.Discount_8,
+                    //     discounted_price : 0,
+                    //     total : this.invoice.Total_RM_8,
+                    // }
                 ]},
                 payment:{
+                    occupation:this.invoice.occupation_code,
                     total_settlement:"",
                      items:[
                     {

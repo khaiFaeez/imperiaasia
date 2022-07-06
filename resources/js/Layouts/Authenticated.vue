@@ -30,7 +30,7 @@ const showingNavigationDropdown = ref(false);
             </div>
             <div class="drawer-side bg-neutral text-neutral-content overflow-y-visible">
                 <label for="my-drawer-2" class="drawer-overlay"></label>
-                <ul class="menu menu-compact w-80 p-0 px-4 overflow-y-auto">
+                <ul class="menu menu-compact w-40 xl:w-80 p-0 px-4 overflow-y-auto">
                     <div class="h-20 flex items-center justify-center">
                         <Link :href="route('portfolio.dashboard')">
                         <BreezeApplicationLogo class="block w-auto px-4" />

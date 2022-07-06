@@ -39,7 +39,7 @@ export default {
             <BreezeLabel value="Sales Person" />
 
             <Multiselect v-model="sales.consultant" placeholder="Please select" label="Employee_Code" valueProp="id"
-                :options="consultants" :canClear="false" searchable=true
+                :options="consultants" :canClear="false" :searchable="true"
                 class="select input-bordered border-primary w-full" :classes="{
     optionSelected: 'bg-gray-400',
     optionSelectedPointed:'bg-gray-400 text-white',
