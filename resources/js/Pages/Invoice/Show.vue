@@ -62,6 +62,7 @@ data() {
 
             invoiceForm: this.$inertia.form({
                 client:this.invoice.client.id,
+                Orderstatus: this.invoice.Orderstatus,
                 products:{
                 grand_total:this.invoice.Grand_Total,
                 items:[
@@ -199,22 +200,23 @@ data() {
 <template>
 
     <Head title="Create Invoice" />
+    <!-- Put this part before </body> tag -->
+    <input type="checkbox" id="my-modal" class="modal-toggle" />
+    <div class="modal">
+        <div class="modal-box w-full lg:max-w-xl xl:max-w-7xl h-[80vh] relative">
+            <label for="my-modal" class="btn btn-sm btn-circle btn-primary absolute right-2 top-2">✕</label>
+            <div class="h-96">
+                <h3 class="font-bold text-lg">Add note</h3>
+                <QuillEditor theme="snow" toolbar="full" v-model:content="noteForm.note" contentType="html"
+                    class="bg-white" />
+                <button class="btn btn-block btn-sm " @click="storeNote">Submit</button>
+            </div>
+
+        </div>
+    </div>
     <AppLayout>
 
-        <!-- Put this part before </body> tag -->
-        <input type="checkbox" id="my-modal" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-full lg:max-w-xl xl:max-w-7xl h-[80vh] relative">
-                <label for="my-modal" class="btn btn-sm btn-circle btn-primary absolute right-2 top-2">✕</label>
-                <div class="h-96">
-                    <h3 class="font-bold text-lg">Add note</h3>
-                    <QuillEditor theme="snow" toolbar="full" v-model:content="noteForm.note" contentType="html"
-                        class="bg-white" />
-                    <button class="btn btn-block btn-sm " @click="storeNote">Submit</button>
-                </div>
 
-            </div>
-        </div>
 
         <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
@@ -227,6 +229,13 @@ data() {
                 <div class="stats stats-vertical lg:stats-horizontal shadow bg-white" v-show="true">
 
                     <div class="stat">
+                        <div class="stat-title">Order Status</div>
+                        <div class="stat-value">
+                            {{ invoice.Orderstatus }}</div>
+                    </div>
+
+
+                    <div class="stat">
                         <div class="stat-title">Status</div>
                         <div class="stat-value"
                             :class='invoice.Status_Inv == "PAID" ? "text-success " : "text-warning"'>
@@ -236,10 +245,10 @@ data() {
                     <div class="stat">
                         <div class="stat-title">Aging</div>
                         <div class="stat-value">{{ Math.abs(
-                            moment(invoice.Date, 'YYYY-MM-DD')
-                            .startOf('day')
-                            .diff(moment(new Date(), 'YYYY-MM-DD').startOf('day'), 'days')
-                            ) + 1}} Days</div>
+                        moment(invoice.Date, 'YYYY-MM-DD')
+                        .startOf('day')
+                        .diff(moment(new Date(), 'YYYY-MM-DD').startOf('day'), 'days')
+                        ) + 1}} Days</div>
                     </div>
 
                     <div class="stat">

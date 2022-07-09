@@ -86,6 +86,10 @@ class InvoiceController extends Controller
 
     public function store(InvoiceRequest $request)
     {
+        $consultantName = $request->sales['consultant'] ? Consultant::where('id', $request->sales['consultant'])->value('Name') : "";
+
+
+
         $id = Invoice::create([
             'MyKad_SSM' => $request->client,
             'Name' => $request->client,
@@ -171,11 +175,12 @@ class InvoiceController extends Controller
 
 
             'Consultant' => $request->sales['consultant'],
-            'Consultant2' => $request->sales['consultant'],
+            'Consultant2' => $consultantName,
             'Channel' => $request->sales['channel'],
             'closing_code' => $request->sales['closing'],
             'Created_By' => Auth::user()->username,
-            'Created_Date' => \Carbon\Carbon::now()
+            'Created_Date' => \Carbon\Carbon::now(),
+            'Orderstatus' => $request->Orderstatus
         ]);
 
         return redirect()->route('portfolio.invoice.show', [

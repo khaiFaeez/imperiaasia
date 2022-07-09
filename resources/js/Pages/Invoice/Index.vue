@@ -151,11 +151,11 @@ export default {
                         <td>{{ invoice.Qty }}</td>
                         <td>{{ invoice.Total_RM }}</td>
 
-                        <td>Grand Total</td>
-                        <td>Paid Total</td>
-                        <td>Overdue Amount</td>
-                        <td>{{invoice.consultant.Name}}</td>
-                        <td>{{invoice.channel?.Name}}</td>
+                        <td>{{ invoice.Grand_Total }}</td>
+                        <td>{{ invoice.Paid_Total }}</td>
+                        <td>{{ invoice.Overdue_Amt }}</td>
+                        <td>{{ invoice.consultant.Name }}</td>
+                        <td>{{ invoice.channel?.Name }}</td>
 
                         <td>{{ invoice.Promise_pay1 ? moment(invoice.Promise_pay1).format('LL') : ""}}</td>
                         <td>{{ invoice.Promise_pay2 ? moment(invoice.Promise_pay2).format('LL') : ""}}</td>

@@ -44,6 +44,7 @@ export default {
             }),
             invoiceForm: this.$inertia.form({
                 client:this.invoice.client.id,
+                Orderstatus: "REPEAT",
                 products:{
                 grand_total:this.invoice.Grand_Total,
                 items:[

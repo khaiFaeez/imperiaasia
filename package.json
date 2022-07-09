@@ -38,7 +38,7 @@
         "axios": "^0.26.1",
         "bootstrap-icons": "^1.8.3",
         "chart.js": "^3.8.0",
-        "daisyui": "^2.15.2",
+        "daisyui": "^2.18.2",
         "inertia-table": "^1.0.8",
         "moment": "^2.29.3",
         "quill-image-uploader": "^1.2.2",

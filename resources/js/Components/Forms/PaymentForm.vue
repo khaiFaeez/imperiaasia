@@ -27,10 +27,10 @@ export default {
             <div class="md:w-2/3">
                 <select name="Occupation" v-model="payment.occupation" class="input input-bordered w-full">
                     <option value=''>Please select</option>
-                    <option value='1'>Gaji Bulanan</option>
-                    <option value='2'>Bekerja Sendiri/berniaga</option>
-                    <option value='3'>Suri Rumah</option>
-                    <option value='4'>Goverment Staff</option>
+                    <option value='A'>Gaji Bulanan</option>
+                    <option value='B'>Bekerja Sendiri/berniaga</option>
+                    <option value='C'>Suri Rumah</option>
+                    <option value='D'>Goverment Staff</option>
                 </select>
                 <BreezeInputError :message="$page.props.errors.occupation" />
             </div>

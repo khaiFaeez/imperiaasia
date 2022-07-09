@@ -43,6 +43,7 @@ export default {
             }),
             invoiceForm: this.$inertia.form({
                 client:this.client.id,
+                Orderstatus: "NEW",
                 products:{
                 grand_total:0,
                 items:[

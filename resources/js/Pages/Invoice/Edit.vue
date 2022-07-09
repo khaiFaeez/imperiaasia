@@ -47,6 +47,7 @@ export default {
             }),
             invoiceForm: this.$inertia.form({
                 Status_Inv:this.invoice.Status_Inv,
+                Orderstatus: this.invoice.Orderstatus,
                 client:this.invoice.client.id,
                 products:{
                 grand_total:this.invoice.Grand_Total,
@@ -130,7 +131,7 @@ export default {
 
                 ]},
                 sales:{
-                    consultant:this.invoice.consultant?.id,
+                    consultant: this.invoice.consultant?.id,
                     channel: this.invoice.Channel,
                     closing: this.invoice.closing_code
                 },
@@ -266,6 +267,12 @@ export default {
             <div class="flex items-center justify-between ">
                 <div class="flex flex-col">
                     <div class="stats stats-vertical lg:stats-horizontal shadow bg-white" v-show="true">
+
+                        <div class="stat">
+                            <div class="stat-title">Order Status</div>
+                            <div class="stat-value">
+                                {{ invoice.Orderstatus }}</div>
+                        </div>
 
                         <div class="stat">
                             <div class="stat-title">Status</div>

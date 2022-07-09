@@ -15,10 +15,10 @@ export default {
                 4:'SPECIAL ORDER'
             },
             closing:{
-                '0':'CALL',
-                '1':'WHATSAPP',
-                '2':'WALKIN',
-                '3':'ROADSHOW'
+                'A':'CALL',
+                'B':'WHATSAPP',
+                'C':'WALKIN',
+                'D':'ROADSHOW'
             }
         }
     },

@@ -26,7 +26,7 @@ class Consultant extends Model
 
         static::addGlobalScope(function (Builder $builder) {
 
-            $builder->orderBy('Status', 'asc');
+            $builder->orderBy('Status', 'asc')->orderBy('Name', 'asc');
         });
     }
 }

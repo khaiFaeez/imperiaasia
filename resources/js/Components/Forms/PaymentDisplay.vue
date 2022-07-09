@@ -11,10 +11,10 @@ export default {
     data() {
         return {
             occupation: {
-                1: 'Gaji Bulanan',
-                2: 'Bekerja Sendiri/berniaga',
-                3: 'Suri Rumah',
-                4: 'Goverment Staff'
+                A: 'Gaji Bulanan',
+                B: 'Bekerja Sendiri/berniaga',
+                C: 'Suri Rumah',
+                D: 'Goverment Staff'
             },
         }
     },
