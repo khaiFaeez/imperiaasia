@@ -1,77 +1,93 @@
 <script>
-import { ref } from 'vue';
-import AppLayout from '@/Layouts/Authenticated.vue';
+import { ref } from 'vue'
+import AppLayout from '@/Layouts/Authenticated.vue'
 import Pagination from '@/Components/Pagination'
 import moment from 'moment'
-import { Head,Link } from '@inertiajs/inertia-vue3';
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import SearchFilter from '@/Components/SearchFilter'
 import throttle from 'lodash/throttle'
 import pickBy from 'lodash/pickBy'
-const showingNavigationDropdown = ref(false);
-
+const showingNavigationDropdown = ref(false)
 
 export default {
-    props:[
-        'clients','filters'
-    ],
-     data() {
+    props: ['clients', 'filters'],
+    data() {
         return {
-        form: {
-            search: this.filters.search,
-        },
+            form: {
+                search: this.filters.search
+            }
         }
     },
-     watch: {
+    watch: {
         form: {
-        deep: true,
-        handler: throttle(function () {
-            this.$inertia.get(route('portfolio.client.index'), pickBy(this.form), { preserveState: true })
-        }, 150),
-        },
+            deep: true,
+            handler: throttle(function () {
+                this.$inertia.get(
+                    route('portfolio.client.index'),
+                    pickBy(this.form),
+                    { preserveState: true }
+                )
+            }, 150)
+        }
     },
-    components:{
+    components: {
         Pagination,
         AppLayout,
         Head,
         Link,
-        SearchFilter,
+        SearchFilter
     },
     created: function () {
-        this.moment = moment;
+        this.moment = moment
     },
     methods: {
         goToViewPage(data) {
-            this.$inertia.get(route('portfolio.client.show',{'client': data.id}));
+            this.$inertia.get(
+                route('portfolio.client.show', { client: data.id })
+            )
         },
-         reset() {
+        reset() {
             this.form = {
-            search: null,
+                search: null
             }
-         }
+        }
     }
 }
-
 </script>
 
 <template>
-
     <Head title="Client List" />
     <AppLayout>
-
         <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
-            <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
+            <Link class="text-primary hover:text-primary-focus" href="/client"
+                >Client</Link
+            >
         </h1>
         <section class="flex flex-row items-center justify-between mb-5">
-            <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
+            <search-filter
+                v-model="form.search"
+                class="mr-4 w-full max-w-md"
+                @reset="reset"
+            >
             </search-filter>
-            <Link :href="route('portfolio.client.create',{portfolio:route().params.portfolio})"
-                v-if="hasAnyPermission(['client-create'])" class="btn btn-primary  btn-sm">
-            <i class="bi bi-plus-lg mr-3"></i>
-            New Client
+            <Link
+                :href="
+                    route('portfolio.client.create', {
+                        portfolio: route().params.portfolio
+                    })
+                "
+                v-if="hasAnyPermission(['client-create'])"
+                class="btn btn-primary btn-sm"
+            >
+                <i class="bi bi-plus-lg mr-3"></i>
+                New Client
             </Link>
         </section>
         <div class="overflow-auto">
-            <table class="table table-compact table-bordered w-full" v-if="clients.data.length > 0">
+            <table
+                class="table table-compact table-bordered w-full"
+                v-if="clients.data.length > 0"
+            >
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -82,10 +98,14 @@ export default {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="hover hover:cursor-pointer" v-for="($client,i) in clients.data" :key="i"
-                        @click="goToViewPage($client)">
-                        <td>{{ $client.Name}}</td>
-                        <td>{{ $client.MyKad_SSM}}</td>
+                    <tr
+                        class="hover hover:cursor-pointer"
+                        v-for="($client, i) in clients.data"
+                        :key="i"
+                        @click="goToViewPage($client)"
+                    >
+                        <td>{{ $client.Name }}</td>
+                        <td>{{ $client.MyKad_SSM }}</td>
                         <td>{{ $client.state?.Negeri }}</td>
                         <td>{{ $client.Mobile_No }}</td>
                         <td>{{ $client.invoice }}</td>
@@ -93,14 +113,19 @@ export default {
                 </tbody>
             </table>
             <div v-else>
-                <Link :href="route('portfolio.client.create',{portfolio:route().params.portfolio})"
+                <Link
+                    :href="
+                        route('portfolio.client.create', {
+                            portfolio: route().params.portfolio
+                        })
+                    "
                     v-if="hasAnyPermission(['client-create'])"
-                    class="text-3xl underline text-primary">
-                Create new Client
+                    class="text-3xl underline text-primary"
+                >
+                    Create new Client
                 </Link>
             </div>
             <pagination class="mt-6" :links="clients.links" />
         </div>
     </AppLayout>
-
 </template>

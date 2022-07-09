@@ -13,8 +13,8 @@ export default {
             default: 'Tab'
         }
     },
-    setup(){
-        const selectedTitle = inject('selectedTitle');
+    setup() {
+        const selectedTitle = inject('selectedTitle')
 
         return {
             selectedTitle

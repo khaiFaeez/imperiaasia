@@ -1,26 +1,23 @@
 <script>
-import { Link,Head } from '@inertiajs/inertia-vue3';
-import AppLayout from '@/Layouts/Authenticated.vue';
+import { Link, Head } from '@inertiajs/inertia-vue3'
+import AppLayout from '@/Layouts/Authenticated.vue'
 import ClientForm from '@/Components/Forms/ClientForm.vue'
 import BreezeButton from '@/Components/Button'
 
-
 export default {
-    props:[
-        'client','states'
-    ],
-    components:{
+    props: ['client', 'states'],
+    components: {
         AppLayout,
         Link,
         Head,
         ClientForm,
         BreezeButton
     },
-    data(){
+    data() {
         return {
-            form:this.$inertia.form({
-                id:this.client.id,
-                MyKad_SSM:this.client.MyKad_SSM,
+            form: this.$inertia.form({
+                id: this.client.id,
+                MyKad_SSM: this.client.MyKad_SSM,
                 Name: this.client.Name,
                 Mobile_No: this.client.Mobile_No,
                 Phone: this.client.Phone,
@@ -36,55 +33,62 @@ export default {
     },
     methods: {
         storeClient() {
-                this.form.put(route('portfolio.client.update',{client:this.client.id}),{
+            this.form.put(
+                route('portfolio.client.update', { client: this.client.id }),
+                {
                     preserveScroll: true,
-                     onFinish: () => {
-                        this.showUpdateForm = false;
+                    onFinish: () => {
+                        this.showUpdateForm = false
                         // this.$toast.success(this.$page.props.flash.message, {
                         //     position: 'top'
                         // });
-                    },
-                });
-            }
+                    }
+                }
+            )
+        }
     }
 }
-
 </script>
 <template>
-
     <Head title="Edit Client" />
     <AppLayout>
-
         <div>
             <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
-                <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
+                <Link
+                    class="text-primary hover:text-primary-focus"
+                    href="/client"
+                    >Client</Link
+                >
                 <span class="text-primary font-medium">/</span> Edit
             </h1>
 
-
             <form @submit.prevent="storeClient" class="form">
                 <div class="flex items-center justify-end mb-8 gap-3">
-                    <Link :href="route('portfolio.client.show',{client:client.id})"
-                        class="hover:underline hover:text-primary hover:cursor-pointer">
-                    Cancel Edit
+                    <Link
+                        :href="
+                            route('portfolio.client.show', {
+                                client: client.id
+                            })
+                        "
+                        class="hover:underline hover:text-primary hover:cursor-pointer"
+                    >
+                        Cancel Edit
                     </Link>
-                    <BreezeButton :class="{ 'loading mr-2': form.processing }" :disabled="form.processing">
+                    <BreezeButton
+                        :class="{ 'loading mr-2': form.processing }"
+                        :disabled="form.processing"
+                    >
                         Save
                     </BreezeButton>
                 </div>
-                <ClientForm class=" mb-12" :client="form" :countries="$page.props.countries"
-                    :states="$page.props.states" />
-                <div>
-
-                </div>
-
-
-
-
+                <ClientForm
+                    class="mb-12"
+                    :client="form"
+                    :countries="$page.props.countries"
+                    :states="$page.props.states"
+                />
+                <div></div>
             </form>
-
-
-
         </div>
     </AppLayout>
 </template>
