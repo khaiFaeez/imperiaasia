@@ -13,8 +13,7 @@ class PortfolioController extends Controller
 
     public function __invoke($portfolio)
     {
-
-        if (!Auth::user()->portfolios->contains('id', $portfolio)) {
+        if (! Auth::user()->portfolios->contains('id', $portfolio)) {
             abort(403);
         }
         User::where('id', Auth::user()->id)->update(['current_portfolio_id' => $portfolio]);

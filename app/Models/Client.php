@@ -4,17 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\State;
-use Illuminate\Support\Facades\DB;
-use App\Models\Invoice;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class Client extends Model
 {
     use HasFactory;
 
     protected $table = 'Client';
+
     public $timestamps = false;
 
     protected $fillable = [
@@ -29,7 +27,7 @@ class Client extends Model
         'City',
         'State',
         'Country',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $connection = 'default';
@@ -58,16 +56,17 @@ class Client extends Model
 
         $select = ['Invoice.Id', 'Invoice.Aging', 'Invoice.Date', 'Invoice.Status_Inv', 'Invoice.Inv_No', 'Invoice.Created_Date'];
 
-        $invoices = DB::table(config('database.connections.' . $first . '.database') . '.Invoice')->leftJoin(config('database.connections.' . $first . '.database') . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select($select)->where('Client.MyKad_SSM', $this->MyKad_SSM);
+        $invoices = DB::table(config('database.connections.'.$first.'.database').'.Invoice')->leftJoin(config('database.connections.'.$first.'.database').'.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select($select)->where('Client.MyKad_SSM', $this->MyKad_SSM);
 
         if ($portfolios->count() > 0) {
             foreach ($portfolios as $portfolio) {
-                if ($portfolio !== "") {
-                    $q = DB::table(config('database.connections.' . $portfolio . '.database') . '.Invoice')->leftJoin(config('database.connections.' . $portfolio . '.database') . '.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select($select)->where('Client.MyKad_SSM', $this->MyKad_SSM);
+                if ($portfolio !== '') {
+                    $q = DB::table(config('database.connections.'.$portfolio.'.database').'.Invoice')->leftJoin(config('database.connections.'.$portfolio.'.database').'.Client', 'Invoice.MyKad_SSM', '=', 'Client.Id')->select($select)->where('Client.MyKad_SSM', $this->MyKad_SSM);
                     $invoices->union($q);
                 }
             }
         }
+
         return $invoices->get();
     }
 }

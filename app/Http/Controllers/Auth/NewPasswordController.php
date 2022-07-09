@@ -15,13 +15,14 @@ use Inertia\Inertia;
 
 class NewPasswordController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store', 'show']]);
         $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display the password reset view.
      *
@@ -77,12 +78,11 @@ class NewPasswordController extends Controller
         ]);
         */
 
-
         // Search for a user matching the email address
         $user = User::where('username', $request->username)->first();
 
         // Go ahead if a user matching that email was found
-        if (!is_null($user)) {
+        if (! is_null($user)) {
             // Check if the password and password confirmation match
             // NOTE: you can do additional validations here if needed
             $user->password = Hash::make($request->password);

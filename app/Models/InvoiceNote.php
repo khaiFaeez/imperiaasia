@@ -17,6 +17,7 @@ class InvoiceNote extends Model
     ];
 
     protected $table = 'Inv_Notes';
+
     public $timestamps = false;
 
     public function __construct()

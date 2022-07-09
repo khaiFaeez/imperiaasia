@@ -26,8 +26,8 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'staff_id' =>  ['required', 'string', 'max:255', Rule::unique('users')->ignore($id, 'id')],
-            'roles' => 'required'
+            'staff_id' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id, 'id')],
+            'roles' => 'required',
         ];
     }
 }

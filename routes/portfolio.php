@@ -1,13 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\PdfController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PrintController;
 use App\Http\Controllers\DocketController;
-
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PdfController;
+use App\Http\Controllers\PrintController;
+use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');

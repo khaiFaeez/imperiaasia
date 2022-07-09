@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Portfolio;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\User;
-use Spatie\Permission\Models\Permission;
+use Illuminate\Database\Seeder;
 
 class CreateAdminUserSeeder extends Seeder
 {

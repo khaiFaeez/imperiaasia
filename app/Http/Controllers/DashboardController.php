@@ -15,8 +15,6 @@ class DashboardController extends Controller
     {
         $connection = Auth::user()->current_portfolio->db_connection;
 
-
-
         $ss = Invoice::whereIn('Product', [1, 5, 6, 7, 8, 9, 13])
             ->selectRaw('DATE(Created_Date) as days, SUM(Qty) as qty')
             ->whereRaw('DATE(Created_Date) >= DATE(NOW()) - INTERVAL 7 DAY')
@@ -45,7 +43,6 @@ class DashboardController extends Controller
             }
         }
 
-
         return Inertia::render('Dashboard', [
             'total_invoice' => DB::connection($connection)
                 ->table('Invoice')
@@ -58,8 +55,8 @@ class DashboardController extends Controller
                 ->count(),
             'bottles' => [
                 'days' => $days,
-                'total' => $total
-            ]
+                'total' => $total,
+            ],
         ]);
     }
 }

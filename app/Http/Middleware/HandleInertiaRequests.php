@@ -39,15 +39,15 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
                 'portfolio' => $request->user()?->portfolios()->pluck('name', 'id'),
                 'can' => $request->user() ? $request->user()->getPermissionArray() : [],
-                'team' => getPermissionsTeamId()
+                'team' => getPermissionsTeamId(),
             ],
             'ziggy' => function () {
                 return (new Ziggy)->toArray();
             },
             'flash' => [
-                'message' => $request->session()->get('message')
+                'message' => $request->session()->get('message'),
             ],
-            'app_name' => config('app.name')
+            'app_name' => config('app.name'),
         ]);
     }
 }

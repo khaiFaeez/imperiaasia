@@ -1,34 +1,29 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
 use App\Models\User;
-use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Role;
-use Illuminate\Validation\Rules;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules;
 use Inertia\Inertia;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\PermissionRegistrar;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store', 'show']]);
         $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
         $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +31,6 @@ class UserController extends Controller
      */
     public function index()
     {
-
         $filter = FacadesRequest::input('search');
 
         $users = User::query()
@@ -44,7 +38,7 @@ class UserController extends Controller
             ->orderBy('id', 'DESC')
             ->withTrashed()
             ->when($filter, function ($query, $filter) {
-                $query->where('username', 'LIKE', '%' . $filter . '%');
+                $query->where('username', 'LIKE', '%'.$filter.'%');
             })
             ->paginate(5);
 
@@ -65,7 +59,6 @@ class UserController extends Controller
      */
     public function create()
     {
-
         $session_team_id = getPermissionsTeamId();
 
         return Inertia::render('User/Create', [
@@ -75,7 +68,7 @@ class UserController extends Controller
                 ->select('roles.id', 'portfolios.name as portfolio', 'roles.name')
                 ->whereNot('roles.id', 1)
                 ->where('portfolio_id', $session_team_id)
-                ->get()
+                ->get(),
         ]);
     }
 
@@ -87,13 +80,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'staff_id' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'roles' => 'required'
+            'roles' => 'required',
         ]);
 
         $input = $request->all();
@@ -122,8 +114,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-
         $user = User::find($id);
+
         return view('users.show', compact('user'));
     }
 
@@ -136,7 +128,6 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::withTrashed()->findOrFail($id);
-
 
         $session_team_id = getPermissionsTeamId();
 
@@ -166,7 +157,7 @@ class UserController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'staff_id' =>  ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
+            'staff_id' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
         ]);
 
         $user->update($request->all());
@@ -188,7 +179,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
         User::find($id)->delete();
 
         return back()
@@ -212,7 +202,7 @@ class UserController extends Controller
                 'current_password' => ['required', 'string'],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ])->after(function ($validator) use ($user, $input) {
-                if (!isset($input['current_password']) || !Hash::check($input['current_password'], $user->password)) {
+                if (! isset($input['current_password']) || ! Hash::check($input['current_password'], $user->password)) {
                     $validator->errors()->add('current_password', __('The provided password does not match your current password.'));
                 }
             });
