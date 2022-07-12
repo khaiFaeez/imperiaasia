@@ -33,7 +33,7 @@ class Portfolio extends Model
             // set actual new team_id to package instance
             setPermissionsTeamId($model);
             // get the admin user and assign roles/permissions on new team model
-            $user =  User::find(1);
+            $user = User::find(1);
             $user->assignRole('superadmin');
             // restore session team_id to package instance
             setPermissionsTeamId($user->current_portfolio_id);

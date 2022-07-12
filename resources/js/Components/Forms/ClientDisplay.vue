@@ -1,83 +1,88 @@
 <script>
-
-import { Link,Head } from '@inertiajs/inertia-vue3';
-import AppLayout from '@/Layouts/Authenticated.vue';
+import { Link, Head } from '@inertiajs/inertia-vue3'
+import AppLayout from '@/Layouts/Authenticated.vue'
 import BreezeLabel from '@/Components/Label.vue'
-import { ref } from 'vue';
-
+import { ref } from 'vue'
 
 export default {
-    props: ['client','countries','states'],
-    components:{
+    props: ['client', 'countries', 'states'],
+    components: {
         AppLayout,
         BreezeLabel,
         Link,
         Head
     },
     computed: {
-                activeState() {
-                    let that = this;
-                    // return this.states.find(( id ) => id === that.client.state);
-                //    return this.states.find(key => key === that.client.state);
-                    let x;
-                    this.states.forEach(function(a){
-                        if(a.id == that.client.State){
-                            x = a;
-                        }
-                    })
-                    return x;
-                },
-
-  }
+        activeState() {
+            let that = this
+            // return this.states.find(( id ) => id === that.client.state);
+            //    return this.states.find(key => key === that.client.state);
+            let x
+            this.states.forEach(function (a) {
+                if (a.id == that.client.State) {
+                    x = a
+                }
+            })
+            return x
+        }
+    }
 }
-
 </script>
 <template>
-    <div class="card bg-white rounded-xl transition ease-in-out hover:bg-base-200 duration-300">
+    <div
+        class="card bg-white rounded-xl transition ease-in-out hover:bg-base-200 duration-300"
+    >
         <div class="card-body collapse p-0">
             <input type="checkbox" :checked="route().current('*.client.*')" />
             <h2 class="card-title text-lg collapse-title">
-                {{client.Name}}
+                {{ client.Name }}
                 <div class="">
-                    <p class="hover:underline">
-                        ( {{client.MyKad_SSM}} )
-                    </p>
+                    <p class="hover:underline">( {{ client.MyKad_SSM }} )</p>
                 </div>
             </h2>
-            <div class=" collapse-content ">
+            <div class="collapse-content">
                 <div class="grid grid-cols-2">
                     <div v-if="route().current('*.client.*')" class="">
-                        <p> {{client.Address}}</p>
-                        <p>{{client.Address_2}}</p>
+                        <p>{{ client.Address }}</p>
+                        <p>{{ client.Address_2 }}</p>
                         <p>{{ client.Poscode }}</p>
                         <p>{{ client.City }}</p>
-                        <p>{{activeState?.Negeri}}</p>
+                        <p>{{ activeState?.Negeri }}</p>
                         <p>{{ client.Country }}</p>
                     </div>
 
-                    <Link v-else :href="route('portfolio.client.show',{'client': client.id})">
-                    <div class="">
-                        <p> {{client.Address}}</p>
-                        <p>{{client.Address_2}}</p>
-                        <p>{{ client.Poscode }}</p>
-                        <p>{{ client.City }}</p>
-                        <p>{{activeState?.Negeri}}</p>
-                        <p>{{ client.Country }}</p>
-                    </div>
+                    <Link
+                        v-else
+                        :href="
+                            route('portfolio.client.show', {
+                                client: client.id
+                            })
+                        "
+                    >
+                        <div class="">
+                            <p>{{ client.Address }}</p>
+                            <p>{{ client.Address_2 }}</p>
+                            <p>{{ client.Poscode }}</p>
+                            <p>{{ client.City }}</p>
+                            <p>{{ activeState?.Negeri }}</p>
+                            <p>{{ client.Country }}</p>
+                        </div>
                     </Link>
-                    <div>
-
-                    </div>
+                    <div></div>
                 </div>
 
-
                 <div class="card-actions justify-end">
-                    <div class="badge badge-outline badge-lg">{{client.Mobile_No}}</div>
-                    <div class="badge badge-outline badge-lg">{{client.Phone}}</div>
-                    <div class="badge badge-outline badge-lg">{{ client.Off_Phone }}</div>
+                    <div class="badge badge-outline badge-lg">
+                        {{ client.Mobile_No }}
+                    </div>
+                    <div class="badge badge-outline badge-lg">
+                        {{ client.Phone }}
+                    </div>
+                    <div class="badge badge-outline badge-lg">
+                        {{ client.Off_Phone }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </template>

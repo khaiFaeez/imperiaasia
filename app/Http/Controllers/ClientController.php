@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
-use Inertia\Inertia;
 use App\Models\Client;
 use App\Models\State;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Request;
+use Inertia\Inertia;
 
 class ClientController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:client-list|client-create|client-edit|client-delete', ['only' => ['index', 'store', 'show']]);
         $this->middleware('permission:client-create', ['only' => ['create', 'store']]);
@@ -27,19 +25,18 @@ class ClientController extends Controller
      */
     public function index()
     {
-
         $filter = Request::input('search');
         $clients = Client::query()
             ->with('state:id,Negeri')
             ->when($filter, function ($query, $filter) {
-                $query->where('MyKad_SSM', 'LIKE', '%' . $filter . '%');
-                $query->orWhere('Mobile_No', 'LIKE', '%' . $filter . '%');
+                $query->where('MyKad_SSM', 'LIKE', '%'.$filter.'%');
+                $query->orWhere('Mobile_No', 'LIKE', '%'.$filter.'%');
             })
             ->select('id', 'Name', 'MyKad_SSM', 'Created_Date', 'Mobile_No', 'State')
             ->paginate(20);
 
         $clients->map(function ($query) {
-            $query->invoice = $query->getAllInvoice()->sortByDesc('Created_Date')->first() ? $query->getAllInvoice()->sortByDesc('Created_Date')->first()->Inv_No : "";
+            $query->invoice = $query->getAllInvoice()->sortByDesc('Created_Date')->first() ? $query->getAllInvoice()->sortByDesc('Created_Date')->first()->Inv_No : '';
         });
 
         return Inertia::render('Client/Index', [
@@ -55,10 +52,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-
         return Inertia::render('Client/Create', [
             'states' => State::get(),
-            'countries' => config('countries')
+            'countries' => config('countries'),
         ]);
     }
 
@@ -70,11 +66,10 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
-
         $id = Client::create($request->validated());
 
         return redirect()->route('portfolio.client.show', [
-            "client" => $id->id
+            'client' => $id->id,
         ])
             ->with('message', 'Client created successfully');
     }
@@ -87,13 +82,13 @@ class ClientController extends Controller
      */
     public function show($portfolio, $id)
     {
-
         $client = Client::with('state')->where('id', $id)->first();
         $client->invoices = $client->getAllInvoice();
+
         return Inertia::render('Client/Show', [
             'client' => $client,
             'states' => State::get(),
-            'countries' => config('countries')
+            'countries' => config('countries'),
         ]);
     }
 
@@ -105,12 +100,12 @@ class ClientController extends Controller
      */
     public function edit($portfolio, $id)
     {
-
         $client = Client::with('state')->where('id', $id)->firstOrFail();
+
         return Inertia::render('Client/Edit', [
             'client' => $client,
             'states' => State::get(),
-            'countries' => config('countries')
+            'countries' => config('countries'),
         ]);
     }
 
@@ -123,7 +118,6 @@ class ClientController extends Controller
      */
     public function update(ClientRequest $request, $portfolio, $id)
     {
-
         $id = Client::where('id', $id)->update($request->validated());
 
         return back()->with('message', 'Client saved successfully');
@@ -142,9 +136,7 @@ class ClientController extends Controller
 
     public function getICNumber(Request $request)
     {
-
-        $data = Client::where('MyKad_SSM', 'LIKE', '%' . $request->keyword . '%')->get();
-
+        $data = Client::where('MyKad_SSM', 'LIKE', '%'.$request->keyword.'%')->get();
 
         return response()->json($data);
     }

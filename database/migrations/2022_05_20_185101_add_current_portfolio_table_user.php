@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId("current_portfolio_id")->after('email_verified_at')->nullable()->constrained('portfolios', 'id');
+            $table->foreignId('current_portfolio_id')->after('email_verified_at')->nullable()->constrained('portfolios', 'id');
         });
     }
 

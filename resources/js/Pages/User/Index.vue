@@ -1,21 +1,18 @@
 <script>
-import { ref } from 'vue';
-import { Link,Head } from '@inertiajs/inertia-vue3';
-import AppLayout from '@/Layouts/Authenticated.vue';
+import { ref } from 'vue'
+import { Link, Head } from '@inertiajs/inertia-vue3'
+import AppLayout from '@/Layouts/Authenticated.vue'
 import Pagination from '@/Components/Pagination'
 import SearchFilter from '@/Components/SearchFilter'
 import throttle from 'lodash/throttle'
 import pickBy from 'lodash/pickBy'
 
-const showingNavigationDropdown = ref(false);
-
+const showingNavigationDropdown = ref(false)
 
 export default {
-    props: [
-        'users', 'filters'
-    ],
+    props: ['users', 'filters'],
 
-    components:{
+    components: {
         Pagination,
         AppLayout,
         Link,
@@ -26,8 +23,8 @@ export default {
     data() {
         return {
             form: {
-                search: this.filters.search,
-            },
+                search: this.filters.search
+            }
         }
     },
 
@@ -35,42 +32,45 @@ export default {
         form: {
             deep: true,
             handler: throttle(function () {
-                this.$inertia.get(route('users.index'), pickBy(this.form), { preserveState: true })
-            }, 150),
-        },
+                this.$inertia.get(route('users.index'), pickBy(this.form), {
+                    preserveState: true
+                })
+            }, 150)
+        }
     },
 
     methods: {
         goToViewPage(data) {
-            this.$inertia.get(route('users.edit',{'user': data.id}));
+            this.$inertia.get(route('users.edit', { user: data.id }))
         },
         reset() {
             this.form = {
-                search: null,
+                search: null
             }
         }
     }
 }
-
 </script>
 
 <template>
-
     <Head title="User List" />
     <AppLayout>
-
         <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
-            <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
+            <Link class="text-primary hover:text-primary-focus" href="/users"
+                >User</Link
+            >
         </h1>
         <div class="flex flex-row items-center justify-between">
-            <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
+            <search-filter
+                v-model="form.search"
+                class="mr-4 w-full max-w-md"
+                @reset="reset"
+            >
             </search-filter>
-            <Link class="btn btn-primary btn-sm" :href="route('users.create')"><i
-                class="bi bi-person-plus-fill mr-3"></i>
-            New User</Link>
+            <Link class="btn btn-primary btn-sm" :href="route('users.create')"
+                ><i class="bi bi-person-plus-fill mr-3"></i> New User</Link
+            >
         </div>
-
-
 
         <table class="table table-bordered w-full max-w-4xl my-5">
             <thead>
@@ -86,23 +86,39 @@ export default {
                 <tr v-show="$page.props.users.data.length == 0">
                     <td colspan="5">No user</td>
                 </tr>
-                <tr class="hover hover:cursor-pointer" v-for="$user in $page.props.users.data" :key="$user.Id"
-                    @click="goToViewPage($user)">
+                <tr
+                    class="hover hover:cursor-pointer"
+                    v-for="$user in $page.props.users.data"
+                    :key="$user.Id"
+                    @click="goToViewPage($user)"
+                >
                     <td>
-                        <label class="badge" :class="$user.deleted_at ? 'badge-error' : 'badge-success'"> {{
-                            $user.deleted_at
-                            ? 'Inactive' : 'Active' }}</label>
+                        <label
+                            class="badge"
+                            :class="
+                                $user.deleted_at
+                                    ? 'badge-error'
+                                    : 'badge-success'
+                            "
+                        >
+                            {{
+                                $user.deleted_at ? 'Inactive' : 'Active'
+                            }}</label
+                        >
                     </td>
                     <td>{{ $user.name }}</td>
                     <td>{{ $user.username }}</td>
                     <td>{{ $user.staff_id }}</td>
                     <td>
-                        <label class="badge badge-outline capitalize" v-for="$v in $user.roles" :key="$v.id">{{ $v.name
-                            }}</label>
+                        <label
+                            class="badge badge-outline capitalize"
+                            v-for="$v in $user.roles"
+                            :key="$v.id"
+                            >{{ $v.name }}</label
+                        >
                     </td>
                 </tr>
             </tbody>
         </table>
     </AppLayout>
-
 </template>

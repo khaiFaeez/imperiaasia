@@ -17,7 +17,7 @@ class TeamsPermission
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!empty($user = auth()->user()) && !empty($user->current_portfolio_id)) {
+        if (! empty($user = auth()->user()) && ! empty($user->current_portfolio_id)) {
             app(PermissionRegistrar::class)->setPermissionsTeamId($user->current_portfolio_id);
         }
 

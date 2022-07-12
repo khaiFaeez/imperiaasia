@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class RestrictRegistrationToOneAdmin
 {
@@ -18,10 +17,11 @@ class RestrictRegistrationToOneAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::user()->hasRole('superadmin')) {
+        if (! Auth::user()->hasRole('superadmin')) {
             // fail and redirect silently if we already have a user with that role
-            return redirect("/");
+            return redirect('/');
         }
+
         return $next($request);
     }
 }
