@@ -154,6 +154,7 @@ class InvoiceController extends Controller
             // 'Total_RM_8' => $request->products['items'][7]['total'],
 
             'Grand_Total' => $request->products['grand_total'],
+            'Overdue_Amt' => $request->products['grand_total']
 
             'occupation_code' => $request->payment['occupation'],
 
@@ -253,6 +254,7 @@ class InvoiceController extends Controller
             // 'Total_RM_8' => $request->products['items'][7]['total'],
 
             'Grand_Total' => $request->products['grand_total'],
+            'Overdue_Amt' => $request->products['grand_total']
 
             'occupation_code' => $request->payment['occupation'],
 
