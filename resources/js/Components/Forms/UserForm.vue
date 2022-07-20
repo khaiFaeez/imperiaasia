@@ -14,7 +14,6 @@ export default {
         BreezeInput,
         BreezeInputError,
         Link,
-        Treeselect,
         Multiselect
     }
 }

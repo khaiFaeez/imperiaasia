@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocketController;
+use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PrintController;
@@ -21,4 +22,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/print/invoices/', [PrintController::class, 'print_invoices'])->name('print.invoices');
     Route::post('/print/dockets/', [PrintController::class, 'print_dockets'])->name('print.dockets');
     Route::get('/invoice_no', [InvoiceController::class, 'invoice_no_list']);
+    Route::post('image-upload', [ImageUploadController::class, 'imageUploadPost'])->name('image.upload.post');
 });

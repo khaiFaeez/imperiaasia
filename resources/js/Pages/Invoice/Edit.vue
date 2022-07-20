@@ -310,16 +310,11 @@ export default {
                             <div class="stat-value">
                                 {{
                                     Math.abs(
-                                        moment(invoice.Date, 'YYYY-MM-DD')
-                                            .startOf('day')
-                                            .diff(
-                                                moment(
-                                                    new Date(),
-                                                    'YYYY-MM-DD'
-                                                ).startOf('day'),
-                                                'days'
-                                            )
-                                    ) + 1
+                                        moment(invoice.Date, 'YYYY-MM-DD').diff(
+                                            moment(new Date(), 'YYYY-MM-DD'),
+                                            'days'
+                                        )
+                                    )
                                 }}
                                 Days
                             </div>

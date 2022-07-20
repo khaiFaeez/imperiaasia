@@ -14,14 +14,20 @@ export default {
         },
         total(i) {
             this.products.items[i].discounted_price =
-                (Number(this.products.items[i].discount) *
-                    (Number(this.products.items[i].price) *
-                        Number(this.products.items[i].qty))) /
-                100
+                Math.round(
+                    ((Number(this.products.items[i].discount) *
+                        (Number(this.products.items[i].price) *
+                            Number(this.products.items[i].qty))) /
+                        100) *
+                        100
+                ) / 100
             this.products.items[i].total =
-                Number(this.products.items[i].price) *
-                    Number(this.products.items[i].qty) -
-                Number(this.products.items[i].discounted_price)
+                Math.round(
+                    Number(this.products.items[i].price) *
+                        Number(this.products.items[i].qty) -
+                        Number(this.products.items[i].discounted_price) * 100
+                ) / 100
+
             this.grandTotal()
         }
     }

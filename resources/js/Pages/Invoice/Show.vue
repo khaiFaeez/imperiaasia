@@ -1,5 +1,5 @@
 <script>
-import { Link, Head } from '@inertiajs/inertia-vue3'
+import { Head, Link } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/Authenticated.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import SalesForm from '@/Components/Forms/SalesForm.vue'
@@ -8,20 +8,24 @@ import ProductDisplay from '@/Components/Forms/ProductDisplay.vue'
 import PostageDisplay from '@/Components/Forms/PostageDisplay.vue'
 import SalesDisplay from '@/Components/Forms/SalesDisplay.vue'
 import PaymentDisplay from '@/Components/Forms/PaymentDisplay.vue'
-// import TipTap from '@/Components/TipTap.vue'
-import { QuillEditor } from '@vueup/vue-quill'
-import ImageUploader from 'quill-image-uploader'
-import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import Tabs from '@/Components/Tabs.vue'
 import Tab from '@/Components/Tab.vue'
 import moment from 'moment'
+
+import { QuillEditor } from '@vueup/vue-quill'
+import ImageUploader from 'quill-image-uploader'
+import BlotFormatter from 'quill-blot-formatter'
+import ImageCompress from 'quill-image-compress'
+import 'quill-paste-smart'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
 export default {
     props: {
         order: Boolean,
         client: Boolean,
         invoice: Object,
-        states: Object
+        states: Object,
+        token: String
     },
     components: {
         AppLayout,
@@ -34,7 +38,6 @@ export default {
         PostageDisplay,
         SalesDisplay,
         PaymentDisplay,
-        // TipTap
         QuillEditor,
         Tabs,
         Tab
@@ -199,13 +202,52 @@ export default {
     },
 
     setup: () => {
-        const modules = {
-            name: 'imageUploader',
-            module: ImageUploader,
-            options: {
-                /* options */
+        const modules = [
+            {
+                name: 'modules/imageCompress',
+                module: ImageCompress,
+                options: {
+                    /* options */
+                }
+            },
+            {
+                name: 'modules/blotFormatter',
+                module: BlotFormatter,
+                options: {
+                    /* options */
+                }
+            },
+            {
+                name: 'modules/imageUploader',
+                module: ImageUploader,
+                options: {
+                    upload: (file) => {
+                        return new Promise((resolve, reject) => {
+                            const formData = new FormData()
+                            formData.append('image', file)
+                            formData.append(
+                                '_token',
+                                document.querySelector('#token').value
+                            )
+
+                            fetch(route('portfolio.image.upload.post'), {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then((response) => response.json())
+                                .then((result) => {
+                                    console.log(result)
+                                    resolve(result.path)
+                                })
+                                .catch((error) => {
+                                    reject('Upload failed')
+                                    console.error('Error:', error)
+                                })
+                        })
+                    }
+                }
             }
-        }
+        ]
         return { modules }
     }
 }
@@ -231,6 +273,7 @@ export default {
                     v-model:content="noteForm.note"
                     contentType="html"
                     class="bg-white"
+                    :modules="modules"
                 />
                 <button class="btn btn-block btn-sm" @click="storeNote">
                     Submit
@@ -239,6 +282,7 @@ export default {
         </div>
     </div>
     <AppLayout>
+        <input type="hidden" :value="$page.props.token" id="token" />
         <h1
             class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center"
         >
@@ -280,16 +324,11 @@ export default {
                         <div class="stat-value">
                             {{
                                 Math.abs(
-                                    moment(invoice.Date, 'YYYY-MM-DD')
-                                        .startOf('day')
-                                        .diff(
-                                            moment(
-                                                new Date(),
-                                                'YYYY-MM-DD'
-                                            ).startOf('day'),
-                                            'days'
-                                        )
-                                ) + 1
+                                    moment(invoice.Date, 'YYYY-MM-DD').diff(
+                                        moment(new Date(), 'YYYY-MM-DD'),
+                                        'days'
+                                    )
+                                )
                             }}
                             Days
                         </div>
