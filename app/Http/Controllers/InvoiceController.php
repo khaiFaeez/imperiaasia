@@ -37,7 +37,7 @@ class InvoiceController extends Controller
                 ->with('consultant')
                 ->orderBy('Id', 'desc')
                 ->when($filter, function ($query, $filter) {
-                    $query->where('Inv_No', 'LIKE', '%' . $filter . '%');
+                    $query->where('Inv_No', 'LIKE', '%'.$filter.'%');
                 })
                 ->paginate(20),
             'filters' => Request::all('search', 'trashed'),
@@ -78,7 +78,7 @@ class InvoiceController extends Controller
             'products' => Product::select('id', 'Code', 'Product_Name')->get(),
             'consultants' => Consultant::select('id', 'Name', 'Status', 'Employee_Code')->get(),
             'cmd' => Collector::select('id', 'Name')->get(),
-            'status' => Invoice::whereRelation('client', 'id', $client_id)->count() > 0 ? "REPEAT" :  "NEW"
+            'status' => Invoice::whereRelation('client', 'id', $client_id)->count() > 0 ? 'REPEAT' : 'NEW',
         ]);
     }
 

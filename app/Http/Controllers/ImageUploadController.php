@@ -11,10 +11,10 @@ class ImageUploadController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        $imageName =  request()->invoice_id . '-' . time() . '.' . $request->image->extension();
+        $imageName = request()->invoice_id.'-'.time().'.'.$request->image->extension();
         $request->image->move(public_path(request()->portfolio), $imageName);
 
         /* Store $imageName name in DATABASE from HERE */
-        return ["image" => $imageName, "path" => '/' . request()->portfolio . '/' . $imageName];
+        return ['image' => $imageName, 'path' => '/'.request()->portfolio.'/'.$imageName];
     }
 }

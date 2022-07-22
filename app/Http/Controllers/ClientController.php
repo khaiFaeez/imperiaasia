@@ -33,7 +33,7 @@ class ClientController extends Controller
                 $query->orWhere('Mobile_No', 'LIKE', '%'.$filter.'%');
             })
             ->select('id', 'Name', 'MyKad_SSM', 'Created_Date', 'Mobile_No', 'State')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate(20);
 
         $clients->map(function ($query) {
