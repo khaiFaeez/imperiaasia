@@ -47,48 +47,55 @@ export default {
     <AppLayout>
         <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/print"
-                >Print</Link
+                >Printing</Link
             >
         </h1>
 
-        <div class="flex items-center justify-end gap-4">
-            <form
-                :action="route('portfolio.print.invoices')"
-                method="post"
-                target="_blank"
-                @submit.prevent="check_form"
-                v-if="$page.props.invoices.data.length > 0"
-            >
-                <input
-                    type="hidden"
-                    :value="$page.props.attribute_name"
-                    name="_token"
-                />
-                <input type="hidden" :value="selected" name="ids" />
-                <button class="btn btn-primary btn-sm" @click="check_form">
-                    <i class="bi bi-printer text-xl mr-3"></i>
-                    Print Invoices
-                </button>
-            </form>
-
-            <form
-                :action="route('portfolio.print.dockets')"
-                method="post"
-                target="_blank"
-                @submit.prevent="check_form"
-                v-if="$page.props.invoices.data.length > 0"
-            >
-                <input
-                    type="hidden"
-                    :value="$page.props.attribute_name"
-                    name="_token"
-                />
-                <input type="hidden" :value="selected" name="ids" />
-                <button class="btn btn-secondary btn-sm" @click="check_form">
-                    <i class="bi bi-printer-fill text-xl mr-3"></i>
-                    Print Docket
-                </button>
-            </form>
+        <div class="menu menu-horizontal mb-4 w-full justify-end">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-neutral btn-sm">Print</label>
+                <ul
+                    tabindex="0"
+                    class="dropdown-content menu p-2 shadow-xl bg-base-100 rounded-box w-52"
+                >
+                    <li>
+                        <form
+                            class="w-full"
+                            :action="route('portfolio.print.invoices')"
+                            method="post"
+                            target="_blank"
+                            @submit.prevent="check_form"
+                            v-if="$page.props.invoices.data.length > 0"
+                        >
+                            <input
+                                type="hidden"
+                                :value="$page.props.attribute_name"
+                                name="_token"
+                            />
+                            <input type="hidden" :value="selected" name="ids" />
+                            <button @click="check_form">Invoices</button>
+                        </form>
+                    </li>
+                    <li>
+                        <form
+                            class="w-full"
+                            :action="route('portfolio.print.dockets')"
+                            method="post"
+                            target="_blank"
+                            @submit.prevent="check_form"
+                            v-if="$page.props.invoices.data.length > 0"
+                        >
+                            <input
+                                type="hidden"
+                                :value="$page.props.attribute_name"
+                                name="_token"
+                            />
+                            <input type="hidden" :value="selected" name="ids" />
+                            <button @click="check_form">Docket</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="overflow-auto my-5">

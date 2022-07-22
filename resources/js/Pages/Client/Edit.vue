@@ -63,16 +63,16 @@ export default {
             </h1>
 
             <form @submit.prevent="storeClient" class="form">
-                <div class="flex items-center justify-end mb-8 gap-3">
+                <div class="menu menu-horizontal w-full justify-end mb-4">
                     <Link
                         :href="
                             route('portfolio.client.show', {
                                 client: client.id
                             })
                         "
-                        class="hover:underline hover:text-primary hover:cursor-pointer"
+                        class="btn btn-ghost btn-sm"
                     >
-                        Cancel Edit
+                        Discard
                     </Link>
                     <BreezeButton
                         :class="{ 'loading mr-2': form.processing }"

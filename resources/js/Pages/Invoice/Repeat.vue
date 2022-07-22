@@ -8,6 +8,7 @@ import PaymentForm from '@/Components/Forms/PaymentForm.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import PostageForm from '@/Components/Forms/PostageForm.vue'
 import BreezeButton from '@/Components/Button.vue'
+import moment from 'moment'
 
 export default {
     props: ['client', 'invoice'],
@@ -22,6 +23,9 @@ export default {
         SalesForm,
         PaymentForm,
         PostageForm
+    },
+    created: function () {
+        this.moment = moment
     },
     data() {
         return {
@@ -76,36 +80,39 @@ export default {
                             discount: this.invoice.Discount_4,
                             discounted_price: 0,
                             total: this.invoice.Total_RM_4
+                        },
+                        {
+                            product: this.invoice.Product_5,
+                            price: this.invoice.Price_5,
+                            qty: this.invoice.Qty_5,
+                            discount: this.invoice.Discount_5,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_5
+                        },
+                        {
+                            product: this.invoice.Product_6,
+                            price: this.invoice.Price_6,
+                            qty: this.invoice.Qty_6,
+                            discount: this.invoice.Discount_6,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_6
+                        },
+                        {
+                            product: this.invoice.Product_7,
+                            price: this.invoice.Price_7,
+                            qty: this.invoice.Qty_7,
+                            discount: this.invoice.Discount_7,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_7
+                        },
+                        {
+                            product: this.invoice.Product_8,
+                            price: this.invoice.Price_8,
+                            qty: this.invoice.Qty_8,
+                            discount: this.invoice.Discount_8,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_8
                         }
-                        // {
-                        //      product:this.invoice.Product_5,
-                        //     price : this.invoice.Price_5,
-                        //     qty : this.invoice.Qty_5,
-                        //     discount : this.invoice.Discount_5,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_5,
-                        // },{
-                        //     product:this.invoice.Product_6,
-                        //     price : this.invoice.Price_6,
-                        //     qty : this.invoice.Qty_6,
-                        //     discount : this.invoice.Discount_6,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_6,
-                        // },{
-                        //     product:this.invoice.Product_7,
-                        //     price : this.invoice.Price_7,
-                        //     qty : this.invoice.Qty_7,
-                        //     discount : this.invoice.Discount_7,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_7,
-                        // },{
-                        //     product:this.invoice.Product_8,
-                        //     price : this.invoice.Price_8,
-                        //     qty : this.invoice.Qty_8,
-                        //     discount : this.invoice.Discount_8,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_8,
-                        // }
                     ]
                 },
                 payment: {
@@ -198,13 +205,45 @@ export default {
         </h1>
 
         <form @submit.prevent="storeInvoice" class="form">
-            <div class="flex items-center justify-end">
-                <BreezeButton
-                    :class="{ 'loading mr-3': invoiceForm.processing }"
-                    :disabled="invoiceForm.processing"
-                >
-                    Save
-                </BreezeButton>
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex flex-col">
+                    <div
+                        class="stats stats-vertical lg:stats-horizontal bg-white"
+                        v-show="true"
+                    >
+                        <div class="stat">
+                            <div class="stat-title">Order Status</div>
+                            <div class="stat-value">
+                                {{ invoiceForm.Orderstatus }}
+                            </div>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-title">Status</div>
+                            <div class="stat-value"></div>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-title">Aging</div>
+                            <div class="stat-value">0 Days</div>
+                        </div>
+
+                        <div class="stat">
+                            <div class="stat-title">Date</div>
+                            <div class="stat-value">
+                                {{ moment(new Date()).format('LL') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu menu-horizontal">
+                    <BreezeButton
+                        :class="{ 'loading mr-3': invoiceForm.processing }"
+                        :disabled="invoiceForm.processing"
+                    >
+                        Save
+                    </BreezeButton>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-1">
@@ -255,6 +294,7 @@ export default {
                     <sales-form
                         :consultants="$page.props.consultants"
                         :sales="invoiceForm.sales"
+                        :invoice="invoiceForm"
                     />
                 </div>
 

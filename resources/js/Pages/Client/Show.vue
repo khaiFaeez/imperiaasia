@@ -51,13 +51,14 @@ export default {
                 <span>This client have pending invoice</span>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-end mb-5 gap-3">
+
+        <div class="menu menu-horizontal mb-4 justify-end w-full">
             <Link
                 :href="route('portfolio.client.edit', { client: client.id })"
-                class="hover:underline hover:text-primary hover:cursor-pointer"
+                class="btn btn-ghost btn-sm"
                 v-if="hasAnyPermission(['client-edit'])"
             >
-                Edit Client
+                Edit
             </Link>
 
             <Link

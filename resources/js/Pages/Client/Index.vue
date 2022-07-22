@@ -63,25 +63,26 @@ export default {
                 >Client</Link
             >
         </h1>
-        <section class="flex flex-row items-center justify-between mb-5">
+        <section class="flex flex-row items-center justify-between mb-4">
             <search-filter
                 v-model="form.search"
                 class="mr-4 w-full max-w-md"
                 @reset="reset"
             >
             </search-filter>
-            <Link
-                :href="
-                    route('portfolio.client.create', {
-                        portfolio: route().params.portfolio
-                    })
-                "
-                v-if="hasAnyPermission(['client-create'])"
-                class="btn btn-primary btn-sm"
-            >
-                <i class="bi bi-plus-lg mr-3"></i>
-                New Client
-            </Link>
+            <div class="menu menu-horizontal">
+                <Link
+                    :href="
+                        route('portfolio.client.create', {
+                            portfolio: route().params.portfolio
+                        })
+                    "
+                    v-if="hasAnyPermission(['client-create'])"
+                    class="btn btn-neutral btn-sm"
+                >
+                    New Client
+                </Link>
+            </div>
         </section>
         <div class="overflow-auto">
             <table

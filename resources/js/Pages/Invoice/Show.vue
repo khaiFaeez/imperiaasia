@@ -64,6 +64,7 @@ export default {
             }),
 
             invoiceForm: this.$inertia.form({
+                invoice_id: this.invoice.Id,
                 client: this.invoice.client.id,
                 Orderstatus: this.invoice.Orderstatus,
                 products: {
@@ -104,40 +105,43 @@ export default {
                             discount: this.invoice.Discount_4,
                             discounted_price: 0,
                             total: this.invoice.Total_RM_4
+                        },
+                        {
+                            product: this.invoice.Product_5,
+                            product_name: this.invoice.product5?.Product_Name,
+                            price: this.invoice.Price_5,
+                            qty: this.invoice.Qty_5,
+                            discount: this.invoice.Discount_5,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_5
+                        },
+                        {
+                            product: this.invoice.Product_6,
+                            product_name: this.invoice.product6?.Product_Name,
+                            price: this.invoice.Price_6,
+                            qty: this.invoice.Qty_6,
+                            discount: this.invoice.Discount_6,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_6
+                        },
+                        {
+                            product: this.invoice.Product_7,
+                            product_name: this.invoice.product7?.Product_Name,
+                            price: this.invoice.Price_7,
+                            qty: this.invoice.Qty_7,
+                            discount: this.invoice.Discount_7,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_7
+                        },
+                        {
+                            product: this.invoice.Product_8,
+                            product_name: this.invoice.product8?.Product_Name,
+                            price: this.invoice.Price_8,
+                            qty: this.invoice.Qty_8,
+                            discount: this.invoice.Discount_8,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_8
                         }
-                        // , {
-                        //      product:this.invoice.Product_5,
-                        //     product_name:this.invoice.product5?.Product_Name,
-                        //     price : this.invoice.Price_5,
-                        //     qty : this.invoice.Qty_5,
-                        //     discount : this.invoice.Discount_5,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_5,
-                        // },{
-                        //      product:this.invoice.Product_6,
-                        //     product_name:this.invoice.product6?.Product_Name,
-                        //     price : this.invoice.Price_6,
-                        //     qty : this.invoice.Qty_6,
-                        //     discount : this.invoice.Discount_6,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_6,
-                        // },{
-                        //      product:this.invoice.Product_7,
-                        //     product_name:this.invoice.product7?.Product_Name,
-                        //     price : this.invoice.Price_7,
-                        //     qty : this.invoice.Qty_7,
-                        //     discount : this.invoice.Discount_7,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_7,
-                        // },{
-                        //      product:this.invoice.Product_8,
-                        //     product_name:this.invoice.product8?.Product_Name,
-                        //     price : this.invoice.Price_8,
-                        //     qty : this.invoice.Qty_8,
-                        //     discount : this.invoice.Discount_8,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_8,
-                        // }
                     ]
                 },
                 payment: {
@@ -229,6 +233,10 @@ export default {
                                 '_token',
                                 document.querySelector('#token').value
                             )
+                            formData.append(
+                                'invoice_id',
+                                document.querySelector('#inv').value
+                            )
 
                             fetch(route('portfolio.image.upload.post'), {
                                 method: 'POST',
@@ -236,7 +244,6 @@ export default {
                             })
                                 .then((response) => response.json())
                                 .then((result) => {
-                                    console.log(result)
                                     resolve(result.path)
                                 })
                                 .catch((error) => {
@@ -282,7 +289,11 @@ export default {
         </div>
     </div>
     <AppLayout>
-        <input type="hidden" :value="$page.props.token" id="token" />
+        <input type="hidden" :value="$page.props.token" id="token" /><input
+            type="hidden"
+            :value="invoice.Id"
+            id="inv"
+        />
         <h1
             class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center"
         >
@@ -292,10 +303,10 @@ export default {
             <span class="text-primary font-medium">/</span> {{ invoice.Inv_No }}
         </h1>
 
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between mb-4">
             <div class="flex flex-col">
                 <div
-                    class="stats stats-vertical lg:stats-horizontal shadow bg-white"
+                    class="stats stats-vertical lg:stats-horizontal bg-white"
                     v-show="true"
                 >
                     <div class="stat">
@@ -342,7 +353,8 @@ export default {
                     </div>
                 </div>
             </div>
-            <div>
+
+            <div class="menu menu-horizontal">
                 <!-- The button to open modal -->
                 <label
                     for="my-modal"
@@ -361,22 +373,34 @@ export default {
                     class="btn btn-ghost btn-sm"
                     title="Edit Invoice"
                 >
-                    <i class="bi bi-pencil-square text-xl"></i>
+                    Edit
                 </Link>
-                <button
-                    @click="openPDF(invoice)"
-                    class="btn btn-ghost btn-sm"
-                    title="Print Invoice"
-                >
-                    <i class="bi bi-printer text-xl"></i>
-                </button>
-                <button
-                    @click="openDocket(invoice)"
-                    class="btn btn-ghost btn-sm"
-                    title="Print Docket"
-                >
-                    <i class="bi bi-printer-fill text-xl"></i>
-                </button>
+                <div class="dropdown dropdown-end">
+                    <label tabindex="0" class="btn btn-ghost btn-sm"
+                        >Print</label
+                    >
+                    <ul
+                        tabindex="0"
+                        class="dropdown-content menu p-2 shadow-xl bg-base-100 rounded-box w-52"
+                    >
+                        <li>
+                            <div
+                                @click="openPDF(invoice)"
+                                class="hover:cursor-pointer w-full"
+                            >
+                                Invoice
+                            </div>
+                        </li>
+                        <li>
+                            <div
+                                @click="openDocket(invoice)"
+                                class="hover:cursor-pointer w-full"
+                            >
+                                Docket
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-1">

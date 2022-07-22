@@ -60,16 +60,20 @@ export default {
                 >User</Link
             >
         </h1>
-        <div class="flex flex-row items-center justify-between">
+        <div class="flex flex-row items-center justify-between mb-4">
             <search-filter
                 v-model="form.search"
                 class="mr-4 w-full max-w-md"
                 @reset="reset"
             >
             </search-filter>
-            <Link class="btn btn-primary btn-sm" :href="route('users.create')"
-                ><i class="bi bi-person-plus-fill mr-3"></i> New User</Link
-            >
+            <div class="menu menu-horizontal">
+                <Link
+                    class="btn btn-neutral btn-sm"
+                    :href="route('users.create')"
+                    >New User</Link
+                >
+            </div>
         </div>
 
         <table class="table table-bordered w-full max-w-4xl my-5">

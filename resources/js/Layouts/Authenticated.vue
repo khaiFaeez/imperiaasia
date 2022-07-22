@@ -1,11 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue'
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
 import Navigation from '@/Components/Navigation.vue'
 import { Link } from '@inertiajs/inertia-vue3'
 
 const showingNavigationDropdown = ref(false)
+
+let animate = false
+
+onMounted(() => {
+    animate = true
+})
 </script>
 
 <template>
@@ -32,8 +38,14 @@ const showingNavigationDropdown = ref(false)
             <div class="drawer-content flex flex-col">
                 <!-- Page content here -->
                 <Navigation />
-                <main class="py-6 px-4 sm:px-6 lg:px-8 w-full">
-                    <slot />
+                <main
+                    class="py-6 px-4 sm:px-6 lg:px-8 w-full overflow-y-scroll"
+                >
+                    <transition name="page" mode="out-in">
+                        <div>
+                            <slot />
+                        </div>
+                    </transition>
                 </main>
             </div>
             <div
@@ -153,7 +165,7 @@ const showingNavigationDropdown = ref(false)
                                     d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
                                 />
                             </svg>
-                            Print Invoices
+                            Printing
                         </BreezeResponsiveNavLink>
                     </li>
                     <li
@@ -196,3 +208,15 @@ const showingNavigationDropdown = ref(false)
         </div>
     </div>
 </template>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+    transition: all 5s;
+}
+
+.page-enter-from,
+.page-leave-to {
+    opacity: 0;
+}
+</style>

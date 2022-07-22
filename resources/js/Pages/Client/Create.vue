@@ -62,7 +62,7 @@ export default {
                 <button @click="deleteAllUsersWithAsync" />
             </template>
             <form @submit.prevent="storeClient" class="form">
-                <div class="flex items-center justify-end mb-8">
+                <div class="menu menu-horizontal w-full justify-end mb-4">
                     <BreezeButton
                         :class="{ 'loading mr-2': form.processing }"
                         :disabled="form.processing"

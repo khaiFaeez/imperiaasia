@@ -58,16 +58,21 @@ export default {
             >
             <span class="text-primary font-medium">/</span> Roles
         </h1>
-        <div class="flex items-end justify-between mb-3">
+        <div class="flex flex-row items-center justify-between mb-4">
             <search-filter
                 v-model="form.search"
                 class="mr-4 w-full max-w-md"
                 @reset="reset"
             >
             </search-filter>
-            <Link class="btn btn-neutral btn-sm" :href="route('roles.create')">
-                Add New Role</Link
-            >
+            <div class="menu menu-horizontal">
+                <Link
+                    class="btn btn-neutral btn-sm"
+                    :href="route('roles.create')"
+                >
+                    Add New Role</Link
+                >
+            </div>
         </div>
 
         <table class="table table-compact table-bordered w-full">
