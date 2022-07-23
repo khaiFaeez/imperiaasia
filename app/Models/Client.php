@@ -67,6 +67,6 @@ class Client extends Model
             }
         }
 
-        return $invoices->get();
+        return $invoices;
     }
 }

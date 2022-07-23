@@ -39,7 +39,7 @@ onMounted(() => {
                 <!-- Page content here -->
                 <Navigation />
                 <main
-                    class="py-6 px-4 sm:px-6 lg:px-8 w-full overflow-y-scroll"
+                    class="py-6 px-4 sm:px-6 lg:px-8 w-full h-full overflow-y-scroll"
                 >
                     <transition name="page" mode="out-in">
                         <div>

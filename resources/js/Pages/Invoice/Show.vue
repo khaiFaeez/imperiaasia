@@ -186,6 +186,7 @@ export default {
     },
     created: function () {
         this.moment = moment
+        this.modules = []
     },
     methods: {
         openPDF(data) {
@@ -354,29 +355,19 @@ export default {
                 </div>
             </div>
 
-            <div class="menu menu-horizontal">
+            <div class="btn-group bg-white">
                 <!-- The button to open modal -->
                 <label
                     for="my-modal"
-                    class="btn btn-ghost btn-sm modal-button"
                     v-if="hasAnyPermission(['note-edit'])"
                     title="Notes"
+                    class="btn btn-outline btn-sm"
                 >
                     <i class="bi bi-journal-text text-xl"></i
                 ></label>
 
-                <Link
-                    :href="
-                        route('portfolio.invoice.edit', { invoice: invoice.Id })
-                    "
-                    v-if="hasAnyPermission(['invoice-edit'])"
-                    class="btn btn-ghost btn-sm"
-                    title="Edit Invoice"
-                >
-                    Edit
-                </Link>
                 <div class="dropdown dropdown-end">
-                    <label tabindex="0" class="btn btn-ghost btn-sm"
+                    <label tabindex="0" class="btn btn-outline btn-sm"
                         >Print</label
                     >
                     <ul
@@ -401,6 +392,18 @@ export default {
                         </li>
                     </ul>
                 </div>
+                <Link
+                    :href="
+                        route('portfolio.invoice.edit', {
+                            invoice: invoice.Id
+                        })
+                    "
+                    v-if="hasAnyPermission(['invoice-edit'])"
+                    title="Edit Invoice"
+                    class="btn btn-outline btn-sm"
+                >
+                    Edit
+                </Link>
             </div>
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-1">

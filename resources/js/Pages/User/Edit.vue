@@ -119,8 +119,8 @@ export default {
                     ></i>
                 </label>
             </div>
-            <form @submit.prevent="updateUser" class="form max-w-4xl">
-                <div class="bg-white h-96 p-12 rounded-xl">
+            <form @submit.prevent="updateUser" class="form max-w-5xl">
+                <div class="bg-white p-12 rounded-xl">
                     <user-form :user="form"></user-form>
                     <!-- <div class="col-span-6">
                             <BreezeLabel>Permission:</BreezeLabel>

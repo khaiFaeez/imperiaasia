@@ -70,7 +70,7 @@ export default {
                 @reset="reset"
             >
             </search-filter>
-            <div class="menu menu-horizontal">
+            <div class="btn-group">
                 <Link
                     :href="
                         route('portfolio.client.create', {
@@ -78,7 +78,7 @@ export default {
                         })
                     "
                     v-if="hasAnyPermission(['client-create'])"
-                    class="btn btn-neutral btn-sm"
+                    class="btn btn-primary btn-sm"
                 >
                     New Client
                 </Link>
@@ -86,16 +86,16 @@ export default {
         </section>
         <div class="overflow-auto">
             <table
-                class="table table-compact table-bordered w-full"
+                class="table table-compact table-bordered w-full table-fixed"
                 v-if="clients.data.length > 0"
             >
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>IC Number</th>
-                        <th>State</th>
-                        <th>Mobile Number</th>
-                        <th>Last Purchase</th>
+                        <th width="10%">Name</th>
+                        <th width="10%">IC Number</th>
+                        <th width="10%">State</th>
+                        <th width="10%">Mobile Number</th>
+                        <th width="10%">Last Purchase</th>
                     </tr>
                 </thead>
                 <tbody>

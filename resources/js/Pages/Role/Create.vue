@@ -58,7 +58,7 @@ export default {
         </h1>
 
         <form @submit.prevent="createRole()" class="form">
-            <div class="flex items-center justify-end gap-4">
+            <div class="flex items-center justify-end gap-4 mb-4">
                 <BreezeButton
                     :class="{ 'loading mr-3': form.processing }"
                     :disabled="form.processing"
@@ -66,7 +66,7 @@ export default {
                     Save
                 </BreezeButton>
             </div>
-            <div class="grid grid-cols-6 gap-6">
+            <div class="grid grid-cols-6 gap-6 p-4 bg-white">
                 <div class="col-span-6">
                     <select
                         name="portfolio"
@@ -83,6 +83,7 @@ export default {
                             {{ portfolio }}
                         </option>
                     </select>
+                    <BreezeInputError :message="$page.props.errors.portfolio" />
                 </div>
 
                 <div class="col-span-6">
@@ -100,18 +101,23 @@ export default {
 
                 <div class="col-span-6">
                     <BreezeLabel>Permission:</BreezeLabel>
-                    <div
-                        v-for="(permission, i) in $page.props.permissions"
-                        :key="i"
-                    >
-                        <input
-                            class="checkbox checkbox-sm"
-                            type="checkbox"
-                            name="permission[]"
-                            v-model="form.permission"
-                            :value="permission.id"
-                        />
-                        <label class="mx-3"> {{ permission.name }}</label>
+                    <BreezeInputError
+                        :message="$page.props.errors.permission"
+                    />
+                    <div class="grid grid-rows-4 grid-flow-col">
+                        <div
+                            v-for="(permission, i) in $page.props.permissions"
+                            :key="i"
+                        >
+                            <input
+                                class="checkbox checkbox-sm"
+                                type="checkbox"
+                                name="permission[]"
+                                v-model="form.permission"
+                                :value="permission.id"
+                            />
+                            <label class="mx-3"> {{ permission.name }}</label>
+                        </div>
                     </div>
                 </div>
             </div>

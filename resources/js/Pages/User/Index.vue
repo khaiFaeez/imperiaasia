@@ -67,16 +67,16 @@ export default {
                 @reset="reset"
             >
             </search-filter>
-            <div class="menu menu-horizontal">
+            <div class="btn-group">
                 <Link
                     class="btn btn-neutral btn-sm"
                     :href="route('users.create')"
-                    >New User</Link
+                    >Add User</Link
                 >
             </div>
         </div>
 
-        <table class="table table-bordered w-full max-w-4xl my-5">
+        <table class="table table-bordered w-full max-w-5xl my-5">
             <thead>
                 <tr>
                     <th>Status</th>
@@ -124,5 +124,7 @@ export default {
                 </tr>
             </tbody>
         </table>
+
+        <pagination class="mt-6" :links="$page.props.users.links" />
     </AppLayout>
 </template>

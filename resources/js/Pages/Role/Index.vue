@@ -70,7 +70,7 @@ export default {
                     class="btn btn-neutral btn-sm"
                     :href="route('roles.create')"
                 >
-                    Add New Role</Link
+                    Add Role</Link
                 >
             </div>
         </div>
@@ -84,7 +84,7 @@ export default {
             <tbody>
                 <tr
                     class="hover hover:cursor-pointer"
-                    v-for="role in $page.props.roles"
+                    v-for="role in $page.props.roles.data"
                     :key="role.Id"
                     @click="goToViewPage(role)"
                 >
@@ -92,5 +92,7 @@ export default {
                 </tr>
             </tbody>
         </table>
+
+        <pagination class="mt-6" :links="$page.props.roles.links" />
     </AppLayout>
 </template>

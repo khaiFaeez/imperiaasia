@@ -38,7 +38,7 @@ const submit = () => {
         </h1>
         <form
             @submit.prevent="submit"
-            class="p-4 bg-white rounded-xl max-w-4xl"
+            class="p-4 bg-white rounded-xl max-w-5xl"
         >
             <div>
                 <BreezeLabel for="username" value="Username" />

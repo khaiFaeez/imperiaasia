@@ -48,19 +48,17 @@ export default {
             <span class="text-primary font-medium">/</span> Create
         </h1>
 
-        <form @submit.prevent="storeUser" class="form max-w-4xl">
-            <div class="card bg-white">
-                <div class="card-body">
-                    <user-form :user="form"></user-form>
-                    <div class="flex items-center justify-end">
-                        <BreezeButton
-                            :class="{ 'loading mr-3': form.processing }"
-                            :disabled="form.processing"
-                            class="btn-md"
-                        >
-                            Register
-                        </BreezeButton>
-                    </div>
+        <form @submit.prevent="storeUser" class="form max-w-5xl">
+            <div class="bg-white p-12 rounded-xl">
+                <user-form :user="form"></user-form>
+                <div class="flex items-center justify-end">
+                    <BreezeButton
+                        :class="{ 'loading mr-3': form.processing }"
+                        :disabled="form.processing"
+                        class="btn-md"
+                    >
+                        Register
+                    </BreezeButton>
                 </div>
             </div>
         </form>

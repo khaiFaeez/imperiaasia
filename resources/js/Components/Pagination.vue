@@ -4,14 +4,14 @@
             <template v-for="(link, p) in links" :key="p">
                 <div
                     v-if="link.url === null"
-                    class="btn btn-outline"
+                    class="btn btn-ghost bg-white btn-sm"
                     v-html="link.label"
                 />
                 <Link
                     preserve-scroll
                     v-else
-                    class="btn btn-outline"
-                    :class="{ 'btn btn-active btn-outline': link.active }"
+                    class="btn btn-ghost bg-white btn-sm"
+                    :class="{ 'btn btn-active btn-ghost': link.active }"
                     :href="link.url"
                     v-html="link.label"
                 />

@@ -20,7 +20,21 @@ class PrintController extends Controller
     public function index()
     {
         return Inertia::render('Print/Index', [
-            'invoices' => Invoice::with('client')->with('state')->orderBy('Id', 'desc')->where('Invoice_Status', 0)->orWhere('Docket_Status', 0)->paginate(20),
+            'invoices' => Invoice::query()
+                ->select(
+                    'Id',
+                    'Ship_Name',
+                    'Inv_No',
+                    'Ship_Phone',
+                    'Ship_poscode',
+                    'Ship_City',
+                    'Ship_State'
+                )
+                ->with('state:Negeri,id')
+                ->orderBy('Id', 'desc')
+                ->where('Invoice_Status', 0)
+                ->orWhere('Docket_Status', 0)
+                ->paginate(20),
             'attribute_name' => csrf_token(),
             'ids' => Request::get('ids'),
             'selected' => [],

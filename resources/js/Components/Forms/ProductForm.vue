@@ -38,7 +38,6 @@ export default {
                     ([_, v]) => v.product != null
                 )
             )
-            console.log(Object.keys(o))
             return Object.keys(o).length < 4 ? 4 : Object.keys(o).length
         }
     }

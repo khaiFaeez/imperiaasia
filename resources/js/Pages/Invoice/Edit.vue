@@ -331,29 +331,33 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div class="menu menu-horizontal">
-                    <p
-                        class="btn btn-sm btn-ghost"
+                <div class="btn-group">
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline"
                         v-show="invoice.Status_Inv == 'PENDING'"
                         @click="cancelOrder"
                     >
                         Cancel Order
-                    </p>
-                    <p
-                        class="btn btn-sm btn-ghost"
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline"
                         v-show="invoice.Status_Inv == 'PENDING'"
                         @click="updatePayment"
                     >
                         Update Payment
-                    </p>
+                    </button>
 
                     <Link
+                        as="button"
+                        type="button"
                         :href="
                             route('portfolio.invoice.show', {
                                 invoice: invoice.Id
                             })
                         "
-                        class="btn btn-sm btn-ghost"
+                        class="btn btn-sm btn-outline"
                     >
                         Discard
                     </Link>

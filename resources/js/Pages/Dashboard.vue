@@ -113,7 +113,7 @@ export default {
         </h1>
         <div class="max-w-7xl">
             <div
-                class="stats stats-vertical lg:stats-horizontal shadow w-full border-2 border-success"
+                class="stats stats-vertical lg:stats-horizontal shadow-xl w-full"
             >
                 <div class="stat">
                     <div class="stat-figure text-primary">
