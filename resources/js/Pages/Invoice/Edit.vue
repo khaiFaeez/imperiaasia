@@ -7,6 +7,9 @@ import PaymentForm from '@/Components/Forms/PaymentForm.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import PostageForm from '@/Components/Forms/PostageForm.vue'
 import BreezeButton from '@/Components/Button.vue'
+import BreezeInput from '@/Components/Input.vue'
+import BreezeLabel from '@/Components/Label.vue'
+import BreezeInputError from '@/Components/InputError.vue'
 import moment from 'moment'
 
 export default {
@@ -20,7 +23,10 @@ export default {
         SalesForm,
         PaymentForm,
         PostageForm,
-        BreezeButton
+        BreezeButton,
+        BreezeLabel,
+        BreezeInput,
+        BreezeInputError
     },
 
     created: function () {
@@ -290,7 +296,7 @@ export default {
                         <div class="stat">
                             <div class="stat-title">Order Status</div>
                             <div class="stat-value">
-                                {{ invoice.Orderstatus }}
+                                {{ invoiceForm.Orderstatus }}
                             </div>
                         </div>
 
@@ -299,12 +305,12 @@ export default {
                             <div
                                 class="stat-value"
                                 :class="
-                                    invoice.Status_Inv == 'PAID'
+                                    invoiceForm.Status_Inv == 'PAID'
                                         ? 'text-success '
                                         : 'text-warning'
                                 "
                             >
-                                {{ invoice.Status_Inv }}
+                                {{ invoiceForm.Status_Inv }}
                             </div>
                         </div>
 
@@ -377,6 +383,53 @@ export default {
                         :client="clientForm"
                         :states="$page.props.states"
                     />
+                    <div class="md:flex md:items-center gap-4">
+                        <div class="md:w-1/3">
+                            <BreezeLabel value="Client Occupation" />
+                        </div>
+                        <div class="md:w-2/3">
+                            <select
+                                name="Occupation"
+                                v-model="invoiceForm.payment.occupation"
+                                class="input input-bordered input-sm w-full"
+                            >
+                                <option value="">Please select</option>
+                                <option value="A">Gaji Bulanan</option>
+                                <option value="B">
+                                    Bekerja Sendiri/berniaga
+                                </option>
+                                <option value="C">Suri Rumah</option>
+                                <option value="D">Goverment Staff</option>
+                            </select>
+                            <BreezeInputError
+                                :message="$page.props.errors.occupation"
+                            />
+                        </div>
+
+                        <div class="md:w-1/3">
+                            <BreezeLabel value="Order Status" />
+                        </div>
+                        <div class="md:w-2/3">
+                            <select
+                                v-model="invoiceForm.Orderstatus"
+                                class="input input-bordered input-sm w-full"
+                            >
+                                <option value="REPEAT">REPEAT</option>
+                                <option value="RESHUFFLE">RESHUFFLE</option>
+                            </select>
+                            <BreezeInputError
+                                :message="
+                                    $page.props.errors.updateInvoice?.hasOwnProperty(
+                                        'sales.closing'
+                                    )
+                                        ? $page.props.errors.updateInvoice[
+                                              'sales.closing'
+                                          ]
+                                        : ''
+                                "
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="my-3">

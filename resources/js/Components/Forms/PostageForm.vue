@@ -169,7 +169,7 @@ export default {
                     <select
                         name="State"
                         v-model="shipping.Ship_State"
-                        class="select input-bordered w-full input-sm"
+                        class="select select-bordered w-full select-sm"
                     >
                         <option value="">Please select state</option>
                         <option
@@ -202,7 +202,7 @@ export default {
                     <select
                         name="Country"
                         v-model="shipping.Ship_Country"
-                        class="select input-bordered w-full input-sm"
+                        class="select select-bordered w-full select-sm"
                     >
                         <option
                             v-for="$country in $page.props.countries"

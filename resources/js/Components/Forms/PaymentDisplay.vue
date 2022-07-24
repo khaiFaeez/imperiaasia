@@ -30,16 +30,6 @@ export default {
 </script>
 
 <template>
-    <div class="bg-white p-12 rounded-xl grid md:grid-cols-3 gap-x-4">
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Client Occupation" />
-            </div>
-            <div class="md:w-2/3">
-                {{ activeOccupation }}
-            </div>
-        </div>
-    </div>
     <div class="overflow-x-auto py-2">
         <table class="table table-compact w-full">
             <thead>
