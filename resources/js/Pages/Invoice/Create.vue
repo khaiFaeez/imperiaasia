@@ -248,11 +248,11 @@ export default {
 
                 <div class="my-3">
                     <div class="divider text-xl" id="postage">Postage</div>
-                    <div class="flex items-end justify-end gap-2">
+                    <div class="items-end justify-end btn-group">
                         <button
                             @click="copyAddress"
                             type="button"
-                            class="btn btn-ghost btn-sm"
+                            class="btn btn-outline btn-sm"
                             title="Copy Client Details"
                         >
                             <i class="bi bi-files"></i>
@@ -261,7 +261,7 @@ export default {
                         <button
                             @click="clearAddress"
                             type="button"
-                            class="btn btn-ghost btn-sm"
+                            class="btn btn-outline btn-sm"
                             title="Clear Postage Detail"
                         >
                             <i class="bi bi-eraser-fill"></i>

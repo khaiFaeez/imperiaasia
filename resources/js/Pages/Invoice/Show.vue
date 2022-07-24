@@ -361,7 +361,7 @@ export default {
                     for="my-modal"
                     v-if="hasAnyPermission(['note-edit'])"
                     title="Notes"
-                    class="btn btn-outline btn-sm"
+                    class="btn btn-outline btn-sm btn-primary"
                 >
                     <i class="bi bi-journal-text text-xl"></i
                 ></label>
@@ -418,7 +418,7 @@ export default {
 
             <div class="my-3">
                 <div class="tabs">
-                    <a class="tab tab-lifted tab-active">Postage</a>
+                    <a class="tab tab-lifted tab-active font-bold">Postage</a>
                 </div>
                 <PostageDisplay
                     :states="$page.props.states"
@@ -445,7 +445,9 @@ export default {
 
             <div class="my-3">
                 <div class="tabs">
-                    <a class="tab tab-lifted tab-active">Invoice Notes</a>
+                    <a class="tab tab-lifted font-bold tab-active"
+                        >Invoice Notes</a
+                    >
                 </div>
                 <div class="overflow-y-scroll">
                     <div

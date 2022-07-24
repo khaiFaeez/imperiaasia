@@ -25,10 +25,10 @@ export default {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Product</th>
-                    <th scope="col">U/Price</th>
-                    <th scope="col">Qty</th>
-                    <th scope="col">Disc %</th>
-                    <th scope="col">Disc RM</th>
+                    <th scope="col">Unit/Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Discount %</th>
+                    <th scope="col">Discount RM</th>
                     <th scope="col">Total</th>
                 </tr>
             </thead>

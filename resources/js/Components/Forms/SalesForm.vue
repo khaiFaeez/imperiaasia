@@ -154,7 +154,7 @@ export default {
             <BreezeLabel value="Order Status" />
             <select
                 v-model="invoice.Orderstatus"
-                class="input input-bordered border-primary w-full"
+                class="input input-bordered w-full"
             >
                 <option value="REPEAT">REPEAT</option>
                 <option value="RESHUFFLE">RESHUFFLE</option>
