@@ -3,10 +3,12 @@ import { Link, Head } from '@inertiajs/inertia-vue3'
 import AppLayout from '@/Layouts/Authenticated.vue'
 import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import moment from 'moment'
+import Pagination from '@/Components/Pagination'
 
 export default {
     props: ['client', 'states'],
     components: {
+        Pagination,
         AppLayout,
         Link,
         Head,
@@ -17,7 +19,7 @@ export default {
     },
     data() {
         return {
-            isPending: this.client.invoices.find(
+            isPending: this.client.invoices.data.find(
                 (o) => o.Status_Inv === 'PENDING'
             )
         }
@@ -27,7 +29,7 @@ export default {
 <template>
     <Head title="View Client" />
     <AppLayout>
-        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/client"
                 >Client</Link
             >
@@ -51,36 +53,42 @@ export default {
                 <span>This client have pending invoice</span>
             </div>
         </div>
-        <div class="flex flex-row items-center justify-end mb-5 gap-3">
-            <Link
-                :href="route('portfolio.client.edit', { client: client.id })"
-                class="hover:underline hover:text-primary hover:cursor-pointer"
-                v-if="hasAnyPermission(['client-edit'])"
-            >
-                Edit Client
-            </Link>
+        <div class="flex justify-end w-full mb-4">
+            <div class="btn-group bg-white">
+                <Link
+                    :href="
+                        route('portfolio.client.edit', { client: client.id })
+                    "
+                    class="btn btn-ghost btn-sm btn-outline btn-primary"
+                    v-if="hasAnyPermission(['client-edit'])"
+                >
+                    Edit
+                </Link>
 
-            <Link
-                :href="
-                    route('portfolio.invoice.create', { client_id: client.id })
-                "
-                class="btn btn-primary btn-sm"
-                v-if="!isPending && hasAnyPermission(['invoice-create'])"
-            >
-                New Invoice
-            </Link>
-            <div class="btn btn-primary btn-sm btn-disabled" v-else>
-                New Invoice
+                <Link
+                    :href="
+                        route('portfolio.invoice.create', {
+                            client_id: client.id
+                        })
+                    "
+                    class="btn btn-ghost btn-sm btn-outline btn-primary"
+                    v-if="!isPending && hasAnyPermission(['invoice-create'])"
+                >
+                    Make Invoice
+                </Link>
+                <Link class="btn btn-ghost btn-sm btn-disabled" v-else>
+                    Make Invoice
+                </Link>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-1 gap-4 max-w-4xl">
+        <div class="grid grid-cols-1 lg:grid-cols-1 gap-4 max-w-5xl">
             <ClientDisplay
                 class="mb-12"
                 :client="client"
                 :states="$page.props.states"
             />
-
+            <h1>Previous Invoice(s)</h1>
             <table class="table table-compact table-bordered w-full">
                 <thead>
                     <tr>
@@ -93,7 +101,7 @@ export default {
                 </thead>
                 <tbody>
                     <tr
-                        v-for="invoice in $page.props.client.invoices"
+                        v-for="invoice in $page.props.client.invoices.data"
                         :key="invoice.Id"
                     >
                         <td>
@@ -123,16 +131,18 @@ export default {
                         <td>
                             {{
                                 invoice.Date
-                                    ? moment(
-                                          moment().subtract(
-                                              invoice.Aging,
+                                    ? Math.abs(
+                                          moment(
+                                              invoice.Date,
+                                              'YYYY-MM-DD'
+                                          ).diff(
+                                              moment(new Date(), 'YYYY-MM-DD'),
                                               'days'
                                           )
                                       )
-                                          .endOf('day')
-                                          .fromNow()
-                                    : ''
+                                    : 'Null'
                             }}
+                            Days
                         </td>
                         <td>
                             {{
@@ -168,6 +178,10 @@ export default {
                     </tr>
                 </tbody>
             </table>
+            <pagination
+                class="mt-6"
+                :links="$page.props.client.invoices.links"
+            />
         </div>
     </AppLayout>
 </template>

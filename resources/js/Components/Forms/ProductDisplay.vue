@@ -4,6 +4,16 @@ export default {
     props: ['productLists', 'products'],
     components: {
         BreezeInput
+    },
+    computed: {
+        removeEmpty() {
+            let o = Object.fromEntries(
+                Object.entries(this.products.items).filter(
+                    ([_, v]) => v.product != null
+                )
+            )
+            return Object.keys(o).length < 4 ? 4 : Object.keys(o).length
+        }
     }
 }
 </script>
@@ -23,11 +33,7 @@ export default {
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    class="line_items"
-                    v-for="(n, i) in products.items.length"
-                    :key="i"
-                >
+                <tr class="line_items" v-for="(n, i) in removeEmpty" :key="i">
                     <td class="">{{ n }}</td>
                     <td>
                         {{ products.items[i].product_name }}

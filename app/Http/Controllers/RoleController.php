@@ -41,7 +41,7 @@ class RoleController extends Controller
                 ->when($filter, function ($query, $filter) {
                     $query->where('roles.name', 'LIKE', '%'.$filter.'%');
                 })
-                ->get(),
+                ->paginate(10),
             'filters' => FacadesRequest::all('search', 'trashed'),
         ]);
     }
@@ -71,14 +71,14 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:roles,name,portfolio_id',
-            'portfolio' => 'required|unique:roles,portfolio_id',
+            'portfolio' => 'required|unique:roles,name,portfolio_id',
             'permission' => 'required',
         ]);
 
         $role = Role::create(['name' => $request->input('name'), 'portfolio_id' => $request->input('portfolio')]);
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('users.index')
+        return redirect()->route('roles.index')
             ->with('message', 'Role created successfully');
     }
 

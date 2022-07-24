@@ -81,36 +81,39 @@ export default {
                             discount: this.invoice.Discount_4,
                             discounted_price: 0,
                             total: this.invoice.Total_RM_4
+                        },
+                        {
+                            product: this.invoice.Product_5,
+                            price: this.invoice.Price_5,
+                            qty: this.invoice.Qty_5,
+                            discount: this.invoice.Discount_5,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_5
+                        },
+                        {
+                            product: this.invoice.Product_6,
+                            price: this.invoice.Price_6,
+                            qty: this.invoice.Qty_6,
+                            discount: this.invoice.Discount_6,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_6
+                        },
+                        {
+                            product: this.invoice.Product_7,
+                            price: this.invoice.Price_7,
+                            qty: this.invoice.Qty_7,
+                            discount: this.invoice.Discount_7,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_7
+                        },
+                        {
+                            product: this.invoice.Product_8,
+                            price: this.invoice.Price_8,
+                            qty: this.invoice.Qty_8,
+                            discount: this.invoice.Discount_8,
+                            discounted_price: 0,
+                            total: this.invoice.Total_RM_8
                         }
-                        //  {
-                        //      product:this.invoice.Product_5,
-                        //     price : this.invoice.Price_5,
-                        //     qty : this.invoice.Qty_5,
-                        //     discount : this.invoice.Discount_5,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_5,
-                        // },{
-                        //     product:this.invoice.Product_6,
-                        //     price : this.invoice.Price_6,
-                        //     qty : this.invoice.Qty_6,
-                        //     discount : this.invoice.Discount_6,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_6,
-                        // },{
-                        //     product:this.invoice.Product_7,
-                        //     price : this.invoice.Price_7,
-                        //     qty : this.invoice.Qty_7,
-                        //     discount : this.invoice.Discount_7,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_7,
-                        // },{
-                        //     product:this.invoice.Product_8,
-                        //     price : this.invoice.Price_8,
-                        //     qty : this.invoice.Qty_8,
-                        //     discount : this.invoice.Discount_8,
-                        //     discounted_price : 0,
-                        //     total : this.invoice.Total_RM_8,
-                        // }
                     ]
                 },
                 payment: {
@@ -269,19 +272,19 @@ export default {
 <template>
     <Head title="Edit Invoice" />
     <app-layout>
-        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice"
                 >Invoice</Link
             >
-            <span class="text-primary font-medium">/</span> Edit
+            <span class="text-primary font-medium">/</span>
             {{ invoice.Inv_No }}
         </h1>
 
         <form @submit.prevent="updateInvoice" class="form">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between mb-4">
                 <div class="flex flex-col">
                     <div
-                        class="stats stats-vertical lg:stats-horizontal shadow bg-white"
+                        class="stats stats-vertical lg:stats-horizontal bg-white"
                         v-show="true"
                     >
                         <div class="stat">
@@ -328,31 +331,35 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-row gap-3 items-center">
-                    <p
-                        class="hover:underline hover:text-primary hover:cursor-pointer"
+                <div class="btn-group bg-white">
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline btn-primary"
                         v-show="invoice.Status_Inv == 'PENDING'"
                         @click="cancelOrder"
                     >
                         Cancel Order
-                    </p>
-                    <p
-                        class="hover:underline hover:text-primary hover:cursor-pointer"
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-outline btn-primary"
                         v-show="invoice.Status_Inv == 'PENDING'"
                         @click="updatePayment"
                     >
                         Update Payment
-                    </p>
+                    </button>
 
                     <Link
+                        as="button"
+                        type="button"
                         :href="
                             route('portfolio.invoice.show', {
                                 invoice: invoice.Id
                             })
                         "
-                        class="hover:underline hover:text-primary hover:cursor-pointe"
+                        class="btn btn-sm btn-outline btn-primary"
                     >
-                        Cancel Edit
+                        Discard
                     </Link>
 
                     <BreezeButton
@@ -413,6 +420,7 @@ export default {
                     <sales-form
                         :consultants="$page.props.consultants"
                         :sales="invoiceForm.sales"
+                        :invoice="invoiceForm"
                     />
                 </div>
 

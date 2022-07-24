@@ -5,7 +5,7 @@ import BreezeInputError from '@/Components/InputError.vue'
 import Multiselect from '@vueform/multiselect'
 
 export default {
-    props: ['consultants', 'sales'],
+    props: ['consultants', 'sales', 'invoice'],
     components: {
         BreezeInput,
         BreezeLabel,
@@ -139,6 +139,26 @@ export default {
                 }"
             >
             </Multiselect>
+            <BreezeInputError
+                :message="
+                    $page.props.errors.updateInvoice?.hasOwnProperty(
+                        'sales.closing'
+                    )
+                        ? $page.props.errors.updateInvoice['sales.closing']
+                        : ''
+                "
+            />
+        </div>
+
+        <div class="col-lg-3" v-if="invoice.Orderstatus !== 'NEW'">
+            <BreezeLabel value="Order Status" />
+            <select
+                v-model="invoice.Orderstatus"
+                class="input input-bordered border-primary w-full"
+            >
+                <option value="REPEAT">REPEAT</option>
+                <option value="RESHUFFLE">RESHUFFLE</option>
+            </select>
             <BreezeInputError
                 :message="
                     $page.props.errors.updateInvoice?.hasOwnProperty(

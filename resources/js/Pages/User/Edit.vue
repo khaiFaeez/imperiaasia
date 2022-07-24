@@ -83,7 +83,7 @@ export default {
     <Head title="Edit User" />
     <AppLayout>
         <div class="w-full">
-            <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+            <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
                 <Link
                     class="text-primary hover:text-primary-focus"
                     href="/users"
@@ -119,8 +119,8 @@ export default {
                     ></i>
                 </label>
             </div>
-            <form @submit.prevent="updateUser" class="form max-w-4xl">
-                <div class="bg-white h-96 p-12 rounded-xl">
+            <form @submit.prevent="updateUser" class="form max-w-5xl">
+                <div class="bg-white p-12 rounded-xl">
                     <user-form :user="form"></user-form>
                     <!-- <div class="col-span-6">
                             <BreezeLabel>Permission:</BreezeLabel>

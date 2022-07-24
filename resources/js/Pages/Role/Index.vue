@@ -52,25 +52,30 @@ export default {
 <template>
     <Head title="Role List" />
     <AppLayout>
-        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/users"
                 >User</Link
             >
             <span class="text-primary font-medium">/</span> Roles
         </h1>
-        <div class="flex items-end justify-between mb-3">
+        <div class="flex flex-row items-center justify-between mb-4">
             <search-filter
                 v-model="form.search"
                 class="mr-4 w-full max-w-md"
                 @reset="reset"
             >
             </search-filter>
-            <Link class="btn btn-neutral btn-sm" :href="route('roles.create')">
-                Add New Role</Link
-            >
+            <div class="menu menu-horizontal">
+                <Link
+                    class="btn btn-primary btn-sm"
+                    :href="route('roles.create')"
+                >
+                    Add Role</Link
+                >
+            </div>
         </div>
 
-        <table class="table table-compact table-bordered w-full">
+        <table class="table table-compact table-bordered w-full max-w-5xl">
             <thead>
                 <tr>
                     <th>Role</th>
@@ -79,7 +84,7 @@ export default {
             <tbody>
                 <tr
                     class="hover hover:cursor-pointer"
-                    v-for="role in $page.props.roles"
+                    v-for="role in $page.props.roles.data"
                     :key="role.Id"
                     @click="goToViewPage(role)"
                 >
@@ -87,5 +92,7 @@ export default {
                 </tr>
             </tbody>
         </table>
+
+        <pagination class="mt-6" :links="$page.props.roles.links" />
     </AppLayout>
 </template>

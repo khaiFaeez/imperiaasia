@@ -58,43 +58,44 @@ export default {
 <template>
     <Head title="Client List" />
     <AppLayout>
-        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/client"
                 >Client</Link
             >
         </h1>
-        <section class="flex flex-row items-center justify-between mb-5">
+        <section class="flex flex-row items-center justify-between mb-4">
             <search-filter
                 v-model="form.search"
                 class="mr-4 w-full max-w-md"
                 @reset="reset"
             >
             </search-filter>
-            <Link
-                :href="
-                    route('portfolio.client.create', {
-                        portfolio: route().params.portfolio
-                    })
-                "
-                v-if="hasAnyPermission(['client-create'])"
-                class="btn btn-primary btn-sm"
-            >
-                <i class="bi bi-plus-lg mr-3"></i>
-                New Client
-            </Link>
+            <div class="btn-group bg-white">
+                <Link
+                    :href="
+                        route('portfolio.client.create', {
+                            portfolio: route().params.portfolio
+                        })
+                    "
+                    v-if="hasAnyPermission(['client-create'])"
+                    class="btn btn-primary btn-sm"
+                >
+                    New Client
+                </Link>
+            </div>
         </section>
         <div class="overflow-auto">
             <table
-                class="table table-compact table-bordered w-full"
+                class="table table-compact table-bordered w-full table-fixed"
                 v-if="clients.data.length > 0"
             >
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>IC Number</th>
-                        <th>State</th>
-                        <th>Mobile Number</th>
-                        <th>Last Purchase</th>
+                        <th width="10%">Name</th>
+                        <th width="10%">IC Number</th>
+                        <th width="10%">State</th>
+                        <th width="10%">Mobile Number</th>
+                        <th width="10%">Last Purchase</th>
                     </tr>
                 </thead>
                 <tbody>

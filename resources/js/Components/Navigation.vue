@@ -44,7 +44,7 @@ const showingNavigationDropdown = ref(false)
                     ></label>
                     <ul
                         tabindex="0"
-                        class="dropdown-content menu shadow bg-neutral w-52"
+                        class="dropdown-content menu shadow-xl bg-neutral w-52"
                     >
                         <li
                             v-for="(value, key) in $page.props.auth.portfolio"
@@ -83,7 +83,7 @@ const showingNavigationDropdown = ref(false)
                 ></label>
                 <ul
                     tabindex="0"
-                    class="dropdown-content menu shadow bg-neutral w-52"
+                    class="dropdown-content menu shadow-xl bg-neutral w-52"
                 >
                     <li
                         v-for="(value, key) in $page.props.auth.portfolio"
@@ -109,7 +109,7 @@ const showingNavigationDropdown = ref(false)
                 >
                 <ul
                     tabindex="0"
-                    class="dropdown-content menu shadow bg-neutral w-52"
+                    class="dropdown-content menu shadow-xl bg-neutral w-52"
                 >
                     <li>
                         <Link :href="route('logout')" method="post" as="button"

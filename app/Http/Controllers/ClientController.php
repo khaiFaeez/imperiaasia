@@ -33,11 +33,11 @@ class ClientController extends Controller
                 $query->orWhere('Mobile_No', 'LIKE', '%'.$filter.'%');
             })
             ->select('id', 'Name', 'MyKad_SSM', 'Created_Date', 'Mobile_No', 'State')
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate(20);
 
         $clients->map(function ($query) {
-            $query->invoice = $query->getAllInvoice()->sortByDesc('Created_Date')->first() ? $query->getAllInvoice()->sortByDesc('Created_Date')->first()->Inv_No : '';
+            $query->invoice = $query->getAllInvoice()->orderByDesc('Created_Date')->first() ? $query->getAllInvoice()->orderByDesc('Created_Date')->first()->Inv_No : '';
         });
 
         return Inertia::render('Client/Index', [
@@ -84,7 +84,7 @@ class ClientController extends Controller
     public function show($portfolio, $id)
     {
         $client = Client::with('state')->where('id', $id)->first();
-        $client->invoices = $client->getAllInvoice();
+        $client->invoices = $client->getAllInvoice()->paginate(5);
 
         return Inertia::render('Client/Show', [
             'client' => $client,

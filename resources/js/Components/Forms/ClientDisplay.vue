@@ -30,9 +30,9 @@ export default {
 </script>
 <template>
     <div
-        class="card bg-white rounded-xl transition ease-in-out hover:bg-base-200 duration-300"
+        class="card bg-white transition ease-in-out hover:bg-base-200 duration-300"
     >
-        <div class="card-body collapse p-0">
+        <div class="card-body collapse collapse-arrow p-0">
             <input type="checkbox" :checked="route().current('*.client.*')" />
             <h2 class="card-title text-lg collapse-title">
                 {{ client.Name }}

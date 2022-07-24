@@ -55,24 +55,28 @@ export default {
 <template>
     <Head title="User List" />
     <AppLayout>
-        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/users"
                 >User</Link
             >
         </h1>
-        <div class="flex flex-row items-center justify-between">
+        <div class="flex flex-row items-center justify-between mb-4">
             <search-filter
                 v-model="form.search"
                 class="mr-4 w-full max-w-md"
                 @reset="reset"
             >
             </search-filter>
-            <Link class="btn btn-primary btn-sm" :href="route('users.create')"
-                ><i class="bi bi-person-plus-fill mr-3"></i> New User</Link
-            >
+            <div class="btn-group bg-white">
+                <Link
+                    class="btn btn-primary btn-sm"
+                    :href="route('users.create')"
+                    >Add User</Link
+                >
+            </div>
         </div>
 
-        <table class="table table-bordered w-full max-w-4xl my-5">
+        <table class="table table-bordered w-full max-w-5xl my-5">
             <thead>
                 <tr>
                     <th>Status</th>
@@ -97,8 +101,8 @@ export default {
                             class="badge"
                             :class="
                                 $user.deleted_at
-                                    ? 'badge-error'
-                                    : 'badge-success'
+                                    ? 'badge-error text-white'
+                                    : 'badge-success text-white'
                             "
                         >
                             {{
@@ -120,5 +124,7 @@ export default {
                 </tr>
             </tbody>
         </table>
+
+        <pagination class="mt-6" :links="$page.props.users.links" />
     </AppLayout>
 </template>

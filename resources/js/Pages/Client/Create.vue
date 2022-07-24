@@ -49,7 +49,7 @@ export default {
     <Head title="View Client" />
     <AppLayout>
         <div>
-            <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+            <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
                 <Link
                     class="text-primary hover:text-primary-focus"
                     href="/client"
@@ -62,7 +62,7 @@ export default {
                 <button @click="deleteAllUsersWithAsync" />
             </template>
             <form @submit.prevent="storeClient" class="form">
-                <div class="flex items-center justify-end mb-8">
+                <div class="menu menu-horizontal w-full justify-end mb-4">
                     <BreezeButton
                         :class="{ 'loading mr-2': form.processing }"
                         :disabled="form.processing"
