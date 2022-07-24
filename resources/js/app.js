@@ -1,14 +1,14 @@
-require("./bootstrap");
+require('./bootstrap')
 
-import { createApp, h } from "vue";
-import { createInertiaApp } from "@inertiajs/inertia-vue3";
-import { InertiaProgress } from "@inertiajs/progress";
-import axios from "axios";
-import VueAxios from "vue-axios";
-import VueScrollTo from "vue-scrollto";
+import { createApp, h } from 'vue'
+import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { InertiaProgress } from '@inertiajs/progress'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import VueScrollTo from 'vue-scrollto'
 
 const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+    window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel'
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -17,9 +17,9 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
             .use(plugin)
             .use(VueScrollTo, {
-                container: ".drawer-content",
+                container: '.drawer-content',
                 duration: 500,
-                easing: "ease",
+                easing: 'ease',
                 offset: -30,
                 force: true,
                 cancelable: true,
@@ -27,24 +27,34 @@ createInertiaApp({
                 onDone: false,
                 onCancel: false,
                 x: false,
-                y: true,
+                y: true
             })
             .use(VueAxios, axios)
             .mixin({
                 methods: {
                     route,
                     hasAnyPermission: function (permissions) {
-                        var allPermissions = this.$page.props.auth.can;
-                        var hasPermission = false;
+                        var allPermissions = this.$page.props.auth.can
+                        var hasPermission = false
                         permissions.forEach(function (item) {
-                            if (allPermissions[item]) hasPermission = true;
-                        });
-                        return hasPermission;
-                    },
-                },
+                            if (allPermissions[item]) hasPermission = true
+                        })
+                        return hasPermission
+                    }
+                }
             })
-            .mount(el);
-    },
-});
+            .mount(el)
+    }
+})
 
-InertiaProgress.init({ color: "red", showSpinner: true });
+InertiaProgress.init({
+    color: 'red', // The delay after which the progress bar will
+    // appear during navigation, in milliseconds.
+    delay: 250,
+
+    // Whether to include the default NProgress styles.
+    includeCSS: true,
+
+    // Whether the NProgress spinner will be shown.
+    showSpinner: false
+})

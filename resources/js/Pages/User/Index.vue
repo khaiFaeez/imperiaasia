@@ -69,7 +69,7 @@ export default {
             </search-filter>
             <div class="btn-group bg-white">
                 <Link
-                    class="btn btn-neutral btn-sm"
+                    class="btn btn-primary btn-sm"
                     :href="route('users.create')"
                     >Add User</Link
                 >

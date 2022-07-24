@@ -67,7 +67,7 @@ export default {
             </search-filter>
             <div class="menu menu-horizontal">
                 <Link
-                    class="btn btn-neutral btn-sm"
+                    class="btn btn-primary btn-sm"
                     :href="route('roles.create')"
                 >
                     Add Role</Link
@@ -75,7 +75,7 @@ export default {
             </div>
         </div>
 
-        <table class="table table-compact table-bordered w-full">
+        <table class="table table-compact table-bordered w-full max-w-5xl">
             <thead>
                 <tr>
                     <th>Role</th>

@@ -276,7 +276,7 @@ export default {
             <Link class="text-primary hover:text-primary-focus" href="/invoice"
                 >Invoice</Link
             >
-            <span class="text-primary font-medium">/</span> Edit
+            <span class="text-primary font-medium">/</span>
             {{ invoice.Inv_No }}
         </h1>
 

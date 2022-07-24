@@ -71,7 +71,7 @@ export default {
             >
         </h1>
 
-        <div class="flex flex-row items-center justify-between">
+        <div class="flex flex-row items-center justify-between mb-4">
             <search-filter
                 v-model="form.search"
                 class="mr-4 w-full max-w-md"
@@ -104,7 +104,7 @@ export default {
                 Quick Order
             </Link>
         </div>
-        <div class="overflow-auto my-5">
+        <div class="overflow-auto">
             <table class="table table-compact table-bordered w-full bg-white">
                 <thead>
                     <tr>

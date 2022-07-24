@@ -53,7 +53,7 @@ export default {
 
         <div class="menu menu-horizontal mb-4 w-full justify-end">
             <div class="dropdown dropdown-end">
-                <label tabindex="0" class="btn btn-neutral btn-sm">Print</label>
+                <label tabindex="0" class="btn btn-primary btn-sm">Print</label>
                 <ul
                     tabindex="0"
                     class="dropdown-content menu p-2 shadow-xl bg-base-100 rounded-box w-52"
@@ -98,9 +98,17 @@ export default {
             </div>
         </div>
 
-        <div class="overflow-auto my-5">
-            <table class="table table-compact table-bordered w-full max-w-7xl">
+        <div class="overflow-auto">
+            <table
+                class="table table-compact table-bordered w-full max-w-7xl text-center"
+            >
                 <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th colspan="2">Status</th>
+                        <th>Inv No</th>
+                        <th colspan="5">Shipping</th>
+                    </tr>
                     <tr>
                         <th>
                             <input
@@ -110,14 +118,14 @@ export default {
                                 @click="select"
                             />
                         </th>
-                        <th class="w-8">Invoice Status</th>
-                        <th class="w-8">Docket Status</th>
-                        <th>Inv No</th>
-                        <th>Ship Phone</th>
-                        <th>Ship Name</th>
-                        <th>Ship Postcode</th>
-                        <th>Ship City</th>
-                        <th>Ship State</th>
+                        <th>Invoice</th>
+                        <th>Docket</th>
+                        <th></th>
+                        <th>Phone</th>
+                        <th>Name</th>
+                        <th>Postcode</th>
+                        <th>City</th>
+                        <th>State</th>
                     </tr>
                 </thead>
                 <tbody>
