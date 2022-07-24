@@ -101,8 +101,8 @@ export default {
                             class="badge"
                             :class="
                                 $user.deleted_at
-                                    ? 'badge-error'
-                                    : 'badge-success'
+                                    ? 'badge-error text-white'
+                                    : 'badge-success text-white'
                             "
                         >
                             {{
