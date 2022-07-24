@@ -16,7 +16,7 @@ onMounted(() => {
 
 <template>
     <input
-        class="input input-bordered w-full"
+        class="input input-bordered w-full input-sm"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         ref="input"

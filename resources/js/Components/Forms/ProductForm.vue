@@ -63,7 +63,7 @@ export default {
                     <td class="">{{ n }}</td>
                     <td>
                         <select
-                            class="p-0 select"
+                            class="p-0 select select-sm"
                             v-model="products.items[i].product"
                         >
                             <option value="">Product</option>
@@ -78,6 +78,7 @@ export default {
                     </td>
                     <td>
                         <BreezeInput
+                            class="input-sm"
                             type="number"
                             step="any"
                             placeholder=""
@@ -87,6 +88,7 @@ export default {
                     </td>
                     <td>
                         <BreezeInput
+                            class="input-sm"
                             type="number"
                             step="any"
                             placeholder=""
@@ -96,6 +98,7 @@ export default {
                     </td>
                     <td>
                         <BreezeInput
+                            class="input-sm"
                             type="number"
                             step="any"
                             placeholder=""
@@ -105,6 +108,7 @@ export default {
                     </td>
                     <td>
                         <BreezeInput
+                            class="input-sm"
                             type="number"
                             step="any"
                             placeholder=""
@@ -114,6 +118,7 @@ export default {
                     </td>
                     <td>
                         <BreezeInput
+                            class="input-sm"
                             type="number"
                             step="any"
                             placeholder=""
@@ -127,14 +132,9 @@ export default {
                 <th colspan="5"></th>
                 <th>Grand Total</th>
                 <th>
-                    <BreezeInput
-                        v-model="products.grand_total"
-                        style=""
-                        type="text"
-                        name="Grand_Total"
-                        placeholder=""
-                        class="border-primary"
-                    />
+                    <p class="font-bold">
+                        {{ products.grand_total }}
+                    </p>
                 </th>
             </tfoot>
         </table>

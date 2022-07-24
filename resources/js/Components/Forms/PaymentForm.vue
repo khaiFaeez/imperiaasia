@@ -31,7 +31,7 @@ export default {
                 <select
                     name="Occupation"
                     v-model="payment.occupation"
-                    class="input input-bordered w-full"
+                    class="input input-bordered w-full input-sm"
                 >
                     <option value="">Please select</option>
                     <option value="A">Gaji Bulanan</option>
@@ -90,11 +90,7 @@ export default {
                 <th colspan="1"></th>
                 <th>Total Settlement (RM)</th>
                 <th>
-                    <BreezeInput
-                        v-model="payment.total_settlement"
-                        name="total_settlement"
-                        placeholder=""
-                    />
+                    <p class="font-bold">{{ payment.total_settlement }}</p>
                 </th>
             </tfoot>
         </table>

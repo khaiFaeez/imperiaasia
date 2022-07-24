@@ -54,6 +54,7 @@ export default {
 
                 <div class="card-actions justify-end">
                     <Link
+                        v-if="route().current('*.client.*') == false"
                         :href="
                             route('portfolio.client.show', {
                                 client: client.id

@@ -54,7 +54,7 @@ export default {
                 :canClear="false"
                 :searchable="true"
                 track-by="Name"
-                class="select input-bordered border-primary w-full"
+                class="select input-bordered border-primary w-full input-sm"
                 :classes="{
                     optionSelected: 'bg-gray-400',
                     optionSelectedPointed: 'bg-gray-400 text-white',
@@ -104,7 +104,7 @@ export default {
                 v-model="sales.channel"
                 :options="channel"
                 :canClear="false"
-                class="select input-bordered border-primary w-full"
+                class="select input-bordered border-primary w-full input-sm"
                 :classes="{
                     optionSelected: 'bg-gray-400',
                     optionSelectedPointed: 'bg-gray-400 text-white',
@@ -131,7 +131,7 @@ export default {
                 v-model="sales.closing"
                 :options="closing"
                 :canClear="false"
-                class="select input-bordered border-primary w-full"
+                class="select input-bordered border-primary w-full input-sm"
                 :classes="{
                     optionSelected: 'bg-gray-400',
                     optionSelectedPointed: 'bg-gray-400 text-white',
@@ -154,7 +154,7 @@ export default {
             <BreezeLabel value="Order Status" />
             <select
                 v-model="invoice.Orderstatus"
-                class="input input-bordered w-full"
+                class="input input-bordered input-sm w-full"
             >
                 <option value="REPEAT">REPEAT</option>
                 <option value="RESHUFFLE">RESHUFFLE</option>
