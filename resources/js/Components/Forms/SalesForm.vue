@@ -150,9 +150,12 @@ export default {
             />
         </div>
 
-        <div class="col-lg-3">
+        <div class="col-lg-3" v-if="invoice.Orderstatus !== 'NEW'">
             <BreezeLabel value="Order Status" />
-            <select v-model="invoice.Orderstatus">
+            <select
+                v-model="invoice.Orderstatus"
+                class="input input-bordered border-primary w-full"
+            >
                 <option value="REPEAT">REPEAT</option>
                 <option value="RESHUFFLE">RESHUFFLE</option>
             </select>

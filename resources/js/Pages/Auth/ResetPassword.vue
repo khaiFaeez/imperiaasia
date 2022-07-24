@@ -28,7 +28,7 @@ const submit = () => {
         <Head title="Reset Password" />
 
         <BreezeValidationErrors class="mb-4" />
-        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link
                 class="text-primary hover:text-primary-focus"
                 :href="route('users.index')"

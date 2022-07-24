@@ -272,7 +272,7 @@ export default {
 <template>
     <Head title="Edit Invoice" />
     <app-layout>
-        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice"
                 >Invoice</Link
             >
@@ -331,10 +331,10 @@ export default {
                         </div>
                     </div>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group bg-white">
                     <button
                         type="button"
-                        class="btn btn-sm btn-outline"
+                        class="btn btn-sm btn-outline btn-primary"
                         v-show="invoice.Status_Inv == 'PENDING'"
                         @click="cancelOrder"
                     >
@@ -342,7 +342,7 @@ export default {
                     </button>
                     <button
                         type="button"
-                        class="btn btn-sm btn-outline"
+                        class="btn btn-sm btn-outline btn-primary"
                         v-show="invoice.Status_Inv == 'PENDING'"
                         @click="updatePayment"
                     >
@@ -357,7 +357,7 @@ export default {
                                 invoice: invoice.Id
                             })
                         "
-                        class="btn btn-sm btn-outline"
+                        class="btn btn-sm btn-outline btn-primary"
                     >
                         Discard
                     </Link>

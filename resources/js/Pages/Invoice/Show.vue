@@ -261,7 +261,7 @@ export default {
 }
 </script>
 <template>
-    <Head title="Create Invoice" />
+    <Head title="Show Invoice" />
     <!-- Put this part before </body> tag -->
     <input type="checkbox" id="my-modal" class="modal-toggle" />
     <div class="modal">
@@ -296,7 +296,7 @@ export default {
             id="inv"
         />
         <h1
-            class="mb-8 text-2xl font-bold flex gap-2 items-center flex gap-2 items-center"
+            class="mb-4 text-xl font-bold flex gap-2 items-center flex gap-2 items-center"
         >
             <Link class="text-primary hover:text-primary-focus" href="/invoice"
                 >Invoice</Link
@@ -367,7 +367,9 @@ export default {
                 ></label>
 
                 <div class="dropdown dropdown-end">
-                    <label tabindex="0" class="btn btn-outline btn-sm"
+                    <label
+                        tabindex="0"
+                        class="btn btn-outline btn-sm btn-primary"
                         >Print</label
                     >
                     <ul
@@ -400,7 +402,7 @@ export default {
                     "
                     v-if="hasAnyPermission(['invoice-edit'])"
                     title="Edit Invoice"
-                    class="btn btn-outline btn-sm"
+                    class="btn btn-outline btn-sm btn-primary"
                 >
                     Edit
                 </Link>

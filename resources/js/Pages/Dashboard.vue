@@ -106,7 +106,7 @@ export default {
             <h2 class="font-semibold leading-tight">Dashboard</h2>
         </template>
 
-        <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/print"
                 >Dashboard</Link
             >

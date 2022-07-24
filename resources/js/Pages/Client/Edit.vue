@@ -53,7 +53,7 @@ export default {
     <Head title="Edit Client" />
     <AppLayout>
         <div>
-            <h1 class="mb-8 text-2xl font-bold flex gap-2 items-center">
+            <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
                 <Link
                     class="text-primary hover:text-primary-focus"
                     href="/client"
@@ -73,7 +73,7 @@ export default {
                                     client: client.id
                                 })
                             "
-                            class="btn btn-ghost btn-sm btn-outline"
+                            class="btn btn-ghost btn-sm btn-outline btn-primary"
                         >
                             Discard
                         </Link>
