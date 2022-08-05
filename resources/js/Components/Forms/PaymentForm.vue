@@ -22,27 +22,6 @@ export default {
 </script>
 
 <template>
-    <div class="bg-white p-12 rounded-xl grid md:grid-cols-3 gap-x-4">
-        <div class="md:flex md:items-center">
-            <div class="md:w-1/3">
-                <BreezeLabel value="Client Occupation" />
-            </div>
-            <div class="md:w-2/3">
-                <select
-                    name="Occupation"
-                    v-model="payment.occupation"
-                    class="input input-bordered w-full"
-                >
-                    <option value="">Please select</option>
-                    <option value="A">Gaji Bulanan</option>
-                    <option value="B">Bekerja Sendiri/berniaga</option>
-                    <option value="C">Suri Rumah</option>
-                    <option value="D">Goverment Staff</option>
-                </select>
-                <BreezeInputError :message="$page.props.errors.occupation" />
-            </div>
-        </div>
-    </div>
     <div class="overflow-x-auto py-2">
         <BreezeInputError
             :message="
@@ -90,11 +69,7 @@ export default {
                 <th colspan="1"></th>
                 <th>Total Settlement (RM)</th>
                 <th>
-                    <BreezeInput
-                        v-model="payment.total_settlement"
-                        name="total_settlement"
-                        placeholder=""
-                    />
+                    <p class="font-bold">{{ payment.total_settlement }}</p>
                 </th>
             </tfoot>
         </table>

@@ -128,7 +128,7 @@ export default {
                     :searchable="true"
                     valueProp="id"
                     label="name"
-                    class="select input-bordered border-primary w-full"
+                    class="select input-bordered input-sm border-primary w-full"
                 >
                 </Multiselect>
                 <BreezeInputError :message="$page.props.errors.roles" />

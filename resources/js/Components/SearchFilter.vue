@@ -2,7 +2,7 @@
     <div class="flex items-center">
         <div class="flex w-full bg-white rounded shadow">
             <input
-                class="input w-full bg-white input-bordered"
+                class="input w-full bg-white input-bordered input-sm"
                 autocomplete="off"
                 type="text"
                 name="search"

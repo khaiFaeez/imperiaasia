@@ -86,7 +86,7 @@ export default {
         </section>
         <div class="overflow-auto">
             <table
-                class="table table-compact table-bordered w-full table-fixed"
+                class="table table-compact table-bordered w-full"
                 v-if="clients.data.length > 0"
             >
                 <thead>

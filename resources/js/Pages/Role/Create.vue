@@ -72,7 +72,7 @@ export default {
                         name="portfolio"
                         id="portfolio"
                         v-model="form.portfolio"
-                        class="select w-full input-bordered border-primary max-w-xl"
+                        class="select w-full input-bordered input-sm border-primary max-w-xl"
                     >
                         <option value="">*</option>
                         <option

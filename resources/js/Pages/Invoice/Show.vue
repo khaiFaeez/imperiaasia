@@ -10,6 +10,7 @@ import SalesDisplay from '@/Components/Forms/SalesDisplay.vue'
 import PaymentDisplay from '@/Components/Forms/PaymentDisplay.vue'
 import Tabs from '@/Components/Tabs.vue'
 import Tab from '@/Components/Tab.vue'
+import BreezeLabel from '@/Components/Label.vue'
 import moment from 'moment'
 
 import { QuillEditor } from '@vueup/vue-quill'
@@ -40,10 +41,17 @@ export default {
         PaymentDisplay,
         QuillEditor,
         Tabs,
-        Tab
+        Tab,
+        BreezeLabel
     },
     data() {
         return {
+            occupation: {
+                A: 'Gaji Bulanan',
+                B: 'Bekerja Sendiri/berniaga',
+                C: 'Suri Rumah',
+                D: 'Goverment Staff'
+            },
             clientForm: this.$inertia.form({
                 MyKad_SSM: this.invoice.client.MyKad_SSM,
                 Name: this.invoice.client.Name,
@@ -205,6 +213,11 @@ export default {
             this.noteForm.post(route('portfolio.invoice.note'))
         }
     },
+    computed: {
+        activeOccupation() {
+            return this.occupation[this.invoiceForm.payment.occupation]
+        }
+    },
 
     setup: () => {
         const modules = [
@@ -361,7 +374,7 @@ export default {
                     for="my-modal"
                     v-if="hasAnyPermission(['note-edit'])"
                     title="Notes"
-                    class="btn btn-outline btn-sm"
+                    class="btn btn-outline btn-sm btn-primary"
                 >
                     <i class="bi bi-journal-text text-xl"></i
                 ></label>
@@ -414,11 +427,21 @@ export default {
                     :client="invoice.client"
                     :states="$page.props.states"
                 />
+                <div class="md:flex md:items-center gap-4">
+                    <div class="md:w-1/3">
+                        <BreezeLabel value="Client Occupation" />
+                    </div>
+                    <div class="md:w-2/3">
+                        {{ activeOccupation }}
+                    </div>
+                    <div class="md:w-1/3"></div>
+                    <div class="md:w-2/3"></div>
+                </div>
             </div>
 
             <div class="my-3">
                 <div class="tabs">
-                    <a class="tab tab-lifted tab-active">Postage</a>
+                    <a class="tab tab-lifted tab-active font-bold">Postage</a>
                 </div>
                 <PostageDisplay
                     :states="$page.props.states"
@@ -445,7 +468,9 @@ export default {
 
             <div class="my-3">
                 <div class="tabs">
-                    <a class="tab tab-lifted tab-active">Invoice Notes</a>
+                    <a class="tab tab-lifted font-bold tab-active"
+                        >Invoice Notes</a
+                    >
                 </div>
                 <div class="overflow-y-scroll">
                     <div

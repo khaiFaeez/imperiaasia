@@ -5,8 +5,8 @@
                 v-for="title in tabTitles"
                 :key="title"
                 @click="selectedTitle = title"
-                :class="{ 'tab-active': title == selectedTitle }"
-                class="tab tab-lifted"
+                :class="{ ' tab-active': title == selectedTitle }"
+                class="tab tab-lifted font-bold"
             >
                 {{ title }}
             </li>

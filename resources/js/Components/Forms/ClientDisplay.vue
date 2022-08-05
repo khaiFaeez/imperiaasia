@@ -34,7 +34,7 @@ export default {
     >
         <div class="card-body collapse collapse-arrow p-0">
             <input type="checkbox" :checked="route().current('*.client.*')" />
-            <h2 class="card-title text-lg collapse-title">
+            <h2 class="card-title text-lg collapse-title text-primary">
                 {{ client.Name }}
                 <div class="">
                     <p class="hover:underline">( {{ client.MyKad_SSM }} )</p>
@@ -42,7 +42,7 @@ export default {
             </h2>
             <div class="collapse-content">
                 <div class="grid grid-cols-2">
-                    <div v-if="route().current('*.client.*')" class="">
+                    <div>
                         <p>{{ client.Address }}</p>
                         <p>{{ client.Address_2 }}</p>
                         <p>{{ client.Poscode }}</p>
@@ -50,35 +50,28 @@ export default {
                         <p>{{ activeState?.Negeri }}</p>
                         <p>{{ client.Country }}</p>
                     </div>
+                </div>
 
+                <div class="card-actions justify-end">
                     <Link
-                        v-else
+                        v-if="route().current('*.client.*') == false"
                         :href="
                             route('portfolio.client.show', {
                                 client: client.id
                             })
                         "
+                        title="Open in Client"
+                        class="btn btn-ghost btn-sm rounded-full"
                     >
-                        <div class="">
-                            <p>{{ client.Address }}</p>
-                            <p>{{ client.Address_2 }}</p>
-                            <p>{{ client.Poscode }}</p>
-                            <p>{{ client.City }}</p>
-                            <p>{{ activeState?.Negeri }}</p>
-                            <p>{{ client.Country }}</p>
-                        </div>
+                        <i class="bi bi-box-arrow-up-right"></i>
                     </Link>
-                    <div></div>
-                </div>
-
-                <div class="card-actions justify-end">
-                    <div class="badge badge-outline badge-lg">
+                    <div class="badge badge-lg">
                         {{ client.Mobile_No }}
                     </div>
-                    <div class="badge badge-outline badge-lg">
+                    <div class="badge badge-lg">
                         {{ client.Phone }}
                     </div>
-                    <div class="badge badge-outline badge-lg">
+                    <div class="badge badge-lg">
                         {{ client.Off_Phone }}
                     </div>
                 </div>

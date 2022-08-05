@@ -173,7 +173,7 @@ export default {
                     <select
                         name="State"
                         v-model="client.State"
-                        class="select input-bordered w-full"
+                        class="select input-bordered w-full input-sm"
                     >
                         <option value="">Please select state</option>
                         <option
@@ -196,7 +196,7 @@ export default {
                     <select
                         name="Country"
                         v-model="client.Country"
-                        class="select input-bordered w-full"
+                        class="select input-bordered w-full input-sm"
                     >
                         <option
                             v-for="$country in countries"

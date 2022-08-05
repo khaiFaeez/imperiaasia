@@ -1,30 +1,31 @@
 module.exports = {
     content: [
-        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
-        "./storage/framework/views/*.php",
-        "./resources/views/**/*.blade.php",
-        "./resources/js/**/*.vue",
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+        './resources/js/**/*.vue'
     ],
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Roboto"],
-            },
-        },
+                sans: ['Roboto']
+            }
+        }
     },
     daisyui: {
         themes: [
             {
                 autumn: {
-                    ...require("daisyui/src/colors/themes")[
-                        "[data-theme=autumn]"
+                    ...require('daisyui/src/colors/themes')[
+                        '[data-theme=autumn]'
                     ],
-                    "--rounded-box": "0.2rem",
-                    "--rounded-btn": "0.2rem",
-                    neutral: "#000000",
-                },
-            },
-        ],
+                    '--rounded-box': '0.2rem',
+                    '--rounded-btn': '0.2rem',
+                    neutral: '#000000',
+                    secondary: '#C95E5E'
+                }
+            }
+        ]
     },
-    plugins: [require("daisyui"), require("@tailwindcss/typography")],
-};
+    plugins: [require('daisyui'), require('@tailwindcss/typography')]
+}

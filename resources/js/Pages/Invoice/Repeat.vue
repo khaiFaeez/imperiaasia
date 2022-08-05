@@ -9,6 +9,9 @@ import ClientDisplay from '@/Components/Forms/ClientDisplay.vue'
 import PostageForm from '@/Components/Forms/PostageForm.vue'
 import BreezeButton from '@/Components/Button.vue'
 import moment from 'moment'
+import BreezeLabel from '@/Components/Label.vue'
+import BreezeInput from '@/Components/Input.vue'
+import BreezeInputError from '@/Components/InputError.vue'
 
 export default {
     props: ['client', 'invoice'],
@@ -22,7 +25,10 @@ export default {
         ProductForm,
         SalesForm,
         PaymentForm,
-        PostageForm
+        PostageForm,
+        BreezeLabel,
+        BreezeInput,
+        BreezeInputError
     },
     created: function () {
         this.moment = moment
@@ -252,15 +258,62 @@ export default {
                         :client="clientForm"
                         :states="$page.props.states"
                     />
+                    <div class="md:flex md:items-center gap-4">
+                        <div class="md:w-1/3">
+                            <BreezeLabel value="Client Occupation" />
+                        </div>
+                        <div class="md:w-2/3">
+                            <select
+                                name="Occupation"
+                                v-model="invoiceForm.payment.occupation"
+                                class="input input-bordered input-sm w-full"
+                            >
+                                <option value="">Please select</option>
+                                <option value="A">Gaji Bulanan</option>
+                                <option value="B">
+                                    Bekerja Sendiri/berniaga
+                                </option>
+                                <option value="C">Suri Rumah</option>
+                                <option value="D">Goverment Staff</option>
+                            </select>
+                            <BreezeInputError
+                                :message="$page.props.errors.occupation"
+                            />
+                        </div>
+
+                        <div class="md:w-1/3">
+                            <BreezeLabel value="Order Status" />
+                        </div>
+                        <div class="md:w-2/3">
+                            <select
+                                v-model="invoiceForm.Orderstatus"
+                                class="input input-bordered input-sm w-full"
+                            >
+                                <option value="REPEAT">REPEAT</option>
+                                <option value="RESHUFFLE">RESHUFFLE</option>
+                            </select>
+                            <BreezeInputError
+                                :message="
+                                    $page.props.errors.updateInvoice?.hasOwnProperty(
+                                        'sales.closing'
+                                    )
+                                        ? $page.props.errors.updateInvoice[
+                                              'sales.closing'
+                                          ]
+                                        : ''
+                                "
+                            />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="my-3">
                     <div class="divider text-xl" id="postage">Postage</div>
-                    <div class="flex items-end justify-end gap-2">
+                    <div class="items-end justify-end btn-group">
                         <button
                             @click="copyAddress"
                             type="button"
-                            class="btn btn-ghost btn-sm"
+                            class="btn btn-outline btn-sm"
                             title="Copy Client Details"
                         >
                             <i class="bi bi-files"></i>
@@ -269,7 +322,7 @@ export default {
                         <button
                             @click="clearAddress"
                             type="button"
-                            class="btn btn-ghost btn-sm"
+                            class="btn btn-outline btn-sm"
                             title="Clear Postage Detail"
                         >
                             <i class="bi bi-eraser-fill"></i>

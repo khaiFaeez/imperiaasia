@@ -5,7 +5,7 @@ import BreezeInputError from '@/Components/InputError.vue'
 import Multiselect from '@vueform/multiselect'
 
 export default {
-    props: ['consultants', 'sales', 'invoice'],
+    props: ['consultants', 'sales'],
     components: {
         BreezeInput,
         BreezeLabel,
@@ -54,7 +54,7 @@ export default {
                 :canClear="false"
                 :searchable="true"
                 track-by="Name"
-                class="select input-bordered border-primary w-full"
+                class="select input-bordered border-primary w-full input-sm"
                 :classes="{
                     optionSelected: 'bg-gray-400',
                     optionSelectedPointed: 'bg-gray-400 text-white',
@@ -104,7 +104,7 @@ export default {
                 v-model="sales.channel"
                 :options="channel"
                 :canClear="false"
-                class="select input-bordered border-primary w-full"
+                class="select input-bordered border-primary w-full input-sm"
                 :classes="{
                     optionSelected: 'bg-gray-400',
                     optionSelectedPointed: 'bg-gray-400 text-white',
@@ -131,7 +131,7 @@ export default {
                 v-model="sales.closing"
                 :options="closing"
                 :canClear="false"
-                class="select input-bordered border-primary w-full"
+                class="select input-bordered border-primary w-full input-sm"
                 :classes="{
                     optionSelected: 'bg-gray-400',
                     optionSelectedPointed: 'bg-gray-400 text-white',
@@ -139,26 +139,6 @@ export default {
                 }"
             >
             </Multiselect>
-            <BreezeInputError
-                :message="
-                    $page.props.errors.updateInvoice?.hasOwnProperty(
-                        'sales.closing'
-                    )
-                        ? $page.props.errors.updateInvoice['sales.closing']
-                        : ''
-                "
-            />
-        </div>
-
-        <div class="col-lg-3" v-if="invoice.Orderstatus !== 'NEW'">
-            <BreezeLabel value="Order Status" />
-            <select
-                v-model="invoice.Orderstatus"
-                class="input input-bordered border-primary w-full"
-            >
-                <option value="REPEAT">REPEAT</option>
-                <option value="RESHUFFLE">RESHUFFLE</option>
-            </select>
             <BreezeInputError
                 :message="
                     $page.props.errors.updateInvoice?.hasOwnProperty(
