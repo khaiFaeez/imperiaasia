@@ -194,22 +194,18 @@ export default {
 </script>
 
 <template>
+
     <Head title="Create Invoice" />
     <AppLayout>
         <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
-            <Link class="text-primary hover:text-primary-focus" href="/invoice"
-                >Invoice</Link
-            >
+            <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
             <span class="text-primary font-medium">/</span> Create
         </h1>
 
         <form @submit.prevent="storeInvoice" class="form">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex flex-col">
-                    <div
-                        class="stats stats-vertical lg:stats-horizontal bg-white"
-                        v-show="true"
-                    >
+                    <div class="stats stats-vertical lg:stats-horizontal bg-white" v-show="true">
                         <div class="stat">
                             <div class="stat-title">Order Status</div>
                             <div class="stat-value">
@@ -236,30 +232,22 @@ export default {
                     </div>
                 </div>
                 <div class="menu menu-horizontal">
-                    <BreezeButton
-                        :class="{ 'loading mr-3': invoiceForm.processing }"
-                        :disabled="invoiceForm.processing"
-                    >
+                    <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }"
+                        :disabled="invoiceForm.processing">
                         Save
                     </BreezeButton>
                 </div>
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-1">
                 <div class="my-3">
-                    <client-display
-                        :client="clientForm"
-                        :states="$page.props.states"
-                    />
+                    <client-display :client="clientForm" :states="$page.props.states" />
                     <div class="md:flex md:items-center gap-4">
                         <div class="md:w-1/3">
                             <BreezeLabel value="Client Occupation" />
                         </div>
                         <div class="md:w-2/3">
-                            <select
-                                name="Occupation"
-                                v-model="invoiceForm.payment.occupation"
-                                class="input input-bordered input-sm w-full"
-                            >
+                            <select name="Occupation" v-model="invoiceForm.payment.occupation"
+                                class="input input-bordered input-sm w-full">
                                 <option value="">Please select</option>
                                 <option value="A">Gaji Bulanan</option>
                                 <option value="B">
@@ -268,33 +256,27 @@ export default {
                                 <option value="C">Suri Rumah</option>
                                 <option value="D">Goverment Staff</option>
                             </select>
-                            <BreezeInputError
-                                :message="$page.props.errors.occupation"
-                            />
+                            <BreezeInputError :message="$page.props.errors.occupation" />
                         </div>
 
                         <div class="md:w-1/3">
                             <BreezeLabel value="Order Status" />
                         </div>
                         <div class="md:w-2/3">
-                            <select
-                                v-model="invoiceForm.Orderstatus"
-                                class="input input-bordered input-sm w-full"
-                            >
+                            <select v-model="invoiceForm.Orderstatus" class="input input-bordered input-sm w-full">
+                                <option value="NEW">NEW</option>
                                 <option value="REPEAT">REPEAT</option>
                                 <option value="RESHUFFLE">RESHUFFLE</option>
                             </select>
-                            <BreezeInputError
-                                :message="
-                                    $page.props.errors.updateInvoice?.hasOwnProperty(
-                                        'sales.closing'
-                                    )
-                                        ? $page.props.errors.updateInvoice[
-                                              'sales.closing'
-                                          ]
-                                        : ''
-                                "
-                            />
+                            <BreezeInputError :message="
+                                $page.props.errors.updateInvoice?.hasOwnProperty(
+                                    'sales.closing'
+                                )
+                                    ? $page.props.errors.updateInvoice[
+                                    'sales.closing'
+                                    ]
+                                    : ''
+                            " />
                         </div>
                     </div>
                 </div>
@@ -302,45 +284,28 @@ export default {
                 <div class="my-3">
                     <div class="divider text-xl" id="postage">Postage</div>
                     <div class="items-end justify-end btn-group">
-                        <button
-                            @click="copyAddress"
-                            type="button"
-                            class="btn btn-outline btn-sm"
-                            title="Copy Client Details"
-                        >
+                        <button @click="copyAddress" type="button" class="btn btn-outline btn-sm"
+                            title="Copy Client Details">
                             <i class="bi bi-files"></i>
                         </button>
 
-                        <button
-                            @click="clearAddress"
-                            type="button"
-                            class="btn btn-outline btn-sm"
-                            title="Clear Postage Detail"
-                        >
+                        <button @click="clearAddress" type="button" class="btn btn-outline btn-sm"
+                            title="Clear Postage Detail">
                             <i class="bi bi-eraser-fill"></i>
                         </button>
                     </div>
-                    <postage-form
-                        :states="$page.props.states"
-                        :shipping="invoiceForm.shipping"
-                    />
+                    <postage-form :states="$page.props.states" :shipping="invoiceForm.shipping" />
                 </div>
 
                 <div class="my-3">
                     <div class="divider text-xl" id="product">Product</div>
-                    <product-form
-                        :products="invoiceForm.products"
-                        :productLists="$page.props.products"
-                    />
+                    <product-form :products="invoiceForm.products" :productLists="$page.props.products" />
                 </div>
 
                 <div class="my-3">
                     <div class="divider text-xl" id="sales">Sales</div>
-                    <sales-form
-                        :consultants="$page.props.consultants"
-                        :sales="invoiceForm.sales"
-                        :invoice="invoiceForm"
-                    />
+                    <sales-form :consultants="$page.props.consultants" :sales="invoiceForm.sales"
+                        :invoice="invoiceForm" />
                 </div>
 
                 <div class="my-3">

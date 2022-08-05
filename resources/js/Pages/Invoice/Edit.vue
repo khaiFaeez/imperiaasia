@@ -276,12 +276,11 @@ export default {
 </script>
 
 <template>
+
     <Head title="Edit Invoice" />
     <app-layout>
         <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
-            <Link class="text-primary hover:text-primary-focus" href="/invoice"
-                >Invoice</Link
-            >
+            <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
             <span class="text-primary font-medium">/</span>
             {{ invoice.Inv_No }}
         </h1>
@@ -289,10 +288,7 @@ export default {
         <form @submit.prevent="updateInvoice" class="form">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex flex-col">
-                    <div
-                        class="stats stats-vertical lg:stats-horizontal bg-white"
-                        v-show="true"
-                    >
+                    <div class="stats stats-vertical lg:stats-horizontal bg-white" v-show="true">
                         <div class="stat">
                             <div class="stat-title">Order Status</div>
                             <div class="stat-value">
@@ -302,14 +298,11 @@ export default {
 
                         <div class="stat">
                             <div class="stat-title">Status</div>
-                            <div
-                                class="stat-value"
-                                :class="
-                                    invoiceForm.Status_Inv == 'PAID'
-                                        ? 'text-success '
-                                        : 'text-warning'
-                                "
-                            >
+                            <div class="stat-value" :class="
+                                invoiceForm.Status_Inv == 'PAID'
+                                    ? 'text-success '
+                                    : 'text-warning'
+                            ">
                                 {{ invoiceForm.Status_Inv }}
                             </div>
                         </div>
@@ -318,12 +311,12 @@ export default {
                             <div class="stat-title">Aging</div>
                             <div class="stat-value">
                                 {{
-                                    Math.abs(
-                                        moment(invoice.Date, 'YYYY-MM-DD').diff(
-                                            moment(new Date(), 'YYYY-MM-DD'),
-                                            'days'
+                                        Math.abs(
+                                            moment(invoice.Date, 'YYYY-MM-DD').diff(
+                                                moment(new Date(), 'YYYY-MM-DD'),
+                                                'days'
+                                            )
                                         )
-                                    )
                                 }}
                                 Days
                             </div>
@@ -338,40 +331,25 @@ export default {
                     </div>
                 </div>
                 <div class="btn-group bg-white">
-                    <button
-                        type="button"
-                        class="btn btn-sm btn-outline btn-primary"
-                        v-show="invoice.Status_Inv == 'PENDING'"
-                        @click="cancelOrder"
-                    >
+                    <button type="button" class="btn btn-sm btn-outline btn-primary"
+                        v-show="invoice.Status_Inv == 'PENDING'" @click="cancelOrder">
                         Cancel Order
                     </button>
-                    <button
-                        type="button"
-                        class="btn btn-sm btn-outline btn-primary"
-                        v-show="invoice.Status_Inv == 'PENDING'"
-                        @click="updatePayment"
-                    >
+                    <button type="button" class="btn btn-sm btn-outline btn-primary"
+                        v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">
                         Update Payment
                     </button>
 
-                    <Link
-                        as="button"
-                        type="button"
-                        :href="
-                            route('portfolio.invoice.show', {
-                                invoice: invoice.Id
-                            })
-                        "
-                        class="btn btn-sm btn-outline btn-primary"
-                    >
-                        Discard
+                    <Link as="button" type="button" :href="
+                        route('portfolio.invoice.show', {
+                            invoice: invoice.Id
+                        })
+                    " class="btn btn-sm btn-outline btn-primary">
+                    Discard
                     </Link>
 
-                    <BreezeButton
-                        :class="{ 'loading mr-3': invoiceForm.processing }"
-                        :disabled="invoiceForm.processing"
-                    >
+                    <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }"
+                        :disabled="invoiceForm.processing">
                         Save
                     </BreezeButton>
                 </div>
@@ -379,20 +357,14 @@ export default {
 
             <div class="grid grid-cols-1 xl:grid-cols-1">
                 <div class="my-3">
-                    <client-display
-                        :client="clientForm"
-                        :states="$page.props.states"
-                    />
+                    <client-display :client="clientForm" :states="$page.props.states" />
                     <div class="md:flex md:items-center gap-4">
                         <div class="md:w-1/3">
                             <BreezeLabel value="Client Occupation" />
                         </div>
                         <div class="md:w-2/3">
-                            <select
-                                name="Occupation"
-                                v-model="invoiceForm.payment.occupation"
-                                class="input input-bordered input-sm w-full"
-                            >
+                            <select name="Occupation" v-model="invoiceForm.payment.occupation"
+                                class="input input-bordered input-sm w-full">
                                 <option value="">Please select</option>
                                 <option value="A">Gaji Bulanan</option>
                                 <option value="B">
@@ -401,33 +373,27 @@ export default {
                                 <option value="C">Suri Rumah</option>
                                 <option value="D">Goverment Staff</option>
                             </select>
-                            <BreezeInputError
-                                :message="$page.props.errors.occupation"
-                            />
+                            <BreezeInputError :message="$page.props.errors.occupation" />
                         </div>
 
                         <div class="md:w-1/3">
                             <BreezeLabel value="Order Status" />
                         </div>
                         <div class="md:w-2/3">
-                            <select
-                                v-model="invoiceForm.Orderstatus"
-                                class="input input-bordered input-sm w-full"
-                            >
+                            <select v-model="invoiceForm.Orderstatus" class="input input-bordered input-sm w-full">
+                                <option value="NEW">NEW</option>
                                 <option value="REPEAT">REPEAT</option>
                                 <option value="RESHUFFLE">RESHUFFLE</option>
                             </select>
-                            <BreezeInputError
-                                :message="
-                                    $page.props.errors.updateInvoice?.hasOwnProperty(
-                                        'sales.closing'
-                                    )
-                                        ? $page.props.errors.updateInvoice[
-                                              'sales.closing'
-                                          ]
-                                        : ''
-                                "
-                            />
+                            <BreezeInputError :message="
+                                $page.props.errors.updateInvoice?.hasOwnProperty(
+                                    'sales.closing'
+                                )
+                                    ? $page.props.errors.updateInvoice[
+                                    'sales.closing'
+                                    ]
+                                    : ''
+                            " />
                         </div>
                     </div>
                 </div>
@@ -435,46 +401,29 @@ export default {
                 <div class="my-3">
                     <div class="divider text-xl" id="postage">Postage</div>
                     <div class="items-end justify-end btn-group">
-                        <button
-                            @click="copyAddress"
-                            type="button"
-                            class="btn btn-outline btn-sm"
-                            title="Copy Client Details"
-                        >
+                        <button @click="copyAddress" type="button" class="btn btn-outline btn-sm"
+                            title="Copy Client Details">
                             <i class="bi bi-files"></i>
                         </button>
 
-                        <button
-                            @click="clearAddress"
-                            type="button"
-                            class="btn btn-outline btn-sm"
-                            title="Clear Postage Detail"
-                        >
+                        <button @click="clearAddress" type="button" class="btn btn-outline btn-sm"
+                            title="Clear Postage Detail">
                             <i class="bi bi-eraser-fill"></i>
                         </button>
                     </div>
-                    <postage-form
-                        :states="$page.props.states"
-                        :shipping="invoiceForm.shipping"
-                    />
+                    <postage-form :states="$page.props.states" :shipping="invoiceForm.shipping" />
                 </div>
 
                 <div class="my-3">
                     <div class="divider text-xl" id="product">Product</div>
-                    <product-form
-                        :products="invoiceForm.products"
-                        :productLists="$page.props.products"
-                        :key="componentKey"
-                    />
+                    <product-form :products="invoiceForm.products" :productLists="$page.props.products"
+                        :key="componentKey" />
                 </div>
 
                 <div class="my-3">
                     <div class="divider text-xl" id="sales">Sales</div>
-                    <sales-form
-                        :consultants="$page.props.consultants"
-                        :sales="invoiceForm.sales"
-                        :invoice="invoiceForm"
-                    />
+                    <sales-form :consultants="$page.props.consultants" :sales="invoiceForm.sales"
+                        :invoice="invoiceForm" />
                 </div>
 
                 <div class="my-3">
