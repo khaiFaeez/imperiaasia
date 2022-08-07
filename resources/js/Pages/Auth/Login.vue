@@ -33,21 +33,18 @@ const submit = () => {
 </style>
 
 <template>
-    <div class="bg-secondary">
+    <div class="bg-secondary"
+        style="background-image:url('/apple-touch-icon-180x180.png');background-repeat:round space;background-size:320px">
         <div
-            class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-neutral max-w-3xl border-blob"
-        >
+            class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-neutral max-w-3xl border-blob">
             <div>
                 <Link href="/">
-                    <BreezeApplicationLogo
-                        class="text-5xl text-neutral-content outline-primary"
-                    />
+                <BreezeApplicationLogo class="text-5xl text-neutral-content outline-primary" />
                 </Link>
             </div>
 
-            <div
-                class="w-full sm:max-w-md mt-6 px-6 py-4 shadow-lg bg-base-200 overflow-hidden"
-            >
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 shadow-lg bg-base-200 overflow-hidden">
+
                 <Head title="Log in" />
 
                 <BreezeValidationErrors class="mb-4" />
@@ -59,33 +56,19 @@ const submit = () => {
                 <form @submit.prevent="submit">
                     <div>
                         <BreezeLabel for="username" value="Username" />
-                        <BreezeInput
-                            id="username"
-                            type="text"
-                            v-model="form.username"
-                            required
-                            autofocus
-                            autocomplete="username"
-                        />
+                        <BreezeInput id="username" type="text" v-model="form.username" required autofocus
+                            autocomplete="username" />
                     </div>
 
                     <div class="mt-4">
                         <BreezeLabel for="password" value="Password" />
-                        <BreezeInput
-                            id="password"
-                            type="password"
-                            v-model="form.password"
-                            required
-                            autocomplete="current-password"
-                        />
+                        <BreezeInput id="password" type="password" v-model="form.password" required
+                            autocomplete="current-password" />
                     </div>
 
                     <div class="block mt-4">
                         <label class="flex items-center">
-                            <BreezeCheckbox
-                                name="remember"
-                                v-model:checked="form.remember"
-                            />
+                            <BreezeCheckbox name="remember" v-model:checked="form.remember" />
                             <span class="ml-2 text-sm">Remember me</span>
                         </label>
                     </div>
@@ -95,11 +78,8 @@ const submit = () => {
                         Forgot your password?
                         </Link> -->
 
-                        <BreezeButton
-                            class="ml-4 btn-block btn-lg"
-                            :class="{ loading: form.processing }"
-                            :disabled="form.processing"
-                        >
+                        <BreezeButton class="ml-4 btn-block btn-lg" :class="{ 'loading': form.processing }"
+                            :disabled="form.processing">
                             Log in
                         </BreezeButton>
                     </div>

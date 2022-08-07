@@ -3055,6 +3055,9 @@ body[dir="rtl"] .checkbox:checked,
 .top-2 {
   top: 0.5rem;
 }
+.bottom-0 {
+  bottom: 0px;
+}
 .z-0 {
   z-index: 0;
 }
@@ -3095,6 +3098,10 @@ body[dir="rtl"] .checkbox:checked,
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
+}
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -3161,6 +3168,9 @@ body[dir="rtl"] .checkbox:checked,
 }
 .mr-3 {
   margin-right: 0.75rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
 }
 .block {
   display: block;

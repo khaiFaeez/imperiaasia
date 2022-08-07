@@ -29,12 +29,10 @@ export default {
 }
 </script>
 <template>
-    <div
-        class="card bg-white transition ease-in-out hover:bg-base-200 duration-300"
-    >
+    <div class="card bg-white transition ease-in-out hover:bg-base-200 duration-300 max-w-5xl mb-8">
         <div class="card-body collapse collapse-arrow p-0">
             <input type="checkbox" :checked="route().current('*.client.*')" />
-            <h2 class="card-title text-lg collapse-title text-primary">
+            <h2 class="card-title text-lg collapse-title text-primary ">
                 {{ client.Name }}
                 <div class="">
                     <p class="hover:underline">( {{ client.MyKad_SSM }} )</p>
@@ -53,17 +51,12 @@ export default {
                 </div>
 
                 <div class="card-actions justify-end">
-                    <Link
-                        v-if="route().current('*.client.*') == false"
-                        :href="
-                            route('portfolio.client.show', {
-                                client: client.id
-                            })
-                        "
-                        title="Open in Client"
-                        class="btn btn-ghost btn-sm rounded-full"
-                    >
-                        <i class="bi bi-box-arrow-up-right"></i>
+                    <Link v-if="route().current('*.client.*') == false" :href="
+                        route('portfolio.client.show', {
+                            client: client.id
+                        })
+                    " title="Open in Client" class="btn btn-ghost btn-sm rounded-full">
+                    <i class="bi bi-box-arrow-up-right"></i>
                     </Link>
                     <div class="badge badge-lg">
                         {{ client.Mobile_No }}

@@ -53,26 +53,17 @@ export default {
 </script>
 
 <template>
+
     <Head title="User List" />
     <AppLayout>
         <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
-            <Link class="text-primary hover:text-primary-focus" href="/users"
-                >User</Link
-            >
+            <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
         </h1>
         <div class="flex flex-row items-center justify-between mb-4">
-            <search-filter
-                v-model="form.search"
-                class="mr-4 w-full max-w-md"
-                @reset="reset"
-            >
+            <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
             </search-filter>
             <div class="btn-group bg-white">
-                <Link
-                    class="btn btn-primary btn-sm"
-                    :href="route('users.create')"
-                    >Add User</Link
-                >
+                <Link class="btn btn-primary btn-sm" :href="route('users.create')">Add User</Link>
             </div>
         </div>
 
@@ -90,41 +81,30 @@ export default {
                 <tr v-show="$page.props.users.data.length == 0">
                     <td colspan="5">No user</td>
                 </tr>
-                <tr
-                    class="hover hover:cursor-pointer"
-                    v-for="$user in $page.props.users.data"
-                    :key="$user.Id"
-                    @click="goToViewPage($user)"
-                >
+                <tr class="hover hover:cursor-pointer" v-for="$user in $page.props.users.data" :key="$user.Id"
+                    @click="goToViewPage($user)">
                     <td>
-                        <label
-                            class="badge"
-                            :class="
-                                $user.deleted_at
-                                    ? 'badge-error text-white'
-                                    : 'badge-success text-white'
-                            "
-                        >
+                        <label class="badge" :class="
+                            $user.deleted_at
+                                ? 'badge-error text-white'
+                                : 'badge-success text-white'
+                        ">
                             {{
-                                $user.deleted_at ? 'Inactive' : 'Active'
-                            }}</label
-                        >
+                                    $user.deleted_at ? 'Inactive' : 'Active'
+                            }}</label>
                     </td>
                     <td>{{ $user.name }}</td>
                     <td>{{ $user.username }}</td>
                     <td>{{ $user.staff_id }}</td>
                     <td>
-                        <label
-                            class="badge badge-outline capitalize"
-                            v-for="$v in $user.roles"
-                            :key="$v.id"
-                            >{{ $v.name }}</label
-                        >
+                        <label class="badge badge-outline capitalize" v-for="$v in $user.roles" :key="$v.id">{{ $v.name
+                        }}</label>
                     </td>
                 </tr>
             </tbody>
         </table>
 
         <pagination class="mt-6" :links="$page.props.users.links" />
+
     </AppLayout>
 </template>
