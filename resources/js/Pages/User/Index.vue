@@ -67,7 +67,7 @@ export default {
             </div>
         </div>
 
-        <table class="table table-bordered w-full max-w-5xl my-5">
+        <table class="table table-bordered w-full max-w-5xl my-5 shadow-xl">
             <thead>
                 <tr>
                     <th>Status</th>

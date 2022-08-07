@@ -274,28 +274,17 @@ export default {
 }
 </script>
 <template>
+
     <Head title="Show Invoice" />
     <!-- Put this part before </body> tag -->
     <input type="checkbox" id="my-modal" class="modal-toggle" />
     <div class="modal">
-        <div
-            class="modal-box w-full lg:max-w-xl xl:max-w-7xl h-[80vh] relative"
-        >
-            <label
-                for="my-modal"
-                class="btn btn-sm btn-circle btn-primary absolute right-2 top-2"
-                >✕</label
-            >
+        <div class="modal-box w-full lg:max-w-xl xl:max-w-7xl h-[80vh] relative">
+            <label for="my-modal" class="btn btn-sm btn-circle btn-primary absolute right-2 top-2">✕</label>
             <div class="h-96">
                 <h3 class="font-bold text-lg">Add note</h3>
-                <QuillEditor
-                    theme="snow"
-                    toolbar="full"
-                    v-model:content="noteForm.note"
-                    contentType="html"
-                    class="bg-white"
-                    :modules="modules"
-                />
+                <QuillEditor theme="snow" toolbar="full" v-model:content="noteForm.note" contentType="html"
+                    class="bg-white" :modules="modules" />
                 <button class="btn btn-block btn-sm" @click="storeNote">
                     Submit
                 </button>
@@ -303,26 +292,16 @@ export default {
         </div>
     </div>
     <AppLayout>
-        <input type="hidden" :value="$page.props.token" id="token" /><input
-            type="hidden"
-            :value="invoice.Id"
-            id="inv"
-        />
-        <h1
-            class="mb-4 text-xl font-bold flex gap-2 items-center flex gap-2 items-center"
-        >
-            <Link class="text-primary hover:text-primary-focus" href="/invoice"
-                >Invoice</Link
-            >
+        <input type="hidden" :value="$page.props.token" id="token" /><input type="hidden" :value="invoice.Id"
+            id="inv" />
+        <h1 class="mb-4 text-xl font-bold flex gap-2 items-center flex gap-2 items-center">
+            <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
             <span class="text-primary font-medium">/</span> {{ invoice.Inv_No }}
         </h1>
 
         <div class="flex items-center justify-between mb-4">
             <div class="flex flex-col">
-                <div
-                    class="stats stats-vertical lg:stats-horizontal bg-white"
-                    v-show="true"
-                >
+                <div class="stats stats-vertical lg:stats-horizontal bg-white  " v-show="true">
                     <div class="stat">
                         <div class="stat-title">Order Status</div>
                         <div class="stat-value">
@@ -332,14 +311,11 @@ export default {
 
                     <div class="stat">
                         <div class="stat-title">Status</div>
-                        <div
-                            class="stat-value"
-                            :class="
-                                invoice.Status_Inv == 'PAID'
-                                    ? 'text-success '
-                                    : 'text-warning'
-                            "
-                        >
+                        <div class="stat-value" :class="
+                            invoice.Status_Inv == 'PAID'
+                                ? 'text-success '
+                                : 'text-warning'
+                        ">
                             {{ invoice.Status_Inv }}
                         </div>
                     </div>
@@ -348,12 +324,12 @@ export default {
                         <div class="stat-title">Aging</div>
                         <div class="stat-value">
                             {{
-                                Math.abs(
-                                    moment(invoice.Date, 'YYYY-MM-DD').diff(
-                                        moment(new Date(), 'YYYY-MM-DD'),
-                                        'days'
+                                    Math.abs(
+                                        moment(invoice.Date, 'YYYY-MM-DD').diff(
+                                            moment(new Date(), 'YYYY-MM-DD'),
+                                            'days'
+                                        )
                                     )
-                                )
                             }}
                             Days
                         </div>
@@ -370,63 +346,38 @@ export default {
 
             <div class="btn-group bg-white">
                 <!-- The button to open modal -->
-                <label
-                    for="my-modal"
-                    v-if="hasAnyPermission(['note-edit'])"
-                    title="Notes"
-                    class="btn btn-outline btn-sm btn-primary"
-                >
-                    <i class="bi bi-journal-text text-xl"></i
-                ></label>
+                <label for="my-modal" v-if="hasAnyPermission(['note-edit'])" title="Notes"
+                    class="btn btn-outline btn-sm btn-primary">
+                    <i class="bi bi-journal-text text-xl"></i></label>
 
                 <div class="dropdown dropdown-end">
-                    <label
-                        tabindex="0"
-                        class="btn btn-outline btn-sm btn-primary"
-                        >Print</label
-                    >
-                    <ul
-                        tabindex="0"
-                        class="dropdown-content menu p-2 shadow-xl bg-base-100 rounded-box w-52"
-                    >
+                    <label tabindex="0" class="btn btn-outline btn-sm btn-primary">Print</label>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow-xl bg-base-100 rounded-box w-52">
                         <li>
-                            <div
-                                @click="openPDF(invoice)"
-                                class="hover:cursor-pointer w-full"
-                            >
+                            <div @click="openPDF(invoice)" class="hover:cursor-pointer w-full">
                                 Invoice
                             </div>
                         </li>
                         <li>
-                            <div
-                                @click="openDocket(invoice)"
-                                class="hover:cursor-pointer w-full"
-                            >
+                            <div @click="openDocket(invoice)" class="hover:cursor-pointer w-full">
                                 Docket
                             </div>
                         </li>
                     </ul>
                 </div>
-                <Link
-                    :href="
-                        route('portfolio.invoice.edit', {
-                            invoice: invoice.Id
-                        })
-                    "
-                    v-if="hasAnyPermission(['invoice-edit'])"
-                    title="Edit Invoice"
-                    class="btn btn-outline btn-sm btn-primary"
-                >
-                    Edit
+                <Link :href="
+                    route('portfolio.invoice.edit', {
+                        invoice: invoice.Id
+                    })
+                " v-if="hasAnyPermission(['invoice-edit'])" title="Edit Invoice"
+                    class="btn btn-outline btn-sm btn-primary">
+                Edit
                 </Link>
             </div>
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-1">
-            <div class="my-3">
-                <ClientDisplay
-                    :client="invoice.client"
-                    :states="$page.props.states"
-                />
+            <div class="my-3 ">
+                <ClientDisplay :client="invoice.client" :states="$page.props.states" />
                 <div class="md:flex md:items-center gap-4">
                     <div class="md:w-1/3">
                         <BreezeLabel value="Client Occupation" />
@@ -439,23 +390,17 @@ export default {
                 </div>
             </div>
 
-            <div class="my-3">
+            <div class="my-3 ">
                 <div class="tabs">
                     <a class="tab tab-lifted tab-active font-bold">Postage</a>
                 </div>
-                <PostageDisplay
-                    :states="$page.props.states"
-                    :shipping="invoiceForm.shipping"
-                />
+                <PostageDisplay :states="$page.props.states" :shipping="invoiceForm.shipping" />
             </div>
 
             <div class="my-3">
                 <tabs>
                     <tab title="Product">
-                        <ProductDisplay
-                            :products="invoiceForm.products"
-                            :productLists="$page.props.products"
-                        />
+                        <ProductDisplay :products="invoiceForm.products" :productLists="$page.props.products" />
                     </tab>
                     <tab title="Sales">
                         <SalesDisplay :sales="invoiceForm.sales" />
@@ -468,16 +413,11 @@ export default {
 
             <div class="my-3">
                 <div class="tabs">
-                    <a class="tab tab-lifted font-bold tab-active"
-                        >Invoice Notes</a
-                    >
+                    <a class="tab tab-lifted font-bold tab-active">Invoice Notes</a>
                 </div>
                 <div class="overflow-y-scroll">
-                    <div
-                        class="bg-white p-4 rounded-sm shadow-xl m-3"
-                        v-for="(note, i) in $page.props.invoice.notes"
-                        :key="i"
-                    >
+                    <div class="bg-white p-4 rounded-sm shadow-xl m-3" v-for="(note, i) in $page.props.invoice.notes"
+                        :key="i">
                         <div v-html="note.Notes"></div>
                         <p class="text-sm text-gray-800 italic">
                             {{ note.Created_By }} ( {{ note.Created_On }} )

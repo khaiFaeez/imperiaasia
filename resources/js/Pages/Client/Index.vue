@@ -56,39 +56,27 @@ export default {
 </script>
 
 <template>
+
     <Head title="Client List" />
     <AppLayout>
         <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
-            <Link class="text-primary hover:text-primary-focus" href="/client"
-                >Client</Link
-            >
+            <Link class="text-primary hover:text-primary-focus" href="/client">Client</Link>
         </h1>
         <section class="flex flex-row items-center justify-between mb-4">
-            <search-filter
-                v-model="form.search"
-                class="mr-4 w-full max-w-md"
-                @reset="reset"
-            >
+            <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
             </search-filter>
             <div class="btn-group bg-white">
-                <Link
-                    :href="
-                        route('portfolio.client.create', {
-                            portfolio: route().params.portfolio
-                        })
-                    "
-                    v-if="hasAnyPermission(['client-create'])"
-                    class="btn btn-primary btn-sm"
-                >
-                    New Client
+                <Link :href="
+                    route('portfolio.client.create', {
+                        portfolio: route().params.portfolio
+                    })
+                " v-if="hasAnyPermission(['client-create'])" class="btn btn-primary btn-sm ">
+                New Client
                 </Link>
             </div>
         </section>
-        <div class="overflow-auto">
-            <table
-                class="table table-compact table-bordered w-full"
-                v-if="clients.data.length > 0"
-            >
+        <div class="overflow-auto shadow-xl">
+            <table class="table table-compact table-bordered w-full  " v-if="clients.data.length > 0">
                 <thead>
                     <tr>
                         <th width="10%">Name</th>
@@ -99,12 +87,8 @@ export default {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        class="hover hover:cursor-pointer"
-                        v-for="($client, i) in clients.data"
-                        :key="i"
-                        @click="goToViewPage($client)"
-                    >
+                    <tr class="hover hover:cursor-pointer" v-for="($client, i) in clients.data" :key="i"
+                        @click="goToViewPage($client)">
                         <td>{{ $client.Name }}</td>
                         <td>{{ $client.MyKad_SSM }}</td>
                         <td>{{ $client.state?.Negeri }}</td>
@@ -114,19 +98,16 @@ export default {
                 </tbody>
             </table>
             <div v-else>
-                <Link
-                    :href="
-                        route('portfolio.client.create', {
-                            portfolio: route().params.portfolio
-                        })
-                    "
-                    v-if="hasAnyPermission(['client-create'])"
-                    class="text-3xl underline text-primary"
-                >
-                    Create new Client
+                <Link :href="
+                    route('portfolio.client.create', {
+                        portfolio: route().params.portfolio
+                    })
+                " v-if="hasAnyPermission(['client-create'])" class="text-3xl underline text-primary">
+                Create new Client
                 </Link>
             </div>
-            <pagination class="mt-6" :links="clients.links" />
+
         </div>
+        <pagination class="mt-6" :links="clients.links" />
     </AppLayout>
 </template>

@@ -212,7 +212,7 @@ export default {
         <form @submit.prevent="storeInvoice" class="form">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex flex-col">
-                    <div class="stats stats-vertical lg:stats-horizontal bg-white" v-show="true">
+                    <div class="stats stats-vertical lg:stats-horizontal bg-white " v-show="true">
                         <div class="stat">
                             <div class="stat-title">Order Status</div>
                             <div class="stat-value">

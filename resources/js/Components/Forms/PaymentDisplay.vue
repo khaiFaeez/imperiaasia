@@ -40,22 +40,18 @@ export default {
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    class="line_items"
-                    v-for="(n, i) in payment.items.length"
-                    :key="i"
-                >
+                <tr class="line_items" v-for="(n, i) in payment.items.length" :key="i">
                     <td class="">{{ n }}</td>
                     <td>
                         <!-- <Datepicker v-model="payment.items[i].ptp"  :format="YYYY-MM-dd" :previewFormat="YYYY-MM-dd"  type="date"></Datepicker> -->
 
                         <p>
                             {{
-                                payment.items[i].ptp
-                                    ? moment(payment.items[i].ptp).format(
-                                          'DD/MM/YYYY'
-                                      )
-                                    : ''
+                                    payment.items[i].ptp
+                                        ? moment(payment.items[i].ptp).format(
+                                            'DD/MM/YYYY'
+                                        )
+                                        : ''
                             }}
                         </p>
                     </td>
@@ -69,10 +65,10 @@ export default {
                 <th>Total Settlement (RM)</th>
                 <th>
                     {{
-                        totalSettlement.toLocaleString('en', {
-                            useGrouping: false,
-                            minimumFractionDigits: 2
-                        })
+                            totalSettlement.toLocaleString('en', {
+                                useGrouping: false,
+                                minimumFractionDigits: 2
+                            })
                     }}
                 </th>
             </tfoot>

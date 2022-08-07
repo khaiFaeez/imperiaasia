@@ -40,56 +40,33 @@ export default {
 }
 </script>
 
-<style src="@vueform/multiselect/themes/default.css"></style>
+<style src="@vueform/multiselect/themes/default.css">
+</style>
 
 <template>
+
     <Head title="Invoice List" />
     <AppLayout>
         <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
-            <Link class="text-primary hover:text-primary-focus" href="/print"
-                >Printing</Link
-            >
+            <Link class="text-primary hover:text-primary-focus" href="/print">Printing</Link>
         </h1>
 
         <div class="menu menu-horizontal mb-4 w-full justify-end">
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-primary btn-sm">Print</label>
-                <ul
-                    tabindex="0"
-                    class="dropdown-content menu p-2 shadow-xl bg-base-100 rounded-box w-52"
-                >
+                <ul tabindex="0" class="dropdown-content menu p-2 shadow-xl bg-base-100 rounded-box w-52">
                     <li>
-                        <form
-                            class="w-full"
-                            :action="route('portfolio.print.invoices')"
-                            method="post"
-                            target="_blank"
-                            @submit.prevent="check_form"
-                            v-if="$page.props.invoices.data.length > 0"
-                        >
-                            <input
-                                type="hidden"
-                                :value="$page.props.attribute_name"
-                                name="_token"
-                            />
+                        <form class="w-full" :action="route('portfolio.print.invoices')" method="post" target="_blank"
+                            @submit.prevent="check_form" v-if="$page.props.invoices.data.length > 0">
+                            <input type="hidden" :value="$page.props.attribute_name" name="_token" />
                             <input type="hidden" :value="selected" name="ids" />
                             <button @click="check_form">Invoices</button>
                         </form>
                     </li>
                     <li>
-                        <form
-                            class="w-full"
-                            :action="route('portfolio.print.dockets')"
-                            method="post"
-                            target="_blank"
-                            @submit.prevent="check_form"
-                            v-if="$page.props.invoices.data.length > 0"
-                        >
-                            <input
-                                type="hidden"
-                                :value="$page.props.attribute_name"
-                                name="_token"
-                            />
+                        <form class="w-full" :action="route('portfolio.print.dockets')" method="post" target="_blank"
+                            @submit.prevent="check_form" v-if="$page.props.invoices.data.length > 0">
+                            <input type="hidden" :value="$page.props.attribute_name" name="_token" />
                             <input type="hidden" :value="selected" name="ids" />
                             <button @click="check_form">Docket</button>
                         </form>
@@ -98,10 +75,8 @@ export default {
             </div>
         </div>
 
-        <div class="overflow-auto">
-            <table
-                class="table table-compact table-bordered w-full max-w-7xl text-center"
-            >
+        <div class="overflow-auto shadow-xl max-w-7xl ">
+            <table class="table table-compact table-bordered w-full text-center">
                 <thead>
                     <tr>
                         <th>Select</th>
@@ -111,12 +86,7 @@ export default {
                     </tr>
                     <tr>
                         <th>
-                            <input
-                                type="checkbox"
-                                class="checkbox checkbox-sm"
-                                v-model="selectAll"
-                                @click="select"
-                            />
+                            <input type="checkbox" class="checkbox checkbox-sm" v-model="selectAll" @click="select" />
                         </th>
                         <th>Invoice</th>
                         <th>Docket</th>
@@ -129,52 +99,35 @@ export default {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        v-for="$invoice in $page.props.invoices.data"
-                        :key="$invoice.Id"
-                    >
+                    <tr v-for="$invoice in $page.props.invoices.data" :key="$invoice.Id">
                         <td>
-                            <input
-                                type="checkbox"
-                                class="checkbox checkbox-sm"
-                                :value="$invoice.Id"
-                                v-model="selected"
-                            />
+                            <input type="checkbox" class="checkbox checkbox-sm" :value="$invoice.Id"
+                                v-model="selected" />
                         </td>
                         <td class="text-center">
-                            <div
-                                class="badge text-white"
-                                :class="
+                            <div class="badge text-white" :class="
+                                $invoice.Invoice_Status == '1'
+                                    ? 'badge-success '
+                                    : 'badge-error'
+                            ">
+                                <i :class="
                                     $invoice.Invoice_Status == '1'
-                                        ? 'badge-success '
-                                        : 'badge-error'
-                                "
-                            >
-                                <i
-                                    :class="
-                                        $invoice.Invoice_Status == '1'
-                                            ? 'bi bi-check-lg'
-                                            : 'bi bi-x-lg'
-                                    "
-                                ></i>
+                                        ? 'bi bi-check-lg'
+                                        : 'bi bi-x-lg'
+                                "></i>
                             </div>
                         </td>
                         <td class="text-center">
-                            <div
-                                class="badge text-white"
-                                :class="
+                            <div class="badge text-white" :class="
+                                $invoice.Docket_Status == '1'
+                                    ? 'badge-success '
+                                    : 'badge-error'
+                            ">
+                                <i :class="
                                     $invoice.Docket_Status == '1'
-                                        ? 'badge-success '
-                                        : 'badge-error'
-                                "
-                            >
-                                <i
-                                    :class="
-                                        $invoice.Docket_Status == '1'
-                                            ? 'bi bi-check-lg'
-                                            : 'bi bi-x-lg'
-                                    "
-                                ></i>
+                                        ? 'bi bi-check-lg'
+                                        : 'bi bi-x-lg'
+                                "></i>
                             </div>
                         </td>
                         <td>{{ $invoice.Inv_No }}</td>

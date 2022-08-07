@@ -50,44 +50,31 @@ export default {
 </script>
 
 <template>
+
     <Head title="Role List" />
     <AppLayout>
         <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
-            <Link class="text-primary hover:text-primary-focus" href="/users"
-                >User</Link
-            >
+            <Link class="text-primary hover:text-primary-focus" href="/users">User</Link>
             <span class="text-primary font-medium">/</span> Roles
         </h1>
         <div class="flex flex-row items-center justify-between mb-4">
-            <search-filter
-                v-model="form.search"
-                class="mr-4 w-full max-w-md"
-                @reset="reset"
-            >
+            <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
             </search-filter>
             <div class="menu menu-horizontal">
-                <Link
-                    class="btn btn-primary btn-sm"
-                    :href="route('roles.create')"
-                >
-                    Add Role</Link
-                >
+                <Link class="btn btn-primary btn-sm" :href="route('roles.create')">
+                Add Role</Link>
             </div>
         </div>
 
-        <table class="table table-compact table-bordered w-full max-w-5xl">
+        <table class="table table-compact table-bordered w-full max-w-5xl  shadow-xl">
             <thead>
                 <tr>
                     <th>Role</th>
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    class="hover hover:cursor-pointer"
-                    v-for="role in $page.props.roles.data"
-                    :key="role.Id"
-                    @click="goToViewPage(role)"
-                >
+                <tr class="hover hover:cursor-pointer" v-for="role in $page.props.roles.data" :key="role.Id"
+                    @click="goToViewPage(role)">
                     <td>{{ role.name }}</td>
                 </tr>
             </tbody>
