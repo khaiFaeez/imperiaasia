@@ -47,7 +47,7 @@ export default {
             </tbody>
             <tfoot>
                 <th colspan="5"></th>
-                <th>Grand Total</th>
+                <th>Grand Total (RM)</th>
                 <th>{{ products.grand_total }}</th>
             </tfoot>
         </table>
