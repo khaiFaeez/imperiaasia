@@ -86,36 +86,36 @@ export default {
                             discount: 0,
                             discounted_price: 0,
                             total: 0
+                        },
+                        {
+                            product: "",
+                            price: 0,
+                            qty: 0,
+                            discount: 0,
+                            discounted_price: 0,
+                            total: 0,
+                        }, {
+                            product: "",
+                            price: 0,
+                            qty: 0,
+                            discount: 0,
+                            discounted_price: 0,
+                            total: 0,
+                        }, {
+                            product: "",
+                            price: 0,
+                            qty: 0,
+                            discount: 0,
+                            discounted_price: 0,
+                            total: 0,
+                        }, {
+                            product: "",
+                            price: 0,
+                            qty: 0,
+                            discount: 0,
+                            discounted_price: 0,
+                            total: 0,
                         }
-                        // {
-                        //     product:"",
-                        //     price : 0,
-                        //     qty : 0,
-                        //     discount : 0,
-                        //     discounted_price : 0,
-                        //     total : 0,
-                        // },{
-                        //     product:"",
-                        //     price : 0,
-                        //     qty : 0,
-                        //     discount : 0,
-                        //     discounted_price : 0,
-                        //     total : 0,
-                        // },{
-                        //     product:"",
-                        //     price : 0,
-                        //     qty : 0,
-                        //     discount : 0,
-                        //     discounted_price : 0,
-                        //     total : 0,
-                        // },{
-                        //     product:"",
-                        //     price : 0,
-                        //     qty : 0,
-                        //     discount : 0,
-                        //     discounted_price : 0,
-                        //     total : 0,
-                        // }
                     ]
                 },
                 payment: {
@@ -283,7 +283,7 @@ export default {
 
                 <div class="my-3">
                     <div class="divider text-xl" id="postage">Postage</div>
-                    <div class="items-end justify-end btn-group">
+                    <div class="items-end justify-end btn-group shadow">
                         <button @click="copyAddress" type="button" class="btn btn-outline btn-sm"
                             title="Copy Client Details">
                             <i class="bi bi-files"></i>

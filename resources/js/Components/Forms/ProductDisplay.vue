@@ -5,6 +5,13 @@ export default {
     components: {
         BreezeInput
     },
+    data() {
+        return {
+            expand: false
+        }
+    },
+    methods: {
+    },
     computed: {
         removeEmpty() {
             let o = Object.fromEntries(
@@ -20,6 +27,8 @@ export default {
 
 <template>
     <div class="overflow-x-auto py-2">
+        <div class="btn btn-sm my-4 btn-outline shadow float-right" @click="expand = true" v-show="!expand">Expand</div>
+        <div class="btn btn-sm my-4 btn-outline shadow float-right" @click="expand = false" v-show="expand">Close</div>
         <table class="table table-compact w-full">
             <thead>
                 <tr>
@@ -33,17 +42,33 @@ export default {
                 </tr>
             </thead>
             <tbody>
-                <tr class="line_items" v-for="(n, i) in removeEmpty" :key="i">
-                    <td class="">{{ n }}</td>
-                    <td>
-                        {{ products.items[i].product_name }}
-                    </td>
-                    <td>{{ products.items[i].price }}</td>
-                    <td>{{ products.items[i].qty }}</td>
-                    <td>{{ products.items[i].discount }}</td>
-                    <td>{{ products.items[i].discounted_price }}</td>
-                    <td>{{ products.items[i].total }}</td>
-                </tr>
+                <template v-if="!expand">
+                    <tr class="line_items" v-for="(n, i) in removeEmpty" :key="i">
+                        <td class="">{{ i + 1 }}</td>
+                        <td>
+                            {{ products.items[i].product_name }}
+                        </td>
+                        <td>{{ products.items[i].price }}</td>
+                        <td>{{ products.items[i].qty }}</td>
+                        <td>{{ products.items[i].discount }}</td>
+                        <td>{{ products.items[i].discounted_price }}</td>
+                        <td>{{ products.items[i].total }}</td>
+                    </tr>
+                </template>
+                <template v-else>
+                    <tr class="line_items" v-for="(n, i) in products.items" :key="i">
+                        <td class="">{{ i + 1 }}</td>
+                        <td>
+                            {{ products.items[i].product_name }}
+                        </td>
+                        <td>{{ products.items[i].price }}</td>
+                        <td>{{ products.items[i].qty }}</td>
+                        <td>{{ products.items[i].discount }}</td>
+                        <td>{{ products.items[i].discounted_price }}</td>
+                        <td>{{ products.items[i].total }}</td>
+                    </tr>
+                </template>
+
             </tbody>
             <tfoot>
                 <th colspan="5"></th>
