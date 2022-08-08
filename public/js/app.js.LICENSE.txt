@@ -15,11 +15,21 @@
  */
 
 /*!
- * Chart.js v3.8.0
+ * Chart.js v3.9.1
  * https://www.chartjs.org
  * (c) 2022 Chart.js Contributors
  * Released under the MIT License
  */
+
+/*!
+ * GSAP 3.10.4
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2022, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
 
 /*!
  * Quill Editor v1.3.7
@@ -36,7 +46,7 @@
  */
 
 /*!
- * VueQuill @vueup/vue-quill v1.0.0-beta.8
+ * VueQuill @vueup/vue-quill v1.0.0-beta.9
  * https://vueup.github.io/vue-quill/
  * 
  * Includes quill v1.3.7
@@ -44,7 +54,7 @@
  * 
  * Copyright (c) 2022 Ahmad Luthfi Masruri
  * Released under the MIT license
- * Date: 2022-02-17T08:01:57.735Z
+ * Date: 2022-07-15T12:19:26.189Z
  */
 
 /*! @license DOMPurify | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/2.2.2/LICENSE */

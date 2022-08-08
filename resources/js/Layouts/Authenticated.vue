@@ -4,13 +4,18 @@ import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue'
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
 import Navigation from '@/Components/Navigation.vue'
 import { Link } from '@inertiajs/inertia-vue3'
+import gsap from 'gsap';
 
 const showingNavigationDropdown = ref(false)
 
 let animate = false
 
 onMounted(() => {
-    animate = true
+    animate = true;
+    gsap.from('form', {
+        duration: 0.4,
+        x: -50
+    })
 })
 </script>
 
