@@ -11,6 +11,9 @@ import BreezeInput from '@/Components/Input.vue'
 import BreezeLabel from '@/Components/Label.vue'
 import BreezeInputError from '@/Components/InputError.vue'
 import moment from 'moment'
+import { ref } from 'vue';
+
+import JetConfirmationModal from '@/Components/ConfirmationModal.vue';
 
 export default {
     props: ['client', 'invoice'],
@@ -26,7 +29,8 @@ export default {
         BreezeButton,
         BreezeLabel,
         BreezeInput,
-        BreezeInputError
+        BreezeInputError,
+        JetConfirmationModal
     },
 
     created: function () {
@@ -34,6 +38,10 @@ export default {
     },
     data() {
         return {
+            confirmingDiscard: ref(false),
+            confirmingPaymentUpdate: ref(false),
+            confirmingCancelOrder: ref(false),
+            confirmingSaving: ref(false),
             componentKey: 0,
             clientForm: this.$inertia.form({
                 id: this.invoice.client.id,
@@ -163,6 +171,24 @@ export default {
         }
     },
     methods: {
+        confirmDiscard() {
+            this.confirmingDiscard = true;
+        },
+        confirmSaving() {
+            this.confirmingSaving = true;
+        },
+        confirmPaymentUpdate() {
+            this.confirmingPaymentUpdate = true;
+        },
+        confirmCancelOrder() {
+            this.confirmingCancelOrder = true;
+        },
+        discarding() {
+            this.$inertia.get(route('portfolio.invoice.show', {
+                invoice: this.invoice.Id
+            }));
+
+        },
         forceRerender() {
             this.componentKey += 1
         },
@@ -170,7 +196,6 @@ export default {
             this.invoiceForm.put(
                 route('portfolio.invoice.update', { invoice: this.invoice.Id }),
                 {
-                    errorBag: 'updateInvoice',
                     preserveScroll: true
                 }
             )
@@ -185,7 +210,7 @@ export default {
             this.invoiceForm.shipping.Ship_State = this.clientForm.State
             this.invoiceForm.shipping.Ship_Country = this.clientForm.Country
 
-            this.$page.props.errors.updateInvoice = {}
+            this.$page.props.errors = {}
         },
         clearAddress() {
             this.invoiceForm.shipping.Ship_Name = ''
@@ -199,6 +224,7 @@ export default {
         },
         updatePayment() {
             this.invoiceForm.Status_Inv = 'PAID'
+            this.confirmingPaymentUpdate = false;
         },
         cancelOrder() {
             this.invoiceForm.Status_Inv = 'PAID'
@@ -270,6 +296,7 @@ export default {
             ]
 
             this.forceRerender()
+            this.confirmingCancelOrder = false
         }
     }
 }
@@ -278,6 +305,89 @@ export default {
 <template>
 
     <Head title="Edit Invoice" />
+
+    <JetConfirmationModal :show="confirmingDiscard" @close="confirmingDiscard = false">
+        <template #title>
+            Discard changes
+        </template>
+
+        <template #content>
+            Are you sure you would like to discard changes?
+        </template>
+
+        <template #footer>
+            <BreezeButton @click="confirmingDiscard = false">
+                Cancel
+            </BreezeButton>
+
+            <BreezeButton class="ml-3" @click="discarding">
+                Yes
+            </BreezeButton>
+        </template>
+    </JetConfirmationModal>
+
+    <JetConfirmationModal :show="confirmingPaymentUpdate" @close="confirmingPaymentUpdate = false">
+        <template #title>
+            Update Payment
+        </template>
+
+        <template #content>
+            Are you sure you would like to update payment?
+        </template>
+
+        <template #footer>
+            <BreezeButton @click="confirmingPaymentUpdate = false">
+                Cancel
+            </BreezeButton>
+
+            <BreezeButton class="ml-3" @click="updatePayment">
+                Yes
+            </BreezeButton>
+        </template>
+    </JetConfirmationModal>
+
+    <JetConfirmationModal :show="confirmingCancelOrder" @close="confirmingCancelOrder = false">
+        <template #title>
+            Cancel out order
+        </template>
+
+        <template #content>
+            Are you sure you would like to cancel order?
+        </template>
+
+        <template #footer>
+            <BreezeButton @click="confirmingCancelOrder = false">
+                Cancel
+            </BreezeButton>
+
+            <BreezeButton class="ml-3" @click="cancelOrder">
+                Yes
+            </BreezeButton>
+        </template>
+    </JetConfirmationModal>
+
+    <JetConfirmationModal :show="confirmingSaving" @close="confirmingSaving = false">
+        <template #title>
+            Save
+        </template>
+
+        <template #content>
+            Are you sure you would like to save?
+        </template>
+
+        <template #footer>
+            <BreezeButton @click="confirmingSaving = false">
+                Cancel
+            </BreezeButton>
+
+            <BreezeButton class="ml-3" :class="{ 'loading ': invoiceForm.processing }"
+                :disabled="invoiceForm.processing" @click="updateInvoice">
+                Yes
+            </BreezeButton>
+        </template>
+    </JetConfirmationModal>
+
+
     <app-layout>
         <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
@@ -332,26 +442,18 @@ export default {
                 </div>
                 <div class="btn-group bg-white">
                     <button type="button" class="btn btn-sm btn-outline btn-primary"
-                        v-show="invoice.Status_Inv == 'PENDING'" @click="cancelOrder">
+                        v-show="invoice.Status_Inv == 'PENDING'" @click="confirmCancelOrder">
                         Cancel Order
                     </button>
                     <button type="button" class="btn btn-sm btn-outline btn-primary"
-                        v-show="invoice.Status_Inv == 'PENDING'" @click="updatePayment">
+                        v-show="invoice.Status_Inv == 'PENDING'" @click="confirmPaymentUpdate">
                         Update Payment
                     </button>
+                    <button class="btn btn-sm btn-outline btn-primary" type="button"
+                        @click="confirmDiscard">Discard</button>
 
-                    <Link as="button" type="button" :href="
-                        route('portfolio.invoice.show', {
-                            invoice: invoice.Id
-                        })
-                    " class="btn btn-sm btn-outline btn-primary">
-                    Discard
-                    </Link>
+                    <button class="btn btn-sm  btn-primary" type="button" @click="confirmSaving">Save</button>
 
-                    <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }"
-                        :disabled="invoiceForm.processing">
-                        Save
-                    </BreezeButton>
                 </div>
             </div>
 
@@ -386,10 +488,10 @@ export default {
                                 <option value="RESHUFFLE">RESHUFFLE</option>
                             </select>
                             <BreezeInputError :message="
-                                $page.props.errors.updateInvoice?.hasOwnProperty(
+                                $page.props.errors?.hasOwnProperty(
                                     'sales.closing'
                                 )
-                                    ? $page.props.errors.updateInvoice[
+                                    ? $page.props.errors[
                                     'sales.closing'
                                     ]
                                     : ''

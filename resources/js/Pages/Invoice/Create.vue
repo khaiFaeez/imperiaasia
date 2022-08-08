@@ -12,6 +12,8 @@ import BreezeLabel from '@/Components/Label.vue'
 import BreezeInput from '@/Components/Input.vue'
 import BreezeInputError from '@/Components/InputError.vue'
 import moment from 'moment'
+import { ref } from 'vue';
+import JetConfirmationModal from '@/Components/ConfirmationModal.vue';
 
 export default {
     props: ['client'],
@@ -28,13 +30,15 @@ export default {
         BreezeButton,
         BreezeLabel,
         BreezeInput,
-        BreezeInputError
+        BreezeInputError,
+        JetConfirmationModal
     },
     created: function () {
         this.moment = moment
     },
     data() {
         return {
+            confirmingSaving: ref(false),
             clientForm: this.$inertia.form({
                 id: this.client.id,
                 MyKad_SSM: this.client.MyKad_SSM,
@@ -159,12 +163,16 @@ export default {
         }
     },
     methods: {
+
+        confirmSaving() {
+            this.confirmingSaving = true;
+        },
         storeInvoice() {
             this.invoiceForm.post(route('portfolio.invoice.store'), {
-                errorBag: 'updateInvoice',
                 preserveScroll: true,
                 onFinish: () => {
                     this.showUpdateForm = false
+                    this.confirmingSaving = false
                 }
             })
         },
@@ -196,6 +204,26 @@ export default {
 <template>
 
     <Head title="Create Invoice" />
+    <JetConfirmationModal :show="confirmingSaving" @close="confirmingSaving = false">
+        <template #title>
+            Save
+        </template>
+
+        <template #content>
+            Are you sure you would like to save?
+        </template>
+
+        <template #footer>
+            <BreezeButton @click="confirmingSaving = false">
+                Cancel
+            </BreezeButton>
+
+            <BreezeButton class="ml-3" :class="{ 'loading ': invoiceForm.processing }"
+                :disabled="invoiceForm.processing" @click="storeInvoice">
+                Yes
+            </BreezeButton>
+        </template>
+    </JetConfirmationModal>
     <AppLayout>
         <h1 class="mb-4 text-xl font-bold flex gap-2 items-center">
             <Link class="text-primary hover:text-primary-focus" href="/invoice">Invoice</Link>
@@ -232,10 +260,7 @@ export default {
                     </div>
                 </div>
                 <div class="menu menu-horizontal">
-                    <BreezeButton :class="{ 'loading mr-3': invoiceForm.processing }"
-                        :disabled="invoiceForm.processing">
-                        Save
-                    </BreezeButton>
+                    <button class="btn btn-sm  btn-primary" type="button" @click="confirmSaving">Save</button>
                 </div>
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-1">
@@ -269,10 +294,10 @@ export default {
                                 <option value="RESHUFFLE">RESHUFFLE</option>
                             </select>
                             <BreezeInputError :message="
-                                $page.props.errors.updateInvoice?.hasOwnProperty(
+                                $page.props.errors?.hasOwnProperty(
                                     'sales.closing'
                                 )
-                                    ? $page.props.errors.updateInvoice[
+                                    ? $page.props.errors[
                                     'sales.closing'
                                     ]
                                     : ''
