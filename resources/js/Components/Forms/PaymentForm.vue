@@ -22,17 +22,15 @@ export default {
 </script>
 
 <template>
-    <div class="overflow-x-auto py-2">
-        <BreezeInputError
-            :message="
-                $page.props.errors.updateInvoice?.hasOwnProperty(
-                    'payment.items.0.ptp'
-                )
-                    ? $page.props.errors.updateInvoice['payment.items.0.ptp']
-                    : ''
-            "
-        />
-        <table class="table table-compact w-full">
+    <div class="overflow-x-auto  p-6 ">
+        <BreezeInputError :message="
+            $page.props.errors.updateInvoice?.hasOwnProperty(
+                'payment.items.0.ptp'
+            )
+                ? $page.props.errors.updateInvoice['payment.items.0.ptp']
+                : ''
+        " />
+        <table class="table table-compact w-full border">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -41,27 +39,14 @@ export default {
                 </tr>
             </thead>
             <tbody>
-                <tr
-                    class="line_items"
-                    v-for="(n, i) in payment.items.length"
-                    :key="i"
-                >
+                <tr class="line_items" v-for="(n, i) in payment.items.length" :key="i">
                     <td class="">{{ n }}</td>
                     <td>
-                        <BreezeInput
-                            type="date"
-                            v-model="payment.items[i].ptp"
-                            placeholder=""
-                            class="border-0"
-                        />
+                        <BreezeInput type="date" v-model="payment.items[i].ptp" placeholder="" class="border-0" />
                     </td>
                     <td>
-                        <BreezeInput
-                            v-model="payment.items[i].settlement"
-                            placeholder=""
-                            class="border-0"
-                            @change="totalSettlement(i)"
-                        />
+                        <BreezeInput v-model="payment.items[i].settlement" placeholder="" class="border-0"
+                            @change="totalSettlement(i)" />
                     </td>
                 </tr>
             </tbody>

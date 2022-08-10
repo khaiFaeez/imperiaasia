@@ -29,7 +29,7 @@ export default {
 }
 </script>
 <template>
-    <div class="w-full card bg-white">
+    <div class="w-full card bg-base-100">
         <div class="card-body grid md:grid-cols-2 gap-x-4">
             <div class="md:flex md:items-center">
                 <div class="md:w-1/3">

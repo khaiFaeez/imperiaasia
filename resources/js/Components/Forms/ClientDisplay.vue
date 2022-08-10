@@ -29,7 +29,7 @@ export default {
 }
 </script>
 <template>
-    <div class="card bg-white transition ease-in-out hover:bg-base-200 duration-300  mb-8">
+    <div class="card bg-white transition ease-in-out hover:bg-base-200 duration-300  mb-8 border border-primary shadow">
         <div class="card-body collapse collapse-arrow p-0">
             <input type="checkbox" :checked="route().current('*.client.*')" />
             <h2 class="card-title text-lg collapse-title text-primary ">

@@ -33,7 +33,7 @@ export default {
 }
 </script>
 <template>
-    <div class="w-full card bg-white">
+    <div class="w-full card bg-base-100 ">
         <div class="card-body grid md:grid-cols-3 gap-x-4">
             <div>
                 <BreezeLabel value="Sales Person" />

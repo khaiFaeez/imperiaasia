@@ -376,7 +376,7 @@ export default {
             </div>
         </div>
         <div class="grid grid-cols-1 xl:grid-cols-1">
-            <div class="my-3 ">
+            <div class="my-6 ">
                 <ClientDisplay :client="invoice.client" :states="$page.props.states" />
                 <div class="md:flex md:items-center gap-4">
                     <div class="md:w-1/3">
@@ -390,14 +390,14 @@ export default {
                 </div>
             </div>
 
-            <div class="my-3 ">
+            <div class="my-6 ">
                 <div class="tabs">
                     <a class="tab tab-lifted tab-active font-bold">Postage</a>
                 </div>
                 <PostageDisplay :states="$page.props.states" :shipping="invoiceForm.shipping" />
             </div>
 
-            <div class="my-3">
+            <div class="my-6 h-[30rem]">
                 <tabs>
                     <tab title="Product">
                         <ProductDisplay :products="invoiceForm.products" :productLists="$page.props.products" />
@@ -411,12 +411,12 @@ export default {
                 </tabs>
             </div>
 
-            <div class="my-3">
+            <div class="my-6">
                 <div class="tabs">
                     <a class="tab tab-lifted font-bold tab-active">Invoice Notes</a>
                 </div>
-                <div class="overflow-y-scroll">
-                    <div class="bg-white p-4 rounded-sm shadow-xl m-3" v-for="(note, i) in $page.props.invoice.notes"
+                <div class="overflow-y-scroll p-6 max-h-72 bg-base-200">
+                    <div class="bg-white rounded-sm shadow-xl m-3" v-for="(note, i) in $page.props.invoice.notes"
                         :key="i">
                         <div v-html="note.Notes"></div>
                         <p class="text-sm text-gray-800 italic">

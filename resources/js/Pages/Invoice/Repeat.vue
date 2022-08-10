@@ -266,7 +266,7 @@ export default {
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-1">
-                <div class="my-3">
+                <div class="my-6">
                     <client-display :client="clientForm" :states="$page.props.states" />
                     <div class="md:flex md:items-center gap-4">
                         <div class="md:w-1/3">
@@ -308,7 +308,7 @@ export default {
                     </div>
                 </div>
 
-                <div class="my-3">
+                <div class="my-6">
                     <div class="divider text-xl" id="postage">Postage</div>
                     <div class="items-end justify-end btn-group shadow">
                         <button @click="copyAddress" type="button" class="btn btn-outline btn-sm"
@@ -324,18 +324,18 @@ export default {
                     <postage-form :states="$page.props.states" :shipping="invoiceForm.shipping" />
                 </div>
 
-                <div class="my-3">
+                <div class="my-6">
                     <div class="divider text-xl" id="product">Product</div>
                     <product-form :products="invoiceForm.products" :productLists="$page.props.products" />
                 </div>
 
-                <div class="my-3">
+                <div class="my-6">
                     <div class="divider text-xl" id="sales">Sales</div>
                     <sales-form :consultants="$page.props.consultants" :sales="invoiceForm.sales"
                         :invoice="invoiceForm" />
                 </div>
 
-                <div class="my-3">
+                <div class="my-6">
                     <div class="divider text-xl" id="sales">Payment</div>
                     <payment-form :payment="invoiceForm.payment" />
                 </div>

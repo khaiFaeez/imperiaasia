@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-    <div class="overflow-x-auto py-2">
+    <div class="overflow-x-auto p-6 bg-base-100 ">
         <table class="table table-compact w-full">
             <thead>
                 <tr>

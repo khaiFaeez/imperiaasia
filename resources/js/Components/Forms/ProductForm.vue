@@ -56,10 +56,10 @@ export default {
 </script>
 
 <template>
-    <div class="overflow-x-auto py-2">
+    <div class="overflow-x-auto p-6">
         <div class="btn btn-sm my-4 btn-outline shadow float-right" @click="expand = true" v-show="!expand">Expand</div>
         <div class="btn btn-sm my-4 btn-outline shadow float-right" @click="expand = false" v-show="expand">Close</div>
-        <table class="table table-compact w-full">
+        <table class="table table-compact w-full border">
             <thead>
                 <tr>
                     <th scope="col">#</th>
