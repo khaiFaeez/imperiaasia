@@ -28,13 +28,25 @@ class ClientRequest extends FormRequest
         return [
             'MyKad_SSM' => [
                 'required',
-                Rule::unique(Auth::user()->current_portfolio->db_connection.'.Client', 'MyKad_SSM')->ignore($this->id),
+                Rule::unique(Auth::user()->current_portfolio->db_connection . '.Client', 'MyKad_SSM')->ignore($this->id),
             ],
             'Name' => 'required',
             'Mobile_No' => [
                 'required',
                 'numeric',
-                Rule::unique(Auth::user()->current_portfolio->db_connection.'.Client', 'Mobile_No')->ignore($this->id),
+                Rule::unique(Auth::user()->current_portfolio->db_connection . '.Client', 'Mobile_No')->ignore($this->id),
+            ],
+            'Phone' =>  [
+                'sometimes',
+                'numeric',
+                'nullable',
+                Rule::unique(Auth::user()->current_portfolio->db_connection . '.Client', 'Mobile_No')->ignore($this->id),
+            ],
+            'Off_Phone' =>  [
+                'sometimes',
+                'numeric',
+                'nullable',
+                Rule::unique(Auth::user()->current_portfolio->db_connection . '.Client', 'Mobile_No')->ignore($this->id),
             ],
             'Address' => 'required',
             'Address_2' => 'required',

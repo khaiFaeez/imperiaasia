@@ -46,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             },
             'flash' => [
                 'message' => $request->session()->get('message'),
+                'bannerStyle' => $request->session()->get('bannerStyle'),
             ],
             'app_name' => config('app.name'),
         ]);

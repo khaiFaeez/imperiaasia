@@ -5,6 +5,7 @@ import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue'
 import Navigation from '@/Components/Navigation.vue'
 import { Link } from '@inertiajs/inertia-vue3'
 import gsap from 'gsap';
+import ActionMessageVue from '@/Components/ActionMessage.vue'
 
 const showingNavigationDropdown = ref(false)
 
@@ -20,15 +21,8 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="absolute bottom-5 inset-x-0 max-w-xl z-20" v-if="$page.props.flash.message" x-data="{show: true}"
-        x-init="setTimeout(() => show = false, 5000)" x-transition:enter="transition ease-out duration-500"
-        x-transition:enter-start="opacity-0 transform scale-90" x-transition:enter-end="opacity-100 transform scale-100"
-        x-transition:leave="transition ease-in duration-1000" x-transition:leave-start="opacity-100 transform scale-100"
-        x-transition:leave-end="opacity-0 transform scale-90" x-show="show">
-        <div class="alert alert-success text-white">
-            <p>{{ $page.props.flash.message }}</p>
-        </div>
-    </div>
+    <ActionMessageVue />
+
     <div class="min-h-screen relative">
         <div class="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
